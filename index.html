@@ -9,8 +9,15 @@
   <style>
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    #netlify-badge, iframe[src*="netlify"] {
+    div[style*="z-index: 2147483647"], 
+  iframe[id*="netlify"], 
+  a[href*="netlify.com/?utm_source"],
+  #netlify-badge {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col relative">
