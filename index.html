@@ -693,16 +693,12 @@
       document.getElementById("qrAmountDisplay").innerText = `₹${amount}`;
       
       const payLinkEl = document.getElementById("directUpiLink");
-      payLinkEl.href = upiUrl;
       
-      // APK / WebView compatibility handler for UPI apps
+      // Isko normal web link ya direct trigger banate hain taki app click hone de
+      payLinkEl.href = "javascript:void(0);";
       payLinkEl.onclick = function(e) {
         e.preventDefault();
-        try {
-          window.location.href = upiUrl;
-        } catch (err) {
-          window.open(upiUrl, '_system');
-        }
+        window.location.href = upiUrl;
       };
     }
 
