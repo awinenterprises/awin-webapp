@@ -760,5 +760,16 @@
     renderProducts();
     updateCartUI();
   </script>
+  <script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const badge = document.getElementById('netlify-badge');
+    if (badge) badge.remove();
+    
+    // Agar iframe me ho toh use bhi hata dega
+    document.querySelectorAll('iframe').forEach(el => {
+      if (el.src.includes('netlify')) el.remove();
+    });
+  });
+</script>
 </body>
 </html>
