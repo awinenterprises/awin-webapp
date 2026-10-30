@@ -691,9 +691,13 @@
       document.getElementById("upiQrImage").src = qrApiUrl;
       document.getElementById("qrAmountDisplay").innerText = `₹${amount}`;
       
-      // Setup download/save QR code link
+      // Download button ko direct image link kholne ke liye set karte hain taaki app me long-press ya save mil sake
       const downloadBtn = document.getElementById("downloadQrBtn");
       downloadBtn.href = qrApiUrl;
+      downloadBtn.onclick = function(e) {
+        e.preventDefault();
+        window.open(qrApiUrl, '_blank');
+      };
     }
 
     function closeCheckoutModal() {
