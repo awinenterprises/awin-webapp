@@ -235,7 +235,7 @@
 
       <!-- Two Status Action Buttons -->
       <div class="space-y-2 pt-1">
-        <a id="directUpiLink" href="#" class="block w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold text-xs transition">
+        <a id="directUpiLink" href="#" class="block w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold text-xs transition text-center">
           Pay Directly on Mobile
         </a>
         
@@ -694,16 +694,15 @@
       
       const payLinkEl = document.getElementById("directUpiLink");
       payLinkEl.href = upiUrl;
-      payLinkEl.target = "_blank"; // Yeh external app/browser me kholne me madad karega
       
+      // APK / WebView compatibility handler for UPI apps
       payLinkEl.onclick = function(e) {
-        // App ke andar intent action ko force karne ke liye
+        e.preventDefault();
         try {
           window.location.href = upiUrl;
         } catch (err) {
-          window.open(upiUrl, '_blank');
+          window.open(upiUrl, '_system');
         }
-        e.preventDefault();
       };
     }
 
