@@ -197,19 +197,27 @@
         </button>
       </div>
       
-      <p class="text-[11px] text-slate-500">Scan QR or save to gallery or copy UPI ID to pay via GPay, PhonePe, Paytm</p>
+      <p class="text-[11px] text-slate-500">Scan QR or Copy UPI ID to pay via GPay, PhonePe, Paytm</p>
       
       <div class="flex flex-col items-center justify-center p-2 bg-slate-50 border rounded-xl space-y-2">
-        <img id="upiQrImage" src="" alt="UPI QR Code" class="w-40 h-40 rounded-lg shadow-sm" crossorigin="anonymous" />
-        <a id="downloadQrBtn" href="#" download="awin-qr.png" class="text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 px-3 py-1.5 rounded-lg border border-purple-200 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-download"></i> Save QR to Gallery
-        </a>
+        <img id="upiQrImage" src="" alt="UPI QR Code" class="w-36 h-36 rounded-lg shadow-sm" crossorigin="anonymous" />
+        
+        <!-- Action Buttons for QR & Copy UPI -->
+        <div class="flex gap-2 w-full">
+          <a id="downloadQrBtn" href="#" target="_blank" class="flex-1 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold text-[11px] rounded-lg border border-purple-200 transition flex items-center justify-center gap-1">
+            <i class="fa-solid fa-expand"></i> View QR
+          </a>
+          <button onclick="copyUpiId()" class="flex-1 py-1.5 bg-slate-800 hover:bg-slate-900 text-white font-bold text-[11px] rounded-lg transition flex items-center justify-center gap-1">
+            <i class="fa-solid fa-copy"></i> Copy UPI ID
+          </button>
+        </div>
+        <div id="copyAlert" class="text-[10px] text-emerald-600 font-bold hidden">UPI ID Copied Successfully!</div>
       </div>
 
       <div class="space-y-0.5">
         <div class="text-[11px] text-slate-400 font-medium">Total Payable Amount</div>
         <div id="qrAmountDisplay" class="text-xl font-black text-purple-700">₹0</div>
-        <div class="text-[11px] text-slate-600 font-bold">UPI ID: awin@slc</div>
+        <div class="text-[11px] text-slate-600 font-bold">UPI ID: <span id="upiIdText">awin@slc</span></div>
       </div>
 
       <!-- Customer Delivery Details Form -->
@@ -691,13 +699,22 @@
       document.getElementById("upiQrImage").src = qrApiUrl;
       document.getElementById("qrAmountDisplay").innerText = `₹${amount}`;
       
-      // Download button ko direct image link kholne ke liye set karte hain taaki app me long-press ya save mil sake
       const downloadBtn = document.getElementById("downloadQrBtn");
       downloadBtn.href = qrApiUrl;
-      downloadBtn.onclick = function(e) {
-        e.preventDefault();
-        window.open(qrApiUrl, '_blank');
-      };
+      
+      document.getElementById("copyAlert").classList.add("hidden");
+    }
+
+    function copyUpiId() {
+      navigator.clipboard.writeText(UPI_ID).then(() => {
+        const alertEl = document.getElementById("copyAlert");
+        alertEl.classList.remove("hidden");
+        setTimeout(() => {
+          alertEl.classList.add("hidden");
+        }, 2500);
+      }).catch(err => {
+        alert("Could not copy text: " + err);
+      });
     }
 
     function closeCheckoutModal() {
