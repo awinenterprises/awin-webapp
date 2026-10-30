@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awin Enterprises - Complete Health & Daily Essentials</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col relative">
+
+  <!-- ONLY Special Offer Permanent Sticky Banner -->
+  <div class="sticky top-0 z-50 bg-gradient-to-r from-amber-500 via-purple-600 to-emerald-600 text-white py-2 px-4 text-center font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2">
+    <i class="fa-solid fa-gift text-yellow-300 animate-bounce"></i>
+    <span>SPECIAL OFFER: If you purchase products worth ₹1000 every month for six months then you will get free products worth ₹1000 in the seventh month!</span>
+  </div>
+
+  <header class="bg-white shadow-sm">
+    <!-- Main Navigation Bar -->
+    <div class="bg-white/95 backdrop-blur-md border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <!-- Correct Official AE Logo Image -->
+          <div class="w-10 h-10 rounded-xl overflow-hidden bg-purple-600 flex items-center justify-center shadow-md border border-purple-200">
+            <img src="https://i.postimg.cc/SRgSZgJX/logo.png" alt="Awin Enterprises Logo" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/7c3aed/ffffff?text=AE'" />
+          </div>
+          <div>
+            <h1 class="font-extrabold text-slate-900 tracking-tight text-lg sm:text-xl leading-none">Awin Enterprises</h1>
+            <p class="text-xs text-purple-600 font-medium">Complete Health & Daily Essentials</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Direct WhatsApp Header Contact -->
+          <a href="https://wa.me/917828757646" target="_blank" class="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 text-emerald-700 hover:bg-emerald-100 font-bold text-xs transition">
+            <i class="fa-brands fa-whatsapp text-sm"></i> Help
+          </a>
+
+          <!-- Cart Button -->
+          <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 transition">
+            <i class="fa-solid fa-cart-shopping text-lg"></i>
+            <span id="cartCount" class="absolute -top-1 -right-1 bg-purple-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">
+              0
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 1: Trust Bar & Badges -->
+    <div class="bg-gradient-to-r from-purple-50 via-emerald-50 to-purple-50 border-y border-slate-200/60 py-1.5 px-4 overflow-x-auto hide-scrollbar">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 text-[11px] font-semibold text-slate-700 whitespace-nowrap min-w-max">
+        <span class="flex items-center gap-1.5 text-emerald-800"><i class="fa-solid fa-truck-fast text-emerald-600"></i> Fast All-India Delivery</span>
+        <span class="flex items-center gap-1.5 text-purple-800"><i class="fa-solid fa-shield-check text-purple-600"></i> 100% Safe Direct UPI</span>
+        <span class="flex items-center gap-1.5 text-blue-800"><i class="fa-solid fa-award text-blue-600"></i> Genuine Quality Guaranteed</span>
+        <span class="flex items-center gap-1.5 text-emerald-800"><i class="fa-brands fa-whatsapp text-emerald-600"></i> Instant WhatsApp Help</span>
+      </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="max-w-7xl mx-auto px-4 py-2.5 space-y-2 bg-white">
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400"></i>
+        <input 
+          type="text" 
+          id="searchInput" 
+          onkeyup="renderProducts()"
+          placeholder="Search products by name or benefit..." 
+          class="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-slate-50/50"
+        />
+      </div>
+
+      <div id="categoryContainer" class="flex gap-2 overflow-x-auto hide-scrollbar py-1"></div>
+    </div>
+  </header>
+
+  <!-- Notice Bar -->
+  <div class="max-w-7xl mx-auto px-4 py-2 w-full flex items-center justify-between text-xs text-slate-500">
+    <span id="productCounter" class="font-bold text-slate-700">PRODUCTS AVAILABLE</span>
+    <span class="flex items-center gap-1.5 text-purple-700 font-semibold bg-purple-50 px-2.5 py-1 rounded-full border border-purple-100">
+      <i class="fa-solid fa-circle-info"></i> Click card for details & direct Buy Now
+    </span>
+  </div>
+
+  <!-- Product Grid -->
+  <main class="max-w-7xl mx-auto px-4 flex-1 pb-20 w-full">
+    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5"></div>
+  </main>
+
+  <!-- Feature 2: Floating WhatsApp Button -->
+  <a href="https://wa.me/917828757646?text=Namaste%20Awin%20Enterprises,%20mujhe%20products%20ke%20baare%20me%20jaankari%20chahiye." target="_blank" class="fixed bottom-5 right-5 z-40 bg-emerald-600 hover:bg-emerald-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition active:scale-95" title="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp text-2xl"></i>
+  </a>
+
+  <!-- Product Detail Modal -->
+  <div id="productDetailModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 space-y-3.5 shadow-2xl relative max-h-[92vh] overflow-y-auto">
+      <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <!-- Modal Image Box with Urgency Badge -->
+      <div class="w-full aspect-square rounded-xl p-3 flex items-center justify-center bg-slate-50 border border-slate-100 relative overflow-hidden">
+        <span id="modalPack" class="absolute top-2 left-2 text-[10px] font-bold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-100"></span>
+        <span id="modalBadge" class="absolute top-2 right-2 text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-200"></span>
+        <img id="modalImg" src="" alt="Product Image" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/400x400/f8fafc/7c3aed?text=Altos+Product'" />
+      </div>
+
+      <!-- Product Info -->
+      <div class="space-y-1">
+        <span id="modalCat" class="text-[11px] text-purple-600 font-semibold uppercase tracking-wider"></span>
+        <h3 id="modalName" class="font-black text-slate-900 text-lg leading-tight"></h3>
+        <p id="modalDesc" class="text-xs text-slate-600 leading-relaxed pt-0.5"></p>
+      </div>
+
+      <!-- Feature 5: Instant Pincode & Delivery Checker Box -->
+      <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1.5 text-left">
+        <div class="flex items-center gap-1.5 text-xs font-bold text-slate-700">
+          <i class="fa-solid fa-location-dot text-purple-600"></i> Check Delivery to Your Pincode
+        </div>
+        <div class="flex gap-1.5">
+          <input 
+            type="text" 
+            id="pincodeInput" 
+            maxlength="6" 
+            placeholder="Enter 6-digit Pincode" 
+            class="flex-1 px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500"
+          />
+          <button onclick="checkPincode()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-lg transition">Check</button>
+        </div>
+        <div id="pincodeResult" class="text-[11px] text-slate-500 hidden"></div>
+      </div>
+
+      <!-- Price & Psychological Pricing -->
+      <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span id="modalStrikedMrp" class="text-xs text-slate-400 line-through"></span>
+            <span class="text-[10px] font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.2 rounded">10% OFF</span>
+          </div>
+          <span id="modalPrice" class="text-xl font-black text-slate-900"></span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="modalAddBtn" class="px-3.5 py-2.5 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 font-bold text-xs transition flex items-center gap-1.5">
+            <i class="fa-solid fa-cart-plus"></i> Add
+          </button>
+          <button id="modalBuyBtn" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs transition shadow-md active:scale-95 flex items-center gap-1.5">
+            <i class="fa-solid fa-bolt"></i> Buy Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer Modal -->
+  <div id="cartModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex justify-end">
+    <div class="bg-white w-full max-w-md h-full flex flex-col shadow-2xl">
+      <div class="p-4 border-b border-slate-200 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-bag-shopping text-purple-600 text-lg"></i>
+          <h2 class="font-bold text-slate-800 text-base">Your Cart</h2>
+        </div>
+        <button onclick="toggleCart()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+
+      <div class="p-4 border-t border-slate-200 bg-slate-50 space-y-3">
+        <div class="flex justify-between items-center text-sm font-semibold text-slate-700">
+          <span>Subtotal</span>
+          <span id="cartSubtotal" class="text-lg text-purple-700 font-extrabold">₹0</span>
+        </div>
+        <button 
+          id="checkoutBtn"
+          onclick="openCheckoutModal()" 
+          class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold shadow-md transition disabled:opacity-50">
+          Proceed to Order & Pay
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPI Checkout Modal -->
+  <div id="checkoutModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 text-center space-y-3.5 shadow-2xl max-h-[92vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-2 border-b">
+        <h3 class="font-bold text-slate-800 text-sm">Scan & Pay via UPI</h3>
+        <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-slate-600">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <p class="text-[11px] text-slate-500">Scan QR using Google Pay, PhonePe, Paytm or BHIM</p>
+      
+      <div class="flex justify-center p-2 bg-slate-50 border rounded-xl">
+        <img id="upiQrImage" src="" alt="UPI QR Code" class="w-40 h-40 rounded-lg shadow-sm" />
+      </div>
+
+      <div class="space-y-0.5">
+        <div class="text-[11px] text-slate-400 font-medium">Total Payable Amount</div>
+        <div id="qrAmountDisplay" class="text-xl font-black text-purple-700">₹0</div>
+        <div class="text-[11px] text-slate-600 font-bold">UPI ID: awin@slc</div>
+      </div>
+
+      <!-- Customer Delivery Details Form -->
+      <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-left space-y-2">
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-bold text-slate-700">Delivery Details</span>
+        </div>
+        <input 
+          type="text" 
+          id="custName" 
+          placeholder="Customer Name" 
+          class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500" 
+        />
+        <input 
+          type="tel" 
+          id="custPhone" 
+          placeholder="Phone Number" 
+          class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500" 
+        />
+        <textarea 
+          id="custAddress" 
+          rows="2" 
+          placeholder="Complete Address with Pincode" 
+          class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 resize-none"></textarea>
+      </div>
+
+      <!-- Two Status Action Buttons -->
+      <div class="space-y-2 pt-1">
+        <a id="directUpiLink" href="#" class="block w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold text-xs transition">
+          Pay Directly on Mobile
+        </a>
+        
+        <button onclick="submitToWhatsApp(true)" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs transition flex items-center justify-center gap-2 shadow">
+          <i class="fa-solid fa-circle-check text-sm"></i> I Have Paid - Confirm Order
+        </button>
+
+        <button onclick="submitToWhatsApp(false)" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-xl font-semibold text-xs transition flex items-center justify-center gap-2">
+          <i class="fa-brands fa-whatsapp text-emerald-600 text-base"></i> Not Paid Yet - Enquiry / Help
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const UPI_ID = "awin@slc";
+    const PAYEE_NAME = "Awin Enterprises";
+    const WHATSAPP_PHONE = "917828757646";
+
+    const products = [
+      { id: 1, name: "Tulsi Power", pack: "20+10 ml", mrp: 300, price: 270, cat: "Medicines & Health", desc: "Immunity Booster Drops", img: "https://i.postimg.cc/CZK7wL5Y/tulsipower.png" },
+      { id: 2, name: "Aroplex", pack: "30 Caps", mrp: 904, price: 814, cat: "Medicines & Health", desc: "For Perfect Health", img: "https://i.postimg.cc/47mWQNTT/aroplex.png" },
+      { id: 3, name: "Aroplex Plus+", pack: "60 Caps + 60 Caps", mrp: 1559, price: 1399, cat: "Medicines & Health", desc: "For Complete Health", img: "https://i.postimg.cc/sQvT4DRr/aroplexplus.png" },
+      { id: 4, name: "Haldi with Kesar Drops", pack: "20+10 ml", mrp: 150, price: 135, cat: "Medicines & Health", desc: "Boosts Immunity", img: "https://i.postimg.cc/Hj8SJx2T/haldiwithkesardrops.png" },
+      { id: 5, name: "Netar Jyoti Eye Drops", pack: "10 ml", mrp: 81, price: 73, cat: "Medicines & Health", desc: "Relieves Irritation & Redness", img: "https://i.postimg.cc/8j8ZLSXQ/netarjyoti.png" },
+      { id: 6, name: "Stevia Drops", pack: "10 ml", mrp: 145, price: 131, cat: "Medicines & Health", desc: "Natural Sugar Free Drops", img: "https://i.postimg.cc/YvR8cmrt/steviadrops.png" },
+      { id: 7, name: "Abhinol", pack: "60 Caps", mrp: 348, price: 313, cat: "Medicines & Health", desc: "Controls Blood Sugar Level", img: "https://i.postimg.cc/N95dkfvk/abhinol.png" },
+      { id: 8, name: "Ashwagandha", pack: "60 Caps", mrp: 345, price: 311, cat: "Medicines & Health", desc: "Increases Blood Cells & Energy", img: "https://i.postimg.cc/DJ8xPyKF/ashwagandha.png" },
+      { id: 9, name: "Brahmi", pack: "60 Caps", mrp: 314, price: 283, cat: "Medicines & Health", desc: "Improves Concentration", img: "https://i.postimg.cc/CBXmPTFS/brahmi.png" },
+      { id: 10, name: "Curcum Plus", pack: "120 Caps", mrp: 1559, price: 1395, cat: "Medicines & Health", desc: "For Overall Vitality", img: "https://i.postimg.cc/jwmZg0sN/curumplus.png" },
+      { id: 11, name: "Coloston (Bovine Colostrum)", pack: "60 Caps", mrp: 627, price: 564, cat: "Medicines & Health", desc: "100% Bovine Colostrum Powder", img: "https://i.postimg.cc/sQqw6dVG/coloston.png" },
+      { id: 12, name: "Neem", pack: "60 Caps", mrp: 310, price: 279, cat: "Medicines & Health", desc: "Blood Purifier & Anti-Fungal", img: "https://i.postimg.cc/kBrTWm1z/neem.png" },
+      { id: 13, name: "Young Look", pack: "30 Caps", mrp: 285, price: 257, cat: "Medicines & Health", desc: "Keeps Skin Fair & Youthful", img: "https://i.postimg.cc/wtbVM8Rs/younglook.png" },
+      { id: 14, name: "Noni", pack: "60 Caps", mrp: 633, price: 570, cat: "Medicines & Health", desc: "A Complete Health Balancer", img: "https://i.postimg.cc/xcr6L2pr/noni.png" },
+      { id: 15, name: "Flax Oil", pack: "90 Caps", mrp: 790, price: 711, cat: "Medicines & Health", desc: "Rich in Omega-3 Fatty Acids", img: "https://i.postimg.cc/JHXKS6nX/flaxoil.png" },
+      { id: 16, name: "Nutroprash", pack: "30 Caps", mrp: 290, price: 261, cat: "Medicines & Health", desc: "Supports Asthma & Bronchitis", img: "https://i.postimg.cc/MvydDFN4/nutroprash.png" },
+      { id: 17, name: "Garlicplus", pack: "60 Caps", mrp: 397, price: 357, cat: "Medicines & Health", desc: "Controls Blood Pressure & Cholesterol", img: "https://i.postimg.cc/4HcwjLd6/galicplus.png" },
+      { id: 18, name: "Hadjod", pack: "60 Caps", mrp: 220, price: 198, cat: "Medicines & Health", desc: "Bone & Joint Wellness", img: "https://i.postimg.cc/RJtG2sFb/hadjod.png" },
+      { id: 19, name: "Ore Piles", pack: "60 Caps", mrp: 205, price: 185, cat: "Medicines & Health", desc: "Relieves Pain & Burning of Piles", img: "https://i.postimg.cc/MvydDFgH/orepiles.png" },
+      { id: 20, name: "Nutroton", pack: "60 Caps", mrp: 681, price: 613, cat: "Medicines & Health", desc: "Respiratory Health Support", img: "https://i.postimg.cc/xcKtR4hZ/nutroton.png" },
+      { id: 21, name: "Vig-R", pack: "60 Caps", mrp: 830, price: 747, cat: "Medicines & Health", desc: "Comprehensive Women Health", img: "https://i.postimg.cc/2q5GC8yV/vigr.png" },
+      { id: 22, name: "Paindon-Plus", pack: "30 Caps", mrp: 230, price: 207, cat: "Medicines & Health", desc: "Severe Arthritic & Joint Pain Remedy", img: "https://i.postimg.cc/MnqtrY8Z/paindonplus.png" },
+      { id: 23, name: "Glucosamine HCL", pack: "60 Tabs", mrp: 885, price: 797, cat: "Medicines & Health", desc: "Enhances Joint Mobility", img: "https://i.postimg.cc/8fvwxK5K/glucosaminehcl.png" },
+      { id: 24, name: "Ganoderma", pack: "60 Caps", mrp: 475, price: 428, cat: "Medicines & Health", desc: "Enhances Energy & Immune Function", img: "https://i.postimg.cc/p5jk3GTB/ganoderma.png" },
+      { id: 25, name: "Vigvit Capsules", pack: "60 Caps", mrp: 681, price: 613, cat: "Medicines & Health", desc: "Promotes Body Strength", img: "https://i.postimg.cc/7CL9qYhC/vigvit.png" },
+      { id: 26, name: "Rakatchap", pack: "60 Caps", mrp: 280, price: 252, cat: "Medicines & Health", desc: "Helps Maintain Blood Pressure", img: "https://i.postimg.cc/LJ2v0VMq/rakatchap.png" },
+      { id: 27, name: "Wheatgrass", pack: "30 Tabs", mrp: 658, price: 592, cat: "Medicines & Health", desc: "Energy & Immunity Booster", img: "https://i.postimg.cc/xkFR8DN8/wheatgrass.png" },
+      { id: 28, name: "Orecal-D", pack: "10x10 Tabs", mrp: 385, price: 347, cat: "Medicines & Health", desc: "Treats Calcium Deficiency", img: "https://i.postimg.cc/9rGJpns5/orecald.png" },
+      { id: 29, name: "Mc Vital", pack: "30 Tabs", mrp: 314, price: 283, cat: "Medicines & Health", desc: "With Ginseng, Vitamins & Minerals", img: "https://i.postimg.cc/F7tT04Wg/mcvital.png" },
+      { id: 30, name: "Spirulina (30 Tabs)", pack: "30 Tabs", mrp: 295, price: 266, cat: "Medicines & Health", desc: "Complete Daily Multivitamin", img: "https://i.postimg.cc/Wd8SRJNT/spirulina.png" },
+      { id: 31, name: "Shatavari", pack: "30 Tabs", mrp: 245, price: 221, cat: "Medicines & Health", desc: "Womens Health & Balance", img: "https://i.postimg.cc/LJDvdZHz/shatavari.png" },
+      { id: 32, name: "Papita Giloy", pack: "30 Tabs", mrp: 250, price: 225, cat: "Medicines & Health", desc: "Rapidly Increases Platelet Count", img: "https://i.postimg.cc/Xr4xDg0J/papitagiloy.png" },
+      { id: 33, name: "Musli Pure", pack: "60 Caps", mrp: 475, price: 428, cat: "Medicines & Health", desc: "Extra Strength & Vitality", img: "https://i.postimg.cc/CzycbgPP/muslipure.png" },
+      { id: 34, name: "Korvin Oil", pack: "15 ml", mrp: 315, price: 284, cat: "Medicines & Health", desc: "Renews Vigor & Strength", img: "https://i.postimg.cc/4nH8Kd5V/korvinoil.png" },
+      { id: 35, name: "Slimming Young Look", pack: "60 Caps", mrp: 330, price: 297, cat: "Medicines & Health", desc: "Reduces Deposited Fat", img: "https://i.postimg.cc/Mn5tkjWN/slimingyounglook.png" },
+      { id: 36, name: "B-Big", pack: "60 Caps", mrp: 405, price: 365, cat: "Medicines & Health", desc: "Supports Growth of Children", img: "https://i.postimg.cc/BLkMY9JR/bbig.png" },
+      { id: 37, name: "Chelated Iron", pack: "60 Tabs", mrp: 405, price: 365, cat: "Medicines & Health", desc: "Formation of Red Blood Cells", img: "https://i.postimg.cc/xJhtxD0d/chelatediron.png" },
+      { id: 38, name: "Calcium with Vitamin D", pack: "60 Tabs", mrp: 390, price: 351, cat: "Medicines & Health", desc: "Builds Strong Bones & Muscles", img: "https://i.postimg.cc/VrpDGQYs/calciumtablet.png" },
+      { id: 39, name: "Multi Collagen Complex", pack: "60 Tabs", mrp: 405, price: 365, cat: "Medicines & Health", desc: "Collagen & Skin Elasticity", img: "https://i.postimg.cc/ppNsKHGB/multicollagencomplex.png" },
+      { id: 40, name: "Red Ginseng", pack: "30 Caps", mrp: 427, price: 384, cat: "Medicines & Health", desc: "Boosts Energy & Focus", img: "https://i.postimg.cc/ZW4jDLhB/redginseng.png" },
+      { id: 41, name: "Vigvit Ultra K-10", pack: "60 Caps", mrp: 555, price: 500, cat: "Medicines & Health", desc: "Weight Loss & Metabolism Support", img: "https://i.postimg.cc/Z9qHJKn5/ultrak10.png" },
+      { id: 42, name: "Ore Piles Ointment", pack: "30 gm", mrp: 95, price: 86, cat: "Powders & Nutrition", desc: "Relief from Pain & Burning", img: "https://i.postimg.cc/rKSQJP7z/orepilesoinment.png" },
+      { id: 43, name: "Swadisht Powder", pack: "100 gm", mrp: 145, price: 131, cat: "Powders & Nutrition", desc: "Increases Appetite & Relieves Acidity", img: "https://i.postimg.cc/LqsDm6Xc/swadishtpowder.png" },
+      { id: 44, name: "Ayush Kwath Powder", pack: "100 gm", mrp: 225, price: 203, cat: "Powders & Nutrition", desc: "Immunity Booster Powder", img: "https://i.postimg.cc/bDsm9Njp/ayushkwath.png" },
+      { id: 45, name: "Itch Care Cream", pack: "30 gm", mrp: 87, price: 78, cat: "Powders & Nutrition", desc: "Fights Fungal & Bacterial Infections", img: "https://i.postimg.cc/Th5kyw9p/itchcarecream.png" },
+      { id: 46, name: "Oregain Weight Gainer", pack: "200 gm", mrp: 890, price: 801, cat: "Powders & Nutrition", desc: "Soya Protein & Carbohydrates", img: "https://i.postimg.cc/56wn3RDJ/oregainpowder.png" },
+      { id: 47, name: "Altos Balm", pack: "10 gm", mrp: 44, price: 40, cat: "Powders & Nutrition", desc: "Relief from Headache, Bodyache & Cold", img: "https://i.postimg.cc/tZYBNCGS/altosbalm.png" },
+      { id: 48, name: "Energize Powder", pack: "100 gm", mrp: 235, price: 212, cat: "Powders & Nutrition", desc: "Instant Energy All Day", img: "https://i.postimg.cc/WqZSxW3F/energizepowder.png" },
+      { id: 49, name: "Nutro Dia Powder", pack: "100 gm", mrp: 542, price: 488, cat: "Powders & Nutrition", desc: "Herbal Powder to Control Diabetes", img: "https://i.postimg.cc/9rGJpnKN/nutrodiapowder.png" },
+      { id: 50, name: "Paindon Ointment", pack: "30 gm", mrp: 124, price: 112, cat: "Powders & Nutrition", desc: "Instant Joint & Muscle Pain Relief", img: "https://i.postimg.cc/JsMKdQW4/paindonoinment.png" },
+      { id: 51, name: "Paindon Oil", pack: "40 ml", mrp: 219, price: 197, cat: "Powders & Nutrition", desc: "Remedy for Severe Arthritis", img: "https://i.postimg.cc/0zPZHCq9/paindonoil.png" },
+      { id: 52, name: "Oreslim Powder", pack: "200 gm", mrp: 665, price: 599, cat: "Powders & Nutrition", desc: "Burns Extra Stubborn Fat", img: "https://i.postimg.cc/tYh25M8s/oreslimshake.png" },
+      { id: 53, name: "Choco Kidz Powder", pack: "200 gm", mrp: 225, price: 203, cat: "Powders & Nutrition", desc: "Vitamins & Minerals for Kids", img: "https://i.postimg.cc/MMNdP2WH/chocokidzpowder.png" },
+      { id: 54, name: "Vigvit Protein Powder (200g)", pack: "200 gm", mrp: 870, price: 783, cat: "Powders & Nutrition", desc: "Premium Protein for Health", img: "https://i.postimg.cc/SnkVtGpn/proteinpowder.png" },
+      { id: 55, name: "Jeewan Shakti", pack: "500 gm", mrp: 455, price: 410, cat: "Powders & Nutrition", desc: "Natural Immunity Booster", img: "https://i.postimg.cc/w3RWtvVs/jeewanshakti.png" },
+      { id: 56, name: "Consoft Powder", pack: "100 gm", mrp: 280, price: 252, cat: "Powders & Nutrition", desc: "Relief from Chronic Constipation", img: "https://i.postimg.cc/R6yXs5Mt/consoftpowder.png" },
+      { id: 57, name: "Multivitamin Gummies", pack: "30 Gummies", mrp: 500, price: 450, cat: "Powders & Nutrition", desc: "Superfood Minerals for Kids", img: "https://i.postimg.cc/HVG6bgZv/multivitaminwithmineralsgummies.png" },
+      { id: 58, name: "Shudh Shilajit Paste", pack: "20 gm", mrp: 999, price: 899, cat: "Powders & Nutrition", desc: "Pure Strength, Stamina & Power", img: "https://i.postimg.cc/k2swrtnf/shudhshilajitpaste.png" },
+      { id: 59, name: "Oregel Aloevera", pack: "500 ml", mrp: 710, price: 639, cat: "Syrups & Juices", desc: "Pure Digestive Detoxifier", img: "https://i.postimg.cc/dL84Bxgw/oregelaloevera.png" },
+      { id: 60, name: "Ore Amla Gel", pack: "500 ml", mrp: 235, price: 212, cat: "Syrups & Juices", desc: "Pure Source of Vitamin C", img: "https://i.postimg.cc/TprC94B8/oreamlagel.png" },
+      { id: 61, name: "Oregel Diab", pack: "500 ml", mrp: 395, price: 356, cat: "Syrups & Juices", desc: "Herbal Sugar Balancer", img: "https://i.postimg.cc/LnzNTbGH/oregeldiab.png" },
+      { id: 62, name: "Noni Juice", pack: "500 ml", mrp: 630, price: 567, cat: "Syrups & Juices", desc: "Immunity & Cellular Balance", img: "https://i.postimg.cc/56wn3RT7/nonijuice.png" },
+      { id: 63, name: "Baby Oil", pack: "100 ml", mrp: 143, price: 129, cat: "Syrups & Juices", desc: "Keeps Baby Bones & Muscles Strong", img: "https://i.postimg.cc/YGZbnKtV/babyoil.png" },
+      { id: 64, name: "Vigvit Multivitamin Syrup", pack: "200 ml", mrp: 165, price: 149, cat: "Syrups & Juices", desc: "Sugar Free Complete Health Tonic", img: "https://i.postimg.cc/hfF2VBys/multivitamin.png" },
+      { id: 65, name: "Abhiliv Liver Syrup", pack: "200 ml", mrp: 200, price: 180, cat: "Syrups & Juices", desc: "Sugar Free Liver Support", img: "https://i.postimg.cc/JDGp54Cc/abhilivsyrup.png" },
+      { id: 66, name: "Abhizyme Syrup", pack: "200 ml", mrp: 180, price: 162, cat: "Syrups & Juices", desc: "Quick Relief from Gas & Indigestion", img: "https://i.postimg.cc/phpsJXMZ/abhizymsyrup.png" },
+      { id: 67, name: "Heal Cough Syrup (Sugar Free)", pack: "100 ml", mrp: 115, price: 104, cat: "Syrups & Juices", desc: "Sugar Free Cough Remedy", img: "https://i.postimg.cc/3W0LyRBr/healthcoughsyrup.png" },
+      { id: 68, name: "Blood Purifier Syrup", pack: "200 ml", mrp: 175, price: 158, cat: "Syrups & Juices", desc: "Removes Impurities from Blood", img: "https://i.postimg.cc/vgk3qFQd/bloodpurifier.png" },
+      { id: 69, name: "Breen Syrup", pack: "200 ml", mrp: 160, price: 144, cat: "Syrups & Juices", desc: "Enhances Memory & Brain Function", img: "https://i.postimg.cc/njg0RbHF/breebsyrup.png" },
+      { id: 70, name: "Hridya Care Syrup", pack: "200 ml", mrp: 152, price: 137, cat: "Syrups & Juices", desc: "Formulated for Healthy Heart", img: "https://i.postimg.cc/LhgyqXT5/hridyacare.png" },
+      { id: 71, name: "Sundri Jiwan", pack: "200 ml", mrp: 180, price: 162, cat: "Syrups & Juices", desc: "Herbal Wellness for Women", img: "https://i.postimg.cc/qt7wpMRY/sundrijiwan.png" },
+      { id: 72, name: "Uripure Syrup", pack: "200 ml", mrp: 320, price: 288, cat: "Syrups & Juices", desc: "Helps Stimulate Kidney Stones (Sugar Free)", img: "https://i.postimg.cc/06Nn92jj/uripuresyrup.png" },
+      { id: 73, name: "Shilajit Syrup", pack: "200 ml", mrp: 1045, price: 941, cat: "Syrups & Juices", desc: "Relieves Weakness & Builds Immunity", img: "https://i.postimg.cc/DS65Vb2r/shilajitsyrup.png" },
+      { id: 74, name: "Tulsi Syrup", pack: "200 ml", mrp: 182, price: 164, cat: "Syrups & Juices", desc: "Herbal Immunity Booster", img: "https://i.postimg.cc/VSNgzLvY/tulsisyrup.png" },
+      { id: 75, name: "Giloy Syrup", pack: "200 ml", mrp: 152, price: 137, cat: "Syrups & Juices", desc: "Increases Platelet Count", img: "https://i.postimg.cc/0KSZhWQZ/giloysyrup.png" },
+      { id: 76, name: "FT-15 Fruit Extract", pack: "500 ml", mrp: 1040, price: 936, cat: "Syrups & Juices", desc: "Premium Concentrated Fruit Extract", img: "https://i.postimg.cc/wRNFnfv5/ft15.png" },
+      { id: 77, name: "Charcoal Face Wash", pack: "60 ml", mrp: 165, price: 149, cat: "Beauty & Skincare", desc: "Pollution Control & Deep Cleansing", img: "https://i.postimg.cc/sQqw6dVV/charcoalfacewash.png" },
+      { id: 78, name: "Ubtan Face Wash", pack: "60 ml", mrp: 165, price: 149, cat: "Beauty & Skincare", desc: "Tan Removal & Radiant Glow", img: "https://i.postimg.cc/FfKphszv/ubtanfacewash.png" },
+      { id: 79, name: "Skin Glow Face Wash", pack: "60 ml", mrp: 130, price: 117, cat: "Beauty & Skincare", desc: "Fresh & Glowing Complexion", img: "https://i.postimg.cc/NKDbhrg4/skinglowfacewash.png" },
+      { id: 80, name: "Rice Water Face Wash", pack: "60 ml", mrp: 120, price: 108, cat: "Beauty & Skincare", desc: "Ultra Radiant Skin Brightener", img: "https://i.postimg.cc/k2qwhydt/ricewaterfacewash.png" },
+      { id: 81, name: "Vitamin C Face Wash", pack: "50 ml", mrp: 165, price: 149, cat: "Beauty & Skincare", desc: "Brightening & Exfoliation", img: "https://i.postimg.cc/XZvLn7q5/vitamincfacewash.png" },
+      { id: 82, name: "Gold Face Wash", pack: "60 ml", mrp: 115, price: 104, cat: "Beauty & Skincare", desc: "Luxurious Glow & Shine", img: "https://i.postimg.cc/7JzXjs6t/goldfacewash.png" },
+      { id: 83, name: "Neem Face Wash (60ml)", pack: "60 ml", mrp: 130, price: 117, cat: "Beauty & Skincare", desc: "Prevents Pimples & Blemishes", img: "https://i.postimg.cc/ppNsKHG3/neemfacewash.png" },
+      { id: 84, name: "Papaya Face Wash (60ml)", pack: "60 ml", mrp: 135, price: 122, cat: "Beauty & Skincare", desc: "Clean, Fresh & Glowing Skin", img: "https://i.postimg.cc/xXngFPS1/papayafacewash.png" },
+      { id: 85, name: "Apricot Scrub", pack: "60 gm", mrp: 110, price: 99, cat: "Beauty & Skincare", desc: "Prevents Blackheads & Cleans Pores", img: "https://i.postimg.cc/r0KfNFLX/apricotscrub.png" },
+      { id: 86, name: "Mini Facial Kit", pack: "33 gm", mrp: 120, price: 108, cat: "Beauty & Skincare", desc: "Gold, Papaya, Wine & Charcoal Kit", img: "https://i.postimg.cc/MfBtgPTj/facialkits3.png" },
+      { id: 87, name: "Facial Kit (Papaya or Gold)", pack: "139 gm", mrp: 360, price: 324, cat: "Beauty & Skincare", desc: "Salon Grade Treatment", img: "https://i.postimg.cc/K3TQCqzM/facialkits6.png" },
+      { id: 88, name: "Vitamin C Serum", pack: "15 ml", mrp: 250, price: 225, cat: "Beauty & Skincare", desc: "Enriched with Niacinamide", img: "https://i.postimg.cc/67QcB5qG/vitamincfaceserum.png" },
+      { id: 89, name: "Gold Bleach Cream (339g)", pack: "339 gm", mrp: 390, price: 351, cat: "Beauty & Skincare", desc: "Salon Pack Golden Glow", img: "https://i.postimg.cc/FkSGwWRB/goldbleachcream.png" },
+      { id: 90, name: "Beauty Face Pack", pack: "100 gm", mrp: 110, price: 99, cat: "Beauty & Skincare", desc: "Soft, Fair & Glowing Skin", img: "https://i.postimg.cc/34VnS5K5/beautyfacepack.png" },
+      { id: 91, name: "Rose Water", pack: "120 ml", mrp: 75, price: 68, cat: "Beauty & Skincare", desc: "Maintains Natural Skin pH", img: "https://i.postimg.cc/LJ2v0VMt/rosewater.png" },
+      { id: 92, name: "Rose & Gold Toner", pack: "100 ml", mrp: 140, price: 126, cat: "Beauty & Skincare", desc: "Deep Cleansing & Tone Enhancer", img: "https://i.postimg.cc/w1gFbkdJ/rose-goldtoner.png" },
+      { id: 93, name: "Aloe Vera Moisturising Gel (100g)", pack: "100 gm", mrp: 150, price: 135, cat: "Beauty & Skincare", desc: "Pure Hydrating Gel", img: "https://i.postimg.cc/0MbV021t/aloeveramoisturisinggel.png" },
+      { id: 94, name: "Honey & Saffron Body Lotion", pack: "100 ml", mrp: 125, price: 113, cat: "Beauty & Skincare", desc: "Moisturizes Skin Deeply", img: "https://i.postimg.cc/CBXmPTF0/bodylotionhoney-saffron.png" },
+      { id: 95, name: "Cold Cream", pack: "50 gm", mrp: 50, price: 45, cat: "Beauty & Skincare", desc: "Nourishing Winter Moisturizer", img: "https://i.postimg.cc/JDvP6V1y/coldcream.png" },
+      { id: 96, name: "Anti Acne & Pimple Cream", pack: "50 gm", mrp: 245, price: 221, cat: "Beauty & Skincare", desc: "Prevents Breakouts & Acne", img: "https://i.postimg.cc/XGpsk76h/antiacne-pimplecream.png" },
+      { id: 97, name: "Anti Blemishing Cream", pack: "50 gm", mrp: 345, price: 311, cat: "Beauty & Skincare", desc: "For Spotless Glowing Skin", img: "https://i.postimg.cc/CBzcsLpX/antiblemishingcream.png" },
+      { id: 98, name: "Anti Wrinkle Cream", pack: "50 gm", mrp: 345, price: 311, cat: "Beauty & Skincare", desc: "Reduces Signs of Ageing", img: "https://i.postimg.cc/zbVxFXY9/antiwrinklecream.png" },
+      { id: 99, name: "Under Eye Cream", pack: "10 gm", mrp: 150, price: 135, cat: "Beauty & Skincare", desc: "Reduces Dark Circles & Puffiness", img: "https://i.postimg.cc/8FC4TPcC/undereyecream.png" },
+      { id: 100, name: "D-Tan Face Pack", pack: "60 gm", mrp: 165, price: 149, cat: "Beauty & Skincare", desc: "Removes Stubborn Sun Tan", img: "https://i.postimg.cc/30G9zSRy/dtanfacepack.png" },
+      { id: 101, name: "Sunscreen SPF-30", pack: "60 gm", mrp: 185, price: 167, cat: "Beauty & Skincare", desc: "UVA UVB Sun Protection", img: "https://i.postimg.cc/874w8r12/spf30.png" },
+      { id: 102, name: "Sunscreen SPF-50", pack: "60 gm", mrp: 325, price: 293, cat: "Beauty & Skincare", desc: "High Protection Sun Guard", img: "https://i.postimg.cc/hXsMF7DB/spf50.png" },
+      { id: 103, name: "BB Cream", pack: "30 gm", mrp: 249, price: 224, cat: "Beauty & Skincare", desc: "5 in 1 Daily Foundation Glow", img: "https://i.postimg.cc/vgk3qFGk/bbcream.png" },
+      { id: 104, name: "Liquid Suhaag Sindoor", pack: "5 ml", mrp: 150, price: 135, cat: "Beauty & Skincare", desc: "Red & Maroon Long Lasting", img: "https://i.postimg.cc/RqJP3FRT/liquidsuhaagsindoor.png" },
+      { id: 105, name: "Ultra Black Kajal", pack: "8 ml", mrp: 220, price: 198, cat: "Beauty & Skincare", desc: "Waterproof & Smudge-free", img: "https://i.postimg.cc/HJLzTsnW/ultrablackkajal.png" },
+      { id: 106, name: "Matte Lipstick", pack: "4 gm", mrp: 250, price: 225, cat: "Beauty & Skincare", desc: "Rich Vibrant Shades", img: "https://i.postimg.cc/bsXm1hCt/lipstick.png" },
+      { id: 107, name: "Nail Polish", pack: "8 ml", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "High Gloss Vibrant Nails", img: "https://i.postimg.cc/qzf12TbY/nailpolish.png" },
+      { id: 108, name: "Sanitary Pads with Anion Chip", pack: "7 Pads", mrp: 80, price: 72, cat: "Beauty & Skincare", desc: "Anti-Bacterial Protection", img: "https://i.postimg.cc/FYNGnxQb/sanitarypad.png" },
+      { id: 109, name: "Onion Black Seed Hair Oil", pack: "100 ml", mrp: 248, price: 223, cat: "Hair & Grooming", desc: "7 Essential Oils for Regrowth", img: "https://i.postimg.cc/dL84Bxpb/onionblackseedoil.png" },
+      { id: 110, name: "Bhringraj Hair Oil", pack: "100 ml", mrp: 390, price: 351, cat: "Hair & Grooming", desc: "Intensive Hair Fall Therapy", img: "https://i.postimg.cc/XGmQHSV6/bhringrajoil.png" },
+      { id: 111, name: "9 in 1 Hair Oil (100ml)", pack: "100 ml", mrp: 100, price: 90, cat: "Hair & Grooming", desc: "Repairs Damaged Hair", img: "https://i.postimg.cc/ftJ8fTQx/9in1hairoil.png" },
+      { id: 112, name: "Vitalizer Hair Oil", pack: "120 ml", mrp: 250, price: 225, cat: "Hair & Grooming", desc: "Controls Dandruff & Hair Fall", img: "https://i.postimg.cc/bGvgqNrD/vitalizer.png" },
+      { id: 113, name: "Amla Hair Oil", pack: "120 ml", mrp: 149, price: 134, cat: "Hair & Grooming", desc: "Promotes Strong Hair Growth", img: "https://i.postimg.cc/R6NgLVxD/amlahairoil.png" },
+      { id: 114, name: "Long Hair Shampoo", pack: "200 ml", mrp: 250, price: 225, cat: "Hair & Grooming", desc: "For Thicker, Stronger Hair", img: "https://i.postimg.cc/LndxjpCP/longhairshampoo.png" },
+      { id: 115, name: "Prevent Hair Fall Shampoo", pack: "200 ml", mrp: 224, price: 202, cat: "Hair & Grooming", desc: "Significantly Reduces Hair Fall", img: "https://i.postimg.cc/MnqtrY8H/preventhairfallshampoo.png" },
+      { id: 116, name: "Amla Shikakai Shampoo", pack: "200 ml", mrp: 330, price: 297, cat: "Hair & Grooming", desc: "Natural Shiny & Silky Hair", img: "https://i.postimg.cc/r0KfNF2H/amlashikakaishampoo.png" },
+      { id: 117, name: "Anti Dandruff Shampoo", pack: "200 ml", mrp: 250, price: 225, cat: "Hair & Grooming", desc: "Nourishes Scalp & Clears Flakes", img: "https://i.postimg.cc/ygkLyYC2/antidandruffshampoo.png" },
+      { id: 118, name: "Hair Conditioner", pack: "200 ml", mrp: 190, price: 171, cat: "Hair & Grooming", desc: "Soft & Silky Smooth Hair", img: "https://i.postimg.cc/p5jk3GTS/hairconditioner.png" },
+      { id: 119, name: "Hair Serum", pack: "100 ml", mrp: 299, price: 269, cat: "Hair & Grooming", desc: "Non-Greasy Natural Shine", img: "https://i.postimg.cc/Hj8SJx2g/hairserum.png" },
+      { id: 120, name: "Very Cool Hair Oil", pack: "100 ml", mrp: 130, price: 117, cat: "Hair & Grooming", desc: "Cooling Stress & Tension Relief", img: "https://i.postimg.cc/yJNj7YxW/verycooloil.png" },
+      { id: 121, name: "Herbal Shaving Cream", pack: "90 gm", mrp: 90, price: 81, cat: "Hair & Grooming", desc: "Cool & Smooth Shave", img: "https://i.postimg.cc/Hrz3G7pb/shavingcream.png" },
+      { id: 122, name: "Oremol Natural Black Hair", pack: "100 ml", mrp: 115, price: 104, cat: "Hair & Grooming", desc: "Gives Naturally Black Hair", img: "https://i.postimg.cc/vcW3zNCH/oremolblackhair.png" },
+      { id: 123, name: "Deodorant (Blue Hill or Black Hill)", pack: "150 ml", mrp: 199, price: 179, cat: "Hair & Grooming", desc: "All-Day Fresh Fragrance", img: "https://i.postimg.cc/ct3TP9HC/deobluehill-blackhill.png" },
+      { id: 124, name: "Perfume (Blueflash or Black Velvet)", pack: "50 ml", mrp: 555, price: 500, cat: "Hair & Grooming", desc: "Long-Lasting Freshness", img: "https://i.postimg.cc/JDvP6V1L/blueflashblackvelvet-bloomperfume.png" },
+      { id: 125, name: "Oredent Toothpaste (100g)", pack: "100 gm", mrp: 150, price: 135, cat: "Home & Kitchen", desc: "Double Protection Formula", img: "https://i.postimg.cc/dL84Bxgc/oredenttoothpaste.png" },
+      { id: 126, name: "Orefresh Gel", pack: "100 gm", mrp: 155, price: 140, cat: "Home & Kitchen", desc: "Instant Fresh Breath Gel", img: "https://i.postimg.cc/BXxMgVRG/orefreshgel.png" },
+      { id: 127, name: "Antiseptic Hand Wash", pack: "250 ml", mrp: 110, price: 99, cat: "Home & Kitchen", desc: "Germ Protection & Cleanliness", img: "https://i.postimg.cc/Th5kyw9R/handwash.png" },
+      { id: 128, name: "Kesar Soap", pack: "75 gm", mrp: 65, price: 59, cat: "Home & Kitchen", desc: "Soft & Nourished Skin Bar", img: "https://i.postimg.cc/CdnvZ1Nb/kesarsoap.png" },
+      { id: 129, name: "Shine Bathing Bar", pack: "75 gm", mrp: 55, price: 50, cat: "Home & Kitchen", desc: "Daily Refreshing Soap", img: "https://i.postimg.cc/hXsMF7S8/shinebathingbar.png" },
+      { id: 130, name: "Dish Top Gel", pack: "250 ml", mrp: 155, price: 140, cat: "Home & Kitchen", desc: "Heavy Grease Dishwashing Gel", img: "https://i.postimg.cc/kRSwL142/dishtop.png" },
+      { id: 131, name: "Glass Cleaner", pack: "500 ml", mrp: 130, price: 117, cat: "Home & Kitchen", desc: "Streak-Free glass Sparkle", img: "https://i.postimg.cc/FkSGwWRp/glasscleaner.png" },
+      { id: 132, name: "Floor Cleaner", pack: "500 ml", mrp: 170, price: 153, cat: "Home & Kitchen", desc: "Disinfectant Surface Cleaner", img: "https://i.postimg.cc/fSd512LX/floorcleaner.png" },
+      { id: 133, name: "Enrich Gold Tea", pack: "250 gm", mrp: 265, price: 239, cat: "Home & Kitchen", desc: "Bright Blend Rich Aroma Tea", img: "https://i.postimg.cc/p5jk3GT5/enrichgoldtea.png" },
+      { id: 134, name: "Kadak Tea", pack: "250 gm", mrp: 185, price: 167, cat: "Home & Kitchen", desc: "Perfect Refreshing Kadak Chai", img: "https://i.postimg.cc/Hj8SJx2M/kadaktea.png" },
+      { id: 135, name: "Pure Turmeric Powder (Haldi)", pack: "100 gm", mrp: 55, price: 50, cat: "Home & Kitchen", desc: "100% Pure Natural Spice", img: "https://i.postimg.cc/grLMwJDz/haldipowder.png" },
+      { id: 136, name: "Pure Red Chilli Powder (Lal Mirch)", pack: "100 gm", mrp: 65, price: 59, cat: "Home & Kitchen", desc: "100% Natural Red Spice", img: "https://i.postimg.cc/JtHTynq3/lalmirchpowder.png" },
+      { id: 137, name: "Pure Coriander Powder (Dhania)", pack: "100 gm", mrp: 45, price: 41, cat: "Home & Kitchen", desc: "100% Natural Spice", img: "https://i.postimg.cc/Cn8J9P1d/dhaniapowder.png" },
+      { id: 138, name: "Pure Garam Masala", pack: "100 gm", mrp: 105, price: 95, cat: "Home & Kitchen", desc: "100% Pure Rich Spice Blend", img: "https://i.postimg.cc/7JzXjs6V/garammasala.png" },
+      { id: 139, name: "Rice Bran Oil", pack: "1 Ltr", mrp: 320, price: 288, cat: "Home & Kitchen", desc: "Heart-Healthy Cooking Oil", img: "https://i.postimg.cc/21rTXxfL/ricebrainoil.png" },
+      { id: 140, name: "Royal Chandan Premium Agarbatti", pack: "15 pcs", mrp: 20, price: 18, cat: "Home & Kitchen", desc: "Sandalwood Incense Sticks", img: "https://i.postimg.cc/SnkVtGpJ/premiumagarbatti.png" },
+      { id: 141, name: "Altos Care Pest Control", pack: "250 ml", mrp: 530, price: 477, cat: "Agri & Veterinary", desc: "Effective Plant Pest Control", img: "https://i.postimg.cc/VrdKWLPD/altocare.png" },
+      { id: 142, name: "Alvet-Cal for Animals", pack: "500 ml", mrp: 160, price: 144, cat: "Agri & Veterinary", desc: "Essential Animal Multivitamin", img: "https://i.postimg.cc/TLptJYvN/alvetcal.png" },
+      { id: 143, name: "Oregon-80 Water Retention", pack: "500 ml", mrp: 685, price: 617, cat: "Agri & Veterinary", desc: "Increases Soil Water Retention", img: "https://i.postimg.cc/ppDqZ63V/oregon80.png" },
+      { id: 144, name: "Alto Gro Plant Booster", pack: "250 ml", mrp: 578, price: 520, cat: "Agri & Veterinary", desc: "Promotes Rapid Plant Growth", img: "https://i.postimg.cc/62yMf5xM/altogro.png" },
+      { id: 145, name: "Haldi Pure Capsule", pack: "60 caps", mrp: 372, price: 335, cat: "Medicines & Health", desc: "Immunity & Vitality Support", img: "https://i.postimg.cc/Hj8SJx2T/haldiwithkesardrops.png" },
+      { id: 146, name: "Liquid Sindur Red - Red", pack: "5 ml", mrp: 150, price: 135, cat: "Beauty & Skincare", desc: "Rich Long Lasting Sindur", img: "https://i.postimg.cc/RqJP3FRT/liquidsuhaagsindoor.png" },
+      { id: 147, name: "Zordan Blue Hill Body Deodorant", pack: "150 ml", mrp: 199, price: 179, cat: "Hair & Grooming", desc: "All-Day Invigorating Fragrance", img: "https://i.postimg.cc/ct3TP9HC/deobluehill-blackhill.png" },
+      { id: 148, name: "Altocare", pack: "250 ml", mrp: 530, price: 477, cat: "Agri & Veterinary", desc: "Effective Plant Pest Control", img: "https://i.postimg.cc/VrdKWLPD/altocare.png" },
+      { id: 149, name: "Oregon 80 (SA Agent)", pack: "500 ml", mrp: 685, price: 617, cat: "Agri & Veterinary", desc: "Increases Soil Water Retention", img: "https://i.postimg.cc/ppDqZ63V/oregon80.png" },
+      { id: 150, name: "Coloston Capsule", pack: "60 cap", mrp: 627, price: 564, cat: "Medicines & Health", desc: "100% Bovine Colostrum Powder", img: "https://i.postimg.cc/sQqw6dVG/coloston.png" },
+      { id: 151, name: "To Breen Capsule (Altos)", pack: "60 cap", mrp: 448, price: 403, cat: "Medicines & Health", desc: "Improves Brain Memory", img: "https://i.postimg.cc/WD48sbzL/tobrain.png" },
+      { id: 152, name: "Ultra K-10 Capsule (Fat Burn)", pack: "60 Caps", mrp: 475, price: 428, cat: "Medicines & Health", desc: "Weight Loss & Metabolism Support", img: "https://i.postimg.cc/Z9qHJKn5/ultrak10.png" },
+      { id: 153, name: "Black Kajal Pencil", pack: "8 ml", mrp: 199, price: 179, cat: "Beauty & Skincare", desc: "Waterproof & Smudge-free", img: "https://i.postimg.cc/HJLzTsnW/ultrablackkajal.png" },
+      { id: 154, name: "Face Pack Beauty", pack: "100 gm", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "Soft, Fair & Glowing Skin", img: "https://i.postimg.cc/34VnS5K5/beautyfacepack.png" },
+      { id: 155, name: "Face Wash Gold", pack: "60 ml", mrp: 115, price: 104, cat: "Beauty & Skincare", desc: "Luxurious Glow & Shine", img: "https://i.postimg.cc/7JzXjs6t/goldfacewash.png" },
+      { id: 156, name: "Face Wash Charcoal", pack: "60 ML", mrp: 109, price: 98, cat: "Beauty & Skincare", desc: "Pollution Control & Deep Cleansing", img: "https://i.postimg.cc/sQqw6dVV/charcoalfacewash.png" },
+      { id: 157, name: "Face Wash Papaya", pack: "60 ml", mrp: 231, price: 208, cat: "Beauty & Skincare", desc: "Clean, Fresh & Glowing Skin", img: "https://i.postimg.cc/xXngFPS1/papayafacewash.png" },
+      { id: 158, name: "Face Wash Skin Glow", pack: "60 ml", mrp: 121, price: 109, cat: "Beauty & Skincare", desc: "Fresh & Glowing Complexion", img: "https://i.postimg.cc/NKDbhrg4/skinglowfacewash.png" },
+      { id: 159, name: "Face Wash Ubtan", pack: "50 ML", mrp: 149, price: 134, cat: "Beauty & Skincare", desc: "Tan Removal & Radiant Glow", img: "https://i.postimg.cc/FfKphszv/ubtanfacewash.png" },
+      { id: 160, name: "Aloevera Moisturising Gel", pack: "100 gm", mrp: 140, price: 126, cat: "Beauty & Skincare", desc: "Pure Hydrating Gel", img: "https://i.postimg.cc/0MbV021t/aloeveramoisturisinggel.png" },
+      { id: 161, name: "Cold Cream (Almond & Cocoa Butter)", pack: "50 gm", mrp: 50, price: 45, cat: "Beauty & Skincare", desc: "Nourishing Winter Moisturizer", img: "https://i.postimg.cc/JDvP6V1y/coldcream.png" },
+      { id: 162, name: "Fruit Cream", pack: "50 gm", mrp: 50, price: 45, cat: "Beauty & Skincare", desc: "Provide Moisture to Rough Skin", img: "https://i.postimg.cc/T5bQB7wr/fruitcream.png" },
+      { id: 163, name: "Hydra Boost Gel", pack: "30 gm", mrp: 115, price: 104, cat: "Beauty & Skincare", desc: "Soft & Smooth Skin", img: "https://i.postimg.cc/hhQCJjrh/hydraboostgel.png" },
+      { id: 164, name: "Jojoba Moisturising Lotion", pack: "100 ml", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "Nourishes Skin Instantly", img: "https://i.postimg.cc/jCn8W5XD/jojobamoisturisinglotion.png" },
+      { id: 165, name: "Lip Balm", pack: "10 gm", mrp: 60, price: 54, cat: "Beauty & Skincare", desc: "For Soft & Smooth Lips", img: "https://i.postimg.cc/Th5kyw9J/lipbalm.png" },
+      { id: 166, name: "Rose & Musk Moisturising Lotion", pack: "100 ml", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "Fragrance & Moisture", img: "https://i.postimg.cc/cv0T5cNf/rose-musklotion.png" },
+      { id: 167, name: "Sun Screen Cream Spf - 20", pack: "100 ml", mrp: 199, price: 179, cat: "Beauty & Skincare", desc: "UVA UVB Sun Protection", img: "https://i.postimg.cc/w12FKs6G/spf20.png" },
+      { id: 168, name: "Sun Screen Cream Spf - 40", pack: "100 ml", mrp: 299, price: 269, cat: "Beauty & Skincare", desc: "High Protection Sun Guard", img: "https://i.postimg.cc/nX2T8QFt/spf40.png" },
+      { id: 169, name: "Zordan Footcare Cream", pack: "50 gm", mrp: 84, price: 76, cat: "Beauty & Skincare", desc: "Soft & Supple Feet", img: "https://i.postimg.cc/64ZzFj3C/footcarecream.png" },
+      { id: 170, name: "Anti Dandruff Shampoo (100ml)", pack: "100 ml", mrp: 130, price: 117, cat: "Hair & Grooming", desc: "Nourishes Scalp & Clears Flakes", img: "https://i.postimg.cc/ygkLyYC2/antidandruffshampoo.png" },
+      { id: 171, name: "Hena Hair Pack", pack: "100 gm", mrp: 99, price: 89, cat: "Hair & Grooming", desc: "Give Natural Colour to Hair", img: "https://i.postimg.cc/LhgyqXT8/heenahairpack.png" },
+      { id: 172, name: "Onion Shampoo", pack: "200 ml", mrp: 245, price: 221, cat: "Hair & Grooming", desc: "Reduces Hair Fall & Nourishes", img: "https://i.postimg.cc/WhMXnHCQ/onionshampoo.png" },
+      { id: 173, name: "Talcum Powder", pack: "100 gm Each", mrp: 135, price: 122, cat: "Hair & Grooming", desc: "All-Day Freshness", img: "https://i.postimg.cc/R30dvVhr/talcumpowder.png" },
+      { id: 174, name: "Zordan Perfume Bloom", pack: "50 ml", mrp: 525, price: 473, cat: "Hair & Grooming", desc: "Luxury Fragrance", img: "https://i.postimg.cc/JDvP6V1L/blueflashblackvelvet-bloomperfume.png" },
+      { id: 175, name: "Dish Washing Gel", pack: "500 ml", mrp: 199, price: 179, cat: "Home & Kitchen", desc: "Heavy Grease Dishwashing Gel", img: "https://i.postimg.cc/kRSwL142/dishtop.png" },
+      { id: 176, name: "Hand Wash (250ml)", pack: "250 ml", mrp: 99, price: 89, cat: "Home & Kitchen", desc: "Germ Protection & Cleanliness", img: "https://i.postimg.cc/Th5kyw9R/handwash.png" },
+      { id: 177, name: "Sharbat Sweet Rose", pack: "700 ml", mrp: 199, price: 179, cat: "Home & Kitchen", desc: "Fresh & Cool Sharbat", img: "https://i.postimg.cc/rdpjqFmv/sweetrosesharbat.png" },
+      { id: 178, name: "Shine Home Cream Soap", pack: "75 gm", mrp: 55, price: 50, cat: "Home & Kitchen", desc: "Nourishes Skin Soft & Glowing", img: "https://i.postimg.cc/zy7pmRJ7/shinehomefacialbar.png" },
+      { id: 179, name: "Ws7 Detergent", pack: "500 gm", mrp: 99, price: 89, cat: "Home & Kitchen", desc: "Super Cleansing Advance Formula", img: "https://i.postimg.cc/xkFR8DNk/ws7detergent.png" },
+      { id: 180, name: "Cloth Face Mask (Altos)", pack: "1 pc", mrp: 75, price: 68, cat: "Beauty & Skincare", desc: "Reusable 100% Cotton Protection Mask", img: "https://i.postimg.cc/DWcZf5Ck/mask.jpg" }
+    ];
+
+    const categories = [
+      "All",
+      "Medicines & Health",
+      "Powders & Nutrition",
+      "Syrups & Juices",
+      "Beauty & Skincare",
+      "Hair & Grooming",
+      "Home & Kitchen",
+      "Agri & Veterinary"
+    ];
+
+    let selectedCategory = "All";
+    let cart = {};
+    let activeCheckoutPayload = null;
+
+    function getUrgencyBadge(id) {
+      if (id % 3 === 0) return { text: "🔥 Bestseller", class: "bg-amber-100 text-amber-800 border-amber-200" };
+      if (id % 4 === 0) return { text: "⚡ Only 3 Left", class: "bg-rose-100 text-rose-800 border-rose-200" };
+      return { text: "✓ Verified Stock", class: "bg-emerald-100 text-emerald-800 border-emerald-200" };
+    }
+
+    function initCategories() {
+      const container = document.getElementById("categoryContainer");
+      container.innerHTML = categories.map(cat => `
+        <button 
+          onclick="filterCategory('${cat}')" 
+          class="category-btn px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${
+            selectedCategory === cat ? 'bg-purple-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+          }">
+          ${cat}
+        </button>
+      `).join("");
+    }
+
+    function filterCategory(cat) {
+      selectedCategory = cat;
+      initCategories();
+      renderProducts();
+    }
+
+    function renderProducts() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const grid = document.getElementById("productGrid");
+
+      const filtered = products.filter(p => {
+        const matchesCategory = selectedCategory === "All" || p.cat === selectedCategory;
+        const matchesSearch = p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query);
+        return matchesCategory && matchesSearch;
+      });
+
+      document.getElementById("productCounter").innerText = `${filtered.length} PRODUCTS AVAILABLE`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center text-slate-400">
+            <i class="fa-solid fa-box-open text-4xl mb-2"></i>
+            <p class="text-sm">No products found matching your search.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => {
+        const badge = getUrgencyBadge(p.id);
+
+        return `
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-3 flex flex-col justify-between hover:shadow-lg transition cursor-pointer relative group" onclick="openProductDetail(${p.id})">
+            <div>
+              <div class="relative w-full aspect-square bg-slate-50 border border-slate-100 rounded-xl p-2.5 flex items-center justify-center mb-2 overflow-hidden">
+                <span class="absolute top-1.5 left-2 text-[9px] font-bold text-slate-600 bg-white/80 px-1.5 py-0.5 rounded shadow-xs z-10">
+                  ${p.pack}
+                </span>
+                <span class="absolute top-1.5 right-2 text-[9px] font-extrabold px-1.5 py-0.5 rounded border ${badge.class} z-10">
+                  ${badge.text}
+                </span>
+                <img src="${p.img}" alt="${p.name}" class="w-full h-full object-contain group-hover:scale-105 transition duration-200" loading="lazy" onerror="this.src='https://placehold.co/400x400/f8fafc/7c3aed?text=Altos+Product'" />
+              </div>
+
+              <h3 class="font-bold text-slate-800 text-xs leading-snug line-clamp-1">${p.name}</h3>
+              <p class="text-slate-400 text-[11px] mt-0.5 line-clamp-1">${p.desc}</p>
+            </div>
+            
+            <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between" onclick="event.stopPropagation()">
+              <div>
+                <div class="flex items-center gap-1 leading-none mb-0.5">
+                  <span class="text-[10px] text-slate-400 line-through">₹${p.mrp}</span>
+                  <span class="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1 rounded">10% OFF</span>
+                </div>
+                <span class="font-extrabold text-slate-900 text-sm">₹${p.price}</span>
+              </div>
+              <button 
+                onclick="addToCart(${p.id})" 
+                class="px-3 py-1 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition active:scale-95 flex items-center gap-1 shadow-sm">
+                <i class="fa-solid fa-plus text-[10px]"></i> Add
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function openProductDetail(productId) {
+      const p = products.find(item => item.id === productId);
+      if (!p) return;
+
+      const badge = getUrgencyBadge(p.id);
+
+      document.getElementById("modalImg").src = p.img;
+      document.getElementById("modalPack").innerText = p.pack;
+      document.getElementById("modalBadge").innerText = badge.text;
+      document.getElementById("modalCat").innerText = p.cat;
+      document.getElementById("modalName").innerText = p.name;
+      document.getElementById("modalDesc").innerText = p.desc;
+      document.getElementById("modalStrikedMrp").innerText = `₹${p.mrp}`;
+      document.getElementById("modalPrice").innerText = `₹${p.price}`;
+
+      document.getElementById("pincodeInput").value = "";
+      const pRes = document.getElementById("pincodeResult");
+      pRes.classList.add("hidden");
+      pRes.innerText = "";
+
+      document.getElementById("modalAddBtn").onclick = () => {
+        addToCart(p.id);
+        closeDetailModal();
+      };
+
+      document.getElementById("modalBuyBtn").onclick = () => {
+        closeDetailModal();
+        buySingleProductNow(p);
+      };
+
+      document.getElementById("productDetailModal").classList.remove("hidden");
+    }
+
+    function closeDetailModal() {
+      document.getElementById("productDetailModal").classList.add("hidden");
+    }
+
+    function checkPincode() {
+      const pin = document.getElementById("pincodeInput").value.trim();
+      const res = document.getElementById("pincodeResult");
+      
+      if (!pin || pin.length !== 6 || isNaN(pin)) {
+        res.innerHTML = `<span class="text-rose-600 font-bold"><i class="fa-solid fa-circle-exclamation"></i> Kripya sahi 6-digit Pincode dalein.</span>`;
+        res.classList.remove("hidden");
+        return;
+      }
+
+      const days = (parseInt(pin[5]) % 3) + 2;
+      res.innerHTML = `<span class="text-emerald-700 font-bold"><i class="fa-solid fa-circle-check"></i> Delivery Available to ${pin}! Free dispatch in ${days} days.</span>`;
+      res.classList.remove("hidden");
+    }
+
+    function buySingleProductNow(item) {
+      activeCheckoutPayload = {
+        type: "single",
+        total: item.price,
+        itemsText: `${item.name} (${item.pack}) x 1`
+      };
+
+      setupCheckoutView(item.price);
+      document.getElementById("checkoutModal").classList.remove("hidden");
+    }
+
+    function addToCart(productId) {
+      cart[productId] = (cart[productId] || 0) + 1;
+      updateCartUI();
+    }
+
+    function changeQty(productId, delta) {
+      if (cart[productId]) {
+        cart[productId] += delta;
+        if (cart[productId] <= 0) delete cart[productId];
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const countEl = document.getElementById("cartCount");
+      const itemsContainer = document.getElementById("cartItems");
+      const subtotalEl = document.getElementById("cartSubtotal");
+      const checkoutBtn = document.getElementById("checkoutBtn");
+
+      let totalItems = 0;
+      let subtotal = 0;
+      let html = "";
+
+      for (const [idStr, qty] of Object.entries(cart)) {
+        const id = parseInt(idStr);
+        const item = products.find(p => p.id === id);
+        if (!item) continue;
+
+        totalItems += qty;
+        subtotal += item.price * qty;
+
+        html += `
+          <div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-100 bg-slate-50/50">
+            <div class="flex-1 pr-2">
+              <div class="font-bold text-xs text-slate-800 line-clamp-1">${item.name}</div>
+              <div class="text-[11px] text-slate-400">₹${item.price} each • ${item.pack}</div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 rounded-md bg-white border flex items-center justify-center text-xs font-bold text-slate-600 hover:bg-slate-100">-</button>
+              <span class="text-xs font-bold text-slate-800 w-4 text-center">${qty}</span>
+              <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 rounded-md bg-purple-600 flex items-center justify-center text-xs font-bold text-white hover:bg-purple-700">+</button>
+            </div>
+          </div>
+        `;
+      }
+
+      countEl.innerText = totalItems;
+      subtotalEl.innerText = `₹${subtotal}`;
+      checkoutBtn.disabled = totalItems === 0;
+
+      itemsContainer.innerHTML = totalItems === 0
+        ? `<div class="py-16 text-center text-slate-400"><i class="fa-solid fa-cart-shopping text-3xl mb-2 text-slate-300"></i><p class="text-xs">Your shopping cart is empty.</p>
+          </div>`
+        : html;
+    }
+
+    function toggleCart() {
+      document.getElementById("cartModal").classList.toggle("hidden");
+    }
+
+    function openCheckoutModal() {
+      let subtotal = 0;
+      let orderItems = [];
+      for (const [idStr, qty] of Object.entries(cart)) {
+        const item = products.find(p => p.id === parseInt(idStr));
+        if (item) {
+          subtotal += item.price * qty;
+          orderItems.push(`• ${item.name} (${item.pack}) x ${qty} = ₹${item.price * qty}`);
+        }
+      }
+      if (subtotal <= 0) return;
+
+      activeCheckoutPayload = {
+        type: "cart",
+        total: subtotal,
+        itemsText: orderItems.join("\n")
+      };
+
+      setupCheckoutView(subtotal);
+      toggleCart();
+      document.getElementById("checkoutModal").classList.remove("hidden");
+    }
+
+    function setupCheckoutView(amount) {
+      const upiUrl = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amount}&cu=INR`;
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
+
+      document.getElementById("upiQrImage").src = qrApiUrl;
+      document.getElementById("qrAmountDisplay").innerText = `₹${amount}`;
+      
+      const payLinkEl = document.getElementById("directUpiLink");
+      payLinkEl.href = upiUrl;
+      payLinkEl.target = "_blank"; // Yeh external app/browser me kholne me madad karega
+      
+      payLinkEl.onclick = function(e) {
+        // App ke andar intent action ko force karne ke liye
+        try {
+          window.location.href = upiUrl;
+        } catch (err) {
+          window.open(upiUrl, '_blank');
+        }
+        e.preventDefault();
+      };
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById("checkoutModal").classList.add("hidden");
+    }
+
+    function submitToWhatsApp(isPaid) {
+      if (!activeCheckoutPayload) return;
+
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+
+      const paymentStatusText = isPaid 
+        ? "PAID VIA UPI (Screenshot attached below)" 
+        : "PAYMENT PENDING / ENQUIRY";
+
+      let msg = `*NEW ORDER / INQUIRY - AWIN ENTERPRISES*\n\n`;
+      msg += `*Payment Status:* ${paymentStatusText}\n`;
+      msg += `*Total Amount:* ₹${activeCheckoutPayload.total}\n\n`;
+      msg += `*Order Items:*\n${activeCheckoutPayload.itemsText}\n`;
+
+      if (name || phone || address) {
+        msg += `\n*Customer Details (Delivery):*\n`;
+        if (name) msg += `• Name: ${name}\n`;
+        if (phone) msg += `• Phone: ${phone}\n`;
+        if (address) msg += `• Address: ${address}\n`;
+      }
+
+      if (isPaid) {
+        msg += `\nMaine payment kar diya hai, screenshot bhej raha hoon. Kripya dispatch karein.`;
+      } else {
+        msg += `\nMaine abhi pay nahi kiya hai, mujhe order/payment ke baare me baat karni hai.`;
+      }
+
+      const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, "_blank");
+    }
+
+    initCategories();
+    renderProducts();
+    updateCartUI();
+  </script>
+</body>
+</html>
