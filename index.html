@@ -197,10 +197,13 @@
         </button>
       </div>
       
-      <p class="text-[11px] text-slate-500">Scan QR using Google Pay, PhonePe, Paytm or BHIM</p>
+      <p class="text-[11px] text-slate-500">Scan QR or save to gallery to pay via GPay, PhonePe, Paytm</p>
       
-      <div class="flex justify-center p-2 bg-slate-50 border rounded-xl">
-        <img id="upiQrImage" src="" alt="UPI QR Code" class="w-40 h-40 rounded-lg shadow-sm" />
+      <div class="flex flex-col items-center justify-center p-2 bg-slate-50 border rounded-xl space-y-2">
+        <img id="upiQrImage" src="" alt="UPI QR Code" class="w-40 h-40 rounded-lg shadow-sm" crossorigin="anonymous" />
+        <a id="downloadQrBtn" href="#" download="awin-qr.png" class="text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 px-3 py-1.5 rounded-lg border border-purple-200 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-download"></i> Save QR to Gallery
+        </a>
       </div>
 
       <div class="space-y-0.5">
@@ -233,12 +236,8 @@
           class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 resize-none"></textarea>
       </div>
 
-      <!-- Two Status Action Buttons -->
+      <!-- Action Buttons -->
       <div class="space-y-2 pt-1">
-        <a id="directUpiLink" href="#" class="block w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold text-xs transition text-center">
-          Pay Directly on Mobile
-        </a>
-        
         <button onclick="submitToWhatsApp(true)" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs transition flex items-center justify-center gap-2 shadow">
           <i class="fa-solid fa-circle-check text-sm"></i> I Have Paid - Confirm Order
         </button>
@@ -692,14 +691,9 @@
       document.getElementById("upiQrImage").src = qrApiUrl;
       document.getElementById("qrAmountDisplay").innerText = `₹${amount}`;
       
-      const payLinkEl = document.getElementById("directUpiLink");
-      
-      // Isko normal web link ya direct trigger banate hain taki app click hone de
-      payLinkEl.href = "javascript:void(0);";
-      payLinkEl.onclick = function(e) {
-        e.preventDefault();
-        window.location.href = upiUrl;
-      };
+      // Setup download/save QR code link
+      const downloadBtn = document.getElementById("downloadQrBtn");
+      downloadBtn.href = qrApiUrl;
     }
 
     function closeCheckoutModal() {
