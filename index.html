@@ -496,6 +496,20 @@
       { id: 180, name: "Cloth Face Mask (Altos)", pack: "1 pc", mrp: 75, price: 68, cat: "Beauty & Skincare", desc: "Reusable 100% Cotton Protection Mask", img: "https://i.postimg.cc/DWcZf5Ck/mask.jpg" }
     ];
 
+    // ==========================================
+    // TOP PRIORITY SORTING LOGIC FOR ATTRACTION
+    // ==========================================
+    products.sort((a, b) => {
+      const getPriority = (p) => {
+        const name = p.name.toLowerCase();
+        if (name.includes("shampoo") || name.includes("face wash") || name.includes("facewash")) return 1;
+        if (name.includes("cream") || name.includes("deo") || name.includes("deodorant") || name.includes("perfume")) return 2;
+        if (p.cat === "Beauty & Skincare" || p.cat === "Hair & Grooming") return 3;
+        return 4; // Medicines & others go lower
+      };
+      return getPriority(a) - getPriority(b);
+    });
+
     const categories = [
       "All",
       "Medicines & Health",
