@@ -71,6 +71,12 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col relative">
 
+  <!-- Toast Notification Popup (Hidden by default) -->
+  <div id="toastNotification" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white px-5 py-2.5 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs font-bold transition-all duration-300 opacity-0 pointer-events-none transform -translate-y-4">
+    <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+    <span id="toastText">Link copied successfully!</span>
+  </div>
+
   <!-- ONLY Special Offer Permanent Sticky Banner -->
   <div class="sticky top-0 z-50 bg-gradient-to-r from-amber-500 via-purple-600 to-emerald-600 text-white py-2 px-4 text-center font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2">
     <i class="fa-solid fa-gift text-yellow-300 animate-bounce"></i>
@@ -145,8 +151,45 @@
   </div>
 
   <!-- Product Grid -->
-  <main class="max-w-7xl mx-auto px-4 flex-1 pb-28 w-full">
+  <main class="max-w-7xl mx-auto px-4 flex-1 pb-16 w-full">
     <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5"></div>
+
+    <!-- NEW FEATURE: Customer Testimonials / Trust Section -->
+    <section class="mt-12 pt-8 border-t border-slate-200">
+      <div class="text-center space-y-2 mb-6">
+        <span class="text-xs font-bold text-purple-600 bg-purple-50 px-3 py-1 rounded-full border border-purple-100 uppercase tracking-wider">Happy Customers</span>
+        <h2 class="text-xl sm:text-2xl font-black text-slate-900">What People Say About Awin Enterprises</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <!-- Testimonial 1 -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <div class="flex items-center gap-1 text-amber-400 text-xs">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">"Tulsi Power aur Aroplex use karne ke baad se immunity mein bohot fark pada hai. Genuine products aur fast delivery mili Ujjain mein!"</p>
+          <div class="font-bold text-xs text-slate-900">- Rajesh Sharma <span class="text-slate-400 font-normal">(Ujjain)</span></div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <div class="flex items-center gap-1 text-amber-400 text-xs">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">"Altos skincare range aur Face wash bohot acche hain. Direct WhatsApp ordering aur UPI payment ka feature bahut asaan hai."</p>
+          <div class="font-bold text-xs text-slate-900">- Priya Verma <span class="text-slate-400 font-normal">(Indore)</span></div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <div class="flex items-center gap-1 text-amber-400 text-xs">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">"Paindon oil se mere ghutno ke dard mein turant aaram mila. Awin Enterprises ki service aur product quality lajawab hai."</p>
+          <div class="font-bold text-xs text-slate-900">- Ramesh Patidar <span class="text-slate-400 font-normal">(Dewas)</span></div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Feature 2: Floating WhatsApp Button -->
@@ -193,7 +236,7 @@
         <p id="modalDesc" class="text-xs text-slate-600 leading-relaxed"></p>
       </div>
 
-      <!-- Copy Direct Product Link Button right at the top of actions -->
+      <!-- Copy Direct Product Link Button in Modal -->
       <button id="modalShareBtn" class="w-full py-2 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold text-xs rounded-xl border border-purple-200 transition flex items-center justify-center gap-1.5 shadow-xs">
         <i class="fa-solid fa-share-nodes"></i> Copy Direct Product Link 🔗
       </button>
@@ -405,6 +448,7 @@
       { id: 59, name: "Oregel Aloevera", pack: "500 ml", mrp: 710, price: 639, cat: "Syrups & Juices", desc: "Pure Digestive Detoxifier", img: "https://i.postimg.cc/dL84Bxgw/oregelaloevera.png" },
       { id: 60, name: "Ore Amla Gel", pack: "500 ml", mrp: 235, price: 212, cat: "Syrups & Juices", desc: "Pure Source of Vitamin C", img: "https://i.postimg.cc/TprC94B8/oreamlagel.png" },
       { id: 61, name: "Oregel Diab", pack: "500 ml", mrp: 395, price: 356, cat: "Syrups & Juices", desc: "Herbal Sugar Balancer", img: "https://i.postimg.cc/LnzNTbGH/oregeldiab.png" },
+      { id: 62, name: "Noni Juice", pack: "500 ml", mrp: 630, format: "500 ml", price: 567, cat: "Syrups & Juices", desc: "Immunity & Cellular Balance", img: "https://i.postimg.cc/56wn3RT7/nonijuice.png" },
       { id: 62, name: "Noni Juice", pack: "500 ml", mrp: 630, price: 567, cat: "Syrups & Juices", desc: "Immunity & Cellular Balance", img: "https://i.postimg.cc/56wn3RT7/nonijuice.png" },
       { id: 63, name: "Baby Oil", pack: "100 ml", mrp: 143, price: 129, cat: "Syrups & Juices", desc: "Keeps Baby Bones & Muscles Strong", img: "https://i.postimg.cc/YGZbnKtV/babyoil.png" },
       { id: 64, name: "Vigvit Multivitamin Syrup", pack: "200 ml", mrp: 165, price: 149, cat: "Syrups & Juices", desc: "Sugar Free Complete Health Tonic", img: "https://i.postimg.cc/hfF2VBys/multivitamin.png" },
@@ -477,7 +521,7 @@
       { id: 131, name: "Glass Cleaner", pack: "500 ml", mrp: 130, price: 117, cat: "Home & Kitchen", desc: "Streak-Free glass Sparkle", img: "https://i.postimg.cc/FkSGwWRp/glasscleaner.png" },
       { id: 132, name: "Floor Cleaner", pack: "500 ml", mrp: 170, price: 153, cat: "Home & Kitchen", desc: "Disinfectant Surface Cleaner", img: "https://i.postimg.cc/fSd512LX/floorcleaner.png" },
       { id: 133, name: "Enrich Gold Tea", pack: "250 gm", mrp: 265, price: 239, cat: "Home & Kitchen", desc: "Bright Blend Rich Aroma Tea", img: "https://i.postimg.cc/p5jk3GT5/enrichgoldtea.png" },
-      { id: 134, name: "Kadak Tea", pack: "250 gm", mrp: 185, price: 167, cat: "Home & Kitchen", desc: "Perfect Refreshing Kadak Chai", img: "https://i.postimg.cc/Hj8SJx2M/kadaktea.png" },
+      { id: 134, name: "Kadak Tea", pack: "250 gm", mrp: 185, price: 167, cat: "Home & Kitchen", desc: "Totally Refreshing Kadak Chai", img: "https://i.postimg.cc/Hj8SJx2M/kadaktea.png" },
       { id: 135, name: "Pure Turmeric Powder (Haldi)", pack: "100 gm", mrp: 55, price: 50, cat: "Home & Kitchen", desc: "100% Pure Natural Spice", img: "https://i.postimg.cc/grLMwJDz/haldipowder.png" },
       { id: 136, name: "Pure Red Chilli Powder (Lal Mirch)", pack: "100 gm", mrp: 65, price: 59, cat: "Home & Kitchen", desc: "100% Natural Red Spice", img: "https://i.postimg.cc/JtHTynq3/lalmirchpowder.png" },
       { id: 137, name: "Pure Coriander Powder (Dhania)", pack: "100 gm", mrp: 45, price: 41, cat: "Home & Kitchen", desc: "100% Natural Spice", img: "https://i.postimg.cc/Cn8J9P1d/dhaniapowder.png" },
@@ -501,7 +545,7 @@
       { id: 155, name: "Face Wash Gold", pack: "60 ml", mrp: 115, price: 104, cat: "Beauty & Skincare", desc: "Luxurious Glow & Shine", img: "https://i.postimg.cc/7JzXjs6t/goldfacewash.png" },
       { id: 156, name: "Face Wash Charcoal", pack: "60 ML", mrp: 109, price: 98, cat: "Beauty & Skincare", desc: "Pollution Control & Deep Cleansing", img: "https://i.postimg.cc/sQqw6dVV/charcoalfacewash.png" },
       { id: 157, name: "Face Wash Papaya", pack: "60 ml", mrp: 231, price: 208, cat: "Beauty & Skincare", desc: "Clean, Fresh & Glowing Skin", img: "https://i.postimg.cc/xXngFPS1/papayafacewash.png" },
-      { id: 158, name: "Face Wash Skin Glow", pack: "60 ml", mrp: 121, price: 109, cat: "Beauty & Skincare", desc: "Fresh & Glowing Complexion", img: "https://i.postimg.cc/NKDbhrg4/skinglowfacewash.png" },
+      { id: 158, name: "Face Wash Skin Glow", pack: "60 ml", mrp: 121, file: "face wash", price: 109, cat: "Beauty & Skincare", desc: "Fresh & Glowing Complexion", img: "https://i.postimg.cc/NKDbhrg4/skinglowfacewash.png" },
       { id: 159, name: "Face Wash Ubtan", pack: "50 ML", mrp: 149, price: 134, cat: "Beauty & Skincare", desc: "Tan Removal & Radiant Glow", img: "https://i.postimg.cc/FfKphszv/ubtanfacewash.png" },
       { id: 160, name: "Aloevera Moisturising Gel", pack: "100 gm", mrp: 140, price: 126, cat: "Beauty & Skincare", desc: "Pure Hydrating Gel", img: "https://i.postimg.cc/0MbV021t/aloeveramoisturisinggel.png" },
       { id: 161, name: "Cold Cream (Almond & Cocoa Butter)", pack: "50 gm", mrp: 50, price: 45, cat: "Beauty & Skincare", desc: "Nourishing Winter Moisturizer", img: "https://i.postimg.cc/JDvP6V1y/coldcream.png" },
@@ -512,7 +556,7 @@
       { id: 166, name: "Rose & Musk Moisturising Lotion", pack: "100 ml", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "Fragrance & Moisture", img: "https://i.postimg.cc/cv0T5cNf/rose-musklotion.png" },
       { id: 167, name: "Sun Screen Cream Spf - 20", pack: "100 ml", mrp: 199, price: 179, cat: "Beauty & Skincare", desc: "UVA UVB Sun Protection", img: "https://i.postimg.cc/w12FKs6G/spf20.png" },
       { id: 168, name: "Sun Screen Cream Spf - 40", pack: "100 ml", mrp: 299, price: 269, cat: "Beauty & Skincare", desc: "High Protection Sun Guard", img: "https://i.postimg.cc/nX2T8QFt/spf40.png" },
-      { id: 169, name: "Zordan Footcare Cream", pack: "50 gm", mrp: 84, price: 76, cat: "Beauty & Skincare", desc: "Soft & Supple Feet", img: "https://i.postimg.cc/64ZzFj3C/footcarecream.png" },
+      { id: 169, name: "Zordan Footcare Cream", pack: "50 gm", mrp: 84, price: 76, cat: "Beauty & Skincare", desc: "Soft & Supple Feet", img: "https://api.postimg.cc/64ZzFj3C/footcarecream.png" },
       { id: 170, name: "Anti Dandruff Shampoo (100ml)", pack: "100 ml", mrp: 130, price: 117, cat: "Hair & Grooming", desc: "Nourishes Scalp & Clears Flakes", img: "https://i.postimg.cc/ygkLyYC2/antidandruffshampoo.png" },
       { id: 171, name: "Hena Hair Pack", pack: "100 gm", mrp: 99, price: 89, cat: "Hair & Grooming", desc: "Give Natural Colour to Hair", img: "https://i.postimg.cc/LhgyqXT8/heenahairpack.png" },
       { id: 172, name: "Onion Shampoo", pack: "200 ml", mrp: 245, price: 221, cat: "Hair & Grooming", desc: "Reduces Hair Fall & Nourishes", img: "https://i.postimg.cc/WhMXnHCQ/onionshampoo.png" },
@@ -578,13 +622,28 @@
       renderProducts();
     }
 
+    // Modern Toast Notification Function
+    function showToast(message) {
+      const toast = document.getElementById("toastNotification");
+      const toastText = document.getElementById("toastText");
+      toastText.innerText = message;
+      
+      toast.classList.remove("opacity-0", "pointer-events-none", "-translate-y-4");
+      toast.classList.add("opacity-100", "translate-y-0");
+
+      setTimeout(() => {
+        toast.classList.remove("opacity-100", "translate-y-0");
+        toast.classList.add("opacity-0", "pointer-events-none", "-translate-y-4");
+      }, 2500);
+    }
+
     function copyProductLinkDirect(event, pId, pName) {
       event.stopPropagation();
       const productUrl = `${window.location.origin}${window.location.pathname}#product-${pId}`;
       navigator.clipboard.writeText(productUrl).then(() => {
-        alert(`Direct link copied for ${pName}!\n${productUrl}`);
+        showToast(`Direct link copied for ${pName}! 🔗`);
       }).catch(err => {
-        alert("Link copy nahi ho paya: " + err);
+        showToast("Link copy nahi ho paya!");
       });
     }
 
@@ -676,9 +735,9 @@
       document.getElementById("modalShareBtn").onclick = () => {
         const productUrl = `${window.location.origin}${window.location.pathname}#product-${p.id}`;
         navigator.clipboard.writeText(productUrl).then(() => {
-          alert(`Direct link copied for ${p.name}!\n${productUrl}`);
+          showToast(`Direct link copied for ${p.name}! 🔗`);
         }).catch(err => {
-          alert("Link copy nahi ho paya: " + err);
+          showToast("Link copy nahi ho paya!");
         });
       };
 
