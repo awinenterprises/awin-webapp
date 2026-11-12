@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,6 +59,13 @@
       visibility: hidden !important;
       opacity: 0 !important;
       pointer-events: none !important;
+    }
+    /* Product Highlight Animation */
+    .highlight-product {
+      border: 2px solid #7c3aed !important;
+      box-shadow: 0 0 25px rgba(124, 58, 237, 0.4) !important;
+      transform: scale(1.02);
+      transition: all 0.4s ease-in-out;
     }
   </style>
 </head>
@@ -185,6 +192,11 @@
         <h3 id="modalName" class="font-black text-slate-900 text-lg leading-tight"></h3>
         <p id="modalDesc" class="text-xs text-slate-600 leading-relaxed pt-0.5"></p>
       </div>
+
+      <!-- Copy Direct Product Link Button in Modal -->
+      <button id="modalShareBtn" class="w-full py-2 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold text-xs rounded-xl border border-purple-200 transition flex items-center justify-center gap-1.5">
+        <i class="fa-solid fa-share-nodes"></i> Copy Direct Product Link 🔗
+      </button>
 
       <!-- Feature 5: Instant Pincode & Delivery Checker Box -->
       <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1.5 text-left">
@@ -514,7 +526,7 @@
       { id: 180, name: "Cloth Face Mask (Altos)", pack: "1 pc", mrp: 75, price: 68, cat: "Beauty & Skincare", desc: "Reusable 100% Cotton Protection Mask", img: "https://i.postimg.cc/DWcZf5Ck/mask.jpg" }
     ];
 
-    // Top Priority Sorting Logic (Shampoos, Face wash, Creams & Deos on top)
+    // Top Priority Sorting Logic
     products.sort((a, b) => {
       const getPriority = (p) => {
         const name = p.name.toLowerCase();
@@ -592,7 +604,7 @@
         const badge = getUrgencyBadge(p.id);
 
         return `
-          <div class="bg-white rounded-2xl border border-slate-200/80 p-3 flex flex-col justify-between hover:shadow-lg transition cursor-pointer relative group" onclick="openProductDetail(${p.id})">
+          <div id="product-${p.id}" class="bg-white rounded-2xl border border-slate-200/80 p-3 flex flex-col justify-between hover:shadow-lg transition cursor-pointer relative group" onclick="openProductDetail(${p.id})">
             <div>
               <div class="relative w-full aspect-square bg-slate-50 border border-slate-100 rounded-xl p-2.5 flex items-center justify-center mb-2 overflow-hidden">
                 <span class="absolute top-1.5 left-2 text-[9px] font-bold text-slate-600 bg-white/80 px-1.5 py-0.5 rounded shadow-xs z-10">
@@ -646,6 +658,16 @@
       const pRes = document.getElementById("pincodeResult");
       pRes.classList.add("hidden");
       pRes.innerText = "";
+
+      // Share Direct Link Button setup
+      document.getElementById("modalShareBtn").onclick = () => {
+        const productUrl = `${window.location.origin}${window.location.pathname}#product-${p.id}`;
+        navigator.clipboard.writeText(productUrl).then(() => {
+          alert(`Direct link copied for ${p.name}!\n${productUrl}`);
+        }).catch(err => {
+          alert("Link copy nahi ho paya: " + err);
+        });
+      };
 
       document.getElementById("modalAddBtn").onclick = () => {
         addToCart(p.id);
@@ -709,7 +731,6 @@
       const subtotalEl = document.getElementById("cartSubtotal");
       const checkoutBtn = document.getElementById("checkoutBtn");
 
-      // Floating Bottom Bar Elements
       const floatingBar = document.getElementById("floatingCartBar");
       const floatItemCount = document.getElementById("floatItemCount");
       const floatSubtotal = document.getElementById("floatSubtotal");
@@ -745,7 +766,6 @@
       subtotalEl.innerText = `₹${subtotal}`;
       checkoutBtn.disabled = totalItems === 0;
 
-      // Toggle Floating Bar Visibility
       if (totalItems > 0) {
         floatingBar.classList.remove("hidden");
         floatItemCount.innerText = totalItems;
@@ -784,7 +804,6 @@
 
       setupCheckoutView(subtotal);
       
-      // Close Cart Drawer and Open Checkout Modal smoothly without app exit
       document.getElementById("cartModal").classList.add("hidden");
       document.getElementById("checkoutModal").classList.remove("hidden");
     }
@@ -815,7 +834,6 @@
     }
 
     function closeCheckoutModal() {
-      // Sirf checkout modal band hoga, app ya catalog wahi khula rahega
       document.getElementById("checkoutModal").classList.add("hidden");
     }
 
@@ -852,19 +870,25 @@
       window.open(waUrl, "_blank");
     }
 
-    initCategories();
-    renderProducts();
-    updateCartUI();
-  </script>
-  <script>
-  window.addEventListener('DOMContentLoaded', (event) => {
-    const badge = document.getElementById('netlify-badge');
-    if (badge) badge.remove();
-    
-    document.querySelectorAll('iframe').forEach(el => {
-      if (el.src.includes('netlify')) el.remove();
+    // Auto-Scroll and Highlight Logic when URL has Product Hash
+    window.addEventListener('load', () => {
+      initCategories();
+      renderProducts();
+      updateCartUI();
+
+      if (window.location.hash) {
+        setTimeout(() => {
+          const targetCard = document.querySelector(window.location.hash);
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            targetCard.classList.add('highlight-product');
+            setTimeout(() => {
+              targetCard.classList.remove('highlight-product');
+            }, 3500);
+          }
+        }, 300);
+      }
     });
-  });
-</script>
+  </script>
 </body>
 </html>
