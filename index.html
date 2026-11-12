@@ -174,8 +174,8 @@
 
   <!-- Product Detail Modal -->
   <div id="productDetailModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-sm w-full p-5 space-y-3.5 shadow-2xl relative max-h-[92vh] overflow-y-auto">
-      <button onclick="closeDetailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeDetailModal()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-600 p-1 z-10">
         <i class="fa-solid fa-xmark text-lg"></i>
       </button>
 
@@ -187,19 +187,19 @@
       </div>
 
       <!-- Product Info -->
-      <div class="space-y-1">
+      <div class="space-y-0.5">
         <span id="modalCat" class="text-[11px] text-purple-600 font-semibold uppercase tracking-wider"></span>
-        <h3 id="modalName" class="font-black text-slate-900 text-lg leading-tight"></h3>
-        <p id="modalDesc" class="text-xs text-slate-600 leading-relaxed pt-0.5"></p>
+        <h3 id="modalName" class="font-black text-slate-900 text-base leading-tight"></h3>
+        <p id="modalDesc" class="text-xs text-slate-600 leading-relaxed"></p>
       </div>
 
-      <!-- Copy Direct Product Link Button in Modal -->
-      <button id="modalShareBtn" class="w-full py-2 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold text-xs rounded-xl border border-purple-200 transition flex items-center justify-center gap-1.5">
+      <!-- Copy Direct Product Link Button right at the top of actions -->
+      <button id="modalShareBtn" class="w-full py-2 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold text-xs rounded-xl border border-purple-200 transition flex items-center justify-center gap-1.5 shadow-xs">
         <i class="fa-solid fa-share-nodes"></i> Copy Direct Product Link 🔗
       </button>
 
       <!-- Feature 5: Instant Pincode & Delivery Checker Box -->
-      <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 space-y-1.5 text-left">
+      <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 space-y-1 text-left">
         <div class="flex items-center gap-1.5 text-xs font-bold text-slate-700">
           <i class="fa-solid fa-location-dot text-purple-600"></i> Check Delivery to Your Pincode
         </div>
@@ -217,20 +217,20 @@
       </div>
 
       <!-- Price & Psychological Pricing -->
-      <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-3">
+      <div class="pt-1.5 border-t border-slate-100 flex items-center justify-between gap-3">
         <div>
           <div class="flex items-center gap-1.5">
             <span id="modalStrikedMrp" class="text-xs text-slate-400 line-through"></span>
             <span class="text-[10px] font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.2 rounded">10% OFF</span>
           </div>
-          <span id="modalPrice" class="text-xl font-black text-slate-900"></span>
+          <span id="modalPrice" class="text-lg font-black text-slate-900"></span>
         </div>
 
         <div class="flex items-center gap-2">
-          <button id="modalAddBtn" class="px-3.5 py-2.5 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 font-bold text-xs transition flex items-center gap-1.5">
+          <button id="modalAddBtn" class="px-3 py-2 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 font-bold text-xs transition flex items-center gap-1">
             <i class="fa-solid fa-cart-plus"></i> Add
           </button>
-          <button id="modalBuyBtn" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs transition shadow-md active:scale-95 flex items-center gap-1.5">
+          <button id="modalBuyBtn" class="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs transition shadow-md active:scale-95 flex items-center gap-1">
             <i class="fa-solid fa-bolt"></i> Buy Now
           </button>
         </div>
@@ -578,6 +578,16 @@
       renderProducts();
     }
 
+    function copyProductLinkDirect(event, pId, pName) {
+      event.stopPropagation();
+      const productUrl = `${window.location.origin}${window.location.pathname}#product-${pId}`;
+      navigator.clipboard.writeText(productUrl).then(() => {
+        alert(`Direct link copied for ${pName}!\n${productUrl}`);
+      }).catch(err => {
+        alert("Link copy nahi ho paya: " + err);
+      });
+    }
+
     function renderProducts() {
       const query = document.getElementById("searchInput").value.toLowerCase();
       const grid = document.getElementById("productGrid");
@@ -605,17 +615,20 @@
 
         return `
           <div id="product-${p.id}" class="bg-white rounded-2xl border border-slate-200/80 p-3 flex flex-col justify-between hover:shadow-lg transition cursor-pointer relative group" onclick="openProductDetail(${p.id})">
+            <!-- Direct Share Icon on Card Top-Left -->
+            <button onclick="copyProductLinkDirect(event, ${p.id}, '${p.name.replace(/'/g, "\\'")}')" class="absolute top-2 left-2 z-20 bg-white/90 hover:bg-purple-50 text-purple-700 w-7 h-7 rounded-full flex items-center justify-center shadow border border-purple-100 transition" title="Copy Product Link">
+              <i class="fa-solid fa-share-nodes text-[11px]"></i>
+            </button>
+
             <div>
               <div class="relative w-full aspect-square bg-slate-50 border border-slate-100 rounded-xl p-2.5 flex items-center justify-center mb-2 overflow-hidden">
-                <span class="absolute top-1.5 left-2 text-[9px] font-bold text-slate-600 bg-white/80 px-1.5 py-0.5 rounded shadow-xs z-10">
-                  ${p.pack}
-                </span>
                 <span class="absolute top-1.5 right-2 text-[9px] font-extrabold px-1.5 py-0.5 rounded border ${badge.class} z-10">
                   ${badge.text}
                 </span>
                 <img src="${p.img}" alt="${p.name}" class="w-full h-full object-contain group-hover:scale-105 transition duration-200" loading="lazy" onerror="this.src='https://placehold.co/400x400/f8fafc/7c3aed?text=Altos+Product'" />
               </div>
 
+              <div class="text-[9px] font-bold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded inline-block mb-1">${p.pack}</div>
               <h3 class="font-bold text-slate-800 text-xs leading-snug line-clamp-1">${p.name}</h3>
               <p class="text-slate-400 text-[11px] mt-0.5 line-clamp-1">${p.desc}</p>
             </div>
@@ -659,7 +672,7 @@
       pRes.classList.add("hidden");
       pRes.innerText = "";
 
-      // Share Direct Link Button setup
+      // Share Direct Link Button setup inside Modal
       document.getElementById("modalShareBtn").onclick = () => {
         const productUrl = `${window.location.origin}${window.location.pathname}#product-${p.id}`;
         navigator.clipboard.writeText(productUrl).then(() => {
@@ -841,7 +854,7 @@
       if (!activeCheckoutPayload) return;
 
       const name = document.getElementById("custName").value.trim();
-      const phone = document.getElementById("custPhone").value.trim();
+      const phone = document.getElementById("custPhone5").value.trim();
       const address = document.getElementById("custAddress").value.trim();
 
       const paymentStatusText = isPaid 
