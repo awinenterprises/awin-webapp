@@ -154,39 +154,19 @@
   <main class="max-w-7xl mx-auto px-4 flex-1 pb-16 w-full">
     <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5"></div>
 
-    <!-- NEW FEATURE: Customer Testimonials / Trust Section -->
+    <!-- LIVE GOOGLE BUSINESS REVIEWS SECTION -->
     <section class="mt-12 pt-8 border-t border-slate-200">
       <div class="text-center space-y-2 mb-6">
-        <span class="text-xs font-bold text-purple-600 bg-purple-50 px-3 py-1 rounded-full border border-purple-100 uppercase tracking-wider">Happy Customers</span>
+        <span class="text-xs font-bold text-purple-600 bg-purple-50 px-3 py-1 rounded-full border border-purple-100 uppercase tracking-wider">Google Business Reviews</span>
         <h2 class="text-xl sm:text-2xl font-black text-slate-900">What People Say About Awin Enterprises</h2>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <!-- Testimonial 1 -->
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <div class="flex items-center gap-1 text-amber-400 text-xs">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">"Tulsi Power aur Aroplex use karne ke baad se immunity mein bohot fark pada hai. Genuine products aur fast delivery mili Ujjain mein!"</p>
-          <div class="font-bold text-xs text-slate-900">- Rajesh Sharma <span class="text-slate-400 font-normal">(Ujjain)</span></div>
-        </div>
-
-        <!-- Testimonial 2 -->
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <div class="flex items-center gap-1 text-amber-400 text-xs">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">"Altos skincare range aur Face wash bohot acche hain. Direct WhatsApp ordering aur UPI payment ka feature bahut asaan hai."</p>
-          <div class="font-bold text-xs text-slate-900">- Priya Verma <span class="text-slate-400 font-normal">(Indore)</span></div>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <div class="flex items-center gap-1 text-amber-400 text-xs">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">"Paindon oil se mere ghutno ke dard mein turant aaram mila. Awin Enterprises ki service aur product quality lajawab hai."</p>
-          <div class="font-bold text-xs text-slate-900">- Ramesh Patidar <span class="text-slate-400 font-normal">(Dewas)</span></div>
+      <!-- Dynamic Google Reviews Container -->
+      <div id="googleReviewsContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <!-- Loading Placeholder -->
+        <div class="col-span-full py-8 text-center text-slate-400 text-xs">
+          <i class="fa-solid fa-spinner fa-spin text-purple-600 text-lg mb-2"></i>
+          <p>Loading live Google reviews...</p>
         </div>
       </div>
     </section>
@@ -385,6 +365,9 @@
     const UPI_ID = "awin@slc";
     const PAYEE_NAME = "Awin Enterprises";
     const WHATSAPP_PHONE = "917828757646";
+
+    // 🔗 APKA APPS SCRIPT WEB APP URL YAHAN PASTE KAR DIYA GAYA HAI
+    const GOOGLE_REVIEWS_API_URL = "https://script.google.com/macros/s/AKfycbdyuV88t6y7ZANMyE2Kmi9TbCEnqFRsRGqe-8sWE9D3UER7hHA6nnJzah3Gpe59qt39yA/exec";
 
     const products = [
       { id: 1, name: "Tulsi Power", pack: "20+10 ml", mrp: 300, price: 270, cat: "Medicines & Health", desc: "Immunity Booster Drops", img: "https://i.postimg.cc/CZK7wL5Y/tulsipower.png" },
@@ -941,11 +924,42 @@
       window.open(waUrl, "_blank");
     }
 
+    // Fetch Live Google Reviews from Apps Script
+    async function loadGoogleReviews() {
+      const container = document.getElementById("googleReviewsContainer");
+      if (!container) return;
+
+      try {
+        const response = await fetch(GOOGLE_REVIEWS_API_URL);
+        const reviews = await response.json();
+
+        if (!reviews || reviews.length === 0) {
+          container.innerHTML = `<p class='text-xs text-slate-400 text-center col-span-full'>No reviews found yet.</p>`;
+          return;
+        }
+
+        container.innerHTML = reviews.map(rev => `
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <div class="flex items-center gap-1 text-amber-400 text-xs">
+              ${'<i class="fa-solid fa-star"></i>'.repeat(rev.rating || 5)}
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">"${rev.text}"</p>
+            <div class="font-bold text-xs text-slate-900">- ${rev.author_name} <span class="text-slate-400 font-normal">(Google Review)</span></div>
+          </div>
+        `).join("");
+
+      } catch (err) {
+        console.error("Failed to load reviews", err);
+        container.innerHTML = `<p class='text-xs text-slate-400 text-center col-span-full'>Unable to load Google reviews at the moment.</p>`;
+      }
+    }
+
     // Auto-Scroll and Highlight Logic when URL has Product Hash
     window.addEventListener('load', () => {
       initCategories();
       renderProducts();
       updateCartUI();
+      loadGoogleReviews(); // Load Live Reviews
 
       if (window.location.hash) {
         setTimeout(() => {
