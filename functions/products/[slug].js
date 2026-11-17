@@ -19,6 +19,8 @@ export async function onRequest({ params }) {
   }
 
   const url = `${SITE}/products/${product.slug}`;
+  const inStock = product.inStock ?? true;
+  const stockLabel = inStock ? "In stock" : "Out of stock";
   const title = `Buy ${product.name} Online in India | Awin Enterprises`;
   const description = `View ${product.name} by Awin Enterprises. Pack: ${product.pack}. Check current price, availability and ordering details on WhatsApp.`;
   const message = `Hello Awin Enterprises, I want to enquire about ${product.name} (${product.pack}). Please confirm current price and availability.`;
@@ -30,11 +32,13 @@ export async function onRequest({ params }) {
     image: [product.image],
     description,
     category: product.category,
+    ...(product.slug === "tulsi-power" ? { brand: { "@type": "Brand", name: "Altos Ayurveda" } } : {}),
     offers: {
       "@type": "Offer",
       url,
       priceCurrency: "INR",
       price: String(product.price),
+      availability: inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
       seller: { "@type": "Organization", name: "Awin Enterprises", url: SITE }
     }
   }).replace(/</g, "\\u003c");
@@ -73,7 +77,8 @@ export async function onRequest({ params }) {
 <h1>${escapeHtml(product.name)}</h1>
 <p class="muted">Pack size: ${escapeHtml(product.pack)}</p>
 <div class="price">₹${product.price.toLocaleString("en-IN")} <span class="mrp">MRP ₹${product.mrp.toLocaleString("en-IN")}</span></div>
-<p class="muted">Listed by Awin Enterprises. Contact us to confirm today's price, availability and delivery details.</p>
+<p><strong>${stockLabel}</strong></p>
+<p class="muted">Listed by Awin Enterprises. Contact us to confirm delivery details.</p>
 <a class="btn" href="${whatsapp}" rel="noopener noreferrer">Enquire / Order on WhatsApp</a>
 <a class="btn alt" href="/">View all products</a>
 <div class="note">Please check the product packaging for ingredients, directions for use, warnings and other product-specific information. Product details and prices may change; confirm before ordering.</div>
