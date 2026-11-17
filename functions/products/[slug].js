@@ -6,6 +6,13 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "oremol-natural-black-hair": "https://altosindia.net/public/product/v1-hair-care/oremol-black-hair.jpg",
+  "shine-home-cream-soap": "https://altosindia.net/public/product/v1-home-care/home-facial-bar.jpg",
+  "oregon-80-water-retention": "https://altosindia.net/public/product/v1-agriculture-aid/oregon-80.jpg",
+  "oregon-80-sa-agent": "https://altosindia.net/public/product/v1-agriculture-aid/oregon-80.jpg",
+  "alto-gro-plant-booster": "https://altosindia.net/public/product/v1-agriculture-aid/alto-gro.jpg",
+  "altos-care-pest-control": "https://altosindia.net/public/product/v1-agriculture-aid/alto-care.jpg",
+  "ft-15-fruit-extract": "https://altosindia.net/public/product/v1-ayurvedic-medicine/ft-15.jpg",
   "aroplex": "https://altosindia.net/public/product/v1-ayurvedic-medicine/aroplex-capsule.jpg",
   "haldi-with-kesar-drops": "https://altosindia.net/public/product/v1-ayurvedic-medicine/haldi-with-kesar-drops1.jpg",
   "abhinol": "https://altosindia.net/public/product/v1-ayurvedic-medicine/abhinol1.jpg",
@@ -101,6 +108,246 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "oremol-natural-black-hair": {
+    "summary": "A black hair-colour emulsion with amla, almond and bhringraj.",
+    "ingredients": [
+      "Amla",
+      "Almond",
+      "Bhringraj"
+    ],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/oremol-hair-black"
+  },
+  "shine-home-cream-soap": {
+    "summary": "A facial cleansing bar with saffron, sandalwood and aloe vera.",
+    "ingredients": [
+      "Kesar",
+      "Chandan",
+      "Aloevera"
+    ],
+    "directions": [
+      "Work into a lather on damp skin, rinse with water and pat dry."
+    ],
+    "source": "https://altosindia.net/products/product/home-shine-facial-bar"
+  },
+  "oregon-80-water-retention": {
+    "summary": "An agricultural spray additive from Altos.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/oregon"
+  },
+  "oregon-80-sa-agent": {
+    "summary": "An agricultural spray additive from Altos.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/oregon"
+  },
+  "alto-gro-plant-booster": {
+    "summary": "A plant-care formulation containing micronutrients, enzymes and plant extracts.",
+    "ingredients": [
+      "Micronutrients",
+      "Enzymes",
+      "Plant Extracts"
+    ],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/altogro"
+  },
+  "altos-care-pest-control": {
+    "summary": "An Altos plant-care product containing clove, neem and thyme oils.",
+    "ingredients": [
+      "Clove Oil",
+      "Neem Oil",
+      "Thyme Oil"
+    ],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/altocare"
+  },
+  "ft-15-fruit-extract": {
+    "summary": "A concentrate made with a blend of 15 fruits.",
+    "ingredients": [
+      "Acai Berry",
+      "Blueberry",
+      "Cranberry",
+      "Goji Berry",
+      "Dragon fruit",
+      "Sea Buckthorn",
+      "Pomegranate",
+      "Grape Seed",
+      "Guava",
+      "Pineapple",
+      "Mango",
+      "Orange",
+      "Pear",
+      "Banana",
+      "Papaya"
+    ],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/ft-15-fruit-concentrate-extract"
+  },
+  "wheatgrass": {
+    "summary": "An Altos tablet made with wheatgrass extract.",
+    "ingredients": [
+      "Wheatgrass"
+    ],
+    "directions": [
+      "Follow the pack directions or the advice of your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/wheatgrass-tablet"
+  },
+  "spirulina-30-tabs": {
+    "summary": "Altos Spirulina tablets in a 30-tablet pack.",
+    "ingredients": [],
+    "directions": [
+      "Follow the pack directions or the advice of your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/spirulina-tablet"
+  },
+  "rose-and-musk-moisturising-lotion": {
+    "summary": "A rose-and-musk body lotion.",
+    "ingredients": [
+      "Rose"
+    ],
+    "directions": [
+      "Smooth a small amount gently over the body."
+    ],
+    "source": "https://altosindia.net/products/product/rose-musk-lotion"
+  },
+  "herbal-shaving-cream": {
+    "summary": "A shaving cream with menthol and aloe vera.",
+    "ingredients": [
+      "Menthol",
+      "Aloe vera",
+      "Glycerine"
+    ],
+    "directions": [
+      "Apply to a wet face with a damp shaving brush. Rinse after shaving."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/shaving-cream"
+  },
+  "shudh-shilajit-paste": {
+    "summary": "An Altos shilajit paste in a 20 g pack.",
+    "ingredients": [
+      "Shilajit"
+    ],
+    "directions": [
+      "Follow the pack directions or the advice of your healthcare professional."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/shudh-shilajit-paste"
+  },
+  "baby-oil": {
+    "summary": "An oil blend formulated for baby massage.",
+    "ingredients": [
+      "Shankhapushpi",
+      "Masha",
+      "Brahmi",
+      "Aloe vera",
+      "Ratanjot",
+      "Coconut oil",
+      "Almond oil",
+      "Sesame oil",
+      "Chamomile"
+    ],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/ayurvedic-baby-massage-oil"
+  },
+  "ayush-kwath-powder": {
+    "summary": "An Altos herbal powder blend.",
+    "ingredients": [
+      "Tulsi",
+      "Dalchini",
+      "Marich",
+      "Sunthi"
+    ],
+    "directions": [
+      "Follow the pack directions or the advice of your healthcare professional."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/ayush-kwath"
+  },
+  "choco-kidz-powder": {
+    "summary": "A chocolate-flavoured nutrition powder with protein, vitamins and minerals.",
+    "ingredients": [
+      "Protein",
+      "Vitamin A",
+      "Vitamin C",
+      "Vitamin D2",
+      "Calcium",
+      "Iron",
+      "Zinc"
+    ],
+    "directions": [
+      "Use the serving instructions on the pack."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/vigvit-choco-kidz"
+  },
+  "b-big": {
+    "summary": "An Altos herbal capsule formulation.",
+    "ingredients": [
+      "Ashwagandha",
+      "Vidarikand",
+      "Chansur",
+      "Guggal",
+      "Arjuna",
+      "Giloy",
+      "Brahmi",
+      "Shankhpushpi",
+      "Yashtimadhu",
+      "Vayvidang"
+    ],
+    "directions": [
+      "Follow the pack directions or the advice of your healthcare professional."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/little-b-big-capsule"
+  },
+  "anti-acne-and-pimple-cream": {
+    "summary": "A topical skin-care formulation with neem, tea tree oil and clove oil.",
+    "ingredients": [
+      "Neem",
+      "Tea tree oil",
+      "Clove oil"
+    ],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/anti-acne-and-pimple-gel"
+  },
+  "multivitamin-gummies": {
+    "summary": "Vigvit multivitamin and mineral gummies for children.",
+    "ingredients": [
+      "Vitamin A",
+      "Vitamin B12",
+      "Vitamin C"
+    ],
+    "directions": [
+      "Follow the age and serving guidance on the pack."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/multivitamins-with-minerals-gummies"
+  },
+  "mc-vital": {
+    "summary": "An Altos multivitamin and mineral tablet with ginseng.",
+    "ingredients": [
+      "Ginseng",
+      "Vitamins",
+      "Minerals"
+    ],
+    "directions": [
+      "Follow the pack directions or the advice of your healthcare professional."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/mc-vital"
+  },
   "vitamin-c-serum": {
     "summary": "A facial serum with vitamin C and niacinamide.",
     "ingredients": [
