@@ -64,6 +64,446 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "curcum-plus": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Curcumin Extract",
+      "Black Pepper"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/curcum-plus-capsule"
+  },
+  "young-look": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Majith",
+      "Rubia cardifolia",
+      "Neem",
+      "Narangi"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/young-look-capsule"
+  },
+  "flax-oil": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Flax seed Oil"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/flax-oil-capsule"
+  },
+  "nutroprash": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Amla",
+      "Haripatri",
+      "Arjuna",
+      "Karpoor",
+      "Haritaki",
+      "Badi Elaichi"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/nutroprash-capsule"
+  },
+  "garlicplus": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Garlic"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/garli-plus-capsule"
+  },
+  "hadjod": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Hadjod"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/hadjod-capsule"
+  },
+  "ore-piles": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Mahanimb",
+      "Karir",
+      "Suran",
+      "Chopatiya",
+      "Nagkesar",
+      "Kakmachi",
+      "Ativisha",
+      "Harar",
+      "Bahera",
+      "Amla",
+      "Ghritkumari",
+      "Amaltas"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/orepiles-capsule"
+  },
+  "nutroton": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Amla",
+      "Hritki",
+      "Pipli",
+      "Draksha"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/nutroton-capsule"
+  },
+  "vig-r": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Ashok",
+      "Gawarpatha",
+      "Bans",
+      "Shatawari",
+      "Ashwagandha",
+      "Kewanch",
+      "Tulsi"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/vig-r-capsule"
+  },
+  "paindon-plus": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Triphla",
+      "Sunthi",
+      "Kali Mirch",
+      "Kal Magha",
+      "Nirgundi",
+      "Guggal",
+      "Gudduchi"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/paindon-plus-capsule"
+  },
+  "glucosamine-hcl": {
+    "summary": "An Altos tablet product.",
+    "ingredients": [
+      "Glucosamine HCL"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/nutro-glucosamine-hcl"
+  },
+  "ganoderma": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Ganoderma"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/ganoderma-capsule"
+  },
+  "vigvit-capsules": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Latakasturi",
+      "Ashwagandha",
+      "Gokhru",
+      "Mundi",
+      "Konch",
+      "Shatawari",
+      "Safed Musli",
+      "laung",
+      "Tulsi",
+      "Talmakhana",
+      "Sonthi",
+      "Pippali",
+      "Vidarikand",
+      "Jaiphal",
+      "Shankhpushpi",
+      "Kesar",
+      "Nardostachys Jatamansi",
+      "Akrkara",
+      "Piplamool",
+      "Dalchini",
+      "Jawitri",
+      "Malkangni"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/vigvit-capsule"
+  },
+  "rakatchap": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Ashwagandha",
+      "Jatamansi",
+      "Sarpagandha",
+      "Shankspushpi",
+      "Giloy",
+      "Brahmi",
+      "Vacha"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/rakatchaap-capsule"
+  },
+  "orecal-d": {
+    "summary": "An Altos tablet product.",
+    "ingredients": [
+      "calcium"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/orecal-d-tablet"
+  },
+  "shatavari": {
+    "summary": "An Altos tablet product.",
+    "ingredients": [
+      "Shatavari",
+      "Ashwagandha",
+      "Jiwanti"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/shatavari-tablet"
+  },
+  "papita-giloy": {
+    "summary": "An Altos tablet product.",
+    "ingredients": [
+      "Papita",
+      "Giloye"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/papita-giloy-tablet"
+  },
+  "musli-pure": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "Safed Musli"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/musli-pure-capsule"
+  },
+  "slimming-young-look": {
+    "summary": "An Altos capsule product.",
+    "ingredients": [
+      "kokum",
+      "Vayvidang",
+      "Satva",
+      "Chitraka",
+      "Methi",
+      "Trikuta"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/young-look-slimming-capsule"
+  },
+  "ore-piles-ointment": {
+    "summary": "A topical herbal ointment.",
+    "ingredients": [
+      "Mahanimb",
+      "Karir",
+      "Suran",
+      "Chopattiya",
+      "Nagkesar",
+      "kakmachii",
+      "Ativisha"
+    ],
+    "directions": [
+      "Follow the application directions on the pack or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/orepiles-ointment"
+  },
+  "swadisht-powder": {
+    "summary": "An Altos powder product.",
+    "ingredients": [
+      "Saunf",
+      "Jeera",
+      "Dhania",
+      "Kali Mirch",
+      "Dalchini",
+      "Kapoor",
+      "Ajmod",
+      "Ela",
+      "Sandha Namak",
+      "Kala Namak",
+      "Hing",
+      "Lavang",
+      "Mishri"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/swadisht-churan"
+  },
+  "energize-powder": {
+    "summary": "An Altos herbal powder mix.",
+    "ingredients": [
+      "Brahmi",
+      "Shankhpushpi",
+      "Gokhru",
+      "Ashwagandha",
+      "Shtawari"
+    ],
+    "directions": [
+      "Stir into milk or water according to the serving instructions on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/herbal-energize-powder"
+  },
+  "vigvit-protein-powder-200g": {
+    "summary": "A soy-based protein powder.",
+    "ingredients": [
+      "Soy protein"
+    ],
+    "directions": [
+      "Mix into a drink or food using the serving instructions on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/vigvit-protein-powder"
+  },
+  "jeewan-shakti": {
+    "summary": "An Altos formulation product.",
+    "ingredients": [
+      "Ashwagandha",
+      "Shatawari",
+      "Gokshru",
+      "konch beej",
+      "Dalchini",
+      "safed musli",
+      "Mulethi",
+      "Pippli",
+      "Vidarikand",
+      "Tej patar",
+      "Amla",
+      "Javitri",
+      "Jaiphal",
+      "Kesar"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/jeewan-shakti-avaleh"
+  },
+  "ore-amla-gel": {
+    "summary": "An Altos formulation product.",
+    "ingredients": [
+      "Amla"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/ore-amla"
+  },
+  "abhiliv-liver-syrup": {
+    "summary": "An Altos liquid product.",
+    "ingredients": [
+      "Sarfooka",
+      "Makoi",
+      "Katuka",
+      "Kasni",
+      "Vidang",
+      "pippli",
+      "Bhringraj"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/abhiliv-syrup"
+  },
+  "blood-purifier-syrup": {
+    "summary": "An Altos liquid product.",
+    "ingredients": [
+      "Neem",
+      "Khus",
+      "Chirata",
+      "Gulab",
+      "Unab",
+      "Mundi",
+      "Heena",
+      "Kasni",
+      "Sandal surkh",
+      "Nilofar",
+      "Sarpunkha",
+      "Simsapa",
+      "Kharbuza"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/blood-purifier"
+  },
+  "anti-wrinkle-cream": {
+    "summary": "A facial cream with almond and wheat germ oil.",
+    "ingredients": [
+      "Almond",
+      "Wheat germ oil"
+    ],
+    "directions": [
+      "After cleansing, gently massage onto the face and neck. Follow the pack instructions for overnight use."
+    ],
+    "source": "https://altosindia.net/products/product/anti-ageing-and-wrinkle-cream"
+  },
+  "to-breen-capsule-altos": {
+    "summary": "An Altos formulation product.",
+    "ingredients": [
+      "shankhpushpi",
+      "Brahmi",
+      "Malkangani"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/to-brain-capsule"
+  },
+  "lip-balm": {
+    "summary": "A lip moisturiser with shea butter.",
+    "ingredients": [
+      "Shea Butter"
+    ],
+    "directions": [
+      "Apply a thin layer to the lips."
+    ],
+    "source": "https://altosindia.net/products/product/lipbalm"
+  },
+  "zordan-footcare-cream": {
+    "summary": "A cream for foot care.",
+    "ingredients": [
+      "Sal oil",
+      "Boswellia",
+      "Methi seed",
+      "Yashad bhasam",
+      "Gandhak"
+    ],
+    "directions": [
+      "Wash and dry your feet, then apply the cream as directed on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/footcare-cream"
+  },
   "ashwagandha": {
     "summary": "An Altos herbal capsule made with ashwagandha.",
     "ingredients": [
