@@ -6,6 +6,17 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "d-tan-face-pack": "https://awinenterprises.in/images/altos/d-tan-face-pack.jpg",
+  "herbal-shaving-cream": "https://awinenterprises.in/images/altos/herbal-shaving-cream.jpg",
+  "pure-red-chilli-powder-lal-mirch": "https://awinenterprises.in/images/altos/pure-red-chilli-powder-lal-mirch.jpg",
+  "pure-coriander-powder-dhania": "https://awinenterprises.in/images/altos/pure-coriander-powder-dhania.jpg",
+  "kadak-tea": "https://awinenterprises.in/images/altos/kadak-tea.jpg",
+  "ultra-black-kajal": "https://awinenterprises.in/images/altos/ultra-black-kajal.jpg",
+  "vitamin-c-serum": "https://awinenterprises.in/images/altos/vitamin-c-serum.jpg",
+  "calcium-with-vitamin-d": "https://awinenterprises.in/images/altos/calcium-with-vitamin-d.jpg",
+  "stevia-drops": "https://shop.altosindia.net/storagecache/product_image/252920914-8c06fc77-1006-4ad4-96ca-89b797164af4.jpeg",
+  "coloston-bovine-colostrum": "https://altosindia.net/public/product/v1-ayurvedic-medicine/coloston-capsule1.jpg",
+  "black-kajal-pencil": "https://awinenterprises.in/images/altos/ultra-black-kajal.jpg",
   "sun-screen-cream-spf-20": "https://altosindia.net/public/product/v1-skin-treatment/spf-20.jpg",
   "sanitary-pads-with-anion-chip": "https://altosindia.net/public/product/v1-skin-care/sanitary-pad-image1.jpg",
   "red-ginseng": "https://altosindia.net/public/product/Red%20ginseng.jpg",
