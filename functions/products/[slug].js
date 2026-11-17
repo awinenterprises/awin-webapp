@@ -6,6 +6,16 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "ws7-detergent": "https://altosindia.net/public/product/v1-home-care/detergent-Powder1.jpg",
+  "alvet-cal-for-animals": "https://altosindia.net/public/product/v1-agriculture-aid/alvet-cal.jpg",
+  "rose-and-musk-moisturising-lotion": "https://altosindia.net/public/product/v1-skin-care/rose-musk.jpg",
+  "talcum-powder": "https://altosindia.net/public/product/v1-skin-treatment/talcum-powder1.jpg",
+  "face-wash-ubtan": "https://altosindia.net/public/product/v1-face-care/Ubtan-Facewash.jpg",
+  "ubtan-face-wash": "https://altosindia.net/public/product/v1-face-care/Ubtan-Facewash.jpg",
+  "fruit-cream": "https://altosindia.net/public/product/v1-face-care/fruit-cream1.jpg",
+  "zordan-footcare-cream": "https://altosindia.net/public/product/v1-ayurvedic-medicine/foot-care-cream1.jpg",
+  "amla-hair-oil": "https://altosindia.net/public/product/v1-hair-care/amla-hair-oil2.jpg",
+  "vigvit-protein-powder-200g": "https://altosindia.net/public/product/v1-ayurvedic-medicine/vigvit-protein-powder1.jpg",
   "paindon-plus": "https://altosindia.net/public/product/v1-ayurvedic-medicine/paindon-plus-capsule1.jpg",
   "glucosamine-hcl": "https://altosindia.net/public/product/v1-ayurvedic-medicine/nutro-glucosamine-tablets1.jpg",
   "spirulina-30-tabs": "https://altosindia.net/public/product/v1-ayurvedic-medicine/spirulina-tab.jpg",
