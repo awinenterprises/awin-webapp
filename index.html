@@ -604,7 +604,28 @@
 
     const categories = ["All", "Medicines & Health", "Powders & Nutrition", "Syrups & Juices", "Beauty & Skincare", "Hair & Grooming", "Home & Kitchen", "Agri & Veterinary"];
     let selectedCategory = "All";
-    let cart = {};
+    const CART_KEY = "awin.shoppingCart";
+    let cart = loadCart();
+
+    function loadCart() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(CART_KEY));
+        return Object.fromEntries(products.flatMap(({ id }) => {
+          const quantity = saved?.[id];
+          return Number.isSafeInteger(quantity) && quantity > 0 ? [[id, quantity]] : [];
+        }));
+      } catch {
+        return {};
+      }
+    }
+
+    function saveCart() {
+      try {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      } catch {
+        // The cart remains usable on this page when storage is unavailable.
+      }
+    }
     let activeCheckoutPayload = null;
 
     function getUrgencyBadge(id) {
@@ -766,6 +787,7 @@
 
     function addToCart(productId) {
       cart[productId] = (cart[productId] || 0) + 1;
+      saveCart();
       updateCartUI();
     }
 
@@ -773,6 +795,7 @@
       if (cart[productId]) {
         cart[productId] += delta;
         if (cart[productId] <= 0) delete cart[productId];
+        saveCart();
       }
       updateCartUI();
     }
@@ -909,7 +932,17 @@
       window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`, "_blank");
     }
 
+    window.addEventListener("pageshow", (event) => {
+      if (event.persisted) {
+        cart = loadCart();
+        updateCartUI();
+      }
+    });
+
     window.addEventListener('load', () => {
+      if (new URLSearchParams(window.location.search).get("cart") === "open") {
+        document.getElementById("cartModal").classList.remove("hidden");
+      }
       initCategories();
       renderProducts();
       updateCartUI();
