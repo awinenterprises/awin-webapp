@@ -6,6 +6,32 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "young-look": "https://altosindia.net/public/product/v1-ayurvedic-medicine/young-look-capsule.jpg",
+  "flax-oil": "https://altosindia.net/public/product/v1-ayurvedic-medicine/flax-oil-capsule1.jpg",
+  "nutroprash": "https://altosindia.net/public/product/v1-ayurvedic-medicine/nutroprash-capsule1.jpg",
+  "garlicplus": "https://altosindia.net/public/product/v1-ayurvedic-medicine/garliplus-capsule1.jpg",
+  "hadjod": "https://altosindia.net/public/product/v1-ayurvedic-medicine/hadjod1.jpg",
+  "ore-piles": "https://altosindia.net/public/product/v1-ayurvedic-medicine/orepiles-capsule1.jpg",
+  "nutroton": "https://altosindia.net/public/product/v1-ayurvedic-medicine/nutroton-capsule1.jpg",
+  "vig-r": "https://altosindia.net/public/product/v1-ayurvedic-medicine/vig-r-capsule1.jpg",
+  "ganoderma": "https://altosindia.net/public/product/v1-ayurvedic-medicine/ganoderma-capsule1.jpg",
+  "vigvit-capsules": "https://altosindia.net/public/product/v1-ayurvedic-medicine/vigvit-capsule1.jpg",
+  "rakatchap": "https://altosindia.net/public/product/v1-ayurvedic-medicine/rakatchap-care1.jpg",
+  "shatavari": "https://altosindia.net/public/product/v1-ayurvedic-medicine/shatavari-capsule.jpg",
+  "papita-giloy": "https://altosindia.net/public/product/v1-ayurvedic-medicine/papita-giloy-tablet1.jpg",
+  "musli-pure": "https://altosindia.net/public/product/v1-ayurvedic-medicine/musli-capsule.jpg",
+  "slimming-young-look": "https://altosindia.net/public/product/v1-ayurvedic-medicine/young-look-slimming-capsule1.jpg",
+  "ore-piles-ointment": "https://altosindia.net/public/product/v1-ayurvedic-medicine/ore-piles-ointment1.jpg",
+  "swadisht-powder": "https://altosindia.net/public/product/v1-ayurvedic-medicine/swadisht-churan1.jpg",
+  "energize-powder": "https://altosindia.net/public/product/v1-ayurvedic-medicine/herbal-energize1.jpg",
+  "ore-amla-gel": "https://altosindia.net/public/product/v1-ayurvedic-medicine/ore-amla1.jpg",
+  "abhiliv-liver-syrup": "https://altosindia.net/public/product/v1-ayurvedic-medicine/abhilive-syrup1.jpg",
+  "blood-purifier-syrup": "https://altosindia.net/public/product/v1-ayurvedic-medicine/blood-purifier.jpg",
+  "anti-wrinkle-cream": "https://altosindia.net/public/product/v1-skin-treatment/anti-ageing-plus-wrinkle-cream2.jpg",
+  "to-breen-capsule-altos": "https://altosindia.net/public/product/v1-ayurvedic-medicine/to-brain-capsule1.jpg",
+  "lip-balm": "https://altosindia.net/public/product/v1-skin-care/lipbalm1.jpg",
+  "jeewan-shakti": "https://altosindia.net/public/product/v1-ayurvedic-medicine/Jeewan-shakti4.jpg",
+  "sunscreen-spf-30": "https://altosindia.net/public/product/v1-skin-treatment/spf-30.jpg",
   "ashwagandha": "https://altosindia.net/public/product/v1-ayurvedic-medicine/ashwagandha-capsule1.jpg",
   "brahmi": "https://altosindia.net/public/product/v1-ayurvedic-medicine/brahmi-capsule1.jpg",
   "neem": "https://altosindia.net/public/product/v1-ayurvedic-medicine/neem-capsule1.jpg",
@@ -64,6 +90,17 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "sunscreen-spf-30": {
+    "summary": "An SPF 30 sunscreen lotion for the face and neck.",
+    "ingredients": [
+      "Aloe vera extract",
+      "Honey"
+    ],
+    "directions": [
+      "Apply to the face and neck before going outdoors. Follow the application and reapplication directions on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/spf-30"
+  },
   "curcum-plus": {
     "summary": "An Altos capsule product.",
     "ingredients": [
