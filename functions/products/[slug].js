@@ -107,9 +107,9 @@ ${inStock ? `
 <label>Quantity <input name="quantity" type="number" min="1" max="99" value="1" required></label>
 <label>Delivery pincode <input name="pincode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" pattern="[1-9][0-9]{5}" title="Enter a six-digit Indian pincode" required></label>
 <p>Product subtotal <output id="order-subtotal" aria-live="polite">₹${product.price.toLocaleString("en-IN")}</output></p>
-<p>Delivery <output id="order-shipping" aria-live="polite">${product.price > 1000 ? "Free" : "₹99"}</output></p>
-<p>Total <output id="order-total" aria-live="polite">₹${(product.price + (product.price > 1000 ? 0 : 99)).toLocaleString("en-IN")}</output></p>
-<p class="muted">Delivery across India costs ₹99 on orders up to and including ₹1,000, and is free on orders above ₹1,000.</p>
+<p>Delivery <output id="order-shipping" aria-live="polite">${product.price >= 1000 ? "Free" : "₹50"}</output></p>
+<p>Total <output id="order-total" aria-live="polite">₹${(product.price + (product.price >= 1000 ? 0 : 50)).toLocaleString("en-IN")}</output></p>
+<p class="muted">Delivery across India costs a flat ₹50 on orders below ₹1,000 and is free on orders of ₹1,000 or more.</p>
 <button class="btn" type="submit">Send Order on WhatsApp</button>
 </form>
 <noscript><p><a href="${whatsapp}">Order on WhatsApp</a></p></noscript>
@@ -117,7 +117,7 @@ ${inStock ? `
 ` : ""}
 <details class="details">
 <summary>Shipping in India</summary>
-<p>Orders dispatch within 1–2 working days after payment confirmation. Delivery typically takes 3–7 working days, depending on the pincode. Delivery across India costs ₹99 on orders up to and including ₹1,000, and is free on orders above ₹1,000.</p>
+<p>Orders dispatch within 1–2 working days after payment confirmation. Delivery typically takes 3–7 working days, depending on the pincode. Delivery across India costs a flat ₹50 on orders below ₹1,000 and is free on orders of ₹1,000 or more.</p>
 </details>
 <section class="details" id="returns" aria-labelledby="returns-title">
 <h2 id="returns-title">Returns &amp; refunds</h2>
@@ -133,7 +133,7 @@ ${inStock ? `<script>
   const shipping = document.getElementById("order-shipping");
   const total = document.getElementById("order-total");
   const productSubtotal = () => Number(form.dataset.price) * quantity.valueAsNumber;
-  const deliveryCharge = (amount) => amount > 1000 ? 0 : 99;
+  const deliveryCharge = (amount) => amount >= 1000 ? 0 : 50;
 
   quantity.addEventListener("input", () => {
     const amount = productSubtotal();
