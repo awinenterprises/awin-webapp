@@ -6,6 +6,7 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "sanitary-pads-with-anion-chip": "https://altosindia.net/public/product/v1-skin-care/sanitary-pad-image1.jpg",
   "red-ginseng": "https://altosindia.net/public/product/Red%20ginseng.jpg",
   "oremol-natural-black-hair": "https://altosindia.net/public/product/v1-hair-care/oremol-black-hair.jpg",
   "shine-home-cream-soap": "https://altosindia.net/public/product/v1-home-care/home-facial-bar.jpg",
@@ -109,6 +110,77 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "sanitary-pads-with-anion-chip": {
+    "summary": "Zordan winged sanitary pads with an anion-chip layer.",
+    "ingredients": [],
+    "directions": [
+      "Peel off the backing and secure the pad and wings to your underwear."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/sanitary-pad"
+  },
+  "mini-facial-kit": {
+    "summary": "A Zordan mini facial kit with several facial-care steps.",
+    "ingredients": [],
+    "directions": [
+      "Follow the order and directions on the individual sachets in your selected kit."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "facial-kit-papaya-or-gold": {
+    "summary": "A Zordan facial kit available in Papaya or Gold.",
+    "ingredients": [],
+    "directions": [
+      "Use the steps in the order printed on your selected kit."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/facial-kits"
+  },
+  "gold-bleach-cream-339g": {
+    "summary": "A Zordan Gold facial bleach kit.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions printed on the pack."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/gold-bleach-cream"
+  },
+  "fruit-cream": {
+    "summary": "A Zordan facial moisturiser containing strawberry and almond.",
+    "ingredients": [
+      "Strawberry",
+      "Almond"
+    ],
+    "directions": [
+      "Massage gently onto the face and neck, according to the pack directions."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/fruit-cream"
+  },
+  "talcum-powder": {
+    "summary": "Zordan body talcum powder.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions printed on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/talcum-powder"
+  },
+  "heal-cough-syrup-sugar-free": {
+    "summary": "Altos Heal syrup, sugar-free variant.",
+    "ingredients": [],
+    "directions": [
+      "Check the pack for the full formulation and follow its directions or advice from your healthcare professional."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/heal-cough-syrup-sugar-free"
+  },
+  "altocare": {
+    "summary": "An Altos plant-care product containing clove, neem and thyme oils.",
+    "ingredients": [
+      "Clove oil",
+      "Neem oil",
+      "Thyme oil"
+    ],
+    "directions": [
+      "Follow the directions and precautions printed on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/altocare"
+  },
   "red-ginseng": {
     "summary": "Vigvit Red Ginseng capsules with ginseng root extract.",
     "ingredients": [
