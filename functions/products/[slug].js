@@ -168,9 +168,10 @@ export async function onRequest({ params }) {
 <script type="application/ld+json">${jsonLd}</script>
 <style>
 :root{font-family:Arial,Helvetica,sans-serif;color:#17211b;background:#f7faf6}*{box-sizing:border-box}body{margin:0;line-height:1.6;overflow-x:hidden;overflow-wrap:anywhere}img{max-width:100%}.top{background:#064e3b;color:#fff;text-align:center;padding:10px}.wrap{max-width:1050px;margin:auto;padding:22px}.brand{color:#064e3b;font-weight:800;text-decoration:none;font-size:20px}.back{float:right;color:#14532d;font-weight:700}.card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;background:#fff;border:1px solid #e2e9e1;border-radius:20px;padding:26px;margin-top:24px}.photo{background:#f1f6ed;border-radius:16px;display:grid;place-items:center;min-height:320px;padding:16px}.photo img{max-width:100%;max-height:390px;object-fit:contain}.tag{color:#166534;font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.08em}h1{font-size:clamp(28px,5vw,42px);line-height:1.15;color:#173c29;margin:10px 0}.muted{color:#65736a}.price{font-size:30px;font-weight:800;color:#064e3b}.mrp{text-decoration:line-through;color:#758078;font-size:16px;margin-left:8px}.btn{display:inline-block;background:#15803d;color:white;text-decoration:none;padding:13px 18px;border-radius:10px;font-weight:800;margin:8px 8px 0 0}.btn.alt{background:white;border:1px solid #b9c9bb;color:#064e3b}.note{font-size:13px;color:#65736a;background:#f1f6ed;padding:14px;border-radius:10px;margin-top:20px}footer{text-align:center;padding:28px;color:#65736a;font-size:14px}@media(max-width:700px){.card{grid-template-columns:1fr;padding:16px;gap:18px}.photo{min-height:240px}.wrap{padding:16px}}
-.checkout{margin-top:24px;background:white;border:1px solid #e2e9e1;border-radius:20px;padding:clamp(16px,4vw,26px)}.checkout form{display:grid;gap:12px;max-width:420px;min-width:0}.card>div,.checkout,.checkout form>*{min-width:0}.checkout label{display:grid;gap:4px;font-weight:700}.checkout input{width:100%;padding:10px;border:1px solid #aabbb0;border-radius:8px;font:inherit}.checkout button{font:inherit;font-weight:800;cursor:pointer;border:0;justify-self:start}.checkout h2{margin-top:0}.checkout output{font-weight:800}.details{margin:24px 0}.details summary{cursor:pointer;font-weight:700}.product-meta{display:flex;gap:12px;flex-wrap:wrap}.stock{color:#166534}
+.checkout{margin-top:24px;background:white;border:1px solid #e2e9e1;border-radius:20px;padding:clamp(16px,4vw,26px)}.checkout form{display:grid;gap:12px;max-width:420px;min-width:0}.card>div,.checkout,.checkout form>*{min-width:0}.checkout label{display:grid;gap:4px;font-weight:700}.checkout input,.checkout textarea{width:100%;padding:10px;border:1px solid #aabbb0;border-radius:8px;font:inherit}.checkout button{font:inherit;font-weight:800;cursor:pointer;border:0;justify-self:start}.checkout h2{margin-top:0}.checkout output{font-weight:800}.details{margin:24px 0}.details summary{cursor:pointer;font-weight:700}.product-meta{display:flex;gap:12px;flex-wrap:wrap}.stock{color:#166534}
 .upi-payment{margin:4px 0;padding:14px;border:1px solid #e2e9e1;border-radius:12px;background:#f7faf6}.upi-payment img{display:block;width:184px;height:184px;margin:8px 0;background:#fff}.upi-payment code{user-select:all;font-size:1rem}.upi-payment .btn{margin-bottom:8px}.upi-payment code{overflow-wrap:anywhere}.upi-help{font-size:13px;color:#425449}.btn{max-width:100%;text-align:center;white-space:normal}@media(max-width:700px){.wrap{padding:12px}.card{margin-top:14px}.top{font-size:13px}.brand{font-size:17px}.back{float:none;display:block;margin-top:6px}.photo{min-height:0;aspect-ratio:1/1}.photo img{max-height:280px}.checkout{margin-top:14px}.checkout button,.checkout .btn{width:100%;justify-self:stretch}.upi-payment img{max-width:100%;height:auto}}
 .product-details{margin-top:24px;background:#fff;border:1px solid #e2e9e1;border-radius:20px;padding:clamp(16px,4vw,26px)}.product-details h2{margin-top:0}.product-details h3{margin-bottom:4px}.product-details p,.product-details ol{margin-top:4px}.product-details a{color:#14532d}
+#add-product-to-cart[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -185,7 +186,7 @@ export async function onRequest({ params }) {
 <p class="muted">Pack size: ${escapeHtml(product.pack)}</p>
 <div class="price">₹${product.price.toLocaleString("en-IN")} <span class="mrp">MRP ₹${product.mrp.toLocaleString("en-IN")}</span></div>
 <p class="product-meta"><strong class="stock">${stockLabel}</strong>${brand ? `<span>Brand: ${escapeHtml(brand)}</span>` : ""}</p>
-${inStock ? '<a class="btn" href="#checkout">Buy Now</a>' : ""}
+${inStock ? '<a class="btn" href="#checkout">Buy Now</a><button class="btn alt" id="add-product-to-cart" type="button" hidden>Add to Cart</button><a class="btn alt" href="/?cart=open">View Cart</a><p id="add-cart-status" role="status"></p>' : ""}
 <a class="btn alt" href="${whatsapp}" rel="noopener noreferrer">Ask on WhatsApp</a>
 ${details ? `<p class="muted">${escapeHtml(details.summary)} <a href="#product-details">Ingredients &amp; how to use</a></p>` : '<div class="note">Please check the product packaging for ingredients, directions for use, warnings and other product-specific information. Product details and prices may change; confirm before ordering.</div>'}
 </div>
@@ -204,8 +205,10 @@ ${inStock ? `
 <section class="checkout" id="checkout" aria-labelledby="checkout-title">
 <h2 id="checkout-title">Checkout</h2>
 <p>${escapeHtml(product.name)} · ${escapeHtml(product.pack)} · ₹${product.price.toLocaleString("en-IN")} each</p>
-<form id="order-form" data-product="${escapeHtml(product.name)}" data-pack="${escapeHtml(product.pack)}" data-price="${product.price}" data-whatsapp="${PHONE}" data-upi="${UPI_ID}" data-payee="${PAYEE}">
+<form id="order-form" data-product-id="${product.id}" data-product="${escapeHtml(product.name)}" data-pack="${escapeHtml(product.pack)}" data-price="${product.price}" data-whatsapp="${PHONE}" data-upi="${UPI_ID}" data-payee="${PAYEE}">
 <label>Quantity <input name="quantity" type="number" min="1" max="99" value="1" required></label>
+<label>Customer name <input name="customerName" type="text" autocomplete="name" maxlength="100" required></label>
+<label>Delivery address <textarea name="address" rows="3" autocomplete="street-address" maxlength="400" required></textarea></label>
 <label>Delivery pincode <input name="pincode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" pattern="[1-9][0-9]{5}" title="Enter a six-digit Indian pincode" required></label>
 <p>Product subtotal <output id="order-subtotal" aria-live="polite">₹${product.price.toLocaleString("en-IN")}</output></p>
 <p>Delivery <output id="order-shipping" aria-live="polite">${product.price >= 1000 ? "Free" : "₹50"}</output></p>
@@ -236,6 +239,25 @@ ${inStock ? `
 <footer>© Awin Enterprises · <a href="https://awinenterprises.in/">awinenterprises.in</a></footer>
 ${inStock ? `<script>
   const form = document.getElementById("order-form");
+  const addToCart = document.getElementById("add-product-to-cart");
+  addToCart.hidden = false;
+  addToCart.addEventListener("click", () => {
+    const key = "awin.shoppingCart";
+    const status = document.getElementById("add-cart-status");
+    try {
+      let cart;
+      try { cart = JSON.parse(localStorage.getItem(key)); } catch { cart = null; }
+      if (!cart || typeof cart !== "object" || Array.isArray(cart)) cart = {};
+      const id = form.dataset.productId;
+      const quantity = cart[id];
+      cart[id] = Number.isSafeInteger(quantity) && quantity > 0 ? quantity + 1 : 1;
+      localStorage.setItem(key, JSON.stringify(cart));
+      status.textContent = "Added to cart (" + cart[id] + ").";
+    } catch {
+      status.textContent = "Cart storage is unavailable. You can still use Buy Now.";
+    }
+  });
+
   const quantity = form.elements.quantity;
   const subtotal = document.getElementById("order-subtotal");
   const formatPrice = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
@@ -277,6 +299,10 @@ ${inStock ? `<script>
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+    for (const field of [form.elements.customerName, form.elements.address]) {
+      field.value = field.value.trim();
+    }
+    if (!form.reportValidity()) return;
     const amount = productSubtotal();
     const charge = deliveryCharge(amount);
     const message = [
@@ -288,7 +314,8 @@ ${inStock ? `<script>
       "Total: " + formatPrice.format(amount + charge),
       "Delivery pincode: " + form.elements.pincode.value,
       "UPI transaction reference: " + (form.elements.reference.value.trim() || "I will share the receipt."),
-      "Delivery address: [Please enter your full address]"
+      "Customer name: " + form.elements.customerName.value.trim(),
+      "Delivery address: " + form.elements.address.value.trim()
     ].join("\\n");
     window.location.assign("https://wa.me/" + form.dataset.whatsapp + "?text=" + encodeURIComponent(message));
   });
