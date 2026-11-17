@@ -2,7 +2,8 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
   <title>Awin Enterprises | Altos Ayurvedic & Daily Care Products, Home Delivery in India</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -51,6 +52,28 @@
       transform: scale(1.02);
       transition: all 0.4s ease-in-out;
     }
+    @media (max-width: 639px) {
+      .offer-banner { position: static; padding-top: calc(0.5rem + env(safe-area-inset-top)); }
+      #searchInput, #pincodeInput, #custName, #custPhone, #custAddress {
+        font-size: 16px;
+      }
+      #searchInput, #categoryContainer button, #productGrid button,
+      #cartModal button, #productDetailModal button, #checkoutModal button,
+      #downloadQrBtn, .cart-trigger {
+        min-height: 44px;
+      }
+      #cartItems button, .cart-trigger { min-width: 44px; }
+      #floatingCartBar { padding-bottom: calc(0.75rem + env(safe-area-inset-bottom)); }
+      #whatsappSupport { bottom: calc(1rem + env(safe-area-inset-bottom)); }
+      body.has-cart #whatsappSupport { bottom: calc(5rem + env(safe-area-inset-bottom)); }
+      body.has-cart footer { padding-bottom: calc(6rem + env(safe-area-inset-bottom)); }
+      #cartModal > div { padding-bottom: env(safe-area-inset-bottom); }
+      #productDetailModal > div, #checkoutModal > div {
+        max-height: calc(100dvh - 2rem - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+        overscroll-behavior: contain;
+      }
+      #pincodeInput { min-width: 0; }
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col relative">
@@ -60,7 +83,7 @@
     <span id="toastText">Link copied successfully!</span>
   </div>
 
-  <div class="sticky top-0 z-50 bg-gradient-to-r from-amber-500 via-purple-600 to-emerald-600 text-white py-2 px-4 text-center font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2">
+  <div class="offer-banner sticky top-0 z-50 bg-gradient-to-r from-amber-500 via-purple-600 to-emerald-600 text-white py-2 px-4 text-center font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2">
     <i class="fa-solid fa-gift text-yellow-300 animate-bounce"></i>
     <span>SPECIAL OFFER: If you purchase products worth ₹1000 every month for six months then you will get free products worth ₹1000 in the seventh month!</span>
   </div>
@@ -82,7 +105,7 @@
           <a href="https://wa.me/917828757646" target="_blank" class="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 text-emerald-700 hover:bg-emerald-100 font-bold text-xs transition">
             <i class="fa-brands fa-whatsapp text-sm"></i> Help
           </a>
-          <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 transition">
+          <button onclick="toggleCart()" aria-label="Open shopping cart" class="cart-trigger relative p-2.5 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 transition">
             <i class="fa-solid fa-cart-shopping text-lg"></i>
             <span id="cartCount" class="absolute -top-1 -right-1 bg-purple-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
           </button>
@@ -102,7 +125,7 @@
     <div class="max-w-7xl mx-auto px-4 py-2.5 space-y-2 bg-white">
       <div class="relative">
         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400"></i>
-        <input type="text" id="searchInput" onkeyup="renderProducts()" placeholder="Search products by name or benefit..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-slate-50/50" />
+        <input type="text" id="searchInput" aria-label="Search products" oninput="renderProducts()" placeholder="Search products by name or benefit..." class="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 bg-slate-50/50" />
       </div>
       <div id="categoryContainer" class="flex gap-2 overflow-x-auto hide-scrollbar py-1"></div>
     </div>
@@ -188,7 +211,7 @@
     </div>
   </div>
 
-  <a href="https://wa.me/917828757646?text=Namaste%20Awin%20Enterprises,%20mujhe%20products%20ke%20baare%20me%20jaankari%20chahiye." target="_blank" class="fixed bottom-20 right-5 z-40 bg-emerald-600 hover:bg-emerald-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition active:scale-95" title="Chat on WhatsApp">
+  <a href="https://wa.me/917828757646?text=Namaste%20Awin%20Enterprises,%20mujhe%20products%20ke%20baare%20me%20jaankari%20chahiye." target="_blank" class="fixed bottom-20 right-5 z-40 bg-emerald-600 hover:bg-emerald-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition active:scale-95" id="whatsappSupport" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
     <i class="fa-brands fa-whatsapp text-2xl"></i>
   </a>
 
@@ -205,7 +228,7 @@
         </div>
       </div>
       <button onclick="toggleCart()" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-lg flex items-center gap-2 transition active:scale-95">
-        <i class="fa-solid fa-bag-shopping"></i> View Cart & Checkout
+        <i class="fa-solid fa-bag-shopping"></i> View Cart
       </button>
     </div>
   </div>
@@ -234,7 +257,7 @@
           <i class="fa-solid fa-location-dot text-purple-600"></i> Check Delivery to Your Pincode
         </div>
         <div class="flex gap-1.5">
-          <input type="text" id="pincodeInput" maxlength="6" placeholder="Enter 6-digit Pincode" class="flex-1 px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500" />
+          <input type="text" id="pincodeInput" inputmode="numeric" autocomplete="postal-code" aria-label="Delivery pincode" maxlength="6" placeholder="Enter 6-digit Pincode" class="flex-1 px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500" />
           <button onclick="checkPincode()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-lg transition">Check</button>
         </div>
         <div id="pincodeResult" class="text-[11px] text-slate-500 hidden"></div>
@@ -308,9 +331,9 @@
         <div class="text-[11px] text-slate-600 font-bold">UPI ID: <span id="upiIdText">awin@slc</span></div>
       </div>
       <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-left space-y-2">
-        <input type="text" id="custName" placeholder="Customer Name" class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500" />
-        <input type="tel" id="custPhone" placeholder="Phone Number" class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500" />
-        <textarea id="custAddress" rows="2" placeholder="Complete Address with Pincode" class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 resize-none"></textarea>
+        <input type="text" id="custName" autocomplete="name" aria-label="Customer name" placeholder="Customer Name" class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500" />
+        <input type="tel" id="custPhone" autocomplete="tel" aria-label="Phone number" placeholder="Phone Number" class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500" />
+        <textarea id="custAddress" autocomplete="street-address" aria-label="Delivery address" rows="2" placeholder="Complete Address with Pincode" class="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500 resize-none"></textarea>
       </div>
       <div class="space-y-2 pt-1">
         <button onclick="submitToWhatsApp(true)" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs transition flex items-center justify-center gap-2 shadow">
@@ -560,7 +583,8 @@
 
     const categories = ["All", "Medicines & Health", "Powders & Nutrition", "Syrups & Juices", "Beauty & Skincare", "Hair & Grooming", "Home & Kitchen", "Agri & Veterinary"];
     let selectedCategory = "All";
-    let cart = {};
+    const CART_STORAGE_KEY = "awin.shoppingCart";
+    const cart = loadCart();
     let activeCheckoutPayload = null;
 
     function getUrgencyBadge(id) {
@@ -716,8 +740,28 @@
       document.getElementById("checkoutModal").classList.remove("hidden");
     }
 
+    function loadCart() {
+      try {
+        const savedCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY));
+        return Object.fromEntries(products
+          .map(({ id }) => [id, savedCart?.[id]])
+          .filter(([, qty]) => Number.isSafeInteger(qty) && qty > 0));
+      } catch {
+        return {};
+      }
+    }
+
+    function saveCart() {
+      try {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+      } catch {
+        // The cart still works for this page session when storage is unavailable.
+      }
+    }
+
     function addToCart(productId) {
       cart[productId] = (cart[productId] || 0) + 1;
+      saveCart();
       updateCartUI();
     }
 
@@ -725,6 +769,7 @@
       if (cart[productId]) {
         cart[productId] += delta;
         if (cart[productId] <= 0) delete cart[productId];
+        saveCart();
       }
       updateCartUI();
     }
@@ -762,6 +807,7 @@
         `;
       }
 
+      document.body.classList.toggle("has-cart", totalItems > 0);
       if(countEl) countEl.innerText = totalItems;
       if(subtotalEl) subtotalEl.innerText = `₹${subtotal}`;
       if(checkoutBtn) checkoutBtn.disabled = totalItems === 0;
