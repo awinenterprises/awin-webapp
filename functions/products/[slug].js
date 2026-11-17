@@ -412,7 +412,6 @@ ${details ? `
 <p class="muted">Check the pack label for the full ingredient list and any warnings.</p>
 <h3>How to use</h3>
 <ol>${details.directions.map(step => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
-<p><a href="${escapeHtml(details.source)}">Altos manufacturer listing</a></p>
 </section>` : ""}
 ${inStock ? `
 <section class="checkout" id="checkout" aria-labelledby="checkout-title">
