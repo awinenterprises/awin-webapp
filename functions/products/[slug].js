@@ -6,6 +6,219 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const productDetails = {
+  "skin-glow-face-wash": {
+    "summary": "A rinse-off facial cleanser with berry extracts.",
+    "ingredients": [
+      "Blackberry",
+      "Mulberry"
+    ],
+    "directions": [
+      "Massage a small amount gently over your face, then rinse with water."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/skin-glow-face-wash"
+  },
+  "face-wash-skin-glow": {
+    "summary": "A rinse-off facial cleanser with berry extracts.",
+    "ingredients": [
+      "Blackberry",
+      "Mulberry"
+    ],
+    "directions": [
+      "Massage a small amount gently over your face, then rinse with water."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/skin-glow-face-wash"
+  },
+  "gold-face-wash": {
+    "summary": "A rinse-off face cleanser with honey.",
+    "ingredients": [
+      "Honey"
+    ],
+    "directions": [
+      "Massage a small amount gently over your face, then rinse with water."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/gold-face-wash"
+  },
+  "face-wash-gold": {
+    "summary": "A rinse-off face cleanser with honey.",
+    "ingredients": [
+      "Honey"
+    ],
+    "directions": [
+      "Massage a small amount gently over your face, then rinse with water."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/gold-face-wash"
+  },
+  "neem-face-wash-60ml": {
+    "summary": "A rinse-off facial cleanser with neem, aloe vera and tea tree oil.",
+    "ingredients": [
+      "Neem",
+      "Aloe vera",
+      "Tea tree oil"
+    ],
+    "directions": [
+      "Massage a small amount gently over your face, then rinse with water."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/neem-face-wash"
+  },
+  "aloe-vera-moisturising-gel-100g": {
+    "summary": "A moisturising gel for the face and neck.",
+    "ingredients": [
+      "Aloe vera",
+      "Rose extract"
+    ],
+    "directions": [
+      "Massage gently over the face and neck using upward circular strokes."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/aloevera-moisturising-gel"
+  },
+  "aloevera-moisturising-gel": {
+    "summary": "A moisturising gel for the face and neck.",
+    "ingredients": [
+      "Aloe vera",
+      "Rose extract"
+    ],
+    "directions": [
+      "Massage gently over the face and neck using upward circular strokes."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/aloevera-moisturising-gel"
+  },
+  "altos-balm": {
+    "summary": "A topical balm with aromatic oils.",
+    "ingredients": [
+      "Camphor oil",
+      "Mint",
+      "Eucalyptus oil",
+      "Clove oil",
+      "Wintergreen oil"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your physician."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/altos-balm"
+  },
+  "bhringraj-hair-oil": {
+    "summary": "An oil for massaging the scalp and conditioning the hair.",
+    "ingredients": [
+      "Bhringraj",
+      "Kumari (aloe vera)",
+      "Amla",
+      "Brahmi"
+    ],
+    "directions": [
+      "Work the oil into the roots and massage the scalp, following the pack directions."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/bhringraj-oil"
+  },
+  "anti-dandruff-shampoo": {
+    "summary": "A rinse-off shampoo for dandruff-prone hair and scalp.",
+    "ingredients": [
+      "Tea tree oil",
+      "Neem extract"
+    ],
+    "directions": [
+      "Apply a small amount to wet hair, leave briefly as directed and rinse thoroughly."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/anti-dandruff-shampoo"
+  },
+  "onion-shampoo": {
+    "summary": "A rinse-off shampoo containing onion and plant keratin.",
+    "ingredients": [
+      "Onion",
+      "Plant keratin"
+    ],
+    "directions": [
+      "Lather into wet hair and scalp with your fingertips, then rinse well."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/onion-shampoo"
+  },
+  "9-in-1-hair-oil-100ml": {
+    "summary": "A blend of nine ingredients for scalp massage.",
+    "ingredients": [
+      "Sesame",
+      "Bhringraj",
+      "Manjistha",
+      "Amla",
+      "Olive",
+      "Coconut",
+      "Almond",
+      "Peanut",
+      "Neem"
+    ],
+    "directions": [
+      "Massage into the scalp with your fingertips. Altos suggests leaving it on overnight."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/hair-gro-oil"
+  },
+  "hena-hair-pack": {
+    "summary": "A henna-based pack for the hair and scalp.",
+    "ingredients": [
+      "Amla",
+      "Shikakai",
+      "Bhringraj",
+      "Henna"
+    ],
+    "directions": [
+      "Spread over the hair and scalp, then rinse thoroughly once it has dried."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/henna-herbal-hair-pack"
+  },
+  "stevia-drops": {
+    "summary": "Liquid stevia for sweetening drinks and dishes.",
+    "ingredients": [
+      "Stevia"
+    ],
+    "directions": [
+      "Add drops to taste, using the pack's serving guidance."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/stevia-drops"
+  },
+  "abhinol": {
+    "summary": "An Altos herbal capsule formulation in a pack of 60.",
+    "ingredients": [
+      "Gurmar",
+      "Jamun seed",
+      "Karela",
+      "Guduchi",
+      "Bijasar",
+      "Shilajit"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your physician."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/abhinol-capsule"
+  },
+  "aroplex": {
+    "summary": "An Altos herbal capsule formulation in a pack of 30.",
+    "ingredients": [
+      "Shatavari",
+      "Brahmi",
+      "Draksh",
+      "Amla",
+      "Rose",
+      "Shilajit",
+      "Musli",
+      "Saffron",
+      "Ashwagandha"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your physician."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/aroplex-capsule"
+  },
+  "oregel-diab": {
+    "summary": "An Altos liquid herbal formulation in a 500 ml bottle.",
+    "ingredients": [
+      "Aloe vera",
+      "Giloy",
+      "Amla",
+      "Karela",
+      "Jamun seed"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your physician."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/oregel-diab"
+  },
   "tulsi-power": {
     "summary": "A liquid blend of five types of tulsi. This pack contains 30 ml in total.",
     "ingredients": [
