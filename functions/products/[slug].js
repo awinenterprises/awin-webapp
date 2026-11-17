@@ -13,6 +13,74 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "oredent-toothpaste-100g": {
+    "summary": "A toothpaste for daily brushing.",
+    "ingredients": [
+      "Neem",
+      "Clove oil",
+      "Tulsi",
+      "Menthol"
+    ],
+    "directions": [
+      "Brush gently with a soft-bristled toothbrush, then rinse your mouth."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/oredent-toothpaste"
+  },
+  "long-hair-shampoo": {
+    "summary": "A rinse-off shampoo containing neem and bhringraj.",
+    "ingredients": [
+      "Neem extract",
+      "Bhringraj"
+    ],
+    "directions": [
+      "Apply a small amount to wet hair, then rinse thoroughly."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/long-hair-shampoo"
+  },
+  "kesar-soap": {
+    "summary": "A saffron cleansing bar.",
+    "ingredients": [
+      "Saffron"
+    ],
+    "directions": [
+      "Lather on damp skin, rinse with water and pat dry."
+    ],
+    "source": "https://altosindia.net/products/product/kesar-soap"
+  },
+  "hair-serum": {
+    "summary": "A hair serum with olive oil and grapeseed oil.",
+    "ingredients": [
+      "Olive oil",
+      "Grapeseed oil"
+    ],
+    "directions": [
+      "After shampooing, put a small amount in your palms and smooth it gently over your hair."
+    ],
+    "source": "https://altosindia.net/products/product/hair-serum"
+  },
+  "very-cool-hair-oil": {
+    "summary": "An oil for scalp and hair massage.",
+    "ingredients": [
+      "Mint",
+      "Bhringraj",
+      "Amla"
+    ],
+    "directions": [
+      "Apply gently across the scalp, using the amount indicated on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/very-cool-oil"
+  },
+  "vitalizer-hair-oil": {
+    "summary": "A scalp treatment containing jatamansi and amla extract.",
+    "ingredients": [
+      "Jatamansi",
+      "Amla extract"
+    ],
+    "directions": [
+      "Apply to the scalp and massage gently with your fingertips before bed. Follow the pack directions for overnight use."
+    ],
+    "source": "https://altosindia.net/products/product/hair-vitalizer"
+  },
   "haldi-with-kesar-drops": {
     "summary": "A liquid turmeric and saffron formulation.",
     "ingredients": [
