@@ -6,6 +6,17 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "hair-serum": "https://altosindia.net/public/product/v1-hair-care/hair-serum.jpg",
+  "long-hair-shampoo": "https://altosindia.net/public/product/v1-hair-care/long-hair-shampoo.jpg",
+  "kesar-soap": "https://altosindia.net/public/product/v1-home-care/kesar-soap.jpg",
+  "oredent-toothpaste-100g": "https://altosindia.net/public/product/v1-ayurvedic-medicine/oredent-toothpaste1.jpg",
+  "very-cool-hair-oil": "https://altosindia.net/public/product/v1-hair-care/very-cool-oil.jpg",
+  "vitalizer-hair-oil": "https://altosindia.net/public/product/v1-hair-care/hair-vitalizer.jpg",
+  "papaya-face-wash-60ml": "https://altosindia.net/public/product/v1-face-care/papaya-face-wash1.jpg",
+  "apricot-scrub": "https://altosindia.net/public/product/v1-face-care/apricot-scrub1.jpg",
+  "beauty-face-pack": "https://altosindia.net/public/product/v1-face-care/beauty-face-pack1.jpg",
+  "face-wash-papaya": "https://altosindia.net/public/product/v1-face-care/papaya-face-wash1.jpg",
+  "face-pack-beauty": "https://altosindia.net/public/product/v1-face-care/beauty-face-pack1.jpg",
   "netar-jyoti-eye-drops": "https://shop.altosindia.net/storagecache/product_image/232914560-444dbfa5-b193-457f-8e6d-94198f63da06.jpeg",
   "tulsi-power": "https://shop.altosindia.net/StorageCache/seo_parameter_image/242730877-9393d154-0c4e-4749-88eb-11f2f876d303.jpeg",
   "charcoal-face-wash": "https://altosindia.net/public/product/v1-face-care/charcoal-face-wash1.jpg",
