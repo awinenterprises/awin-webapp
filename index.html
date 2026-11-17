@@ -49,12 +49,12 @@
           "orderValue": {
             "@type": "MonetaryAmount",
             "currency": "INR",
-            "maxValue": 1000
+            "maxValue": 999.99
           },
           "shippingRate": {
             "@type": "MonetaryAmount",
             "currency": "INR",
-            "value": 99
+            "value": 50
           }
         },
         {
@@ -66,7 +66,7 @@
           "orderValue": {
             "@type": "MonetaryAmount",
             "currency": "INR",
-            "minValue": 1000.01
+            "minValue": 1000
           },
           "shippingRate": {
             "@type": "MonetaryAmount",
@@ -376,7 +376,7 @@
     const policyData = {
       shipping: {
         title: "Shipping Policy",
-        content: "Delivery across India costs ₹99 on orders up to and including ₹1,000, and is free on orders above ₹1,000. Orders are packed and dispatched within 1–2 working days of payment confirmation. Delivery typically takes 3–7 working days depending on your delivery pincode. You can check estimated delivery on any product page. You will receive tracking updates directly on WhatsApp once your order ships."
+        content: "Delivery across India costs a flat ₹50 on orders below ₹1,000 and is free on orders of ₹1,000 or more. Orders are packed and dispatched within 1–2 working days of payment confirmation. Delivery typically takes 3–7 working days depending on your delivery pincode. You can check estimated delivery on any product page. You will receive tracking updates directly on WhatsApp once your order ships."
       },
       returns: {
         title: "Return & Refund Policy",
@@ -755,7 +755,7 @@
     }
 
     function deliveryCharge(subtotal) {
-      return subtotal > 0 && subtotal <= 1000 ? 99 : 0;
+      return subtotal > 0 && subtotal < 1000 ? 50 : 0;
     }
 
     function buySingleProductNow(item) {
@@ -812,7 +812,7 @@
 
       if(countEl) countEl.innerText = totalItems;
       if(subtotalEl) subtotalEl.innerText = `₹${subtotal}`;
-      document.getElementById("cartShipping").innerText = subtotal > 1000 ? "Free" : `₹${deliveryCharge(subtotal)}`;
+      document.getElementById("cartShipping").innerText = subtotal >= 1000 ? "Free" : `₹${deliveryCharge(subtotal)}`;
       document.getElementById("cartTotal").innerText = `₹${subtotal + deliveryCharge(subtotal)}`;
       if(checkoutBtn) checkoutBtn.disabled = totalItems === 0;
 
