@@ -6,6 +6,17 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "aroplex": "https://altosindia.net/public/product/v1-ayurvedic-medicine/aroplex-capsule.jpg",
+  "haldi-with-kesar-drops": "https://altosindia.net/public/product/v1-ayurvedic-medicine/haldi-with-kesar-drops1.jpg",
+  "abhinol": "https://altosindia.net/public/product/v1-ayurvedic-medicine/abhinol1.jpg",
+  "aloe-vera-moisturising-gel-100g": "https://altosindia.net/public/product/v1-face-care/aloevera-moisturising1.jpg",
+  "anti-dandruff-shampoo": "https://altosindia.net/public/product/v1-hair-care/antis-dandruff-shampoo.jpg",
+  "chelated-iron": "https://altosindia.net/public/product/v1-nutraceuticals/chilated-iron.jpg",
+  "multi-collagen-complex": "https://altosindia.net/public/product/v1-nutraceuticals/multi-collagen.jpg",
+  "noni": "https://altosindia.net/public/product/v1-ayurvedic-medicine/noni-capsule1.jpg",
+  "aloevera-moisturising-gel": "https://altosindia.net/public/product/v1-face-care/aloevera-moisturising1.jpg",
+  "dish-top-gel": "https://altosindia.net/public/product/v1-home-care/dish-top1.jpg",
+  "enrich-gold-tea": "https://altosindia.net/public/product/v1-home-care/enrich-gold-tea1.jpg",
   "young-look": "https://altosindia.net/public/product/v1-ayurvedic-medicine/young-look-capsule.jpg",
   "flax-oil": "https://altosindia.net/public/product/v1-ayurvedic-medicine/flax-oil-capsule1.jpg",
   "nutroprash": "https://altosindia.net/public/product/v1-ayurvedic-medicine/nutroprash-capsule1.jpg",
@@ -90,6 +101,114 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "vitamin-c-serum": {
+    "summary": "A facial serum with vitamin C and niacinamide.",
+    "ingredients": [
+      "Vitamin C",
+      "Niacinamide",
+      "Aloe vera"
+    ],
+    "directions": [
+      "After cleansing and patting dry, gently smooth onto the face and neck until absorbed."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/vitamin-c-face-serum"
+  },
+  "hydra-boost-gel": {
+    "summary": "A lightweight moisturising gel.",
+    "ingredients": [
+      "Hyaluronic acid",
+      "Niacinamide",
+      "Rice extract",
+      "Glycerine",
+      "Vitamin E acetate"
+    ],
+    "directions": [
+      "Apply according to the directions printed on your pack."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/hydra-boost-gel"
+  },
+  "sunscreen-spf-50": {
+    "summary": "An SPF 50 sunscreen lotion.",
+    "ingredients": [
+      "Aloe vera",
+      "Sandalwood"
+    ],
+    "directions": [
+      "Follow the directions on your pack for application and reapplication."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/spf-50-sunscreen-lotion"
+  },
+  "alvet-cal-for-animals": {
+    "summary": "A liquid feed supplement formulated for animals.",
+    "ingredients": [
+      "Shatavari",
+      "Sarphunkha",
+      "Aloe vera",
+      "Bhumi amla",
+      "Silymarin",
+      "Neem"
+    ],
+    "directions": [
+      "Follow the pack directions for the animal's species or ask your veterinarian."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/healthy-alvet-cal"
+  },
+  "dish-top-gel": {
+    "summary": "A concentrated dishwashing gel for cleaning greasy utensils.",
+    "ingredients": [],
+    "directions": [
+      "Use according to the directions on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/dishtop"
+  },
+  "enrich-gold-tea": {
+    "summary": "Enrich Gold Premier tea blend.",
+    "ingredients": [],
+    "directions": [
+      "Brew according to the directions on your pack."
+    ],
+    "source": "https://altosindia.net/products/product/enrich-tea"
+  },
+  "kadak-tea": {
+    "summary": "Altos Enrich Kadak tea blend.",
+    "ingredients": [],
+    "directions": [
+      "Brew according to the directions on your pack."
+    ],
+    "source": "https://altosindia.net/products/product/enrich-tea"
+  },
+  "bb-cream": {
+    "summary": "Zordan BB cream for a light, even-looking makeup finish.",
+    "ingredients": [],
+    "directions": [
+      "Apply according to the directions on the pack."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/bb-cream-zordan"
+  },
+  "zordan-perfume-bloom": {
+    "summary": "Zordan Bloom Eau de Parfum.",
+    "ingredients": [],
+    "directions": [
+      "Use according to the directions and precautions on the pack."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/bloom-perfume"
+  },
+  "liquid-suhaag-sindoor": {
+    "summary": "Liquid sindoor with a matte finish and a sponge-tip applicator.",
+    "ingredients": [],
+    "directions": [
+      "Apply using the sponge-tip applicator as directed on the pack."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/liquid-sindur-red"
+  },
+  "liquid-sindur-red-red": {
+    "summary": "Red liquid sindoor with a sponge-tip applicator.",
+    "ingredients": [],
+    "directions": [
+      "Apply using the sponge-tip applicator as directed on the pack."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/liquid-sindur-red"
+  },
   "sunscreen-spf-30": {
     "summary": "An SPF 30 sunscreen lotion for the face and neck.",
     "ingredients": [
@@ -1581,14 +1700,13 @@ export async function onRequest({ params }) {
 <p class="product-meta"><strong class="stock">${stockLabel}</strong>${brand ? `<span>Brand: ${escapeHtml(brand)}</span>` : ""}</p>
 ${inStock ? '<a class="btn" href="#checkout">Buy Now</a><button class="btn alt" id="add-product-to-cart" type="button" hidden>Add to Cart</button><a class="btn alt" href="/?cart=open">View Cart</a><p id="add-cart-status" role="status"></p>' : ""}
 <a class="btn alt" href="${whatsapp}" rel="noopener noreferrer">Ask on WhatsApp</a>
-${details ? `<p class="muted">${escapeHtml(details.summary)} <a href="#product-details">Ingredients &amp; how to use</a></p>` : '<div class="note">Please check the product packaging for ingredients, directions for use, warnings and other product-specific information. Product details and prices may change; confirm before ordering.</div>'}
+${details ? `<p class="muted">${escapeHtml(details.summary)} <a href="#product-details">${details.ingredients.length ? "Ingredients &amp; how to use" : "Product details &amp; how to use"}</a></p>` : '<div class="note">Please check the product packaging for ingredients, directions for use, warnings and other product-specific information. Product details and prices may change; confirm before ordering.</div>'}
 </div>
 </main>
 ${details ? `
 <section class="product-details" id="product-details" aria-labelledby="product-details-title">
 <h2 id="product-details-title">Product details</h2>
-<h3>Key ingredients</h3>
-<p>${details.ingredients.map(escapeHtml).join(", ")}.</p>
+${details.ingredients.length ? `<h3>Key ingredients</h3>\n<p>${details.ingredients.map(escapeHtml).join(", ")}.</p>` : ""}
 <p class="muted">Check the pack label for the full ingredient list and any warnings.</p>
 <h3>How to use</h3>
 <ol>${details.directions.map(step => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
