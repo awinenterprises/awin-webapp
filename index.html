@@ -35,6 +35,47 @@
       "opens": "09:00",
       "closes": "21:00"
     },
+    "hasShippingService": {
+      "@type": "ShippingService",
+      "@id": "https://awinenterprises.in/#india-shipping",
+      "name": "India delivery",
+      "shippingConditions": [
+        {
+          "@type": "ShippingConditions",
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "IN"
+          },
+          "orderValue": {
+            "@type": "MonetaryAmount",
+            "currency": "INR",
+            "maxValue": 1000
+          },
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "currency": "INR",
+            "value": 99
+          }
+        },
+        {
+          "@type": "ShippingConditions",
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "IN"
+          },
+          "orderValue": {
+            "@type": "MonetaryAmount",
+            "currency": "INR",
+            "minValue": 1000.01
+          },
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "currency": "INR",
+            "value": 0
+          }
+        }
+      ]
+    },
     "priceRange": "₹₹"
   }
   </script>
@@ -200,7 +241,7 @@
           <span id="floatItemCount">0</span> Items
         </div>
         <div>
-          <div class="text-[10px] text-slate-400 font-medium">Total Amount</div>
+          <div class="text-[10px] text-slate-400 font-medium">Product subtotal</div>
           <div id="floatSubtotal" class="text-base font-extrabold text-amber-400">₹0</div>
         </div>
       </div>
@@ -275,6 +316,8 @@
           <span>Subtotal</span>
           <span id="cartSubtotal" class="text-lg text-purple-700 font-extrabold">₹0</span>
         </div>
+        <div class="flex justify-between text-sm"><span>Delivery</span><span id="cartShipping">₹0</span></div>
+        <div class="flex justify-between text-sm font-bold"><span>Total</span><span id="cartTotal">₹0</span></div>
         <button id="checkoutBtn" onclick="openCheckoutModal()" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold shadow-md transition disabled:opacity-50">
           Proceed to Order & Pay
         </button>
@@ -303,7 +346,8 @@
         <div id="copyAlert" class="text-[10px] text-emerald-600 font-bold hidden">UPI ID Copied Successfully!</div>
       </div>
       <div class="space-y-0.5">
-        <div class="text-[11px] text-slate-400 font-medium">Total Payable Amount</div>
+        <div id="checkoutBreakdown" class="text-xs text-slate-600"></div>
+        <div class="text-[11px] text-slate-500 font-medium">Total Payable Amount</div>
         <div id="qrAmountDisplay" class="text-xl font-black text-purple-700">₹0</div>
         <div class="text-[11px] text-slate-600 font-bold">UPI ID: <span id="upiIdText">awin@slc</span></div>
       </div>
@@ -332,7 +376,7 @@
     const policyData = {
       shipping: {
         title: "Shipping Policy",
-        content: "We deliver across India through reliable courier partners. Orders are packed and dispatched within 1–2 working days of payment confirmation. Delivery typically takes 3–7 working days depending on your delivery pincode. You can check estimated delivery on any product page. You will receive tracking updates directly on WhatsApp once your order ships."
+        content: "Delivery across India costs ₹99 on orders up to and including ₹1,000, and is free on orders above ₹1,000. Orders are packed and dispatched within 1–2 working days of payment confirmation. Delivery typically takes 3–7 working days depending on your delivery pincode. You can check estimated delivery on any product page. You will receive tracking updates directly on WhatsApp once your order ships."
       },
       returns: {
         title: "Return & Refund Policy",
@@ -710,8 +754,12 @@
       res.classList.remove("hidden");
     }
 
+    function deliveryCharge(subtotal) {
+      return subtotal > 0 && subtotal <= 1000 ? 99 : 0;
+    }
+
     function buySingleProductNow(item) {
-      activeCheckoutPayload = { type: "single", total: item.price, itemsText: `${item.name} (${item.pack}) x 1` };
+      activeCheckoutPayload = { type: "single", subtotal: item.price, itemsText: `${item.name} (${item.pack}) x 1` };
       setupCheckoutView(item.price);
       document.getElementById("checkoutModal").classList.remove("hidden");
     }
@@ -764,6 +812,8 @@
 
       if(countEl) countEl.innerText = totalItems;
       if(subtotalEl) subtotalEl.innerText = `₹${subtotal}`;
+      document.getElementById("cartShipping").innerText = subtotal > 1000 ? "Free" : `₹${deliveryCharge(subtotal)}`;
+      document.getElementById("cartTotal").innerText = `₹${subtotal + deliveryCharge(subtotal)}`;
       if(checkoutBtn) checkoutBtn.disabled = totalItems === 0;
 
       if (floatingBar) {
@@ -797,13 +847,16 @@
         }
       }
       if (subtotal <= 0) return;
-      activeCheckoutPayload = { type: "cart", total: subtotal, itemsText: orderItems.join("\n") };
+      activeCheckoutPayload = { type: "cart", subtotal, itemsText: orderItems.join("\n") };
       setupCheckoutView(subtotal);
       document.getElementById("cartModal").classList.add("hidden");
       document.getElementById("checkoutModal").classList.remove("hidden");
     }
 
-    function setupCheckoutView(amount) {
+    function setupCheckoutView(subtotal) {
+      const shipping = deliveryCharge(subtotal);
+      const amount = subtotal + shipping;
+      document.getElementById("checkoutBreakdown").innerText = `Products ₹${subtotal} · Delivery ${shipping ? `₹${shipping}` : "free"}`;
       const upiUrl = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amount}&cu=INR`;
       const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
       const qrImg = document.getElementById("upiQrImage");
@@ -840,7 +893,9 @@
 
       let msg = `*NEW ORDER / INQUIRY - AWIN ENTERPRISES*\n\n`;
       msg += `*Payment Status:* ${paymentStatusText}\n`;
-      msg += `*Total Amount:* ₹${activeCheckoutPayload.total}\n\n`;
+      const subtotal = activeCheckoutPayload.subtotal;
+      const shipping = deliveryCharge(subtotal);
+      msg += `*Product subtotal:* ₹${subtotal}\n*Delivery:* ₹${shipping}\n*Total Amount:* ₹${subtotal + shipping}\n\n`;
       msg += `*Order Items:*\n${activeCheckoutPayload.itemsText}\n`;
 
       if (name || phone || address) {
