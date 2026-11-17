@@ -6,6 +6,77 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const productDetails = {
+  "tulsi-power": {
+    "summary": "A liquid blend of five types of tulsi. This pack contains 30 ml in total.",
+    "ingredients": [
+      "Ram Tulsi",
+      "Sham Tulsi",
+      "Van Tulsi",
+      "Kapuri Tulsi",
+      "Sursa Tulsi"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your physician."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/tulsi-power"
+  },
+  "charcoal-face-wash": {
+    "summary": "An activated charcoal face wash for rinsing away dirt and excess oil.",
+    "ingredients": [
+      "Activated charcoal powder"
+    ],
+    "directions": [
+      "Gently massage onto your face in circular motions, then rinse with water."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/charcoal-face-wash"
+  },
+  "face-wash-charcoal": {
+    "summary": "An activated charcoal face wash for rinsing away dirt and excess oil.",
+    "ingredients": [
+      "Activated charcoal powder"
+    ],
+    "directions": [
+      "Gently massage onto your face in circular motions, then rinse with water."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/charcoal-face-wash"
+  },
+  "papaya-face-wash-60ml": {
+    "summary": "A rinse-off face cleanser with papaya and aloe vera.",
+    "ingredients": [
+      "Papaya",
+      "Aloe vera"
+    ],
+    "directions": [
+      "Gently massage a small amount onto your face, then rinse with water."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/papaya-face-wash"
+  },
+  "face-wash-papaya": {
+    "summary": "A rinse-off face cleanser with papaya and aloe vera.",
+    "ingredients": [
+      "Papaya",
+      "Aloe vera"
+    ],
+    "directions": [
+      "Gently massage a small amount onto your face, then rinse with water."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/papaya-face-wash"
+  },
+  "face-wash-ubtan": {
+    "summary": "A rinse-off face wash for removing dirt and leaving skin feeling fresh.",
+    "ingredients": [
+      "Turmeric",
+      "Vitamin E",
+      "Carrot seed",
+      "Walnut",
+      "Orange oil"
+    ],
+    "directions": [
+      "Apply to a wet face and gently massage with your fingertips.",
+      "Rinse with water and pat dry."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/ubtan-face-wash"
+  },
   "vitamin-c-face-wash": {
     summary: "A rinse-off face wash for cleansing and exfoliation. It helps remove dead skin cells for brighter-looking skin.",
     ingredients: ["Lemon oil", "Aloe vera"],
