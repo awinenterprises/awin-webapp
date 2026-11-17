@@ -2300,6 +2300,7 @@ export async function onRequest({ params }) {
 .upi-payment{margin:4px 0;padding:14px;border:1px solid #e2e9e1;border-radius:12px;background:#f7faf6}.upi-payment img{display:block;width:184px;height:184px;margin:8px 0;background:#fff}.upi-payment code{user-select:all;font-size:1rem}.upi-payment .btn{margin-bottom:8px}.upi-payment code{overflow-wrap:anywhere}.upi-help{font-size:13px;color:#425449}.btn{max-width:100%;text-align:center;white-space:normal}@media(max-width:700px){.wrap{padding:12px}.card{margin-top:14px}.top{font-size:13px}.brand{font-size:17px}.back{float:none;display:block;margin-top:6px}.photo{min-height:0;aspect-ratio:1/1;padding:8px}.photo img{width:100%;height:100%;max-height:360px;min-height:0}.checkout{margin-top:14px}.checkout button,.checkout .btn{width:100%;justify-self:stretch}.upi-payment img{max-width:100%;height:auto}}
 .product-details{margin-top:24px;background:#fff;border:1px solid #e2e9e1;border-radius:20px;padding:clamp(16px,4vw,26px)}.product-details h2{margin-top:0}.product-details h3{margin-bottom:4px}.product-details p,.product-details ol{margin-top:4px}.product-details a{color:#14532d}
 #add-product-to-cart[hidden]{display:none}
+#browser-checkout-link[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -2344,7 +2345,8 @@ ${inStock ? `
 <h3>Pay via UPI</h3>
 <p>UPI ID: <code>${UPI_ID}</code></p>
 <img id="upi-qr" width="184" height="184" alt="Awin Enterprises UPI payment QR">
-<a id="upi-link" class="btn" href="#" rel="external">Open UPI app</a><p id="upi-help" class="upi-help" role="status" aria-live="polite">If your UPI app does not open, enter the UPI ID and total shown above in your payment app, or scan this QR from another device.</p>
+<a id="upi-link" class="btn" href="#" rel="external">Open UPI app</a>
+<a id="browser-checkout-link" class="btn alt" target="_blank" rel="noopener noreferrer" hidden>Open checkout in browser</a><p id="upi-help" class="upi-help" role="status" aria-live="polite">If your UPI app does not open, enter the UPI ID and total shown above in your payment app, or scan this QR from another device.</p>
 <p class="muted">Check the payee and total in your UPI app before paying. After payment, send your UPI transaction reference or receipt and delivery address to Awin for order confirmation.</p>
 </div>
 <label>UPI transaction reference <input name="reference" type="text" maxlength="64" placeholder="Optional if you share the receipt"></label>
@@ -2395,6 +2397,16 @@ ${inStock ? `<script>
   const payment = document.getElementById("upi-payment");
   const qr = document.getElementById("upi-qr");
   const upiLink = document.getElementById("upi-link");
+  const browserLink = document.getElementById("browser-checkout-link");
+  const currentPage = new URL(window.location.href);
+  const browserCheckout = currentPage.searchParams.get("checkout-browser") === "1";
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  if (browserCheckout) {
+    const selectedQuantity = Number(currentPage.searchParams.get("qty"));
+    if (Number.isSafeInteger(selectedQuantity) && selectedQuantity >= 1 && selectedQuantity <= 99) {
+      quantity.value = String(selectedQuantity);
+    }
+  }
   const confirmPayment = document.getElementById("confirm-payment");
 
   function updateCheckout() {
@@ -2405,7 +2417,16 @@ ${inStock ? `<script>
     total.value = quantity.validity.valid ? formatPrice.format(amount + charge) : "—";
     payment.hidden = !quantity.validity.valid;
     confirmPayment.disabled = payment.hidden;
+    browserLink.hidden = payment.hidden || !isAndroid || browserCheckout;
     if (payment.hidden) return;
+
+    if (!browserLink.hidden) {
+      const checkoutPage = new URL(currentPage.pathname, currentPage.origin);
+      checkoutPage.searchParams.set("checkout-browser", "1");
+      checkoutPage.searchParams.set("qty", String(quantity.valueAsNumber));
+      checkoutPage.hash = "checkout";
+      browserLink.href = checkoutPage.href;
+    }
 
     const upi = "upi://pay?pa=" + encodeURIComponent(form.dataset.upi) +
       "&pn=" + encodeURIComponent(form.dataset.payee) + "&am=" +
