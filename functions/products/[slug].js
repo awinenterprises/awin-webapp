@@ -6,6 +6,16 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "paindon-plus": "https://altosindia.net/public/product/v1-ayurvedic-medicine/paindon-plus-capsule1.jpg",
+  "glucosamine-hcl": "https://altosindia.net/public/product/v1-ayurvedic-medicine/nutro-glucosamine-tablets1.jpg",
+  "spirulina-30-tabs": "https://altosindia.net/public/product/v1-ayurvedic-medicine/spirulina-tab.jpg",
+  "orecal-d": "https://altosindia.net/public/product/v1-ayurvedic-medicine/orecal-d1.jpg",
+  "b-big": "https://altosindia.net/public/product/v1-ayurvedic-medicine/b-big-capsule1.jpg",
+  "altos-balm": "https://altosindia.net/public/product/v1-ayurvedic-medicine/pain-balm1.jpg",
+  "oregel-diab": "https://altosindia.net/public/product/v1-ayurvedic-medicine/oregel-diab1.jpg",
+  "mini-facial-kit": "https://altosindia.net/public/product/v1-facial-kits/facial-kits-33gm.jpg",
+  "vitamin-c-face-wash": "https://altosindia.net/public/product/v1-face-care/vitamin-c-face-wash.jpg",
+  "anti-acne-and-pimple-cream": "https://altosindia.net/public/product/v1-skin-treatment/anti-acne-and-pimple-gel.jpg",
   "ayush-kwath-powder": "https://awinenterprises.in/images/altos/ayush-kwath-powder.jpg",
   "mc-vital": "https://awinenterprises.in/images/altos/mc-vital.jpg",
   "oregain-weight-gainer": "https://awinenterprises.in/images/altos/oregain-weight-gainer.jpg",
