@@ -6,6 +6,7 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "sun-screen-cream-spf-20": "https://altosindia.net/public/product/v1-skin-treatment/spf-20.jpg",
   "sanitary-pads-with-anion-chip": "https://altosindia.net/public/product/v1-skin-care/sanitary-pad-image1.jpg",
   "red-ginseng": "https://altosindia.net/public/product/Red%20ginseng.jpg",
   "oremol-natural-black-hair": "https://altosindia.net/public/product/v1-hair-care/oremol-black-hair.jpg",
@@ -110,6 +111,85 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "calcium-with-vitamin-d": {
+    "summary": "A Vigvit calcium supplement with vitamin D.",
+    "ingredients": [
+      "Calcium",
+      "Vitamin D",
+      "Magnesium",
+      "Zinc"
+    ],
+    "directions": [
+      "Follow the directions on the pack or those given by your healthcare professional."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/section/newly-launched"
+  },
+  "vigvit-multivitamin-syrup": {
+    "summary": "A liquid multivitamin and mineral supplement.",
+    "ingredients": [
+      "Vitamin A",
+      "B-complex vitamins",
+      "Vitamin D3",
+      "Vitamin E"
+    ],
+    "directions": [
+      "Follow the directions on the pack or those given by your healthcare professional."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/Multivitamin-Syrup"
+  },
+  "rose-and-gold-toner": {
+    "summary": "A Zordan facial toner listing for the Rose and Gold variants.",
+    "ingredients": [],
+    "directions": [
+      "Apply gently to the face with a cotton pad, following the directions for your selected toner."
+    ],
+    "source": "https://altosindia.net/products/product/rose-skin-toner"
+  },
+  "cold-cream": {
+    "summary": "A Zordan facial moisturiser with aloe vera extract.",
+    "ingredients": [
+      "Aloe vera extract"
+    ],
+    "directions": [
+      "Massage gently onto the face and neck in upward strokes."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/cold-cream"
+  },
+  "sun-screen-cream-spf-20": {
+    "summary": "A Zordan SPF 20 sunscreen lotion.",
+    "ingredients": [
+      "Sunflower oil",
+      "Sandalwood oil"
+    ],
+    "directions": [
+      "Apply before going outdoors. Follow the application and reapplication directions on the pack."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/spf-20-sunscreen-lotion"
+  },
+  "sun-screen-cream-spf-40": {
+    "summary": "A Zordan SPF 40 sunblock product.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions on the pack for application and reapplication."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/sun-block-cream-spf-40"
+  },
+  "dish-washing-gel": {
+    "summary": "A dishwashing gel for removing grease from utensils.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/dishtop"
+  },
+  "ws7-detergent": {
+    "summary": "An Altos WS7 laundry detergent powder for hand or machine washing.",
+    "ingredients": [],
+    "directions": [
+      "Check the pack for the amount to use for your wash load."
+    ],
+    "source": "https://altosindia.net/products/product/detergent-powder"
+  },
   "sanitary-pads-with-anion-chip": {
     "summary": "Zordan winged sanitary pads with an anion-chip layer.",
     "ingredients": [],
