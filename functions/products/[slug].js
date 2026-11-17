@@ -536,9 +536,9 @@ ${inStock ? `
 <p>${escapeHtml(product.name)} · ${escapeHtml(product.pack)} · ₹${product.price.toLocaleString("en-IN")} each</p>
 <form id="order-form" data-product-id="${product.id}" data-product="${escapeHtml(product.name)}" data-pack="${escapeHtml(product.pack)}" data-price="${product.price}" data-whatsapp="${PHONE}" data-upi="${UPI_ID}" data-payee="${PAYEE}">
 <label>Quantity <input name="quantity" type="number" min="1" max="99" value="1" required></label>
-<label>Customer name <input name="customerName" type="text" autocomplete="name" maxlength="100" required></label>
-<label>Delivery address <textarea name="address" rows="3" autocomplete="street-address" maxlength="400" required></textarea></label>
-<label>Delivery pincode <input name="pincode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" pattern="[1-9][0-9]{5}" title="Enter a six-digit Indian pincode" required></label>
+<label>Your Name: <input name="customerName" type="text" autocomplete="name" maxlength="100" required></label>
+<label>Your Address <textarea name="address" rows="3" autocomplete="street-address" maxlength="400" required></textarea></label>
+<label>Your Area Pincode <input name="pincode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" pattern="[1-9][0-9]{5}" title="Enter a six-digit Indian pincode" required></label>
 <p>Product subtotal <output id="order-subtotal" aria-live="polite">₹${product.price.toLocaleString("en-IN")}</output></p>
 <p>Delivery <output id="order-shipping" aria-live="polite">${product.price >= 1000 ? "Free" : "₹50"}</output></p>
 <p>Total <output id="order-total" aria-live="polite">₹${(product.price + (product.price >= 1000 ? 0 : 50)).toLocaleString("en-IN")}</output></p>
