@@ -117,7 +117,7 @@ ${inStock ? `
 <h3>Pay via UPI</h3>
 <p>UPI ID: <code>${UPI_ID}</code></p>
 <img id="upi-qr" width="184" height="184" alt="Awin Enterprises UPI payment QR">
-<a id="upi-link" class="btn" href="#" rel="external">Open UPI app</a><p id="upi-help" class="upi-help" role="status" aria-live="polite">If your Android app does not open UPI apps, open this product page in Chrome, or scan the QR using another device.</p>
+<a id="upi-link" class="btn" href="#" rel="external">Open UPI app</a><p id="upi-help" class="upi-help" role="status" aria-live="polite">If your UPI app does not open, enter the UPI ID and total shown above in your payment app, or scan this QR from another device.</p>
 <p class="muted">Check the payee and total in your UPI app before paying. After payment, send your UPI transaction reference or receipt and delivery address to Awin for order confirmation.</p>
 </div>
 <label>UPI transaction reference <input name="reference" type="text" maxlength="64" placeholder="Optional if you share the receipt"></label>
@@ -164,22 +164,16 @@ ${inStock ? `<script>
     const upi = "upi://pay?pa=" + encodeURIComponent(form.dataset.upi) +
       "&pn=" + encodeURIComponent(form.dataset.payee) + "&am=" +
       (amount + charge).toFixed(2) + "&cu=INR";
-    upiLink.href = upi;
+    const androidChrome = /Android/i.test(navigator.userAgent) &&
+      /Chrome\\//i.test(navigator.userAgent) && !/; wv\\)/i.test(navigator.userAgent);
+    const fallback = window.location.href.split("#")[0] + "#upi-help";
+    upiLink.href = androidChrome
+      ? "intent://" + upi.slice("upi://".length) +
+        "#Intent;scheme=upi;S.browser_fallback_url=" + encodeURIComponent(fallback) + ";end"
+      : upi;
     qr.src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(upi);
   }
 
-  upiLink.addEventListener("click", (event) => {
-    // Keep this as a direct user-initiated navigation for Android intent handling.
-    const link = upiLink.getAttribute("href");
-    if (!link || !link.startsWith("upi://pay?")) {
-      event.preventDefault();
-      return;
-    }
-    // Embedded WebViews may block external schemes. Show a usable fallback.
-    document.getElementById("upi-help").textContent =
-      "If no payment app opens, use Chrome to visit " + window.location.href.split("#")[0] +
-      " or scan the QR from another device. Do not mark payment complete until paid.";
-  });
   quantity.addEventListener("input", updateCheckout);
   updateCheckout();
 
