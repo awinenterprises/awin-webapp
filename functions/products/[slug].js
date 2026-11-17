@@ -6,6 +6,46 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "ashwagandha": "https://altosindia.net/public/product/v1-ayurvedic-medicine/ashwagandha-capsule1.jpg",
+  "brahmi": "https://altosindia.net/public/product/v1-ayurvedic-medicine/brahmi-capsule1.jpg",
+  "neem": "https://altosindia.net/public/product/v1-ayurvedic-medicine/neem-capsule1.jpg",
+  "korvin-oil": "https://altosindia.net/public/product/v1-ayurvedic-medicine/korvin-oil2.jpg",
+  "itch-care-cream": "https://altosindia.net/public/product/v1-ayurvedic-medicine/itch-care-cream.jpg",
+  "nutro-dia-powder": "https://altosindia.net/public/product/v1-ayurvedic-medicine/nutro-dia-powder1.jpg",
+  "paindon-ointment": "https://altosindia.net/public/product/v1-ayurvedic-medicine/paindon-ointment1.jpg",
+  "paindon-oil": "https://altosindia.net/public/product/v1-ayurvedic-medicine/paindon-oil1.jpg",
+  "oreslim-powder": "https://altosindia.net/public/product/v1-ayurvedic-medicine/oreslim-powder1.jpg",
+  "consoft-powder": "https://altosindia.net/public/product/v1-ayurvedic-medicine/consoft-powder1.jpg",
+  "oregel-aloevera": "https://altosindia.net/public/product/v1-ayurvedic-medicine/oregel-aloevera-gel.jpg",
+  "noni-juice": "https://altosindia.net/public/product/v1-ayurvedic-medicine/noni-juice1.jpg",
+  "abhizyme-syrup": "https://altosindia.net/public/product/v1-ayurvedic-medicine/abhi-zyme3.jpg",
+  "breen-syrup": "https://altosindia.net/public/product/v1-ayurvedic-medicine/breen-syrup1.jpg",
+  "hridya-care-syrup": "https://altosindia.net/public/product/v1-ayurvedic-medicine/hridya-syrup.jpg",
+  "sundri-jiwan": "https://altosindia.net/public/product/v1-ayurvedic-medicine/sundari-jiwan1.jpg",
+  "uripure-syrup": "https://altosindia.net/public/product/v1-ayurvedic-medicine/uripure-syrup.jpg",
+  "tulsi-syrup": "https://altosindia.net/public/product/v1-ayurvedic-medicine/tulsi-syrup.jpg",
+  "giloy-syrup": "https://altosindia.net/public/product/v1-ayurvedic-medicine/giloy-syrup1.jpg",
+  "skin-glow-face-wash": "https://altosindia.net/public/product/v1-face-care/skin-glow-face-wash.jpg",
+  "gold-face-wash": "https://altosindia.net/public/product/v1-face-care/gold-face-wash.jpg",
+  "neem-face-wash-60ml": "https://altosindia.net/public/product/v1-face-care/neem-face-wash1.jpg",
+  "honey-and-saffron-body-lotion": "https://altosindia.net/public/product/v1-skin-care/honey-%26-saffron-body-lotion.jpg",
+  "anti-blemishing-cream": "https://altosindia.net/public/product/v1-skin-treatment/anti-blemishing-cream2.jpg",
+  "onion-black-seed-hair-oil": "https://altosindia.net/public/product/v1-hair-care/onion-black-seed-hair-oil.jpg",
+  "bhringraj-hair-oil": "https://altosindia.net/public/product/v1-hair-care/bhringraj-oil.jpg",
+  "9-in-1-hair-oil-100ml": "https://altosindia.net/public/product/v1-hair-care/hair-gro-oil.jpg",
+  "amla-shikakai-shampoo": "https://altosindia.net/public/product/v1-hair-care/amla-shikakai-shampoo2.jpg",
+  "hair-conditioner": "https://altosindia.net/public/product/v1-hair-care/hair-conditionar.jpg",
+  "orefresh-gel": "https://altosindia.net/public/product/v1-ayurvedic-medicine/orefresh-gel-1.jpg",
+  "shine-bathing-bar": "https://altosindia.net/public/product/v1-home-care/shine-bathing-bar.jpg",
+  "rice-bran-oil": "https://altosindia.net/public/product/v1-home-care/rice-bran-0il.jpg",
+  "haldi-pure-capsule": "https://altosindia.net/public/product/v1-ayurvedic-medicine/haldi-pure-capsule1.jpg",
+  "altocare": "https://altosindia.net/public/product/v1-agriculture-aid/alto-care.jpg",
+  "coloston-capsule": "https://altosindia.net/public/product/v1-ayurvedic-medicine/coloston-capsule1.jpg",
+  "face-wash-gold": "https://altosindia.net/public/product/v1-face-care/gold-face-wash.jpg",
+  "face-wash-skin-glow": "https://altosindia.net/public/product/v1-face-care/skin-glow-face-wash.jpg",
+  "jojoba-moisturising-lotion": "https://altosindia.net/public/product/v1-skin-care/jojoba-moisturising-lotion.jpg",
+  "hena-hair-pack": "https://altosindia.net/public/product/v1-hair-care/heena-hair-pack.jpg",
+  "onion-shampoo": "https://altosindia.net/public/product/v1-hair-care/onion-shampoo1.jpg",
   "hair-serum": "https://altosindia.net/public/product/v1-hair-care/hair-serum.jpg",
   "long-hair-shampoo": "https://altosindia.net/public/product/v1-hair-care/long-hair-shampoo.jpg",
   "kesar-soap": "https://altosindia.net/public/product/v1-home-care/kesar-soap.jpg",
@@ -24,6 +64,473 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "ashwagandha": {
+    "summary": "An Altos herbal capsule made with ashwagandha.",
+    "ingredients": [
+      "Ashwagandha"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/ashwagandha-capsule"
+  },
+  "brahmi": {
+    "summary": "An Altos herbal capsule made with brahmi.",
+    "ingredients": [
+      "Brahmi"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/brahmi-capsule"
+  },
+  "neem": {
+    "summary": "An Altos herbal capsule made with neem.",
+    "ingredients": [
+      "Neem"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/neem-capsule"
+  },
+  "noni": {
+    "summary": "An Altos herbal capsule made with noni.",
+    "ingredients": [
+      "Noni"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/noni-capsule"
+  },
+  "korvin-oil": {
+    "summary": "A topical herbal massage oil.",
+    "ingredients": [
+      "Tila",
+      "Akarkara",
+      "Laung",
+      "Jaiphal",
+      "Dalchini"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/korvin-oil"
+  },
+  "chelated-iron": {
+    "summary": "A chelated iron supplement with added vitamins and zinc.",
+    "ingredients": [
+      "Iron",
+      "Zinc",
+      "Vitamin b12",
+      "Vitamin c"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/chelated-iron"
+  },
+  "multi-collagen-complex": {
+    "summary": "A collagen and piperine supplement.",
+    "ingredients": [
+      "Collagen",
+      "Piperine"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/multi-collagen-complex"
+  },
+  "itch-care-cream": {
+    "summary": "An Altos cream for topical use.",
+    "ingredients": [
+      "Shudha Gandhak",
+      "Safutika Bhasma",
+      "Tankan Bhasma",
+      "Raal"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/itch-care-cream"
+  },
+  "nutro-dia-powder": {
+    "summary": "An Altos herbal powder blend.",
+    "ingredients": [
+      "Gurmar",
+      "Karela",
+      "Jamun Guthli",
+      "Neem",
+      "Bijasar",
+      "Amla",
+      "Haritrki"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/nutro-dia-powder"
+  },
+  "paindon-ointment": {
+    "summary": "A topical ointment containing herbal oils.",
+    "ingredients": [
+      "Mahanarayan Tel",
+      "Mahavishagar Tel",
+      "Satpudina",
+      "Satajwain",
+      "Kapoor"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/paindon-ointment"
+  },
+  "paindon-oil": {
+    "summary": "A topical massage oil containing herbal oils.",
+    "ingredients": [
+      "Gandhpura",
+      "Neelgiri",
+      "Satpudina",
+      "Mushkapoor",
+      "Til Oil"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/paindon-oil"
+  },
+  "oreslim-powder": {
+    "summary": "An Altos powder made with kokum and green coffee beans.",
+    "ingredients": [
+      "Kokum",
+      "Green Coffee beans"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/oreslim-powder"
+  },
+  "consoft-powder": {
+    "summary": "An Altos herbal powder with isabgol and fennel.",
+    "ingredients": [
+      "Sanaya",
+      "Isabgol",
+      "saunf"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/consoft-powder"
+  },
+  "oregel-aloevera": {
+    "summary": "An aloe vera liquid formulation.",
+    "ingredients": [
+      "Aloevera"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/oregel-syrup"
+  },
+  "noni-juice": {
+    "summary": "A liquid formulation made with noni.",
+    "ingredients": [
+      "Noni"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/noni-juice"
+  },
+  "abhizyme-syrup": {
+    "summary": "A liquid herbal formulation from Altos.",
+    "ingredients": [
+      "Sonth",
+      "Khajur",
+      "Vidang",
+      "Kapurkachri",
+      "Ajwain",
+      "Chavya",
+      "Nagarmotha"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/abhizyme-syrup"
+  },
+  "breen-syrup": {
+    "summary": "An Altos syrup containing a blend of herbs.",
+    "ingredients": [
+      "Malkangni",
+      "Shankhpushpi",
+      "Brahmi",
+      "Mulethi",
+      "Ashwagandha",
+      "Jatamansi",
+      "Dhaniya",
+      "Vidang",
+      "Saunf",
+      "Sarpgandha",
+      "Vacha"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/breen-syrup"
+  },
+  "hridya-care-syrup": {
+    "summary": "An Altos syrup containing arjuna bark and other herbs.",
+    "ingredients": [
+      "Arjuna Bark",
+      "Valerian jatamansi",
+      "Alsi",
+      "Triphala (Amla, Harar & Bahera)",
+      "Uste khadoos",
+      "Kakra shringi",
+      "Brahmi",
+      "Shankhpushpi",
+      "Gokhru",
+      "Saunf"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/hridya-care-syrup"
+  },
+  "sundri-jiwan": {
+    "summary": "A liquid herbal formulation from Altos.",
+    "ingredients": [
+      "Nagkesar",
+      "Dashmool",
+      "Arjuna",
+      "Supari",
+      "Ashwagandha",
+      "Amla",
+      "Elaichi",
+      "Ashoka",
+      "Lodhra",
+      "Manjuphal",
+      "Mochras",
+      "Shatawari",
+      "Vasaka"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/sundri-jiwan"
+  },
+  "uripure-syrup": {
+    "summary": "An Altos syrup containing a blend of herbs.",
+    "ingredients": [
+      "Aloevera",
+      "Shilajit",
+      "Gokshru",
+      "Pashanbhed",
+      "Tripushap/kheera",
+      "Varun chaal",
+      "Kulthi",
+      "Ushir",
+      "Punarnava",
+      "Sheetalchini/kankol",
+      "Kush",
+      "Bhumi amlaki",
+      "Annanas",
+      "Palash",
+      "Daruharidra",
+      "Giloy",
+      "Shahad",
+      "Navsadar",
+      "Pudina"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/uripure-syrup"
+  },
+  "shilajit-syrup": {
+    "summary": "An Altos liquid formulation containing shilajit and herbs.",
+    "ingredients": [
+      "Shilajit",
+      "Vidarikand",
+      "Shatavari",
+      "Ashwagandha",
+      "Gokhru",
+      "Arjun Chhal",
+      "Amla",
+      "Manjishtha",
+      "Gorakhmundi",
+      "Sunthi",
+      "Kaunch Beej"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/shilajit-syrup"
+  },
+  "tulsi-syrup": {
+    "summary": "An Altos syrup containing tulsi extract.",
+    "ingredients": [
+      "Tulsi Extract"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/tulsi-syrup"
+  },
+  "giloy-syrup": {
+    "summary": "An Altos syrup containing giloy extract.",
+    "ingredients": [
+      "Giloy Extract"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/giloy-syrup"
+  },
+  "haldi-pure-capsule": {
+    "summary": "An Altos herbal capsule made with turmeric.",
+    "ingredients": [
+      "Haldi"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/haldi-pure-capsule"
+  },
+  "coloston-capsule": {
+    "summary": "A bovine colostrum supplement in capsule form.",
+    "ingredients": [
+      "Bovine Colostrum Powder"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/coloston-capsule"
+  },
+  "coloston-bovine-colostrum": {
+    "summary": "A bovine colostrum supplement in capsule form.",
+    "ingredients": [
+      "Bovine Colostrum Powder"
+    ],
+    "directions": [
+      "Follow the directions on your pack label or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/products/product/coloston-capsule"
+  },
+  "rose-water": {
+    "summary": "A rose-water preparation for facial care.",
+    "ingredients": [
+      "Rose petals"
+    ],
+    "directions": [
+      "Apply gently to the face with a cotton pad."
+    ],
+    "source": "https://altosindia.net/products/product/rose-water"
+  },
+  "honey-and-saffron-body-lotion": {
+    "summary": "A body lotion with honey and saffron.",
+    "ingredients": [
+      "Honey",
+      "Saffron"
+    ],
+    "directions": [
+      "Smooth a small amount gently over the body."
+    ],
+    "source": "https://altosindia.net/products/product/honey-saffron-body-lotion"
+  },
+  "anti-blemishing-cream": {
+    "summary": "A facial cream with papaya and almond oil.",
+    "ingredients": [
+      "Papaya",
+      "Almond oil"
+    ],
+    "directions": [
+      "After cleansing, massage gently onto the face and neck. Follow pack instructions for overnight use."
+    ],
+    "source": "https://altosindia.net/products/product/anti-blemishing-cream"
+  },
+  "under-eye-cream": {
+    "summary": "A cream for the skin beneath the eyes.",
+    "ingredients": [
+      "Olive oil",
+      "Lemon"
+    ],
+    "directions": [
+      "After cleansing, gently apply beneath the eyes according to the pack directions."
+    ],
+    "source": "https://altosindia.net/products/product/under-eye-cream"
+  },
+  "onion-black-seed-hair-oil": {
+    "summary": "A hair and scalp oil with onion seed and black seed oils.",
+    "ingredients": [
+      "Black Seed Oil",
+      "Moroccan Argan Oil",
+      "Castor oil",
+      "Almond Oil",
+      "Jojoba Oil",
+      "Olive oil",
+      "Onion seed Oil"
+    ],
+    "directions": [
+      "Apply to the roots and work through the hair. Massage gently into the scalp."
+    ],
+    "source": "https://altosindia.net/products/product/onion-black-seed-hair-oil"
+  },
+  "amla-hair-oil": {
+    "summary": "An amla oil for the hair and scalp.",
+    "ingredients": [
+      "Amla"
+    ],
+    "directions": [
+      "Apply evenly to dry hair and massage gently at the roots."
+    ],
+    "source": "https://altosindia.net/products/product/amla-hair-oil"
+  },
+  "hair-conditioner": {
+    "summary": "A rinse-off conditioner with aloe vera and cherry.",
+    "ingredients": [
+      "Aloevera extract",
+      "Cherry"
+    ],
+    "directions": [
+      "After shampooing, massage into wet hair. Leave for about two minutes and rinse well."
+    ],
+    "source": "https://altosindia.net/products/product/hair-conditioner"
+  },
+  "orefresh-gel": {
+    "summary": "A dental gel for daily brushing.",
+    "ingredients": [
+      "Peppermint oil",
+      "Spearmint",
+      "Tulsi",
+      "Neem"
+    ],
+    "directions": [
+      "Brush gently with a soft-bristled toothbrush, then rinse your mouth."
+    ],
+    "source": "https://altosindia.net/products/product/orefresh-gel"
+  },
+  "shine-bathing-bar": {
+    "summary": "A cleansing bar containing honey.",
+    "ingredients": [
+      "Honey"
+    ],
+    "directions": [
+      "Work into a lather on damp skin, then rinse and pat dry."
+    ],
+    "source": "https://altosindia.net/products/product/shine-bathing-bar"
+  },
+  "jojoba-moisturising-lotion": {
+    "summary": "A body lotion containing jojoba and almond oils.",
+    "ingredients": [
+      "Jojoba Oil",
+      "Almond Oil"
+    ],
+    "directions": [
+      "Smooth a small amount gently over the body."
+    ],
+    "source": "https://altosindia.net/products/product/jojoba-moisturising-lotion"
+  },
   "oredent-toothpaste-100g": {
     "summary": "A toothpaste for daily brushing.",
     "ingredients": [
