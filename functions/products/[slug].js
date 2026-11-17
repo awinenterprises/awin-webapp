@@ -6,12 +6,104 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "netar-jyoti-eye-drops": "https://shop.altosindia.net/storagecache/product_image/232914560-444dbfa5-b193-457f-8e6d-94198f63da06.jpeg",
   "tulsi-power": "https://shop.altosindia.net/StorageCache/seo_parameter_image/242730877-9393d154-0c4e-4749-88eb-11f2f876d303.jpeg",
   "charcoal-face-wash": "https://altosindia.net/public/product/v1-face-care/charcoal-face-wash1.jpg",
   "face-wash-charcoal": "https://altosindia.net/public/product/v1-face-care/charcoal-face-wash1.jpg"
 };
 
 const productDetails = {
+  "haldi-with-kesar-drops": {
+    "summary": "A liquid turmeric and saffron formulation.",
+    "ingredients": [
+      "Turmeric",
+      "Saffron",
+      "Curcumin"
+    ],
+    "directions": [
+      "Follow the directions printed on the pack or given by your physician."
+    ],
+    "source": "https://altosindia.net/eshop/product/info/haldi-drops"
+  },
+  "netar-jyoti-eye-drops": {
+    "summary": "A bottled eye-drop formulation from Altos Ayurveda.",
+    "ingredients": [
+      "Daruhaldi ark",
+      "Bhringraj ark",
+      "Punarnava ark",
+      "Ghritkumari ark",
+      "Tulsi ark"
+    ],
+    "directions": [
+      "Follow the directions printed on the pack or given by your physician."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/netar-jyoti"
+  },
+  "aroplex-plus-plus": {
+    "summary": "An Altos herbal capsule combo containing two packs of 60 capsules.",
+    "ingredients": [
+      "Musli",
+      "Shatavari",
+      "Brahmi",
+      "Draksh",
+      "Amla",
+      "Rose flower",
+      "Shilajit",
+      "Saffron",
+      "Ashwagandha"
+    ],
+    "directions": [
+      "Follow the directions printed on the pack or given by your physician."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/aroplex-plus-capsule"
+  },
+  "amla-shikakai-shampoo": {
+    "summary": "A rinse-off hair cleanser with amla, shikakai and reetha.",
+    "ingredients": [
+      "Amla",
+      "Shikakai",
+      "Reetha"
+    ],
+    "directions": [
+      "Lather into wet hair with a gentle massage, then rinse thoroughly."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/amla-shikakai-shampoo"
+  },
+  "apricot-scrub": {
+    "summary": "A rinse-off facial scrub for exfoliation.",
+    "ingredients": [
+      "Apricot",
+      "Aloe vera"
+    ],
+    "directions": [
+      "Gently massage a small amount onto your face, then rinse with water. Follow the frequency indicated on the pack."
+    ],
+    "source": "https://altosindia.net/eshop/product/info/apricot-scrub"
+  },
+  "beauty-face-pack": {
+    "summary": "A facial pack with turmeric, sandalwood and fuller's earth.",
+    "ingredients": [
+      "Turmeric",
+      "Sandalwood",
+      "Multani mitti"
+    ],
+    "directions": [
+      "Mix a small amount with a few drops of rose water. Apply evenly to the face, then rinse as directed on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/beauty-face-pack"
+  },
+  "face-pack-beauty": {
+    "summary": "A facial pack with turmeric, sandalwood and fuller's earth.",
+    "ingredients": [
+      "Turmeric",
+      "Sandalwood",
+      "Multani mitti"
+    ],
+    "directions": [
+      "Mix a small amount with a few drops of rose water. Apply evenly to the face, then rinse as directed on the pack."
+    ],
+    "source": "https://altosindia.net/products/product/beauty-face-pack"
+  },
   "rice-water-face-wash": {
     summary: "A rinse-off face cleanser formulated with rice bran, niacinamide and vitamin E.",
     ingredients: ["Rice bran", "Niacinamide", "Vitamin E"],
