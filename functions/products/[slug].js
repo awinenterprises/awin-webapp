@@ -6,6 +6,16 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "ayush-kwath-powder": "https://awinenterprises.in/images/altos/ayush-kwath-powder.jpg",
+  "mc-vital": "https://awinenterprises.in/images/altos/mc-vital.jpg",
+  "oregain-weight-gainer": "https://awinenterprises.in/images/altos/oregain-weight-gainer.jpg",
+  "pure-turmeric-powder-haldi": "https://awinenterprises.in/images/altos/pure-turmeric-powder-haldi.jpg",
+  "sharbat-sweet-rose": "https://awinenterprises.in/images/altos/sharbat-sweet-rose.jpg",
+  "shudh-shilajit-paste": "https://awinenterprises.in/images/altos/shudh-shilajit-paste.jpg",
+  "under-eye-cream": "https://awinenterprises.in/images/altos/under-eye-cream.jpg",
+  "vigvit-multivitamin-syrup": "https://awinenterprises.in/images/altos/vigvit-multivitamin-syrup.jpg",
+  "antiseptic-hand-wash": "https://awinenterprises.in/images/altos/antiseptic-hand-wash.jpg",
+  "hand-wash-250ml": "https://awinenterprises.in/images/altos/antiseptic-hand-wash.jpg",
   "d-tan-face-pack": "https://awinenterprises.in/images/altos/d-tan-face-pack.jpg",
   "herbal-shaving-cream": "https://awinenterprises.in/images/altos/herbal-shaving-cream.jpg",
   "pure-red-chilli-powder-lal-mirch": "https://awinenterprises.in/images/altos/pure-red-chilli-powder-lal-mirch.jpg",
