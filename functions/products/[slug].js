@@ -6,6 +6,7 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "red-ginseng": "https://altosindia.net/public/product/Red%20ginseng.jpg",
   "oremol-natural-black-hair": "https://altosindia.net/public/product/v1-hair-care/oremol-black-hair.jpg",
   "shine-home-cream-soap": "https://altosindia.net/public/product/v1-home-care/home-facial-bar.jpg",
   "oregon-80-water-retention": "https://altosindia.net/public/product/v1-agriculture-aid/oregon-80.jpg",
@@ -108,6 +109,222 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "red-ginseng": {
+    "summary": "Vigvit Red Ginseng capsules with ginseng root extract.",
+    "ingredients": [
+      "Red ginseng root extract"
+    ],
+    "directions": [
+      "Follow the directions on the pack or those given by your healthcare professional."
+    ],
+    "source": "https://altosindia.net/eshop/product/info/red-korean-ginseng"
+  },
+  "ultra-k-10-capsule-fat-burn": {
+    "summary": "An Altos supplement containing green coffee, kokum and green tea extracts.",
+    "ingredients": [
+      "Green coffee extract",
+      "Kokum extract",
+      "Green tea extract"
+    ],
+    "directions": [
+      "Follow the directions on the pack or those given by your healthcare professional."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/ultra-k10-capsule"
+  },
+  "vigvit-ultra-k-10": {
+    "summary": "An Altos supplement containing green coffee, kokum and green tea extracts.",
+    "ingredients": [
+      "Green coffee extract",
+      "Kokum extract",
+      "Green tea extract"
+    ],
+    "directions": [
+      "Follow the directions on the pack or those given by your healthcare professional."
+    ],
+    "source": "https://shop.altosindia.net/eshop/product/info/ultra-k10-capsule"
+  },
+  "oregain-weight-gainer": {
+    "summary": "Oregain vanilla-flavoured powder with soy protein.",
+    "ingredients": [
+      "Soy protein",
+      "Vanilla powder"
+    ],
+    "directions": [
+      "Mix according to the serving directions on your pack."
+    ],
+    "source": "https://altosindia.net/products/product/oregain-powder-vanilla"
+  },
+  "prevent-hair-fall-shampoo": {
+    "summary": "A rinse-off shampoo with neem and bhringraj.",
+    "ingredients": [
+      "Neem extract",
+      "Bhringraj"
+    ],
+    "directions": [
+      "Apply to wet hair and rinse thoroughly."
+    ],
+    "source": "https://altosindia.net/eshop/product/info/prevent-hairfall-shampoo"
+  },
+  "d-tan-face-pack": {
+    "summary": "Zordan D-Tan Face Pack for facial skin care.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "ultra-black-kajal": {
+    "summary": "Zordan Ultra Black Kajal for a defined black eye-makeup look.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "black-kajal-pencil": {
+    "summary": "Black kajal for defining your eye makeup.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "matte-lipstick": {
+    "summary": "Zordan lipstick with a matte finish.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "nail-polish": {
+    "summary": "Zordan nail colour for everyday or occasion wear.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "antiseptic-hand-wash": {
+    "summary": "Altos antiseptic liquid hand wash.",
+    "ingredients": [],
+    "directions": [
+      "Lather on wet hands and rinse with water."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "hand-wash-250ml": {
+    "summary": "Altos antiseptic liquid hand wash.",
+    "ingredients": [],
+    "directions": [
+      "Lather on wet hands and rinse with water."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "glass-cleaner": {
+    "summary": "Altos liquid cleaner for glass surfaces.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "floor-cleaner": {
+    "summary": "Altos liquid floor cleaner.",
+    "ingredients": [],
+    "directions": [
+      "Follow the label for dilution and suitable surfaces."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "pure-turmeric-powder-haldi": {
+    "summary": "Ground turmeric for cooking.",
+    "ingredients": [
+      "Turmeric"
+    ],
+    "directions": [
+      "Season your dishes to taste."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "pure-red-chilli-powder-lal-mirch": {
+    "summary": "Ground red chilli for adding heat to dishes.",
+    "ingredients": [
+      "Red chilli"
+    ],
+    "directions": [
+      "Season your dishes to taste."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "pure-coriander-powder-dhania": {
+    "summary": "Ground coriander for cooking.",
+    "ingredients": [
+      "Coriander"
+    ],
+    "directions": [
+      "Season your dishes to taste."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "pure-garam-masala": {
+    "summary": "A ground garam masala spice blend for cooking.",
+    "ingredients": [],
+    "directions": [
+      "Season your dishes to taste."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "rice-bran-oil": {
+    "summary": "Altos rice bran cooking oil.",
+    "ingredients": [
+      "Rice bran oil"
+    ],
+    "directions": [
+      "Use as a cooking oil according to your recipe."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "sharbat-sweet-rose": {
+    "summary": "A rose-flavoured sharbat concentrate.",
+    "ingredients": [],
+    "directions": [
+      "Dilute according to the directions on your bottle and serve chilled."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "royal-chandan-premium-agarbatti": {
+    "summary": "Royal Chandan sandalwood-scented incense sticks.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "deodorant-blue-hill-or-black-hill": {
+    "summary": "Zordan deodorant in the Blue Hill or Black Hill fragrance.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "zordan-blue-hill-body-deodorant": {
+    "summary": "Zordan Blue Hill body deodorant.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
+  "perfume-blueflash-or-black-velvet": {
+    "summary": "Zordan perfume in Blueflash or Black Velvet fragrance.",
+    "ingredients": [],
+    "directions": [
+      "Follow the directions and precautions on the pack."
+    ],
+    "source": "https://altosindia.net/public/download/Altos%20Product%20Brochure%28June%202025%29.pdf"
+  },
   "oremol-natural-black-hair": {
     "summary": "A black hair-colour emulsion with amla, almond and bhringraj.",
     "ingredients": [
