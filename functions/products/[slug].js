@@ -52,6 +52,7 @@ export async function onRequest({ params }) {
       priceCurrency: "INR",
       price: String(product.price),
       availability: inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      shippingDetails: { "@type": "OfferShippingDetails", hasShippingService: { "@id": `${SITE}/#india-shipping` } },
       hasMerchantReturnPolicy: returnPolicy,
       seller: { "@type": "Organization", name: "Awin Enterprises", url: SITE }
     }
@@ -106,7 +107,9 @@ ${inStock ? `
 <label>Quantity <input name="quantity" type="number" min="1" max="99" value="1" required></label>
 <label>Delivery pincode <input name="pincode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="6" pattern="[1-9][0-9]{5}" title="Enter a six-digit Indian pincode" required></label>
 <p>Product subtotal <output id="order-subtotal" aria-live="polite">₹${product.price.toLocaleString("en-IN")}</output></p>
-<p class="muted">Awin will confirm the delivery charge and final total on WhatsApp before you pay.</p>
+<p>Delivery <output id="order-shipping" aria-live="polite">${product.price > 1000 ? "Free" : "₹99"}</output></p>
+<p>Total <output id="order-total" aria-live="polite">₹${(product.price + (product.price > 1000 ? 0 : 99)).toLocaleString("en-IN")}</output></p>
+<p class="muted">Delivery across India costs ₹99 on orders up to and including ₹1,000, and is free on orders above ₹1,000.</p>
 <button class="btn" type="submit">Send Order on WhatsApp</button>
 </form>
 <noscript><p><a href="${whatsapp}">Order on WhatsApp</a></p></noscript>
@@ -114,7 +117,7 @@ ${inStock ? `
 ` : ""}
 <details class="details">
 <summary>Shipping in India</summary>
-<p>Orders dispatch within 1–2 working days after payment confirmation. Delivery typically takes 3–7 working days, depending on the pincode. We confirm delivery charges before payment.</p>
+<p>Orders dispatch within 1–2 working days after payment confirmation. Delivery typically takes 3–7 working days, depending on the pincode. Delivery across India costs ₹99 on orders up to and including ₹1,000, and is free on orders above ₹1,000.</p>
 </details>
 <section class="details" id="returns" aria-labelledby="returns-title">
 <h2 id="returns-title">Returns &amp; refunds</h2>
@@ -127,21 +130,32 @@ ${inStock ? `<script>
   const quantity = form.elements.quantity;
   const subtotal = document.getElementById("order-subtotal");
   const formatPrice = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
-  const total = () => Number(form.dataset.price) * quantity.valueAsNumber;
+  const shipping = document.getElementById("order-shipping");
+  const total = document.getElementById("order-total");
+  const productSubtotal = () => Number(form.dataset.price) * quantity.valueAsNumber;
+  const deliveryCharge = (amount) => amount > 1000 ? 0 : 99;
 
   quantity.addEventListener("input", () => {
-    subtotal.value = quantity.validity.valid ? formatPrice.format(total()) : "—";
+    const amount = productSubtotal();
+    const charge = deliveryCharge(amount);
+    subtotal.value = quantity.validity.valid ? formatPrice.format(amount) : "—";
+    shipping.value = quantity.validity.valid ? (charge ? formatPrice.format(charge) : "Free") : "—";
+    total.value = quantity.validity.valid ? formatPrice.format(amount + charge) : "—";
   });
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+    const amount = productSubtotal();
+    const charge = deliveryCharge(amount);
     const message = [
       "Hello Awin Enterprises, I would like to place an order.",
       "Product: " + form.dataset.product + " (" + form.dataset.pack + ")",
       "Quantity: " + quantity.value,
-      "Product subtotal: " + formatPrice.format(total()),
+      "Product subtotal: " + formatPrice.format(amount),
+      "Delivery: " + (charge ? formatPrice.format(charge) : "Free"),
+      "Total: " + formatPrice.format(amount + charge),
       "Delivery pincode: " + form.elements.pincode.value,
-      "Please confirm the delivery charge, final total and payment details."
+      "Please confirm my order and share payment details."
     ].join("\\n");
     window.location.assign("https://wa.me/" + form.dataset.whatsapp + "?text=" + encodeURIComponent(message));
   });
