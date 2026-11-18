@@ -93,7 +93,7 @@ const manufacturerImages = {
   "mc-vital": "https://shop.altosindia.net/storagecache/product_image/240023743-57fa0af4-8f8e-4d51-8298-0ca0be09eeeb.jpeg",
   "oregain-weight-gainer": "https://shop.altosindia.net/storagecache/product_image/245422003-354d6fad-1c49-4e60-a3fd-50886244ea06.jpeg",
   "pure-turmeric-powder-haldi": "https://shop.altosindia.net/storagecache/product_image/241540744-ffcedfe3-037b-4383-ab65-5b62922cb282.jpeg",
-  "sharbat-sweet-rose": "https://awinenterprises.in/images/altos/sharbat-sweet-rose.jpg",
+  "sharbat-sweet-rose": "https://altosindia.net/public/product/v1-home-care/sweet-rose-sharbat.jpg",
   "shudh-shilajit-paste": "https://shop.altosindia.net/storagecache/product_image/234820161-af6ab9eb-79e6-45f0-ba03-920040c32df5.jpeg",
   "under-eye-cream": "https://shop.altosindia.net/storagecache/product_image/244108634-328f45ee-795d-411a-a83a-eeecbca264e2.jpeg",
   "vigvit-multivitamin-syrup": "https://shop.altosindia.net/storagecache/product_image/250752197-2ec4ee0b-b0c5-40c9-bd0f-e8f8b59f6f3c.jpeg",
