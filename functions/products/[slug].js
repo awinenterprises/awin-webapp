@@ -46,7 +46,7 @@ const manufacturerImages = {
   "gold-bleach-cream-339g": "https://shop.altosindia.net/storagecache/product_image/242607039-3edd9a54-d7fb-45a2-a5da-07cd50400af0.jpeg",
   "rose-water": "https://shop.altosindia.net/storagecache/product_image/235855229-001edb1f-fcc8-4c20-95ec-507bcfd81a4f.jpeg",
   "rose-and-gold-toner": "https://shop.altosindia.net/storagecache/product_image/234946580-7fc6b102-a7ce-4d26-877d-3b96e5e927c9.jpeg",
-  "cold-cream": "https://shop.altosindia.net/storagecache/product_image/235730412-8deaadb8-ebf0-4f83-9045-18ddb181d6d7.jpeg",
+  "cold-cream": "https://altosindia.net/public/product/v1-face-care/cold-cream.jpg",
   "sunscreen-spf-50": "https://shop.altosindia.net/storagecache/product_image/230245448-66109dac-43f1-42a6-8362-e1b79da29fd9.jpeg",
   "bb-cream": "https://shop.altosindia.net/storagecache/product_image/240524705-62371be3-0623-4913-8495-3426bbfd3811.jpeg",
   "liquid-suhaag-sindoor": "https://shop.altosindia.net/storagecache/product_image/241338493-9b4b5c99-ce6a-4bed-8e56-61a756ba0ca1.jpeg",
@@ -276,7 +276,7 @@ const productDetails = {
     "source": "https://altosindia.net/products/product/rose-skin-toner"
   },
   "cold-cream": {
-    "summary": "A Zordan facial moisturiser with aloe vera extract.",
+    "summary": "A 75 gm Zordan Skin White cold cream with aloe vera extract to moisturise dry skin.",
     "ingredients": [
       "Aloe vera extract"
     ],
