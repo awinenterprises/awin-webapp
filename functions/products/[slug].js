@@ -62,7 +62,7 @@ const manufacturerImages = {
   "liquid-sindur-red-red": "https://shop.altosindia.net/storagecache/product_image/241338493-9b4b5c99-ce6a-4bed-8e56-61a756ba0ca1.jpeg",
   "zordan-blue-hill-body-deodorant": "https://shop.altosindia.net/storagecache/product_image/252855116-ce4b921c-567f-462d-9342-9fb9436fe64b.jpeg",
   "ultra-k-10-capsule-fat-burn": "https://shop.altosindia.net/storagecache/product_image/234520920-4da2aef7-beab-49a8-9dbd-b79137c93627.jpeg",
-  "cold-cream-almond-and-cocoa-butter": "https://awinenterprises.in/images/altos/cold-cream.jpg",
+  "cold-cream-almond-and-cocoa-butter": "https://shop.altosindia.net/storagecache/product_image/235730412-8deaadb8-ebf0-4f83-9045-18ddb181d6d7.jpeg",
   "hydra-boost-gel": "https://shop.altosindia.net/storagecache/product_image/255338240-9d8b0aad-d891-4be6-931d-7d4bef393188.jpeg",
   "sun-screen-cream-spf-40": "https://shop.altosindia.net/storagecache/product_image/234100825-af9d1236-13d4-4f6e-b232-fb2b82f7f896.jpeg",
   "anti-dandruff-shampoo-100ml": "https://shop.altosindia.net/storagecache/product_image/231824333-dae13eca-0bf2-43c8-9f50-4ff601337405.jpeg",
