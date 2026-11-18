@@ -6,6 +6,7 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "papaya-face-wash-120ml": "https://shop.altosindia.net/storagecache/product_image/230350314-66882881-e413-4ac5-ac76-a0ced8d0afda.jpeg",
   "complete-health-pack": "https://shop.altosindia.net/storagecache/product_image/254504735-ad8e690e-ff61-4f52-95e9-10ce146f3052.jpeg",
   "advance-hair-serum": "https://shop.altosindia.net/storagecache/product_image/255224542-e97fedc0-abc9-4a19-8e56-163f5e19c211.jpeg",
   "almond-hair-oil": "https://shop.altosindia.net/storagecache/product_image/230602976-9d6b7739-da72-4cb0-8858-89a6b3c6d1db.jpeg",
@@ -214,6 +215,7 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "papaya-face-wash-120ml": {"summary": "A 120 ml Papaya and Aloe Vera facial cleanser.", "ingredients": ["Papaya", "Aloe Vera"], "directions": ["Take a small quantity on your palm and gently massage over the face.", "The manufacturer specifies two to three minutes of gentle massage; follow the directions on your current pack.", "Rinse with water."], "source": "https://shop.altosindia.net/eshop/product/info/papaya-face-wash"},
   "complete-health-pack": {"summary": "Four 60-capsule packs: Aroplex Plus, Vig-R, Curcum Plus and Coloston.", "ingredients": ["Aroplex Plus Capsule", "Vig-R Capsule", "Curcum Plus Capsule", "Coloston Capsule"], "directions": ["Follow the directions on each included pack and the advice of your healthcare professional."], "source": "https://shop.altosindia.net/eshop/product/info/the-complete-health-pack"},
   "advance-hair-serum": {"summary": "A scalp serum with Redensyl, Saw Palmetto, Baicapil, Rosemary, Biotin and Anagain.", "ingredients": ["REDENSYL", "SAW PALMETTO", "BAICAPIL", "ROSEMARY", "BIOTIN", "ANAGAIN"], "directions": ["Apply a small amount to a clean scalp with the dropper and massage gently with your fingertips.", "Allow it to absorb and follow the frequency stated on your current pack."], "source": "https://shop.altosindia.net/eshop/product/info/adbance-hair-serum"},
   "almond-hair-oil": {"summary": "An almond hair oil for scalp and hair massage.", "ingredients": ["Almond"], "directions": ["Pour the required amount onto your palm, apply to the scalp and massage gently into the roots.", "The manufacturer suggests leaving it overnight; follow your pack directions."], "source": "https://shop.altosindia.net/eshop/product/info/almond-hair-oil"},
