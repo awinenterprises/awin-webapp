@@ -6,6 +6,31 @@ const UPI_ID = "awin@slc";
 const PAYEE = "Awin Enterprises";
 
 const manufacturerImages = {
+  "complete-health-pack": "https://shop.altosindia.net/storagecache/product_image/254504735-ad8e690e-ff61-4f52-95e9-10ce146f3052.jpeg",
+  "advance-hair-serum": "https://shop.altosindia.net/storagecache/product_image/255224542-e97fedc0-abc9-4a19-8e56-163f5e19c211.jpeg",
+  "almond-hair-oil": "https://shop.altosindia.net/storagecache/product_image/230602976-9d6b7739-da72-4cb0-8858-89a6b3c6d1db.jpeg",
+  "herbal-hair-oil": "https://shop.altosindia.net/storagecache/product_image/240528692-d368ee86-69ea-43f3-9877-5605147308bd.jpeg",
+  "liquid-cream-soap": "https://shop.altosindia.net/storagecache/product_image/230735462-36297fb0-45a1-4d8c-ba90-5922862dce9e.jpeg",
+  "nabhi-oil": "https://shop.altosindia.net/storagecache/product_image/262113958-803d29e6-fdf2-414d-b625-632461683aeb.jpeg",
+  "sea-buckthorn-juice": "https://shop.altosindia.net/storagecache/product_image/261436414-9488d618-c2f0-4fbb-8cba-7000868d54c0.jpeg",
+  "body-oil-100ml": "https://shop.altosindia.net/storagecache/product_image/230557323-4221b806-e811-4aa2-bca3-9e24dca6f1dc.jpeg",
+  "winter-care-cream": "https://shop.altosindia.net/storagecache/product_image/230928721-6d5245e1-70d8-4426-82aa-4661faecfdda.jpeg",
+  "sanjeevani-granules": "https://shop.altosindia.net/storagecache/product_image/250801316-94dab141-9ead-4e1a-8321-4b214240adf6.jpeg",
+  "triphala-churna": "https://shop.altosindia.net/storagecache/product_image/260842967-01a6eb26-8160-4a54-bd98-503a126d2394.jpeg",
+  "hair-removal-cream": "https://shop.altosindia.net/storagecache/product_image/233405743-7bef575e-0691-48e3-940a-252a9f8c596b.jpeg",
+  "herbal-antiseptic-cream": "https://shop.altosindia.net/storagecache/product_image/242852076-8d93ee65-263e-4747-a2cf-993e6ff8d6f1.jpeg",
+  "skin-glow-cream": "https://shop.altosindia.net/storagecache/product_image/234957239-111cbfed-ca89-43f9-bf96-5a897d939403.jpeg",
+  "whitening-and-glow-cream": "https://shop.altosindia.net/storagecache/product_image/233039951-7914e662-ff9b-4691-961a-3ae5575aa9bc.jpeg",
+  "prakruti-punch": "https://shop.altosindia.net/storagecache/product_image/260126377-2b6f2575-8ef6-4a2b-9a72-710ebac005a0.jpeg",
+  "moringa-tablets": "https://shop.altosindia.net/storagecache/product_image/251041772-4d2f81bd-c20e-465b-98de-62be9d8c9350.jpeg",
+  "hair-revitalizer-tablets": "https://shop.altosindia.net/storagecache/product_image/262339898-369f8437-f81a-4e44-b9b2-6bb4ba3fff94.jpeg",
+  "oreslim-advance-fat-burner-tablets": "https://shop.altosindia.net/storagecache/product_image/261957689-5130b5bb-b5af-4150-83bf-904f3ddbf358.jpeg",
+  "vitamin-c-tablets": "https://shop.altosindia.net/storagecache/product_image/231121721-df2d5aca-0e2c-46c3-b8b3-cc55c6214da0.jpeg",
+  "oreslim-tea": "https://shop.altosindia.net/storagecache/product_image/262942547-0e8217bf-ba0a-49ad-a710-b836a6095fb9.jpeg",
+  "cleansing-milk": "https://shop.altosindia.net/storagecache/product_image/234154658-0b1bb702-1c22-4b61-a36b-ec7e7bf4109d.jpeg",
+  "facial-skin-toner": "https://shop.altosindia.net/storagecache/product_image/234356718-44c2a4b5-6153-4156-ab4d-62d07a38fbd8.jpeg",
+  "orefresh-toothpaste": "https://shop.altosindia.net/storagecache/product_image/231707695-5ad400e5-1043-4c01-a758-ffdef9b6d570.jpeg",
+
   "aroplex-plus-plus": "https://shop.altosindia.net/storagecache/product_image/234343202-78115e94-6b7f-4b39-8257-9b787470967f.jpeg",
   "curcum-plus": "https://shop.altosindia.net/storagecache/product_image/233255132-10eec8c6-b6b1-4fa0-8959-24966fda3eda.jpeg",
   "wheatgrass": "https://shop.altosindia.net/storagecache/product_image/231604413-9e4f6dfe-b1c1-4625-a77d-1a10a0f7cfe2.jpeg",
@@ -189,6 +214,31 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "complete-health-pack": {"summary": "Four 60-capsule packs: Aroplex Plus, Vig-R, Curcum Plus and Coloston.", "ingredients": ["Aroplex Plus Capsule", "Vig-R Capsule", "Curcum Plus Capsule", "Coloston Capsule"], "directions": ["Follow the directions on each included pack and the advice of your healthcare professional."], "source": "https://shop.altosindia.net/eshop/product/info/the-complete-health-pack"},
+  "advance-hair-serum": {"summary": "A scalp serum with Redensyl, Saw Palmetto, Baicapil, Rosemary, Biotin and Anagain.", "ingredients": ["REDENSYL", "SAW PALMETTO", "BAICAPIL", "ROSEMARY", "BIOTIN", "ANAGAIN"], "directions": ["Apply a small amount to a clean scalp with the dropper and massage gently with your fingertips.", "Allow it to absorb and follow the frequency stated on your current pack."], "source": "https://shop.altosindia.net/eshop/product/info/adbance-hair-serum"},
+  "almond-hair-oil": {"summary": "An almond hair oil for scalp and hair massage.", "ingredients": ["Almond"], "directions": ["Pour the required amount onto your palm, apply to the scalp and massage gently into the roots.", "The manufacturer suggests leaving it overnight; follow your pack directions."], "source": "https://shop.altosindia.net/eshop/product/info/almond-hair-oil"},
+  "herbal-hair-oil": {"summary": "A herbal hair oil containing Bhringraj, Majeeth and Nagkesar.", "ingredients": ["Bhringraj", "Majeeth", "Nagkesar"], "directions": ["Spread evenly through dry hair, concentrating on the roots.", "Massage gently, following the directions on your bottle."], "source": "https://shop.altosindia.net/eshop/product/info/hair-oil"},
+  "liquid-cream-soap": {"summary": "A liquid cream soap for everyday hand and skin cleansing.", "ingredients": [], "directions": ["Take a small amount in your hands and massage gently to cleanse.", "Rinse thoroughly with water."], "source": "https://shop.altosindia.net/eshop/product/info/liquid-cream-soap"},
+  "nabhi-oil": {"summary": "An oil blend intended for external application around the navel area.", "ingredients": ["Ajwain Oil", "Almond Oil", "Olive Oil", "Coconut Oil", "Kalonji Oil", "Clove Oil", "Garlic Oil", "Cinnamon Oil", "Eucalyptus Oil", "Camphor", "Amla", "Haritaki & Baheda", "Hibiscus", "Nutmeg"], "directions": ["Clean and dry the navel area before application.", "The manufacturer specifies four drops before bedtime; massage gently around the navel and allow it to absorb.", "Use externally and follow the precautions on your current bottle."], "source": "https://shop.altosindia.net/eshop/product/info/nabhi-oil"},
+  "sea-buckthorn-juice": {"summary": "A sea buckthorn juice supplied in a 500 ml bottle.", "ingredients": ["Sea buckthorns"], "directions": ["Follow the serving directions and dilution instructions on your current bottle, or your healthcare professional’s advice."], "source": "https://shop.altosindia.net/eshop/product/info/sea-buckthorn-juice"},
+  "body-oil-100ml": {"summary": "A body massage oil containing almond oil and olive oil for moisturising dry skin.", "ingredients": ["Almond Oil", "Olive Oil"], "directions": ["Massage gently over the body, following the directions on your bottle."], "source": "https://shop.altosindia.net/eshop/product/info/body-oil"},
+  "winter-care-cream": {"summary": "A moisturising winter-care cream with Tulsi and Aloe Vera extracts.", "ingredients": ["Tulsi Extract", "Aloevera Extract"], "directions": ["Apply the required amount using gentle upward circular movements.", "Follow the application frequency on your current pack."], "source": "https://shop.altosindia.net/eshop/product/info/winter-care-cream"},
+  "sanjeevani-granules": {"summary": "Herbal granules in a 60 g pack containing 12 sachets.", "ingredients": ["KONCH BEEZ", "ASHWAGANDHA", "TULSI", "CLOVE", "SUPARI", "YASHTIMADHU", "HARITKI", "BRAHMI", "GREEN TEA", "AKARKARA"], "directions": ["Use under the guidance of a qualified healthcare professional and follow the serving size and duration printed on your sachets."], "source": "https://shop.altosindia.net/eshop/product/info/sanjivani-granules"},
+  "triphala-churna": {"summary": "A 100 g pack of Triphala herbal powder.", "ingredients": [], "directions": ["Follow the serving size and directions printed on your current pack or those given by your healthcare professional."], "source": "https://shop.altosindia.net/eshop/product/info/triphala-churna"},
+  "hair-removal-cream": {"summary": "A hair-removal cream containing Papaya and Shea Butter.", "ingredients": ["papaya", "Shea Butter"], "directions": ["Follow the patch-test instructions and precautions on your pack.", "Apply with the spatula. The manufacturer specifies three to five minutes before removal; follow your pack’s time limit.", "Remove, rinse with water and moisturise as directed."], "source": "https://shop.altosindia.net/eshop/product/info/hair-removal-cream"},
+  "herbal-antiseptic-cream": {"summary": "A topical herbal cream containing Neem, Tulsi, Haldi and other listed ingredients.", "ingredients": ["Kapoor Kachari", "Safed-Chandan", "Ghritkumari", "Neem", "Tulsi", "Haldi", "Khair", "Jashad", "Tankan Bhasma", "Dugdha Pashana"], "directions": ["Apply the required amount to the skin and massage gently with your fingertips.", "Follow the frequency and precautions printed on your pack."], "source": "https://shop.altosindia.net/eshop/product/info/herbal-antisepticcream"},
+  "skin-glow-cream": {"summary": "A facial cream containing Aloe Vera and Basil extracts.", "ingredients": ["Aloevera Extract", "Basil extract"], "directions": ["Cleanse the face before application.", "Apply the cream evenly and follow the morning/evening directions on your pack."], "source": "https://shop.altosindia.net/eshop/product/info/skin-glow-cream"},
+  "whitening-and-glow-cream": {"summary": "A facial cream containing Almond and Apricot ingredients.", "ingredients": ["Almond", "Apricot"], "directions": ["Cleanse the face, then apply the cream evenly.", "Follow the frequency and precautions on your current pack."], "source": "https://shop.altosindia.net/eshop/product/info/whitening-and-glow-cream"},
+  "prakruti-punch": {"summary": "A 500 ml herbal juice blend with Aloe Vera, Tulsi, Haldi, Amla and other listed plant ingredients.", "ingredients": ["Aloe Vera", "Tulsi", "Haldi", "Arjun Chhal", "Karela", "Wheatgrass", "Shilajit", "Moringa", "Ashwagandha", "Neem", "Amla"], "directions": ["Follow the serving directions on your bottle or those given by your healthcare professional."], "source": "https://shop.altosindia.net/eshop/product/info/prakruti-punch"},
+  "moringa-tablets": {"summary": "A 60-tablet Moringa supplement.", "ingredients": ["Moringa"], "directions": ["The manufacturer lists one tablet twice daily after meals, or as advised by a healthcare practitioner.", "Check the directions and precautions on your current pack."], "source": "https://shop.altosindia.net/eshop/product/info/moringa-tablets"},
+  "hair-revitalizer-tablets": {"summary": "A hair-nutrition supplement supplied as 60 tablets, described by the manufacturer as a blend of 19 nutrients.", "ingredients": ["Blend of 19 Nutrients"], "directions": ["Use the serving directions on your current pack or the instructions given by your healthcare professional."], "source": "https://shop.altosindia.net/eshop/product/info/hair-revitalizer-tablets"},
+  "oreslim-advance-fat-burner-tablets": {"summary": "A 60-tablet supplement containing L-Carnitine, Garcinia Cambogia, caffeine and green coffee extracts.", "ingredients": ["L-Carnitine", "Garcinia Cambogia", "Caffeine Extract", "Green Coffee Extract", "Black Pepper Extract"], "directions": ["Follow the serving size, usage directions and precautions printed on your pack.", "Consult a healthcare professional about suitability before use."], "source": "https://shop.altosindia.net/eshop/product/info/advance-fat-burner-tablet"},
+  "vitamin-c-tablets": {"summary": "A 60-tablet Vitamin C supplement with Amla extract and Zinc.", "ingredients": ["Vitamin C", "Zinc"], "directions": ["The manufacturer specifies one tablet daily with a meal, or as advised by a healthcare professional."], "source": "https://shop.altosindia.net/eshop/product/info/vitamin-c"},
+  "oreslim-tea": {"summary": "A 100 g tea blend with green tea, green coffee, black tea, Hibiscus and other listed ingredients.", "ingredients": ["Green Tea Extract", "Green Coffee Extract", "Garcinia Cambogia", "Caffeine", "Black Tea", "Hibiscus Flower powder"], "directions": ["Mix the quantity specified on your pack into warm water and stir well.", "Follow the serving frequency and precautions on your pack."], "source": "https://shop.altosindia.net/eshop/product/info/oreslim-tea"},
+  "cleansing-milk": {"summary": "A facial cleansing milk containing Cucumber and Aloe Vera extracts.", "ingredients": ["Cucumber extract", "Aloevera Extract"], "directions": ["Wash the face, then apply cleansing milk gently with a cotton ball, following the directions on your bottle."], "source": "https://shop.altosindia.net/eshop/product/info/cleansing-milk"},
+  "facial-skin-toner": {"summary": "A 120 ml facial skin toner containing Rose Petals.", "ingredients": ["Rose Petals"], "directions": ["Put the required amount on a cotton ball and apply gently over the face.", "Follow the precautions on your bottle."], "source": "https://shop.altosindia.net/eshop/product/info/facial-skin-toner"},
+  "orefresh-toothpaste": {"summary": "A toothpaste containing Tulsi, Clove and Mint.", "ingredients": ["Tulsi", "Clove", "Mint"], "directions": ["Put the required amount on a soft-bristled toothbrush and brush the teeth and gums gently.", "Rinse the mouth thoroughly. The manufacturer recommends brushing twice daily."], "source": "https://shop.altosindia.net/eshop/product/info/orefresh-toothpaste"},
+
   "calcium-with-vitamin-d": {
     "summary": "A Vigvit calcium supplement with vitamin D.",
     "ingredients": [
@@ -2340,6 +2390,7 @@ export async function onRequest({ params }) {
     image: [image],
     description,
     category: product.category,
+    ...(product.sku ? { sku: product.sku } : {}),
     ...(brand ? { brand: { "@type": "Brand", name: brand } } : {}),
     offers: {
       "@type": "Offer",
