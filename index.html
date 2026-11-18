@@ -167,6 +167,25 @@
   </div>
 
   <main class="max-w-7xl mx-auto px-4 flex-1 pb-16 w-full">
+    <section id="shopByConcern" class="mb-6 rounded-2xl bg-gradient-to-br from-purple-50 via-white to-emerald-50 border border-purple-100 p-4 sm:p-6 shadow-sm" aria-labelledby="concernTitle">
+      <div class="text-center mb-4">
+        <p class="text-xs font-bold tracking-widest uppercase text-purple-700">Awin Enterprises</p>
+        <h2 id="concernTitle" class="text-xl sm:text-2xl font-black text-slate-900 mt-1">Pehle Aapki Zaroorat, Phir Hamara Product ❤️</h2>
+        <p class="text-sm text-slate-600 mt-2">Aap kis tarah ka product dhoondh rahe hain? Hum aapko relevant options dikhayenge.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+        <button type="button" onclick="showConcern('dandruff')" class="rounded-xl bg-white border border-slate-200 hover:border-purple-400 p-3 text-left shadow-sm"><span class="text-xl">🌿</span><span class="block font-bold text-sm mt-1">Dandruff Care</span><span class="text-xs text-slate-500">Scalp cleansing</span></button>
+        <button type="button" onclick="showConcern('hair')" class="rounded-xl bg-white border border-slate-200 hover:border-purple-400 p-3 text-left shadow-sm"><span class="text-xl">💇</span><span class="block font-bold text-sm mt-1">Hair Care</span><span class="text-xs text-slate-500">Shampoo & hair care</span></button>
+        <button type="button" onclick="showConcern('face')" class="rounded-xl bg-white border border-slate-200 hover:border-purple-400 p-3 text-left shadow-sm"><span class="text-xl">✨</span><span class="block font-bold text-sm mt-1">Face & Skin</span><span class="text-xs text-slate-500">Face wash & skincare</span></button>
+        <button type="button" onclick="showConcern('eye')" class="rounded-xl bg-white border border-slate-200 hover:border-purple-400 p-3 text-left shadow-sm"><span class="text-xl">👁️</span><span class="block font-bold text-sm mt-1">Under-Eye Care</span><span class="text-xs text-slate-500">Daily under-eye care</span></button>
+      </div>
+      <div id="concernFeedback" class="hidden mt-4 text-sm text-slate-700 bg-white border border-purple-100 rounded-xl p-3" role="status"></div>
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
+        <a href="https://wa.me/917828757646?text=Namaste%20Awin%20Enterprises%2C%20mujhe%20apni%20hair%20ya%20skin%20care%20needs%20ke%20liye%20product%20guidance%20chahiye." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-xl bg-emerald-600 text-white px-4 py-2.5 font-bold text-sm hover:bg-emerald-700"><i class="fa-brands fa-whatsapp"></i> Personal Guidance on WhatsApp</a>
+        <button type="button" onclick="clearConcern()" class="text-sm font-semibold text-purple-700 underline underline-offset-2">Show all products</button>
+      </div>
+      <p class="text-[11px] text-slate-500 mt-3 text-center">Suggestions are for shopping guidance, not medical diagnosis or a guaranteed treatment. Check labels and consult a professional for persistent concerns.</p>
+    </section>
     <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5"></div>
 
     <!-- PERMANENT FAST STATIC GOOGLE BUSINESS REVIEWS SECTION -->
@@ -713,6 +732,46 @@
       }).catch(() => {
         showToast("Link copy nahi ho paya!");
       });
+    }
+
+    function showConcern(type) {
+      const rules = {
+        dandruff: { label: "Dandruff Care", test: p => /dandruff|neem.*shampoo|shampoo.*neem/i.test(p.name + " " + p.desc) },
+        hair: { label: "Hair Care", test: p => /shampoo|hair|conditioner/i.test(p.name + " " + p.desc) },
+        face: { label: "Face & Skin", test: p => /face wash|facewash|papaya|skin cream|moisturiz|toner/i.test(p.name + " " + p.desc) },
+        eye: { label: "Under-Eye Care", test: p => /under.?eye|dark circle/i.test(p.name + " " + p.desc) }
+      };
+      const rule = rules[type];
+      if (!rule) return;
+      const matched = products.filter(rule.test);
+      const feedback = document.getElementById("concernFeedback");
+      if (feedback) {
+        feedback.textContent = matched.length ? rule.label + ": " + matched.length + " relevant products available below. Choose based on the product label and your needs." : rule.label + ": No exact match in the current catalogue. Please ask us on WhatsApp for guidance.";
+        feedback.classList.remove("hidden");
+      }
+      selectedCategory = "All";
+      const search = document.getElementById("searchInput");
+      if (search) search.value = "";
+      renderProducts();
+      const grid = document.getElementById("productGrid");
+      if (grid && matched.length) {
+        const ids = new Set(matched.map(p => p.id));
+        Array.from(grid.children).forEach(card => {
+          const match = card.id.match(/^product-(\\d+)$/);
+          if (match && !ids.has(Number(match[1]))) card.classList.add("hidden");
+        });
+        const counter = document.getElementById("productCounter");
+        if (counter) counter.textContent = matched.length + " RELEVANT PRODUCTS";
+      }
+      if (grid) grid.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    function clearConcern() {
+      const feedback = document.getElementById("concernFeedback");
+      if (feedback) feedback.classList.add("hidden");
+      selectedCategory = "All";
+      const search = document.getElementById("searchInput");
+      if (search) search.value = "";
+      renderProducts();
     }
 
     function renderProducts() {
