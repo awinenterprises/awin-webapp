@@ -757,7 +757,7 @@
       if (grid && matched.length) {
         const ids = new Set(matched.map(p => p.id));
         Array.from(grid.children).forEach(card => {
-          const match = card.id.match(/^product-(\\d+)$/);
+          const match = card.id.match(/^product-(\d+)$/);
           if (match && !ids.has(Number(match[1]))) card.classList.add("hidden");
         });
         const counter = document.getElementById("productCounter");
