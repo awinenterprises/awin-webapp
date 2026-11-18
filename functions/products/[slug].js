@@ -29,7 +29,7 @@ const manufacturerImages = {
   "prevent-hair-fall-shampoo": "https://shop.altosindia.net/storagecache/product_image/244953341-886c29da-8f0c-4a7c-bff4-bc8fc0c09363.jpeg",
   "deodorant-blue-hill-or-black-hill": "https://shop.altosindia.net/storagecache/product_image/252855116-ce4b921c-567f-462d-9342-9fb9436fe64b.jpeg",
   "perfume-blueflash-or-black-velvet": "https://shop.altosindia.net/storagecache/product_image/254937895-1830388b-6be7-4762-9c02-edcf81ea3c28.jpeg",
-  "glass-cleaner": "https://awinenterprises.in/images/altos/glass-cleaner.jpg",
+  "glass-cleaner": "https://awinenterprises.in/images/altos/glass-cleaner-original.jpg",
   "floor-cleaner": "https://shop.altosindia.net/storagecache/product_image/252951666-5a878207-116e-49ad-ab7e-2ac6212e5c87.jpeg",
   "pure-garam-masala": "https://shop.altosindia.net/storagecache/product_image/250644378-eba7b338-0a60-428f-b7fd-bab1dba4264f.jpeg",
   "royal-chandan-premium-agarbatti": "https://shop.altosindia.net/storagecache/product_image/252545163-78fd4956-3158-4cd7-9bf0-4ac8db1ee9f3.jpeg",
