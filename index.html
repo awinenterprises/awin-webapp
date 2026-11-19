@@ -175,10 +175,10 @@
         <p class="text-sm text-slate-600 mt-2">Aap kis tarah ka product dhoondh rahe hain? Hum aapko relevant options dikhayenge.</p>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-        <button type="button" onclick="showConcern('dandruff')" class="rounded-xl bg-white border border-slate-200 hover:border-purple-400 p-3 text-left shadow-sm"><span class="text-xl">🌿</span><span class="block font-bold text-sm mt-1">Dandruff Care</span><span class="text-xs text-slate-500">Scalp cleansing</span></button>
+        <button type="button" onclick="showConcern('supplements')" class="rounded-xl bg-white border border-slate-200 hover:border-purple-400 p-3 text-left shadow-sm"><span class="text-xl">💊</span><span class="block font-bold text-sm mt-1">Supplements</span><span class="text-xs text-slate-500">Health & nutrition</span></button>
         <button type="button" onclick="showConcern('hair')" class="rounded-xl bg-white border border-slate-200 hover:border-purple-400 p-3 text-left shadow-sm"><span class="text-xl">💇</span><span class="block font-bold text-sm mt-1">Hair Care</span><span class="text-xs text-slate-500">Shampoo & hair care</span></button>
         <button type="button" onclick="showConcern('face')" class="rounded-xl bg-white border border-slate-200 hover:border-purple-400 p-3 text-left shadow-sm"><span class="text-xl">✨</span><span class="block font-bold text-sm mt-1">Face & Skin</span><span class="text-xs text-slate-500">Face wash & skincare</span></button>
-        <button type="button" onclick="showConcern('eye')" class="rounded-xl bg-white border border-slate-200 hover:border-purple-400 p-3 text-left shadow-sm"><span class="text-xl">👁️</span><span class="block font-bold text-sm mt-1">Under-Eye Care</span><span class="text-xs text-slate-500">Daily under-eye care</span></button>
+        <button type="button" onclick="showConcern('daily')" class="rounded-xl bg-white border border-slate-200 hover:border-purple-400 p-3 text-left shadow-sm"><span class="text-xl">🛍️</span><span class="block font-bold text-sm mt-1">Daily Routine</span><span class="text-xs text-slate-500">Personal care & home essentials</span></button>
       </div>
       <div id="concernFeedback" class="hidden mt-4 text-sm text-slate-700 bg-white border border-purple-100 rounded-xl p-3" role="status"></div>
       <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
@@ -762,10 +762,10 @@
 
     function showConcern(type) {
       const rules = {
-        dandruff: { label: "Dandruff Care", test: p => /dandruff|neem.*shampoo|shampoo.*neem/i.test(p.name + " " + p.desc) },
+        supplements: { label: "Supplements", test: p => [1,2,3,4,8,9,10,11,12,13,14,15,17,18,21,23,24,25,27,28,29,30,31,32,33,35,36,37,38,39,40,41,43,44,46,48,49,52,53,54,55,56,57,58,59,60,61,62,64,73,74,75,76,145,150,151,152,181,187,190,191,196,197,198,199,200,201].includes(p.id) },
         hair: { label: "Hair Care", test: p => /shampoo|hair|conditioner/i.test(p.name + " " + p.desc) },
         face: { label: "Face & Skin", test: p => /face wash|facewash|papaya|skin cream|moisturiz|toner/i.test(p.name + " " + p.desc) },
-        eye: { label: "Under-Eye Care", test: p => /under.?eye|dark circle/i.test(p.name + " " + p.desc) }
+        daily: { label: "Daily Routine", test: p => (["Beauty & Skincare", "Hair & Grooming", "Home & Kitchen"].includes(p.cat) && ![86,87,198].includes(p.id)) || [6,63].includes(p.id) }
       };
       const rule = rules[type];
       if (!rule) return;
