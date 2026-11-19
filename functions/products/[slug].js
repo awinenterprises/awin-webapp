@@ -69,7 +69,6 @@ const manufacturerImages = {
   "anti-dandruff-shampoo-100ml": "https://shop.altosindia.net/storagecache/product_image/231824333-dae13eca-0bf2-43c8-9f50-4ff601337405.jpeg",
   "zordan-perfume-bloom": "https://shop.altosindia.net/storagecache/product_image/250050007-885559c6-517c-4820-9006-992a1e3a71fb.jpeg",
   "dish-washing-gel": "https://shop.altosindia.net/storagecache/product_image/231021489-88892149-62b2-4635-9aca-68c23fa6d512.jpeg",
-  "cloth-face-mask-altos": "https://awinenterprises.in/images/altos/cloth-face-mask-altos.jpg",
   "ws7-detergent": "https://shop.altosindia.net/storagecache/product_image/235957356-80996ed7-49d7-404c-8ad5-3ea644779aff.jpeg",
   "alvet-cal-for-animals": "https://altosindia.net/public/product/v1-agriculture-aid/alvet-cal.jpg",
   "rose-and-musk-moisturising-lotion": "https://shop.altosindia.net/storagecache/product_image/231609931-fd68faff-2019-45ec-8b45-d832e083555c.jpeg",
