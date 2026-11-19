@@ -2444,7 +2444,7 @@ export async function onRequest({ params }) {
 <div class="wrap">
 <header><a class="brand" href="/">Awin Enterprises</a><a class="back" href="/">← Browse catalogue</a></header>
 <main class="card">
-<div class="photo" ${product.components ? `style="display:grid;grid-template-columns:repeat(${product.components.length > 5 ? 3 : 2},minmax(0,1fr));gap:10px"` : ""}>${product.components ? product.components.map(p => `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" style="width:100%;height:150px;object-fit:contain" loading="eager">`).join("") : `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" style="transform:scale(${product.imageScale ?? 1})" loading="eager">`}</div>
+<div class="photo" ${product.components ? `style="display:grid;grid-template-columns:repeat(${product.components.length > 5 ? 3 : 2},minmax(0,1fr));gap:10px;aspect-ratio:auto"` : ""}>${product.components ? product.components.map(p => `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" style="width:100%;height:150px;object-fit:contain" loading="eager">`).join("") : `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" style="transform:scale(${product.imageScale ?? 1})" loading="eager">`}</div>
 <div>
 <div class="tag">${escapeHtml(product.category)}</div>
 <h1>${escapeHtml(product.name)}</h1>
