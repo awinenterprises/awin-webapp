@@ -1,4 +1,5 @@
 import { products } from "../_shared/products.js";
+import { buildCareKits, kitDefinitions } from "../_shared/kits.js";
 
 const SITE = "https://awinenterprises.in";
 const PHONE = "917828757646";
@@ -215,6 +216,7 @@ const manufacturerImages = {
 };
 
 const productDetails = {
+  "papaya-anti-blemish-face-pack": {summary:"A facial pack with Papaya and Saffron.",ingredients:["Papaya","Saffron"],directions:["Apply evenly to a clean face and neck, avoiding the eye area.","Rinse after 10–15 minutes. Use twice a week."]},
   "papaya-face-wash-120ml": {"summary": "A 120 ml Papaya and Aloe Vera facial cleanser.", "ingredients": ["Papaya", "Aloe Vera"], "directions": ["Take a small quantity on your palm and gently massage over the face.", "The manufacturer specifies two to three minutes of gentle massage; follow the directions on your current pack.", "Rinse with water."], "source": "https://shop.altosindia.net/eshop/product/info/papaya-face-wash"},
   "complete-health-pack": {"summary": "Four 60-capsule packs: Aroplex Plus, Vig-R, Curcum Plus and Coloston.", "ingredients": ["Aroplex Plus Capsule", "Vig-R Capsule", "Curcum Plus Capsule", "Coloston Capsule"], "directions": ["Follow the directions on each included pack and the advice of your healthcare professional."], "source": "https://shop.altosindia.net/eshop/product/info/the-complete-health-pack"},
   "advance-hair-serum": {"summary": "A scalp serum with Redensyl, Saw Palmetto, Baicapil, Rosemary, Biotin and Anagain.", "ingredients": ["REDENSYL", "SAW PALMETTO", "BAICAPIL", "ROSEMARY", "BIOTIN", "ANAGAIN"], "directions": ["Apply a small amount to a clean scalp with the dropper and massage gently with your fingertips.", "Allow it to absorb and follow the frequency stated on your current pack."], "source": "https://shop.altosindia.net/eshop/product/info/adbance-hair-serum"},
@@ -2356,7 +2358,7 @@ export async function onRequest({ params }) {
   if (params.slug === "deodorant-blue-hill-or-black-hill") {
     return new Response(null, { status: 301, headers: { Location: "/products/zordan-black-hill-body-deodorant" } });
   }
-  const product = products.find((item) => item.slug === params.slug);
+  const product = [...products, ...buildCareKits(products, kitDefinitions)].find((item) => item.slug === params.slug);
   if (!product) {
     return new Response("Product not found", {
       status: 404,
@@ -2364,7 +2366,7 @@ export async function onRequest({ params }) {
     });
   }
 
-  const details = Object.hasOwn(productDetails, product.slug) ? productDetails[product.slug] : undefined;
+  const details = product.components ? {summary: product.summary, ingredients: [], directions: product.routine} : (Object.hasOwn(productDetails, product.slug) ? productDetails[product.slug] : undefined);
   const image = Object.hasOwn(manufacturerImages, product.slug) ? manufacturerImages[product.slug] : product.image;
   const url = `${SITE}/products/${product.slug}`;
   const inStock = product.inStock ?? true;
@@ -2442,16 +2444,17 @@ export async function onRequest({ params }) {
 <div class="wrap">
 <header><a class="brand" href="/">Awin Enterprises</a><a class="back" href="/">← Browse catalogue</a></header>
 <main class="card">
-<div class="photo"><img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" style="transform:scale(${product.imageScale ?? 1})" loading="eager"></div>
+<div class="photo" ${product.components ? 'style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px"' : ""}>${product.components ? product.components.map(p => `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" style="width:100%;height:150px;object-fit:contain" loading="eager">`).join("") : `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" style="transform:scale(${product.imageScale ?? 1})" loading="eager">`}</div>
 <div>
 <div class="tag">${escapeHtml(product.category)}</div>
 <h1>${escapeHtml(product.name)}</h1>
 <p class="muted">Pack size: ${escapeHtml(product.pack)}</p>
 <div class="price">₹${product.price.toLocaleString("en-IN")} <span class="mrp">MRP ₹${product.mrp.toLocaleString("en-IN")}</span></div>
+${product.components ? `<p>Individual selling total <s>₹${product.regularTotal}</s> · Extra 5% OFF · Save extra ₹${product.savings}</p><ul>${product.components.map(p=>`<li>${escapeHtml(p.id===112 ? "Hair Vitalizer Aroma" : p.id===97 ? "Papaya Light Anti-Blemishing Cream" : p.name)} · ${escapeHtml(p.pack)} · 1 pack</li>`).join("")}</ul><p class="note">${escapeHtml(product.note)}</p><p><a href="${whatsapp}">Product selection aur istemaal ki jaankari ke liye WhatsApp karein</a></p>` : ""}
 <p class="product-meta"><strong class="stock">${stockLabel}</strong>${brand ? `<span>Brand: ${escapeHtml(brand)}</span>` : ""}</p>
 ${inStock ? '<a class="btn" href="#checkout">Buy Now</a><button class="btn alt" id="add-product-to-cart" type="button" hidden>Add to Cart</button><a class="btn alt" href="/?cart=open">View Cart</a><p id="add-cart-status" role="status"></p>' : ""}
 <a class="btn alt" href="${whatsapp}" rel="noopener noreferrer">Ask on WhatsApp</a>
-${details ? `<p class="muted">${escapeHtml(details.summary)} <a href="#product-details">${details.ingredients.length ? "Ingredients &amp; how to use" : "Product details &amp; how to use"}</a></p>` : '<div class="note">Please check the product packaging for ingredients, directions for use, warnings and other product-specific information. Product details and prices may change; confirm before ordering.</div>'}
+${details ? `<p class="muted">${escapeHtml(details.summary)} <a href="#product-details">${!details.directions.length ? "Kit details" : details.ingredients.length ? "Ingredients &amp; how to use" : "Product details &amp; how to use"}</a></p>` : '<div class="note">Please check the product packaging for ingredients, directions for use, warnings and other product-specific information. Product details and prices may change; confirm before ordering.</div>'}
 </div>
 </main>
 ${details ? `
@@ -2459,14 +2462,13 @@ ${details ? `
 <h2 id="product-details-title">Product details</h2>
 ${details.ingredients.length ? `<h3>Key ingredients</h3>\n<p>${details.ingredients.map(escapeHtml).join(", ")}.</p>` : ""}
 <p class="muted">Check the pack label for the full ingredient list and any warnings.</p>
-<h3>How to use</h3>
-<ol>${details.directions.map(step => `<li>${escapeHtml(step)}</li>`).join("")}</ol>
+${details.directions.length ? `<h3>${product.components ? "Care routine" : "How to use"}</h3><ol>${details.directions.map(step => `<li>${escapeHtml(step)}</li>`).join("")}</ol>` : ""}
 </section>` : ""}
 ${inStock ? `
 <section class="checkout" id="checkout" aria-labelledby="checkout-title">
 <h2 id="checkout-title">Checkout</h2>
 <p>${escapeHtml(product.name)} · ${escapeHtml(product.pack)} · ₹${product.price.toLocaleString("en-IN")} each</p>
-<form id="order-form" data-product-id="${product.id}" data-product="${escapeHtml(product.name)}" data-pack="${escapeHtml(product.pack)}" data-price="${product.price}" data-whatsapp="${PHONE}" data-upi="${UPI_ID}" data-payee="${PAYEE}">
+<form id="order-form" data-product-id="${product.id}" data-product="${escapeHtml(product.name + (product.components ? " — " + product.components.map(p=>p.name+" ("+p.pack+")").join(" + ") : ""))}" data-pack="${escapeHtml(product.pack)}" data-price="${product.price}" data-whatsapp="${PHONE}" data-upi="${UPI_ID}" data-payee="${PAYEE}">
 <label>Quantity <input name="quantity" type="number" min="1" max="99" value="1" required></label>
 <label>Your Name <input name="customerName" type="text" autocomplete="name" maxlength="100" required></label>
 <label>Your Address <textarea name="address" rows="3" autocomplete="street-address" maxlength="400" required></textarea></label>

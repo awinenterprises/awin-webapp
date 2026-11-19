@@ -166,6 +166,7 @@
     </span>
   </div>
 
+<nav class="max-w-7xl mx-auto px-4 py-3 w-full flex flex-wrap gap-3 text-xs font-bold text-purple-700" aria-label="Care kits"><a href="/products/anti-dandruff-care-kit" class="underline">Anti-Dandruff Care Kit</a><a href="/products/hair-fall-care-kit" class="underline">Hair Fall Care Kit</a><a href="/products/anti-ageing-care-kit" class="underline">Anti-Aging Care Kit</a><a href="/products/blemish-care-kit" class="underline">Blemish Care Kit</a><a href="/products/kids-immunity-pack" class="underline">Kids Immunity Pack</a></nav>
   <main class="max-w-7xl mx-auto px-4 flex-1 pb-16 w-full">
     <section id="shopByConcern" class="mb-6 rounded-2xl bg-gradient-to-br from-purple-50 via-white to-emerald-50 border border-purple-100 p-4 sm:p-6 shadow-sm" aria-labelledby="concernTitle">
       <div class="text-center mb-4">
@@ -185,6 +186,10 @@
         <button type="button" onclick="clearConcern()" class="text-sm font-semibold text-purple-700 underline underline-offset-2">Show all products</button>
       </div>
       <p class="text-[11px] text-slate-500 mt-3 text-center">Suggestions are for shopping guidance, not medical diagnosis or a guaranteed treatment. Check labels and consult a professional for persistent concerns.</p>
+    </section>
+    <section id="careKits" class="mb-7 scroll-mt-28" aria-labelledby="careKitsTitle">
+      <div class="flex flex-wrap justify-between items-end gap-3 mb-4"><div><p class="text-xs font-bold uppercase tracking-widest text-purple-700">Awin Care Kits</p><h2 id="careKitsTitle" class="text-2xl font-black text-slate-900">Aapki care, ek simple kit</h2><p class="text-sm text-slate-600 mt-1">Buy the complete kit and save an extra 5% on our individual selling prices. One pack of each listed product.</p></div><a href="#productGrid" class="text-sm text-purple-700 font-bold underline">Shop individual products</a></div>
+      <div id="kitGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
     <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5"></div>
 
@@ -445,6 +450,7 @@
     }
 
     const products = [
+      {"id": 206, "slug": "papaya-anti-blemish-face-pack", "name": "Papaya Anti-Blemish Face Pack", "pack": "60 gm", "mrp": 95, "price": 86, "cat": "Beauty & Skincare", "desc": "A Papaya and Saffron face pack for a facial care routine.", "img": "https://altosindia.net/public/product/v1-face-care/papaya-face-pack.jpg"},
       { id: 1, slug: "tulsi-power", name: "Tulsi Power", pack: "20+10 ml", mrp: 300, price: 270, cat: "Medicines & Health", desc: "Immunity Booster Drops", img: "https://shop.altosindia.net/storagecache/product_image/234440797-6e4c58e5-e7aa-4c12-97fa-26497c9bd321.jpeg" },
       { id: 2, slug: "aroplex", name: "Aroplex", pack: "30 Caps", mrp: 904, price: 814, cat: "Medicines & Health", desc: "For Perfect Health", img: "https://shop.altosindia.net/storagecache/product_image/243230340-25e30603-991c-4aae-8e0a-f3e27b481d47.jpeg" },
       { id: 3, slug: "aroplex-plus-plus", name: "Aroplex Plus+", pack: "60 Caps + 60 Caps", mrp: 1395, price: 1256, cat: "Medicines & Health", desc: "For Complete Health", img: "https://shop.altosindia.net/storagecache/product_image/234343202-78115e94-6b7f-4b39-8257-9b787470967f.jpeg" },
@@ -652,6 +658,26 @@
       { id: 205, slug: "papaya-face-wash-120ml", name: "Papaya Face Wash (120 ml)", pack: "120 ml", mrp: 231, price: 208, cat: "Beauty & Skincare", desc: "A 120 ml Papaya and Aloe Vera facial cleanser.", img: "https://shop.altosindia.net/storagecache/product_image/230350314-66882881-e413-4ac5-ac76-a0ced8d0afda.jpeg" }
     ];
 
+    const kitDefinitions = [{"id":1001,"slug":"anti-dandruff-care-kit","name":"Anti-Dandruff Care Kit","ids":[117,118,112,182],"summary":"A four-product scalp and hair-care selection.","routine":["हफ्ते में 3 wash days रखें। रात में Hair Vitalizer Aroma को scalp पर हल्के हाथों से लगाएँ।","Advance Hair Serum को उसके label के अनुसार अलग से scalp पर लगाएँ; oil में मिलाने की सलाह नहीं दी गई है।","अगली सुबह गीले बालों पर Anti-Dandruff Shampoo लगाएँ, कुछ मिनट बाद अच्छी तरह rinse करें।","Shampoo के बाद conditioner बालों पर लगाएँ और लगभग 2 मिनट बाद rinse करें।","बाल सूखने के बाद Vitalizer का इस्तेमाल उसके pack directions के अनुसार करें।"],"note":"तुरंत या तय समय में परिणाम की अपेक्षा न करें। असर हर व्यक्ति में अलग हो सकता है और परिणाम की गारंटी नहीं है। Product label के निर्देशों का पालन करें।"},{"id":1002,"slug":"hair-fall-care-kit","name":"Hair Fall Care Kit","ids":[115,118,110,182,60],"summary":"A five-product hair-care selection with Ore Amla 500 ml.","routine":["हफ्ते में 3 wash days रखें। रात में Bhringraj Oil से हल्की मालिश करें और अगली सुबह shampoo करें।","Advance Hair Serum को उसके label के अनुसार अलग से scalp पर लगाएँ; इसे oil में मिलाने का निर्देश नहीं है।","Shampoo के बाद conditioner बालों पर लगाएँ, लगभग 2 मिनट बाद rinse करें।","बाल सूखने पर जरूरत के अनुसार थोड़ी मात्रा में Bhringraj Oil लगाएँ।","Ore Amla पीने वाला product है। इसकी मात्रा और समय के लिए bottle label तथा qualified professional के निर्देश मानें; व्यक्तिगत सलाह के लिए WhatsApp करें।"],"note":"तुरंत या तय समय में परिणाम की अपेक्षा न करें। असर हर व्यक्ति में अलग हो सकता है और परिणाम की गारंटी नहीं है। Product label के निर्देशों का पालन करें।"},{"id":1003,"slug":"anti-ageing-care-kit","name":"Anti-Aging Care Kit","ids":[98,85,205,102,1],"summary":"A five-product skincare selection with Papaya Face Wash 120 ml.","routine":["सुबह Papaya Face Wash से चेहरा साफ करें।","धूप में निकलने से पहले SPF 50 को pack directions के अनुसार लगाएँ और दोबारा लगाने के निर्देश मानें।","रात में चेहरा साफ करके Anti-Wrinkle Cream लगाएँ।","Apricot Scrub हफ्ते में एक बार हल्के हाथों से इस्तेमाल करें; irritation हो तो रोक दें। बाकी रातों में face wash और cream रखें।","Tulsi Power की मात्रा और इस्तेमाल के लिए उसके label तथा qualified professional के निर्देश मानें।"],"note":"तुरंत या तय समय में परिणाम की अपेक्षा न करें। असर हर व्यक्ति में अलग हो सकता है और परिणाम की गारंटी नहीं है। Product label के निर्देशों का पालन करें।"},{"id":1004,"slug":"blemish-care-kit","name":"Blemish Care Kit","ids":[206,205,97,76],"summary":"Papaya face pack, face wash, Papaya Light cream and FT-15 in one selection.","routine":["सुबह और रात Papaya Face Wash से चेहरा साफ करें।","रात में साफ चेहरे पर Papaya Light Anti-Blemishing Cream हल्के हाथों से लगाएँ; अन्य समय इस्तेमाल के लिए pack directions मानें।","Papaya Face Pack हफ्ते में 2 बार लगाएँ। आँखों के आसपास न लगाएँ; 10–15 मिनट बाद धो लें।","FT-15 की मात्रा और समय के लिए bottle label तथा qualified professional के निर्देश मानें। व्यक्तिगत सलाह के लिए WhatsApp करें।"],"note":"तुरंत या तय समय में परिणाम की अपेक्षा न करें। असर हर व्यक्ति में अलग हो सकता है और परिणाम की गारंटी नहीं है। Product label के निर्देशों का पालन करें।"},{"id":1005,"slug":"kids-immunity-pack","name":"Kids Immunity Pack","ids":[53,57,76],"summary":"Choco Kidz, Multivitamin Gummies and FT-15. For age suitability and product-use guidance, contact us on WhatsApp.","routine":[],"note":"तुरंत या तय समय में परिणाम की अपेक्षा न करें। असर हर व्यक्ति में अलग हो सकता है और परिणाम की गारंटी नहीं है। Product label के निर्देशों का पालन करें।"}];
+    function buildCareKits(catalogue, definitions) {
+  return definitions.map(def => {
+    const components = def.ids.map(id => {
+      const item = catalogue.find(p => p.id === id);
+      if (!item) throw new Error("Missing kit component: " + id);
+      return item;
+    });
+    const regularTotal = components.reduce((sum, p) => sum + p.price, 0);
+    const price = Math.round(regularTotal * 0.95);
+    return { ...def, components, regularTotal, price, savings: regularTotal - price,
+      mrp: components.reduce((sum, p) => sum + p.mrp, 0), pack: components.length + " products · 1 each",
+      category: "Awin Care Kits", cat: "Awin Care Kits", description: def.summary, desc: def.summary,
+      image: components[0].image || components[0].img, img: components[0].image || components[0].img,
+      brand: "Awin Enterprises", inStock: components.every(p => p.inStock !== false), sku: "AWIN-KIT-" + def.id };
+  });
+}
+    const careKits = buildCareKits(products, kitDefinitions);
+    const purchasableItems = [...products, ...careKits];
+
     products.sort((a, b) => {
       const getPriority = (p) => {
         const name = p.name.toLowerCase();
@@ -671,7 +697,7 @@
     function loadCart() {
       try {
         const saved = JSON.parse(localStorage.getItem(CART_KEY));
-        return Object.fromEntries(products.flatMap(({ id }) => {
+        return Object.fromEntries(purchasableItems.flatMap(({ id }) => {
           const quantity = saved?.[id];
           return Number.isSafeInteger(quantity) && quantity > 0 ? [[id, quantity]] : [];
         }));
@@ -774,7 +800,30 @@
       renderProducts();
     }
 
+    function kitOrderContents(kit) {
+      return kit.components.map(p => "  - " + p.name + " (" + p.pack + ") x 1 per kit").join("\n") + "\n  Extra 5% kit discount included; kit price Rs " + kit.price;
+    }
+    function buyCareKit(id) { const kit = careKits.find(p => p.id === id); if (kit) buySingleProductNow(kit); }
+    function renderCareKits() {
+      const query = (document.getElementById("searchInput").value || "").toLowerCase().trim();
+      const visible = careKits.filter(k => !query || (k.name + " " + k.components.map(p => p.name).join(" ")).toLowerCase().includes(query));
+      document.getElementById("careKits").hidden = selectedCategory !== "All" || visible.length === 0;
+      document.getElementById("kitGrid").innerHTML = visible.map(k => `
+        <article class="rounded-2xl bg-white border border-purple-100 shadow-sm p-4 flex flex-col" id="kit-${k.id}">
+          <div class="flex gap-1 items-center h-28 bg-slate-50 rounded-xl p-2">${k.components.map(p => `<img src="${p.img}" alt="${p.name}" loading="lazy" style="width:${100/k.components.length}%;height:96px;object-fit:contain;min-width:0">`).join("")}</div>
+          <span class="text-[11px] font-bold text-emerald-700 mt-3">${k.components.length} products · Extra 5% OFF</span><h3 class="text-lg font-extrabold mt-1">${k.name}</h3>
+          <ul class="text-xs text-slate-600 list-disc pl-4 my-3 space-y-1">${k.components.map(p => `<li>${p.id===112 ? "Hair Vitalizer Aroma" : p.id===97 ? "Papaya Light Anti-Blemishing Cream" : p.name} · ${p.pack}</li>`).join("")}</ul>
+          <div class="mt-auto"><p class="text-xs text-slate-500">Individual selling total <s>₹${k.regularTotal}</s></p><p class="text-2xl font-black text-purple-800">₹${k.price} <span class="text-xs font-semibold text-emerald-700">Save extra ₹${k.savings}</span></p>
+          <div class="flex flex-wrap gap-2 mt-3"><button type="button" onclick="buyCareKit(${k.id})" class="rounded-lg bg-purple-700 text-white px-3 py-2 font-bold text-sm">Buy Kit</button><button type="button" onclick="addToCart(${k.id});showToast('Kit added to cart')" class="rounded-lg border border-purple-200 px-3 py-2 text-purple-800 text-sm font-bold">Add Kit to Cart</button></div>
+          <a class="block text-xs text-purple-700 underline mt-3" href="/products/${k.slug}">View kit details${k.routine.length ? " & routine" : ""}</a>
+          ${k.routine.length ? `<details class="text-xs mt-3"><summary class="font-bold cursor-pointer">Care routine</summary><ol class="list-decimal pl-4 space-y-2 mt-2">${k.routine.map(r=>`<li>${r}</li>`).join("")}</ol></details>` : ""}
+          <a target="_blank" rel="noopener noreferrer" class="block text-xs font-bold text-emerald-700 mt-3 underline" href="https://wa.me/917828757646?text=${encodeURIComponent('Namaste, mujhe '+k.name+' ke products aur istemaal ki guidance chahiye.')}">Product selection aur istemaal ki jaankari ke liye WhatsApp karein</a>
+          <p class="text-[11px] leading-relaxed bg-amber-50 border border-amber-100 rounded-lg p-2 mt-3">${k.note}</p></div>
+        </article>`).join("");
+    }
+
     function renderProducts() {
+      renderCareKits();
       const searchInput = document.getElementById("searchInput");
       const grid = document.getElementById("productGrid");
       const counter = document.getElementById("productCounter");
@@ -882,12 +931,13 @@
     }
 
     function buySingleProductNow(item) {
-      activeCheckoutPayload = { type: "single", subtotal: item.price, itemsText: `${item.name} (${item.pack}) x 1` };
+      activeCheckoutPayload = { type: "single", subtotal: item.price, itemsText: `${item.name} (${item.pack}) x 1${item.components ? "\n" + kitOrderContents(item) : ""}` };
       setupCheckoutView(item.price);
       document.getElementById("checkoutModal").classList.remove("hidden");
     }
 
     function addToCart(productId) {
+      if (!purchasableItems.some(p => p.id === productId)) return;
       cart[productId] = (cart[productId] || 0) + 1;
       saveCart();
       updateCartUI();
@@ -916,14 +966,14 @@
       let html = "";
 
       for (const [idStr, qty] of Object.entries(cart)) {
-        const item = products.find(p => p.id === parseInt(idStr));
+        const item = purchasableItems.find(p => p.id === parseInt(idStr));
         if (!item) continue;
         totalItems += qty;
         subtotal += item.price * qty;
         html += `
           <div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-100 bg-slate-50/50">
             <div class="flex-1 pr-2">
-              <div class="font-bold text-xs text-slate-800 line-clamp-1">${item.name}</div>
+              <div class="font-bold text-xs text-slate-800 line-clamp-1">${item.name}</div>${item.components ? `<div class="text-[10px] text-emerald-700">Extra 5% kit discount included · ${item.components.map(p => p.name + " (" + p.pack + ")").join(" + ")}</div>` : ""}
               <div class="text-[11px] text-slate-400">₹${item.price} each • ${item.pack}</div>
             </div>
             <div class="flex items-center gap-2">
@@ -965,10 +1015,10 @@
       let subtotal = 0;
       let orderItems = [];
       for (const [idStr, qty] of Object.entries(cart)) {
-        const item = products.find(p => p.id === parseInt(idStr));
+        const item = purchasableItems.find(p => p.id === parseInt(idStr));
         if (item) {
           subtotal += item.price * qty;
-          orderItems.push(`• ${item.name} (${item.pack}) x ${qty} = ₹${item.price * qty}`);
+          orderItems.push(`• ${item.name} (${item.pack}) x ${qty} = ₹${item.price * qty}${item.components ? "\n" + kitOrderContents(item) : ""}`);
         }
       }
       if (subtotal <= 0) return;
