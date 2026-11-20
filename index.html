@@ -354,6 +354,8 @@
         <button onclick="closeCheckoutModal()" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <p class="text-[11px] text-slate-500">Scan QR or Copy UPI ID to pay via GPay, PhonePe, Paytm</p>
+      <a id="openUpiAppBtn" href="#" class="hidden w-full py-2.5 bg-purple-700 hover:bg-purple-800 text-white rounded-xl font-bold text-xs items-center justify-center gap-2"><i class="fa-solid fa-mobile-screen-button"></i> Pay with UPI App</a>
+      <p id="upiAppHelp" class="hidden text-[11px] text-slate-600">Your phone may ask which UPI app to use. Verify the receiver and amount before paying. Return here afterward to send your payment reference for verification.</p>
       <div class="flex flex-col items-center justify-center p-2 bg-slate-50 border rounded-xl space-y-2">
         <img id="upiQrImage" src="" alt="UPI QR Code" class="w-36 h-36 rounded-lg shadow-sm" crossorigin="anonymous" />
         <div class="flex gap-2 w-full">
@@ -1036,6 +1038,15 @@
       if(qrImg) qrImg.src = qrApiUrl;
       if(qrDisp) qrDisp.innerText = `₹${amount}`;
       if(dlBtn) dlBtn.href = qrApiUrl;
+      const upiAppBtn = document.getElementById("openUpiAppBtn");
+      const upiAppHelp = document.getElementById("upiAppHelp");
+      const isMobileDevice = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (upiAppBtn) {
+        upiAppBtn.href = upiUrl;
+        upiAppBtn.classList.toggle("hidden", !isMobileDevice);
+        upiAppBtn.classList.toggle("flex", isMobileDevice);
+      }
+      if (upiAppHelp) upiAppHelp.classList.toggle("hidden", !isMobileDevice);
       const copyAlert = document.getElementById("copyAlert");
       if(copyAlert) copyAlert.classList.add("hidden");
     }
