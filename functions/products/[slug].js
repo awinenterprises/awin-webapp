@@ -2414,6 +2414,15 @@ export async function onRequest({ params }) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- GA4: shared measurement ID for all dynamically generated product pages -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8B69YQR316"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-8B69YQR316');
+gtag('event', 'view_item', {currency:'INR',value:${product.price},items:[{item_id:${JSON.stringify(String(product.id))},item_name:${JSON.stringify(product.name)},price:${product.price},quantity:1}]});
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(title)}</title>
 <meta name="description" content="${escapeHtml(description)}">
@@ -2501,6 +2510,8 @@ ${inStock ? `
 </div>
 <footer>© Awin Enterprises · <a href="https://awinenterprises.in/">awinenterprises.in</a></footer>
 ${inStock ? `<script>
+  const gaItem = {item_id: ${JSON.stringify(String(product.id))}, item_name: ${JSON.stringify(product.name)}, price: ${product.price}, quantity: 1};
+  const trackGa = (eventName, data) => { if (typeof window.gtag === "function") window.gtag("event", eventName, data); };
   const form = document.getElementById("order-form");
   const addToCart = document.getElementById("add-product-to-cart");
   addToCart.hidden = false;
@@ -2515,6 +2526,7 @@ ${inStock ? `<script>
       const quantity = cart[id];
       cart[id] = Number.isSafeInteger(quantity) && quantity > 0 ? quantity + 1 : 1;
       localStorage.setItem(key, JSON.stringify(cart));
+      trackGa('add_to_cart', {currency:'INR',value:gaItem.price,items:[gaItem]});
       status.textContent = "Added to cart (" + cart[id] + ").";
     } catch {
       status.textContent = "Cart storage is unavailable. You can still use Buy Now.";
@@ -2576,6 +2588,10 @@ ${inStock ? `<script>
     qr.src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(upi);
   }
 
+  document.querySelector('a[href="#checkout"]')?.addEventListener("click", () => {
+    const qty = Number(quantity.value) || 1;
+    trackGa('begin_checkout', {currency:'INR',value:gaItem.price*qty+deliveryCharge(gaItem.price*qty),items:[{...gaItem,quantity:qty}]});
+  });
   quantity.addEventListener("input", updateCheckout);
   updateCheckout();
 
@@ -2599,6 +2615,7 @@ ${inStock ? `<script>
       "Customer name: " + form.elements.customerName.value.trim(),
       "Delivery address: " + form.elements.address.value.trim()
     ].join("\\n");
+    trackGa('whatsapp_order_inquiry', {currency:'INR',value:amount+charge,items:[{...gaItem,quantity:Number(quantity.value)}]});
     window.location.assign("https://wa.me/" + form.dataset.whatsapp + "?text=" + encodeURIComponent(message));
   });
 </script>` : ""}
