@@ -1040,7 +1040,10 @@
       if(dlBtn) dlBtn.href = qrApiUrl;
       const upiAppBtn = document.getElementById("openUpiAppBtn");
       const upiAppHelp = document.getElementById("upiAppHelp");
-      if (upiAppBtn) upiAppBtn.href = upiUrl;
+      if (upiAppBtn) {
+        upiAppBtn.href = upiUrl;
+        upiAppBtn.onclick = () => trackAwinEvent("upi_payment_app_opened", {currency:"INR",value:amount,checkout_type:activeCheckoutPayload?.type || "unknown"});
+      }
       // Responsive visibility is controlled by CSS rather than user-agent detection.
       if (upiAppHelp) upiAppHelp.className = "md:hidden text-[11px] text-slate-600";
       const copyAlert = document.getElementById("copyAlert");
@@ -1058,7 +1061,11 @@
     }
 
     function closeCheckoutModal() {
-      document.getElementById("checkoutModal").classList.add("hidden");
+      const modal = document.getElementById("checkoutModal");
+      if (modal && !modal.classList.contains("hidden") && activeCheckoutPayload) {
+        trackAwinEvent("checkout_closed", {currency:"INR",value:activeCheckoutPayload.subtotal+deliveryCharge(activeCheckoutPayload.subtotal),checkout_type:activeCheckoutPayload.type});
+      }
+      if (modal) modal.classList.add("hidden");
     }
 
     function submitToWhatsApp(isPaid) {
@@ -1073,6 +1080,7 @@
       if (address.length < 10 || !/\b[1-9][0-9]{5}\b/.test(address)) problems.push("Enter a complete delivery address including a valid 6-digit PIN.");
       if (problems.length) {
         if (errorEl) { errorEl.textContent = problems.join(" "); errorEl.classList.remove("hidden"); }
+        trackAwinEvent("checkout_validation_error", {checkout_type:activeCheckoutPayload.type, error_count:problems.length});
         return;
       }
       if (errorEl) { errorEl.textContent = ""; errorEl.classList.add("hidden"); }
