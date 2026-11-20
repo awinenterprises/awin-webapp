@@ -866,10 +866,15 @@
       }).join("");
     }
 
+    // GA4 funnel events. WhatsApp inquiries are NOT verified purchases.
+    function trackAwinEvent(name, data) { if (typeof window.gtag === 'function') window.gtag('event', name, data); }
+    function awinGaItem(p, qty = 1) { return {item_id:String(p.id),item_name:p.name,price:Number(p.price),quantity:qty}; }
+    function awinCartGaItems() { return Object.entries(cart).flatMap(([id,qty]) => { const p=purchasableItems.find(x=>x.id===Number(id));return p?[awinGaItem(p,qty)]:[]; }); }
     function openProductDetail(productId) {
       const p = products.find(item => item.id === productId);
       if (!p) return;
       const badge = getUrgencyBadge(p.id);
+      trackAwinEvent('view_item',{currency:'INR',value:p.price,items:[awinGaItem(p)]});
 
       document.getElementById("modalImg").src = p.img;
       document.getElementById("modalImg").style.transform = `scale(${p.imageScale || 1})`;
@@ -920,13 +925,16 @@
     }
 
     function buySingleProductNow(item) {
-      activeCheckoutPayload = { type: "single", subtotal: item.price, itemsText: `${item.name} (${item.pack}) x 1${item.components ? "\n" + kitOrderContents(item) : ""}` };
+      activeCheckoutPayload = { type: "single", item, subtotal: item.price, itemsText: `${item.name} (${item.pack}) x 1${item.components ? "\n" + kitOrderContents(item) : ""}` };
+      trackAwinEvent('begin_checkout',{currency:'INR',value:item.price+deliveryCharge(item.price),items:[awinGaItem(item)]});
       setupCheckoutView(item.price);
       document.getElementById("checkoutModal").classList.remove("hidden");
     }
 
     function addToCart(productId) {
       if (!purchasableItems.some(p => p.id === productId)) return;
+      const added = purchasableItems.find(p=>p.id===productId);
+      trackAwinEvent('add_to_cart',{currency:'INR',value:added.price,items:[awinGaItem(added)]});
       cart[productId] = (cart[productId] || 0) + 1;
       saveCart();
       updateCartUI();
@@ -1012,6 +1020,7 @@
       }
       if (subtotal <= 0) return;
       activeCheckoutPayload = { type: "cart", subtotal, itemsText: orderItems.join("\n") };
+      trackAwinEvent('begin_checkout',{currency:'INR',value:subtotal+deliveryCharge(subtotal),items:awinCartGaItems()});
       setupCheckoutView(subtotal);
       document.getElementById("cartModal").classList.add("hidden");
       document.getElementById("checkoutModal").classList.remove("hidden");
@@ -1070,6 +1079,7 @@
       }
 
       msg += isPaid ? `\nMaine payment kar diya hai, screenshot bhej raha hoon. Kripya dispatch karein.` : `\nMaine abhi pay nahi kiya hai, mujhe order/payment ke baare me baat karni hai.`;
+      trackAwinEvent("whatsapp_order_inquiry",{currency:"INR",value:subtotal+shipping,payment_claimed:isPaid,items:activeCheckoutPayload.type==="single"?[awinGaItem(activeCheckoutPayload.item)]:awinCartGaItems()});
       window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`, "_blank");
     }
 
