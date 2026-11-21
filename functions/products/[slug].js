@@ -2380,7 +2380,9 @@ export async function onRequest({ params }) {
     applicableCountry: "IN",
     returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
     merchantReturnDays: 2,
-    itemCondition: "https://schema.org/DamagedCondition",
+    itemCondition: "https://schema.org/NewCondition",
+    returnMethod: "https://schema.org/ReturnByMail",
+    returnFees: "https://schema.org/FreeReturn",
     merchantReturnLink: `${url}#returns`
   };
   const title = `Buy ${product.name} Online in India | Awin Enterprises`;
@@ -2505,7 +2507,7 @@ ${inStock ? `
 </details>
 <section class="details" id="returns" aria-labelledby="returns-title">
 <h2 id="returns-title">Returns &amp; refunds</h2>
-<p>Contact us on WhatsApp within 48 hours of delivery with your order number and clear photos or an unboxing video if your item is damaged, leaking, defective, expired, or incorrect. Eligible orders qualify for a replacement or refund. Returns on opened or used products are excluded under our policy. Approved refunds go back to the original payment method within 5–7 working days.</p>
+<p>Request a return on WhatsApp within 48 hours of delivery and share your order number. Unwanted products must be unused, unopened, fully packed and factory-sealed to qualify for a return. Approved returns have free courier pickup, subject to the pickup agent verifying the packaging, seal and condition. Opened or used products are not eligible for ordinary returns. If your order arrives damaged, leaking, defective, expired or incorrect, share clear photos or an unboxing video so we can assess a replacement or refund, including where the item arrived with a broken seal. Approved refunds are processed to the original payment method within 5–7 working days. Your statutory consumer rights remain unaffected.</p>
 </section>
 </div>
 <footer>© Awin Enterprises · <a href="https://awinenterprises.in/">awinenterprises.in</a></footer>
