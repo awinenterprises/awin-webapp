@@ -2372,6 +2372,7 @@ export async function onRequest({ params }) {
   const stockLabel = inStock ? "In stock" : "Out of stock";
   const brand = product.brand ?? (
     product.slug === "tulsi-power" ? "Altos Ayurveda" :
+    product.slug === "aroplex" ? "Altos" :
     product.slug === "charcoal-face-wash" || product.name.startsWith("Zordan ") ? "Zordan" :
     undefined
   );
