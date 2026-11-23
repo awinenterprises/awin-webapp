@@ -23,8 +23,10 @@ export async function onRequestPost({ request, env }) {
     const base = Number(quote.shipping_rate), gst = Number(quote.gst);
     if (!Number.isFinite(base) || !Number.isFinite(gst) || base < 0 || gst < 0)
       return json({ error: "Invalid carrier quote." }, 502);
+    const totalPaise = Math.round((base + gst) * 100);
+    const deliveryFee = Math.ceil(totalPaise / 1000) * 10;
     return json({ available: true, originPincode: origin, destinationPincode: pin, zone: quote.zone,
-      baseRate: base, gst, total: Math.round((base + gst) * 100) / 100, environment: "staging" });
+      baseRate: base, gst, total: totalPaise / 100, deliveryFee, environment: "staging" });
   } catch {
     return json({ error: "Unable to calculate rate right now." }, 502);
   }
