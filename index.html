@@ -1186,7 +1186,7 @@
         const weightKg = Number(fields.get("weightKg"));
         const button = shadowfaxQuoteForm.querySelector('button[type="submit"]');
         const inputs = shadowfaxQuoteForm.querySelectorAll("input");
-        const currency = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" });
+        const currency = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
         button.disabled = true;
         inputs.forEach(input => { input.disabled = true; });
         shadowfaxQuoteStatus.textContent = "Checking test rate…";
@@ -1206,8 +1206,9 @@
           if (quote.available !== true || ![quote.total, quote.baseRate, quote.gst].every(Number.isFinite)) {
             throw new Error("Malformed quote");
           }
+          const deliveryFee = Math.ceil(quote.total / 10) * 10;
           shadowfaxQuoteStatus.textContent =
-            `${currency.format(quote.total)} (${currency.format(quote.baseRate)} + ${currency.format(quote.gst)} GST) for ${weightKg} kg to ${pincode}.`;
+            `Estimated delivery: ${currency.format(deliveryFee)} for ${weightKg} kg to ${pincode}.`;
         } catch {
           shadowfaxQuoteStatus.textContent = "Test rate unavailable. Please try again.";
         } finally {
