@@ -339,6 +339,20 @@
         </div>
         <div class="flex justify-between text-sm"><span>Delivery</span><span id="cartShipping">₹0</span></div>
         <div class="flex justify-between text-sm font-bold"><span>Total</span><span id="cartTotal">₹0</span></div>
+        <details class="rounded-lg border border-slate-200 bg-white p-3 text-sm">
+          <summary class="cursor-pointer font-semibold">Shadowfax test quote</summary>
+          <p class="mt-2 text-xs text-slate-600">Staging estimate for a test parcel. Checkout uses the delivery charge shown above.</p>
+          <form id="shadowfaxQuoteForm" class="mt-2 space-y-2">
+            <label class="block">Delivery PIN
+              <input name="pincode" inputmode="numeric" pattern="[1-9][0-9]{5}" maxlength="6" required class="block w-full rounded border px-2 py-1">
+            </label>
+            <label class="block">Packed weight (kg)
+              <input name="weightKg" type="number" min="0.01" max="2" step="0.01" value="1" required class="block w-full rounded border px-2 py-1">
+            </label>
+            <button type="submit" class="rounded bg-purple-600 px-3 py-2 font-semibold text-white disabled:opacity-50">Get test quote</button>
+            <p role="status" class="text-xs text-slate-700"></p>
+          </form>
+        </details>
         <button id="checkoutBtn" onclick="openCheckoutModal()" class="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold shadow-md transition disabled:opacity-50">
           Proceed to Order & Pay
         </button>
@@ -1145,5 +1159,48 @@
     })();
   </script>
   <!-- End of Tawk.to Live Chat -->
+  <script>
+    const shadowfaxQuoteForm = document.getElementById("shadowfaxQuoteForm");
+    const shadowfaxQuoteStatus = shadowfaxQuoteForm.querySelector('[role="status"]');
+    shadowfaxQuoteForm.addEventListener("input", () => {
+      shadowfaxQuoteStatus.textContent = "";
+    });
+    shadowfaxQuoteForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const fields = new FormData(shadowfaxQuoteForm);
+      const pincode = fields.get("pincode");
+      const weightKg = Number(fields.get("weightKg"));
+      const button = shadowfaxQuoteForm.querySelector('button[type="submit"]');
+      const inputs = shadowfaxQuoteForm.querySelectorAll("input");
+      const currency = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" });
+      button.disabled = true;
+      inputs.forEach(input => { input.disabled = true; });
+      shadowfaxQuoteStatus.textContent = "Checking test rate…";
+      try {
+        const response = await fetch("/api/shadowfax-rate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ pincode, weightKg }),
+          signal: AbortSignal.timeout(10000)
+        });
+        if (!response.ok) throw new Error("Quote request failed");
+        const quote = await response.json();
+        if (quote.available === false) {
+          shadowfaxQuoteStatus.textContent = "No test rate is available for this PIN.";
+          return;
+        }
+        if (quote.available !== true || ![quote.total, quote.baseRate, quote.gst].every(Number.isFinite)) {
+          throw new Error("Malformed quote");
+        }
+        shadowfaxQuoteStatus.textContent =
+          `${currency.format(quote.total)} (${currency.format(quote.baseRate)} + ${currency.format(quote.gst)} GST) for ${weightKg} kg to ${pincode}.`;
+      } catch {
+        shadowfaxQuoteStatus.textContent = "Test rate unavailable. Please try again.";
+      } finally {
+        inputs.forEach(input => { input.disabled = false; });
+        button.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
