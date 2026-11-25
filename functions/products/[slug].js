@@ -2367,6 +2367,9 @@ export async function onRequest({ params }) {
 
   const details = product.components ? {summary: product.summary, ingredients: [], directions: product.routine} : (Object.hasOwn(productDetails, product.slug) ? productDetails[product.slug] : undefined);
   const image = Object.hasOwn(manufacturerImages, product.slug) ? manufacturerImages[product.slug] : product.image;
+  const displayImage = product.slug === "glass-cleaner"
+    ? "/images/altos/glass-cleaner-optimized.webp"
+    : image;
   const url = `${SITE}/products/${product.slug}`;
   const inStock = product.inStock ?? true;
   const stockLabel = inStock ? "In stock" : "Out of stock";
@@ -2441,6 +2444,8 @@ gtag('event', 'view_item', {currency:'INR',value:${product.price},items:[{item_i
 <meta name="twitter:description" content="${escapeHtml(description)}">
 <meta name="twitter:image" content="${escapeHtml(image)}">
 <script type="application/ld+json">${jsonLd}</script>
+<link rel="stylesheet" href="/assets/image-zoom.75f50c5390fe.css">
+<script defer src="/assets/image-zoom.b41f05c3731e.js"></script>
 <style>
 :root{font-family:Arial,Helvetica,sans-serif;color:#17211b;background:#f7faf6}*{box-sizing:border-box}body{margin:0;line-height:1.6;overflow-x:hidden;overflow-wrap:anywhere}img{max-width:100%}.top{background:#064e3b;color:#fff;text-align:center;padding:10px}.wrap{max-width:1050px;margin:auto;padding:22px}.brand{color:#064e3b;font-weight:800;text-decoration:none;font-size:20px}.back{float:right;color:#14532d;font-weight:700}.card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;background:#fff;border:1px solid #e2e9e1;border-radius:20px;padding:26px;margin-top:24px}.photo{background:#fff;border:1px solid #e2e9e1;border-radius:16px;display:grid;place-items:center;align-self:start;aspect-ratio:1/1;min-height:0;padding:8px;overflow:hidden}.photo img{display:block;width:100%;height:100%;min-height:0;object-fit:contain}.tag{color:#166534;font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.08em}h1{font-size:clamp(28px,5vw,42px);line-height:1.15;color:#173c29;margin:10px 0}.muted{color:#65736a}.price{font-size:30px;font-weight:800;color:#064e3b}.mrp{text-decoration:line-through;color:#758078;font-size:16px;margin-left:8px}.btn{display:inline-block;background:#15803d;color:white;text-decoration:none;padding:13px 18px;border-radius:10px;font-weight:800;margin:8px 8px 0 0}.btn.alt{background:white;border:1px solid #b9c9bb;color:#064e3b}.note{font-size:13px;color:#65736a;background:#f1f6ed;padding:14px;border-radius:10px;margin-top:20px}footer{text-align:center;padding:28px;color:#65736a;font-size:14px}@media(max-width:700px){.card{grid-template-columns:1fr;padding:16px;gap:18px}.photo{min-height:0}.wrap{padding:16px}}
 .checkout{margin-top:24px;background:white;border:1px solid #e2e9e1;border-radius:20px;padding:clamp(16px,4vw,26px)}.checkout form{display:grid;gap:12px;max-width:420px;min-width:0}.card>div,.checkout,.checkout form>*{min-width:0}.checkout label{display:grid;gap:4px;font-weight:700}.checkout input,.checkout textarea{width:100%;padding:10px;border:1px solid #aabbb0;border-radius:8px;font:inherit}.checkout button{font:inherit;font-weight:800;cursor:pointer;border:0;justify-self:start}.checkout h2{margin-top:0}.checkout output{font-weight:800}.details{margin:24px 0}.details summary{cursor:pointer;font-weight:700}.product-meta{display:flex;gap:12px;flex-wrap:wrap}.stock{color:#166534}
@@ -2455,7 +2460,7 @@ gtag('event', 'view_item', {currency:'INR',value:${product.price},items:[{item_i
 <div class="wrap">
 <header><a class="brand" href="/">Awin Enterprises</a><a class="back" href="/">← Browse catalogue</a></header>
 <main class="card">
-<div class="photo" ${product.components ? `style="display:grid;grid-template-columns:repeat(${product.components.length > 5 ? 3 : 2},minmax(0,1fr));gap:10px;aspect-ratio:auto"` : ""}>${product.components ? product.components.map(p => `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" style="width:100%;height:150px;object-fit:contain" loading="eager">`).join("") : `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" style="transform:scale(${product.imageScale ?? 1})" loading="eager">`}</div>
+<div class="photo" ${product.components ? `style="display:grid;grid-template-columns:repeat(${product.components.length > 5 ? 3 : 2},minmax(0,1fr));gap:10px;aspect-ratio:auto"` : ""}>${product.components ? product.components.map(p => `<button type="button" data-image-zoom aria-label="Zoom product image"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" style="width:100%;height:150px;object-fit:contain" loading="lazy" decoding="async"></button>`).join("") : `<button type="button" data-image-zoom aria-label="Zoom product image"><img src="${escapeHtml(displayImage)}" alt="${escapeHtml(product.name)}" style="transform:scale(${product.imageScale ?? 1})" fetchpriority="high" decoding="async"></button>`}</div>
 <div>
 <div class="tag">${escapeHtml(product.category)}</div>
 <h1>${escapeHtml(product.name)}</h1>
@@ -2491,7 +2496,7 @@ ${inStock ? `
 <div class="upi-payment" id="upi-payment" hidden>
 <h3>Pay via UPI</h3>
 <p>UPI ID: <code>${UPI_ID}</code></p>
-<img id="upi-qr" width="184" height="184" alt="Awin Enterprises UPI payment QR">
+<img id="upi-qr" width="184" height="184" alt="Awin Enterprises UPI payment QR" loading="lazy" decoding="async">
 <a id="upi-link" class="btn" href="#" rel="external">Open UPI app</a>
 <a id="browser-checkout-link" class="btn alt" target="_blank" rel="noopener noreferrer" hidden>Open checkout in browser</a><p id="upi-help" class="upi-help" role="status" aria-live="polite">If your UPI app does not open, enter the UPI ID and total shown above in your payment app, or scan this QR from another device.</p>
 <p class="muted">Check the payee and total in your UPI app before paying. After payment, send your UPI transaction reference or receipt and delivery address to Awin for order confirmation.</p>
@@ -2622,6 +2627,10 @@ ${inStock ? `<script>
     window.location.assign("https://wa.me/" + form.dataset.whatsapp + "?text=" + encodeURIComponent(message));
   });
 </script>` : ""}
+<dialog id="imageZoom" aria-label="Enlarged product image">
+  <button type="button" data-close-image-zoom autofocus>Close image zoom</button>
+  <img alt="">
+</dialog>
 </body>
 </html>`;
 

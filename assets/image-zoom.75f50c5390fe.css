@@ -1,0 +1,6 @@
+[data-image-zoom]{appearance:none;display:block;width:100%;min-width:0;height:100%;padding:0;border:0;background:none;cursor:zoom-in;overflow:hidden}
+[data-image-zoom]:focus-visible,#imageZoom button:focus-visible{outline:3px solid #7c3aed;outline-offset:-3px}
+#imageZoom{position:fixed;inset:0;margin:auto;border:0;border-radius:14px;background:white;color:#17211b;padding:12px;max-width:94vw;max-height:92vh;max-height:92dvh}
+#imageZoom::backdrop{background:rgb(15 23 42 / .8)}
+#imageZoom button{display:block;margin:0 0 8px auto;padding:8px 12px;border:1px solid #cbd5e1;border-radius:8px;background:white;font:inherit;cursor:pointer}
+#imageZoom img{display:block;width:auto;height:auto;max-width:min(86vw,960px);max-height:calc(90vh - 70px);max-height:calc(90dvh - 70px);object-fit:contain;margin:auto}
