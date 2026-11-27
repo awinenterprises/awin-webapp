@@ -203,10 +203,8 @@ const manufacturerImages = {
   "oredent-toothpaste-100g": "https://shop.altosindia.net/storagecache/product_image/231809893-f2469fff-abb5-45f2-a3e4-80354d24dfb8.jpeg",
   "very-cool-hair-oil": "https://shop.altosindia.net/storagecache/product_image/230320906-87e03ae8-2a72-4403-8120-022171f1db31.jpeg",
   "vitalizer-hair-oil": "https://shop.altosindia.net/storagecache/product_image/245839596-5206dc6b-9bad-49d1-9bcf-91420e3d53d9.jpeg",
-  "papaya-face-wash-60ml": "https://shop.altosindia.net/storagecache/product_image/230350314-66882881-e413-4ac5-ac76-a0ced8d0afda.jpeg",
   "apricot-scrub": "https://shop.altosindia.net/storagecache/product_image/231453148-93a2977c-decb-41c8-8e47-03f254fb5542.jpeg",
   "beauty-face-pack": "https://shop.altosindia.net/storagecache/product_image/232114505-e0d912b3-12a8-4956-8722-b890b18771c0.jpeg",
-  "face-wash-papaya": "https://shop.altosindia.net/storagecache/product_image/230350314-66882881-e413-4ac5-ac76-a0ced8d0afda.jpeg",
   "face-pack-beauty": "https://shop.altosindia.net/storagecache/product_image/232114505-e0d912b3-12a8-4956-8722-b890b18771c0.jpeg",
   "netar-jyoti-eye-drops": "https://shop.altosindia.net/storagecache/product_image/232914560-444dbfa5-b193-457f-8e6d-94198f63da06.jpeg",
   "tulsi-power": "https://shop.altosindia.net/storagecache/product_image/234440797-6e4c58e5-e7aa-4c12-97fa-26497c9bd321.jpeg",
@@ -2298,28 +2296,6 @@ const productDetails = {
     ],
     "source": "https://shop.altosindia.net/eshop/product/info/charcoal-face-wash"
   },
-  "papaya-face-wash-60ml": {
-    "summary": "A rinse-off face cleanser with papaya and aloe vera.",
-    "ingredients": [
-      "Papaya",
-      "Aloe vera"
-    ],
-    "directions": [
-      "Gently massage a small amount onto your face, then rinse with water."
-    ],
-    "source": "https://shop.altosindia.net/eshop/product/info/papaya-face-wash"
-  },
-  "face-wash-papaya": {
-    "summary": "A rinse-off face cleanser with papaya and aloe vera.",
-    "ingredients": [
-      "Papaya",
-      "Aloe vera"
-    ],
-    "directions": [
-      "Gently massage a small amount onto your face, then rinse with water."
-    ],
-    "source": "https://shop.altosindia.net/eshop/product/info/papaya-face-wash"
-  },
   "face-wash-ubtan": {
     "summary": "A rinse-off face wash for removing dirt and leaving skin feeling fresh.",
     "ingredients": [
@@ -2354,6 +2330,9 @@ function escapeHtml(value) {
 }
 
 export async function onRequest({ params }) {
+  if (params.slug === "papaya-face-wash-60ml" || params.slug === "face-wash-papaya") {
+    return new Response(null, { status: 301, headers: { Location: "/products/papaya-face-wash-120ml" } });
+  }
   if (params.slug === "deodorant-blue-hill-or-black-hill") {
     return new Response(null, { status: 301, headers: { Location: "/products/zordan-black-hill-body-deodorant" } });
   }
