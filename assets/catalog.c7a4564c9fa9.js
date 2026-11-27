@@ -1,0 +1,834 @@
+    const offerBanner = document.getElementById("offerBanner");
+    function updateOfferBannerHeight() {
+      document.documentElement.style.setProperty("--offer-banner-height", `${offerBanner.getBoundingClientRect().height}px`);
+    }
+    updateOfferBannerHeight();
+    if (typeof ResizeObserver !== "undefined") new ResizeObserver(updateOfferBannerHeight).observe(offerBanner);
+    window.addEventListener("resize", updateOfferBannerHeight);
+    const UPI_ID = "awin@slc";
+    const PAYEE_NAME = "Awin Enterprises";
+    const WHATSAPP_PHONE = "917828757646";
+
+    // Policy texts content
+    const policyData = {
+      shipping: {
+        title: "Shipping Policy",
+        content: "Delivery across India costs a flat ₹50 on orders below ₹1,000 and is free on orders of ₹1,000 or more. Orders are packed and dispatched within 1–2 working days of payment confirmation. Delivery typically takes 3–7 working days depending on your delivery pincode. You can check estimated delivery on any product page. You will receive tracking updates directly on WhatsApp once your order ships."
+      },
+      returns: {
+        title: "Return & Refund Policy",
+        content: "Request a return on WhatsApp within 48 hours of delivery with your order number. Unwanted items must be unused, unopened, fully packed and factory-sealed. Approved returns qualify for free courier pickup, subject to the pickup agent checking the seal, packaging and condition. Opened or used products cannot be returned simply because you no longer want them. If an item arrives damaged, leaking, defective, expired or incorrect, please share clear photos or an unboxing video so we can assess a replacement or refund, including if its seal was broken on arrival. Approved refunds are sent to the original payment method within 5–7 working days. Statutory consumer rights remain unaffected."
+      },
+      privacy: {
+        title: "Privacy Policy",
+        content: "Awin Enterprises collects your name, phone number, delivery address, and order details strictly to process and fulfill your orders and provide customer support. We share your delivery details only with trusted courier and payment partners. We do not sell or rent your personal information. You can request review or deletion of your data by contacting us via email or WhatsApp."
+      },
+      terms: {
+        title: "Terms of Use",
+        content: "Awin Enterprises is an independent authorized distributor of Altos products. Trademarks and product names belong to their respective owners. Information on this site is for general awareness and does not substitute professional medical advice. Prices and availability are subject to change. Orders are confirmed upon payment verification."
+      },
+      grievance: {
+        title: "Grievance Officer",
+        content: "In compliance with consumer protection guidelines, if you have any complaints or grievances regarding your order, products, or services, you can contact our Grievance Officer:<br><br><strong>Name:</strong> Nilesh Shrivastava (Awin Enterprises)<br><strong>Location:</strong> Ujjain, Madhya Pradesh<br><strong>Contact:</strong> WhatsApp / Phone: +91-7828757646<br><strong>Working Hours:</strong> Monday to Saturday (9:00 AM – 8:00 PM)<br><br>We acknowledge all grievances within 48 hours and work to resolve them satisfactorily within one month."
+      }
+    };
+
+    function openPolicy(type) {
+      const policy = policyData[type];
+      if(!policy) return;
+      document.getElementById("policyTitle").innerText = policy.title;
+      document.getElementById("policyContent").innerHTML = policy.content;
+      document.getElementById("policyModal").classList.remove("hidden");
+    }
+
+    function closePolicy() {
+      document.getElementById("policyModal").classList.add("hidden");
+    }
+
+    const products = [
+      {"id": 207, "name": "Allpic Toilet Cleaner", "pack": "500 ml", "mrp": 115, "price": 104, "slug": "allpic-toilet-cleaner", "brand": "Altos", "inStock": true, "cat": "Home & Kitchen", "desc": "Toilet cleaner for toilet bowls. Follow the directions and precautions on the pack.", "img": "https://awinenterprises.in/images/altos/allpic-toilet-cleaner.webp"},
+      {"id": 206, "slug": "papaya-anti-blemish-face-pack", "name": "Papaya Anti-Blemish Face Pack", "pack": "60 gm", "mrp": 95, "price": 86, "cat": "Beauty & Skincare", "desc": "A Papaya and Saffron face pack for a facial care routine.", "img": "https://altosindia.net/public/product/v1-face-care/papaya-face-pack.jpg"},
+      { id: 1, slug: "tulsi-power", name: "Tulsi Power", pack: "20+10 ml", mrp: 300, price: 270, cat: "Medicines & Health", desc: "Immunity Booster Drops", img: "https://shop.altosindia.net/storagecache/product_image/234440797-6e4c58e5-e7aa-4c12-97fa-26497c9bd321.jpeg" },
+      { id: 2, slug: "aroplex", name: "Aroplex", pack: "30 Caps", mrp: 904, price: 814, cat: "Medicines & Health", desc: "For Perfect Health", img: "https://shop.altosindia.net/storagecache/product_image/243230340-25e30603-991c-4aae-8e0a-f3e27b481d47.jpeg" },
+      { id: 3, slug: "aroplex-plus-plus", name: "Aroplex Plus+", pack: "60 Caps", mrp: 1395, price: 1256, cat: "Medicines & Health", desc: "For Complete Health", img: "https://shop.altosindia.net/storagecache/product_image/234343202-78115e94-6b7f-4b39-8257-9b787470967f.jpeg" },
+      { id: 4, slug: "haldi-with-kesar-drops", name: "Haldi with Kesar Drops", pack: "20+10 ml", mrp: 150, price: 135, cat: "Medicines & Health", desc: "Boosts Immunity", img: "https://altosindia.net/public/product/v1-ayurvedic-medicine/haldi-with-kesar-drops1.jpg" },
+      { id: 5, slug: "netar-jyoti-eye-drops", name: "Netar Jyoti Eye Drops", pack: "10 ml", mrp: 81, price: 73, cat: "Medicines & Health", desc: "Relieves Irritation & Redness", img: "https://shop.altosindia.net/storagecache/product_image/232914560-444dbfa5-b193-457f-8e6d-94198f63da06.jpeg" },
+      { id: 6, slug: "stevia-drops", name: "Stevia Drops", pack: "10 ml", mrp: 145, price: 131, cat: "Medicines & Health", desc: "Natural Sugar Free Drops", img: "https://shop.altosindia.net/storagecache/product_image/252920914-8c06fc77-1006-4ad4-96ca-89b797164af4.jpeg" },
+      { id: 7, slug: "abhinol", name: "Abhinol", pack: "60 Caps", mrp: 348, price: 313, cat: "Medicines & Health", desc: "Controls Blood Sugar Level", img: "https://shop.altosindia.net/storagecache/product_image/234657044-81e0fe9b-4eba-4d50-a990-0e1ea8a912f6.jpeg" },
+      { id: 8, slug: "ashwagandha", name: "Ashwagandha", pack: "60 Caps", mrp: 345, price: 311, cat: "Medicines & Health", desc: "Increases Blood Cells & Energy", img: "https://shop.altosindia.net/storagecache/product_image/242739686-c97e6c00-01e2-49a0-91c6-e5b0576f00f1.jpeg" },
+      { id: 9, slug: "brahmi", name: "Brahmi", pack: "60 Caps", mrp: 314, price: 283, cat: "Medicines & Health", desc: "Improves Concentration", img: "https://shop.altosindia.net/storagecache/product_image/230814159-f7ead6b9-cd99-4559-87a1-9cea1731f758.jpeg" },
+      { id: 10, slug: "curcum-plus", name: "Curcum Plus", pack: "60 Caps", mrp: 1395, price: 1256, cat: "Medicines & Health", desc: "For Overall Vitality", img: "https://shop.altosindia.net/storagecache/product_image/233255132-10eec8c6-b6b1-4fa0-8959-24966fda3eda.jpeg" },
+      { id: 11, slug: "coloston-bovine-colostrum", name: "Coloston (Bovine Colostrum)", pack: "60 Caps", mrp: 627, price: 564, cat: "Medicines & Health", desc: "100% Bovine Colostrum Powder", img: "https://shop.altosindia.net/storagecache/product_image/235712619-aeea641a-c0b9-4567-8866-19e8c924d367.jpeg" },
+      { id: 12, slug: "neem", name: "Neem", pack: "60 Caps", mrp: 310, price: 279, cat: "Medicines & Health", desc: "Blood Purifier & Anti-Fungal", img: "https://shop.altosindia.net/storagecache/product_image/233935218-968d4183-32b5-43fc-82d7-5cb9eb3b7e58.jpeg" },
+      { id: 13, slug: "young-look", name: "Young Look", pack: "30 Caps", mrp: 285, price: 257, cat: "Medicines & Health", desc: "Keeps Skin Fair & Youthful", img: "https://shop.altosindia.net/storagecache/product_image/230521058-86abe931-2315-4405-a159-a23bd46a4303.jpeg" },
+      { id: 14, slug: "noni", name: "Noni", pack: "60 Caps", mrp: 633, price: 570, cat: "Medicines & Health", desc: "A Complete Health Balancer", img: "https://shop.altosindia.net/storagecache/product_image/243006800-40f2d971-b8bf-47ba-82d6-f4790d8d94e3.jpeg" },
+      { id: 15, slug: "flax-oil", name: "Flax Oil", pack: "90 Caps", mrp: 790, price: 711, cat: "Medicines & Health", desc: "Rich in Omega-3 Fatty Acids", img: "https://shop.altosindia.net/storagecache/product_image/230236288-7627b600-f819-4ce9-9e61-506e4783f9f7.jpeg" },
+      { id: 16, slug: "nutroprash", name: "Nutroprash", pack: "30 Caps", mrp: 290, price: 261, cat: "Medicines & Health", desc: "Supports Asthma & Bronchitis", img: "https://shop.altosindia.net/storagecache/product_image/243038022-77720d02-54dc-429d-9046-e01525752891.jpeg" },
+      { id: 17, slug: "garlicplus", name: "Garlicplus", pack: "60 Caps", mrp: 397, price: 357, cat: "Medicines & Health", desc: "Controls Blood Pressure & Cholesterol", img: "https://shop.altosindia.net/storagecache/product_image/231644472-06d57e7f-7ce1-4cac-a946-131f9fe567f6.jpeg" },
+      { id: 18, slug: "hadjod", name: "Hadjod", pack: "60 Caps", mrp: 220, price: 198, cat: "Medicines & Health", desc: "Bone & Joint Wellness", img: "https://shop.altosindia.net/storagecache/product_image/232630242-11c39019-877a-47ac-89ae-979fd032cf52.jpeg" },
+      { id: 19, slug: "ore-piles", name: "Ore Piles", pack: "60 Caps", mrp: 205, price: 185, cat: "Medicines & Health", desc: "Relieves Pain & Burning of Piles", img: "https://shop.altosindia.net/storagecache/product_image/231221966-b9423a69-3fe2-48b0-bc28-dc2faf21b9df.jpeg" },
+      { id: 20, slug: "nutroton", name: "Nutroton", pack: "60 Caps", mrp: 681, price: 613, cat: "Medicines & Health", desc: "Respiratory Health Support", img: "https://shop.altosindia.net/storagecache/product_image/234746125-baa05589-78fd-4474-94bb-e55867a4e7bd.jpeg" },
+      { id: 21, slug: "vig-r", name: "Vig-R", pack: "60 Caps", mrp: 740, price: 666, cat: "Medicines & Health", desc: "Comprehensive Women Health", img: "https://shop.altosindia.net/storagecache/product_image/242823429-6ff2172d-95ab-444c-b838-bde5ff1405a5.jpeg" },
+      { id: 22, slug: "paindon-plus", name: "Paindon-Plus", pack: "30 Caps", mrp: 230, price: 207, cat: "Medicines & Health", desc: "Severe Arthritic & Joint Pain Remedy", img: "https://shop.altosindia.net/storagecache/product_image/231508892-75ce1104-25a8-43c6-9a1c-04a659066b6a.jpeg" },
+      { id: 23, slug: "glucosamine-hcl", name: "Glucosamine HCL", pack: "60 Tabs", mrp: 885, price: 797, cat: "Medicines & Health", desc: "Enhances Joint Mobility", img: "https://shop.altosindia.net/storagecache/product_image/232415346-aff9a7c8-31b0-41ab-aeb3-54369b6f31ef.jpeg" },
+      { id: 24, slug: "ganoderma", name: "Ganoderma", pack: "60 Caps", mrp: 475, price: 428, cat: "Medicines & Health", desc: "Enhances Energy & Immune Function", img: "https://shop.altosindia.net/storagecache/product_image/234255247-3f829fa2-bb56-4562-a549-fe2337701cbd.jpeg" },
+      { id: 25, slug: "vigvit-capsules", name: "Vigvit Capsules", pack: "60 Caps", mrp: 681, price: 613, cat: "Medicines & Health", desc: "Promotes Body Strength", img: "https://shop.altosindia.net/storagecache/product_image/242927340-bbac77b3-7784-4b4e-8037-179aab418d0b.jpeg" },
+      { id: 26, slug: "rakatchap", name: "Rakatchap", pack: "60 Caps", mrp: 280, price: 252, cat: "Medicines & Health", desc: "Helps Maintain Blood Pressure", img: "https://shop.altosindia.net/storagecache/product_image/232031905-8a2c702c-c808-447e-9913-e7e9114eacd3.jpeg" },
+      { id: 27, slug: "wheatgrass", name: "Wheatgrass", pack: "30 Tabs", mrp: 225, price: 203, cat: "Medicines & Health", desc: "Energy & Immunity Booster", img: "https://shop.altosindia.net/storagecache/product_image/231604413-9e4f6dfe-b1c1-4625-a77d-1a10a0f7cfe2.jpeg" },
+      { id: 28, slug: "orecal-d", name: "Orecal-D", pack: "10x10 Tabs", mrp: 311, price: 280, cat: "Medicines & Health", desc: "Treats Calcium Deficiency", img: "https://shop.altosindia.net/storagecache/product_image/244953380-7097ed83-4e7a-4282-98b7-60601a29a1e6.jpeg" },
+      { id: 29, slug: "mc-vital", name: "Mc Vital", pack: "30 Tabs", mrp: 348, price: 313, cat: "Medicines & Health", desc: "With Ginseng, Vitamins & Minerals", img: "https://shop.altosindia.net/storagecache/product_image/240023743-57fa0af4-8f8e-4d51-8298-0ca0be09eeeb.jpeg" },
+      { id: 30, slug: "spirulina-30-tabs", name: "Spirulina (30 Tabs)", pack: "30 Tabs", mrp: 265, price: 239, cat: "Medicines & Health", desc: "Complete Daily Multivitamin", img: "https://shop.altosindia.net/storagecache/product_image/231844933-b8bc3ce8-7c05-4b57-a4a1-628e98c7c439.jpeg" },
+      { id: 31, slug: "shatavari", name: "Shatavari", pack: "30 Tabs", mrp: 245, price: 221, cat: "Medicines & Health", desc: "Womens Health & Balance", img: "https://shop.altosindia.net/storagecache/product_image/235313356-ddcb586d-5591-4bae-8d96-d92b981cd57f.jpeg" },
+      { id: 32, slug: "papita-giloy", name: "Papita Giloy", pack: "30 Tabs", mrp: 250, price: 225, cat: "Medicines & Health", desc: "Rapidly Increases Platelet Count", img: "https://shop.altosindia.net/storagecache/product_image/230140018-4a557646-fa94-4049-83ee-e606fb287e0b.jpeg" },
+      { id: 33, slug: "musli-pure", name: "Musli Pure", pack: "60 Caps", mrp: 475, price: 428, cat: "Medicines & Health", desc: "Extra Strength & Vitality", img: "https://shop.altosindia.net/storagecache/product_image/241535256-65dfb97f-06f3-4c05-85e7-fe01962df567.jpeg" },
+      { id: 34, slug: "korvin-oil", name: "Korvin Oil", pack: "15 ml", mrp: 315, price: 284, cat: "Medicines & Health", desc: "Renews Vigor & Strength", img: "https://shop.altosindia.net/storagecache/product_image/230534874-7060da48-9630-4e09-9e13-933e31a0b9a1.jpeg" },
+      { id: 35, slug: "slimming-young-look", name: "Slimming Young Look", pack: "60 Caps", mrp: 285, price: 257, cat: "Medicines & Health", desc: "Reduces Deposited Fat", img: "https://shop.altosindia.net/storagecache/product_image/235034508-f1de8ce6-c275-4961-9904-2fb4b6c5c390.jpeg" },
+      { id: 36, slug: "b-big", name: "B-Big", pack: "60 Caps", mrp: 405, price: 365, cat: "Medicines & Health", desc: "Supports Growth of Children", img: "https://shop.altosindia.net/storagecache/product_image/254114884-d5c1943c-fba8-40eb-a0ab-a1378012cce1.jpeg" },
+      { id: 37, slug: "chelated-iron", name: "Chelated Iron", pack: "60 Tabs", mrp: 405, price: 365, cat: "Medicines & Health", desc: "Formation of Red Blood Cells", img: "https://shop.altosindia.net/storagecache/product_image/232900762-1cae9593-1868-4abc-a20e-611c7b0e3464.jpeg" },
+      { id: 38, slug: "calcium-with-vitamin-d", name: "Calcium with Vitamin D", pack: "60 Tabs", mrp: 390, price: 351, cat: "Medicines & Health", desc: "Builds Strong Bones & Muscles", img: "https://shop.altosindia.net/storagecache/product_image/243309494-7e748196-a6ea-44a7-890f-a49e7710d5aa.jpeg" },
+      { id: 39, slug: "multi-collagen-complex", name: "Multi Collagen Complex", pack: "60 Tabs", mrp: 405, price: 365, cat: "Medicines & Health", desc: "Collagen & Skin Elasticity", img: "https://shop.altosindia.net/storagecache/product_image/233707993-c5cb6ec8-e8ee-4b04-993a-cd4e816f022c.jpeg" },
+      { id: 40, slug: "red-ginseng", name: "Red Ginseng", pack: "30 Caps", mrp: 427, price: 384, cat: "Medicines & Health", desc: "Boosts Energy & Focus", img: "https://shop.altosindia.net/storagecache/product_image/235329779-bf17c7f6-afb2-4362-a60f-37d9d7738605.jpeg" },
+      { id: 41, slug: "vigvit-ultra-k-10", name: "Vigvit Ultra K-10", pack: "60 Caps", mrp: 475, price: 428, cat: "Medicines & Health", desc: "Weight Loss & Metabolism Support", img: "https://shop.altosindia.net/storagecache/product_image/234520920-4da2aef7-beab-49a8-9dbd-b79137c93627.jpeg" },
+      { id: 42, slug: "ore-piles-ointment", name: "Ore Piles Ointment", pack: "30 gm", mrp: 95, price: 86, cat: "Powders & Nutrition", desc: "Relief from Pain & Burning", img: "https://shop.altosindia.net/storagecache/product_image/231715150-5e8ae6fe-c481-4b8d-9bfa-b2f7574f9dd9.jpeg" },
+      { id: 43, slug: "swadisht-powder", name: "Swadisht Powder", pack: "100 gm", mrp: 145, price: 131, cat: "Powders & Nutrition", desc: "Increases Appetite & Relieves Acidity", img: "https://shop.altosindia.net/storagecache/product_image/251559024-58cf0fd2-9521-4b2a-bd91-026058c0596d.jpeg" },
+      { id: 44, slug: "ayush-kwath-powder", name: "Ayush Kwath Powder", pack: "100 gm", mrp: 225, price: 203, cat: "Powders & Nutrition", desc: "Immunity Booster Powder", img: "https://shop.altosindia.net/storagecache/product_image/244316451-a0dd723b-4122-4b78-995d-3685330a7699.jpeg" },
+      { id: 45, slug: "itch-care-cream", name: "Itch Care Cream", pack: "30 gm", mrp: 87, price: 78, cat: "Powders & Nutrition", desc: "Fights Fungal & Bacterial Infections", img: "https://shop.altosindia.net/storagecache/product_image/232349598-b433f1c9-bc5d-462c-a270-31bf1112a49a.jpeg" },
+      { id: 46, slug: "oregain-weight-gainer", name: "Oregain Weight Gainer", pack: "200 gm", mrp: 755, price: 680, cat: "Powders & Nutrition", desc: "Soya Protein & Carbohydrates", img: "https://shop.altosindia.net/storagecache/product_image/245422003-354d6fad-1c49-4e60-a3fd-50886244ea06.jpeg" },
+      { id: 47, slug: "altos-balm", name: "Altos Balm", pack: "10 gm", mrp: 44, price: 40, cat: "Powders & Nutrition", desc: "Relief from Headache, Bodyache & Cold", img: "https://shop.altosindia.net/storagecache/product_image/230207747-f73def28-619c-4067-ab44-7e9bc808b0ed.jpeg" },
+      { id: 48, slug: "energize-powder", name: "Energize Powder", pack: "100 gm", mrp: 235, price: 212, cat: "Powders & Nutrition", desc: "Instant Energy All Day", img: "https://shop.altosindia.net/storagecache/product_image/240035106-ca380965-9dd5-426c-8558-7d05f0c2e78f.jpeg" },
+      { id: 49, slug: "nutro-dia-powder", name: "Nutro Dia Powder", pack: "100 gm", mrp: 542, price: 488, cat: "Powders & Nutrition", desc: "Herbal Powder to Control Diabetes", img: "https://shop.altosindia.net/storagecache/product_image/234828492-143060de-2d7c-4409-bb8b-ff444a66a0b9.jpeg" },
+      { id: 50, slug: "paindon-ointment", name: "Paindon Ointment", pack: "30 gm", mrp: 124, price: 112, cat: "Powders & Nutrition", desc: "Instant Joint & Muscle Pain Relief", img: "https://shop.altosindia.net/storagecache/product_image/232211968-8eaa886b-8e52-4838-ab15-aaf50b1735f3.jpeg" },
+      { id: 51, slug: "paindon-oil", name: "Paindon Oil", pack: "40 ml", mrp: 219, price: 197, cat: "Powders & Nutrition", desc: "Remedy for Severe Arthritis", img: "https://shop.altosindia.net/storagecache/product_image/231926827-48efb9d6-f4bb-4b20-8fa0-76710d4bf224.jpeg" },
+      { id: 52, slug: "oreslim-powder", name: "Oreslim Powder", pack: "200 gm", mrp: 665, price: 599, cat: "Powders & Nutrition", desc: "Burns Extra Stubborn Fat", img: "https://shop.altosindia.net/storagecache/product_image/230930954-2b2b7f4d-dfbd-408b-95ab-4efcbb982ae8.jpeg" },
+      { id: 53, slug: "choco-kidz-powder", name: "Choco Kidz Powder", pack: "200 gm", mrp: 225, price: 203, cat: "Powders & Nutrition", desc: "Vitamins & Minerals for Kids", img: "https://shop.altosindia.net/storagecache/product_image/253540935-0311fa63-3a37-42b0-95f0-65a17483a0fd.jpeg" },
+      { id: 54, slug: "vigvit-protein-powder-200g", name: "Vigvit Protein Powder (200g)", pack: "200 gm", mrp: 870, price: 783, cat: "Powders & Nutrition", desc: "Premium Protein for Health", img: "https://shop.altosindia.net/storagecache/product_image/230656117-2b3b804d-3ca0-4c35-af25-7f5869a81121.jpeg" },
+      { id: 55, slug: "jeewan-shakti", name: "Jeewan Shakti", pack: "500 gm", mrp: 455, price: 410, cat: "Powders & Nutrition", desc: "Natural Immunity Booster", img: "https://shop.altosindia.net/storagecache/product_image/231052734-43f9cf88-a94f-4e46-8f09-7b5f38643add.jpeg" },
+      { id: 56, slug: "consoft-powder", name: "Consoft Powder", pack: "100 gm", mrp: 280, price: 252, cat: "Powders & Nutrition", desc: "Relief from Chronic Constipation", img: "https://shop.altosindia.net/storagecache/product_image/235219736-7c7637cf-48f9-4ec1-afe4-c549deb9de2d.jpeg" },
+      { id: 57, slug: "multivitamin-gummies", name: "Multivitamin Gummies", pack: "30 Gummies", mrp: 405, price: 365, cat: "Powders & Nutrition", desc: "Superfood Minerals for Kids", img: "https://shop.altosindia.net/storagecache/product_image/243600819-7c65b2ab-6b50-4c0c-b76f-a268c69c555f.jpeg" },
+      { id: 58, slug: "shudh-shilajit-paste", name: "Shudh Shilajit Paste", pack: "20 gm", mrp: 999, price: 899, cat: "Powders & Nutrition", desc: "Pure Strength, Stamina & Power", img: "https://shop.altosindia.net/storagecache/product_image/234820161-af6ab9eb-79e6-45f0-ba03-920040c32df5.jpeg" },
+      { id: 59, slug: "oregel-aloevera", name: "Oregel Aloevera", pack: "500 ml", mrp: 640, price: 576, cat: "Syrups & Juices", desc: "Pure Digestive Detoxifier", img: "https://shop.altosindia.net/storagecache/product_image/234927017-850d963b-69c2-40e2-b3ac-cc39599f68db.jpeg" },
+      { id: 60, slug: "ore-amla-gel", name: "Ore Amla Gel", pack: "500 ml", mrp: 235, price: 212, cat: "Syrups & Juices", desc: "Pure Source of Vitamin C", img: "https://shop.altosindia.net/storagecache/product_image/235827476-ed1790a3-6b56-4d8d-89e3-c056eb45b6af.jpeg" },
+      { id: 61, slug: "oregel-diab", name: "Oregel Diab", pack: "500 ml", mrp: 395, price: 356, cat: "Syrups & Juices", desc: "Herbal Sugar Balancer", img: "https://shop.altosindia.net/storagecache/product_image/231133914-2c266ae3-6b17-4be5-9fed-ad2eee0c638c.jpeg" },
+      { id: 62, slug: "noni-juice", name: "Noni Juice", pack: "500 ml", mrp: 630, format: "500 ml", price: 567, cat: "Syrups & Juices", desc: "Immunity & Cellular Balance", img: "https://shop.altosindia.net/storagecache/product_image/231230459-7181c41a-0c5f-471b-b781-38016878d2a0.jpeg" },
+      { id: 63, slug: "baby-oil", name: "Baby Oil", pack: "100 ml", mrp: 143, price: 129, cat: "Syrups & Juices", desc: "Keeps Baby Bones & Muscles Strong", img: "https://shop.altosindia.net/storagecache/product_image/242819619-74e5efe4-f0a7-403e-b9de-84e11a22fa0f.jpeg" },
+      { id: 64, slug: "vigvit-multivitamin-syrup", name: "Vigvit Multivitamin Syrup", pack: "200 ml", mrp: 165, price: 149, cat: "Syrups & Juices", desc: "Sugar Free Complete Health Tonic", img: "https://shop.altosindia.net/storagecache/product_image/250752197-2ec4ee0b-b0c5-40c9-bd0f-e8f8b59f6f3c.jpeg" },
+      { id: 65, slug: "abhiliv-liver-syrup", name: "Abhiliv Liver Syrup", pack: "200 ml", mrp: 180, price: 162, cat: "Syrups & Juices", desc: "Sugar Free Liver Support", img: "https://shop.altosindia.net/storagecache/product_image/233037453-e7782173-96d4-425d-a5d5-109832317b95.jpeg" },
+      { id: 66, slug: "abhizyme-syrup", name: "Abhizyme Syrup", pack: "200 ml", mrp: 180, price: 162, cat: "Syrups & Juices", desc: "Quick Relief from Gas & Indigestion", img: "https://shop.altosindia.net/storagecache/product_image/231331723-010b5ee0-ce0d-4dc8-b0a2-909ac6cb4de5.jpeg" },
+      { id: 67, slug: "heal-cough-syrup-sugar-free", name: "Heal Cough Syrup (Sugar Free)", pack: "100 ml", mrp: 100, price: 90, cat: "Syrups & Juices", desc: "Sugar Free Cough Remedy", img: "https://shop.altosindia.net/storagecache/product_image/263709682-5f256df3-6047-421e-99d8-303085b88698.jpeg" },
+      { id: 68, slug: "blood-purifier-syrup", name: "Blood Purifier Syrup", pack: "200 ml", mrp: 160, price: 144, cat: "Syrups & Juices", desc: "Removes Impurities from Blood", img: "https://shop.altosindia.net/storagecache/product_image/234627591-5a7db8d6-1495-484a-9699-fed28f46cdbf.jpeg" },
+      { id: 69, slug: "breen-syrup", name: "Breen Syrup", pack: "200 ml", mrp: 160, price: 144, cat: "Syrups & Juices", desc: "Enhances Memory & Brain Function", img: "https://shop.altosindia.net/storagecache/product_image/230856690-dfd78eaf-c597-43e1-b477-e8b3db480c32.jpeg" },
+      { id: 70, slug: "hridya-care-syrup", name: "Hridya Care Syrup", pack: "200 ml", mrp: 152, price: 137, cat: "Syrups & Juices", desc: "Formulated for Healthy Heart", img: "https://shop.altosindia.net/storagecache/product_image/235358724-6ddbd1d2-76ec-4012-b743-ad78a3ffb204.jpeg" },
+      { id: 71, slug: "sundri-jiwan", name: "Sundri Jiwan", pack: "200 ml", mrp: 180, price: 162, cat: "Syrups & Juices", desc: "Herbal Wellness for Women", img: "https://shop.altosindia.net/storagecache/product_image/230046525-566c515f-d8de-4ed2-ad2d-e417dd1c9df5.jpeg" },
+      { id: 72, slug: "uripure-syrup", name: "Uripure Syrup", pack: "200 ml", mrp: 320, price: 288, cat: "Syrups & Juices", desc: "Helps Stimulate Kidney Stones (Sugar Free)", img: "https://shop.altosindia.net/storagecache/product_image/245834399-f4dbd39d-2c36-487f-b4ac-1cb4ea29754d.jpeg" },
+      { id: 73, slug: "shilajit-syrup", name: "Shilajit Syrup", pack: "200 ml", mrp: 1045, price: 941, cat: "Syrups & Juices", desc: "Relieves Weakness & Builds Immunity", img: "https://shop.altosindia.net/storagecache/product_image/231507282-ccad2dfc-fa7a-4fd4-aa03-e979f457b6f3.jpeg" },
+      { id: 74, slug: "tulsi-syrup", name: "Tulsi Syrup", pack: "200 ml", mrp: 182, price: 164, cat: "Syrups & Juices", desc: "Herbal Immunity Booster", img: "https://shop.altosindia.net/storagecache/product_image/234913928-f555673d-a51a-4f26-9c5f-d929d128f988.jpeg" },
+      { id: 75, slug: "giloy-syrup", name: "Giloy Syrup", pack: "200 ml", mrp: 152, price: 137, cat: "Syrups & Juices", desc: "Increases Platelet Count", img: "https://shop.altosindia.net/storagecache/product_image/233512400-a0b7d898-6846-436a-8c2d-cb0a7d29be85.jpeg" },
+      { id: 76, slug: "ft-15-fruit-extract", name: "FT-15 Fruit Extract", pack: "500 ml", mrp: 1040, price: 936, cat: "Syrups & Juices", desc: "Premium Concentrated Fruit Extract", img: "https://shop.altosindia.net/storagecache/product_image/230257751-65334e21-89ec-40aa-8165-6346d3acf534.jpeg" },
+      { id: 77, slug: "charcoal-face-wash", name: "Charcoal Face Wash", pack: "60 ml", mrp: 109, price: 98, cat: "Beauty & Skincare", desc: "Pollution Control & Deep Cleansing", img: "https://shop.altosindia.net/storagecache/product_image/231809127-31179eb4-ffac-4a41-9b2b-23a96468948d.jpeg" },
+      { id: 78, slug: "ubtan-face-wash", name: "Ubtan Face Wash", pack: "60 ml", mrp: 165, price: 149, cat: "Beauty & Skincare", desc: "Tan Removal & Radiant Glow", img: "https://shop.altosindia.net/storagecache/product_image/230222375-e099c679-be9e-420c-a8c7-a2c1864f22aa.jpeg" },
+      { id: 79, slug: "skin-glow-face-wash", name: "Skin Glow Face Wash", pack: "60 ml", mrp: 121, price: 109, cat: "Beauty & Skincare", desc: "Fresh & Glowing Complexion", img: "https://shop.altosindia.net/storagecache/product_image/235713283-653d75db-691a-4723-baf7-69fa0e302a6e.jpeg" },
+      { id: 80, slug: "rice-water-face-wash", name: "Rice Water Face Wash", pack: "60 ml", mrp: 120, price: 108, cat: "Beauty & Skincare", desc: "Ultra Radiant Skin Brightener", img: "https://shop.altosindia.net/storagecache/product_image/240216850-56c1af2f-aaf1-48fd-b17f-072edd9ede45.jpeg" },
+      { id: 81, slug: "vitamin-c-face-wash", name: "Vitamin C Face Wash", pack: "50 ml", mrp: 160, price: 144, cat: "Beauty & Skincare", desc: "Brightening & Exfoliation", img: "https://shop.altosindia.net/storagecache/product_image/231552208-a050ba5b-ee44-426e-9e70-10b54da6f5f0.jpeg" },
+      { id: 82, slug: "gold-face-wash", name: "Gold Face Wash", pack: "60 ml", mrp: 115, price: 104, cat: "Beauty & Skincare", desc: "Luxurious Glow & Shine", img: "https://shop.altosindia.net/storagecache/product_image/230032228-1cc740c0-730c-493c-8e52-10815b1ec150.jpeg" },
+      { id: 83, slug: "neem-face-wash-60ml", name: "Neem Face Wash (60ml)", pack: "60 ml", mrp: 121, price: 109, cat: "Beauty & Skincare", desc: "Prevents Pimples & Blemishes", img: "https://shop.altosindia.net/storagecache/product_image/230158582-8c885360-656d-4e2f-9aa7-495aeac57d1c.jpeg" },
+      { id: 84, slug: "papaya-face-wash-60ml", name: "Papaya Face Wash (60ml)", pack: "60 ml", mrp: 135, price: 122, cat: "Beauty & Skincare", desc: "Clean, Fresh & Glowing Skin", img: "https://shop.altosindia.net/storagecache/product_image/230350314-66882881-e413-4ac5-ac76-a0ced8d0afda.jpeg" },
+      { id: 85, slug: "apricot-scrub", name: "Apricot Scrub", pack: "60 gm", mrp: 110, price: 99, cat: "Beauty & Skincare", desc: "Prevents Blackheads & Cleans Pores", img: "https://shop.altosindia.net/storagecache/product_image/231453148-93a2977c-decb-41c8-8e47-03f254fb5542.jpeg" },
+      { id: 86, slug: "mini-facial-kit", name: "Mini Facial Kit", pack: "33 gm", mrp: 115, price: 104, cat: "Beauty & Skincare", desc: "Gold, Papaya, Wine & Charcoal Kit", img: "https://shop.altosindia.net/storagecache/product_image/241253639-3b943f07-f7c8-4efc-9ef6-9bb1ca1c0b05.jpeg" },
+      { id: 87, slug: "facial-kit-papaya-or-gold", name: "Facial Kit (Papaya or Gold)", pack: "139 gm", mrp: 325, price: 293, cat: "Beauty & Skincare", desc: "Salon Grade Treatment", img: "https://shop.altosindia.net/storagecache/product_image/241253639-3b943f07-f7c8-4efc-9ef6-9bb1ca1c0b05.jpeg" },
+      { id: 88, slug: "vitamin-c-serum", name: "Vitamin C Serum", pack: "15 ml", mrp: 235, price: 212, cat: "Beauty & Skincare", desc: "Enriched with Niacinamide", img: "https://shop.altosindia.net/storagecache/product_image/242700442-a9aa54ba-8284-4d66-9e52-23e70811dd43.jpeg" },
+      { id: 89, slug: "gold-bleach-cream-339g", name: "Gold Bleach Cream (339g)", pack: "339 gm", mrp: 349, price: 314, cat: "Beauty & Skincare", desc: "Salon Pack Golden Glow", img: "https://shop.altosindia.net/storagecache/product_image/242607039-3edd9a54-d7fb-45a2-a5da-07cd50400af0.jpeg" },
+      { id: 90, slug: "beauty-face-pack", name: "Beauty Face Pack", pack: "100 gm", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "Soft, Fair & Glowing Skin", img: "https://shop.altosindia.net/storagecache/product_image/232114505-e0d912b3-12a8-4956-8722-b890b18771c0.jpeg" },
+      { id: 91, slug: "rose-water", name: "Rose Water", pack: "120 ml", mrp: 75, price: 68, cat: "Beauty & Skincare", desc: "Maintains Natural Skin pH", img: "https://shop.altosindia.net/storagecache/product_image/235855229-001edb1f-fcc8-4c20-95ec-507bcfd81a4f.jpeg" },
+      { id: 92, slug: "rose-and-gold-toner", name: "Rose & Gold Toner", pack: "100 ml", mrp: 135, price: 122, cat: "Beauty & Skincare", desc: "Deep Cleansing & Tone Enhancer", img: "https://shop.altosindia.net/storagecache/product_image/234946580-7fc6b102-a7ce-4d26-877d-3b96e5e927c9.jpeg" },
+      { id: 93, slug: "aloe-vera-moisturising-gel-100g", name: "Aloe Vera Moisturising Gel (100g)", pack: "100 gm", mrp: 145, price: 131, cat: "Beauty & Skincare", desc: "Pure Hydrating Gel", img: "https://shop.altosindia.net/storagecache/product_image/233342252-1a88bbf2-7cd2-4a07-81b8-402cf9a3b43c.jpeg" },
+      { id: 94, slug: "honey-and-saffron-body-lotion", name: "Honey & Saffron Body Lotion", pack: "100 ml", mrp: 120, price: 108, cat: "Beauty & Skincare", desc: "Moisturizes Skin Deeply", img: "https://shop.altosindia.net/storagecache/product_image/230244716-d0bfe2be-6f7f-48ea-8c77-d0a59f3cf376.jpeg" },
+      { id: 95, slug: "cold-cream", name: "Cold Cream (Skin White)", pack: "75 gm", mrp: 110, price: 99, cat: "Beauty & Skincare", desc: "Aloe Vera Moisturiser for Dry Skin", img: "https://altosindia.net/public/product/v1-face-care/cold-cream.jpg" },
+      { id: 96, slug: "anti-acne-and-pimple-cream", name: "Anti Acne & Pimple Cream", pack: "50 gm", mrp: 219, price: 197, cat: "Beauty & Skincare", desc: "Prevents Breakouts & Acne", img: "https://shop.altosindia.net/storagecache/product_image/232722351-476f2a55-989c-4d99-ab1b-43c783a12635.jpeg" },
+      { id: 97, slug: "anti-blemishing-cream", name: "Anti Blemishing Cream", pack: "50 gm", mrp: 345, price: 311, cat: "Beauty & Skincare", desc: "For Spotless Glowing Skin", img: "https://shop.altosindia.net/storagecache/product_image/233028978-f7658c0f-9077-4869-8217-930a9c2476c4.jpeg" },
+      { id: 98, slug: "anti-wrinkle-cream", name: "Anti Wrinkle Cream", pack: "50 gm", mrp: 345, price: 311, cat: "Beauty & Skincare", desc: "Reduces Signs of Ageing", img: "https://shop.altosindia.net/storagecache/product_image/232918767-94a5b88c-5fdc-46f0-8a3c-abdfbba5c537.jpeg" },
+      { id: 99, slug: "under-eye-cream", name: "Under Eye Cream", pack: "10 gm", mrp: 150, price: 135, cat: "Beauty & Skincare", desc: "Reduces Dark Circles & Puffiness", img: "https://shop.altosindia.net/storagecache/product_image/244108634-328f45ee-795d-411a-a83a-eeecbca264e2.jpeg" },
+      { id: 100, slug: "d-tan-face-pack", name: "D-Tan Face Pack", pack: "60 gm", mrp: 165, price: 149, cat: "Beauty & Skincare", desc: "Removes Stubborn Sun Tan", img: "https://shop.altosindia.net/storagecache/product_image/251152641-e1b127f7-53a2-4ed7-853b-405f8a591144.jpeg" },
+      { id: 101, slug: "sunscreen-spf-30", name: "Sunscreen SPF-30", pack: "60 gm", mrp: 165, price: 149, cat: "Beauty & Skincare", desc: "UVA UVB Sun Protection", img: "https://shop.altosindia.net/storagecache/product_image/241558108-2923089b-34ee-41dc-be11-e3a6a65dea13.jpeg" },
+      { id: 102, slug: "sunscreen-spf-50", name: "Sunscreen SPF-50", pack: "60 gm", mrp: 325, price: 293, cat: "Beauty & Skincare", desc: "High Protection Sun Guard", img: "https://shop.altosindia.net/storagecache/product_image/230245448-66109dac-43f1-42a6-8362-e1b79da29fd9.jpeg" },
+      { id: 103, slug: "bb-cream", name: "BB Cream", pack: "30 gm", mrp: 249, price: 224, cat: "Beauty & Skincare", desc: "5 in 1 Daily Foundation Glow", img: "https://shop.altosindia.net/storagecache/product_image/240524705-62371be3-0623-4913-8495-3426bbfd3811.jpeg" },
+      { id: 104, slug: "liquid-suhaag-sindoor", name: "Liquid Suhaag Sindoor", pack: "5 ml", mrp: 150, price: 135, cat: "Beauty & Skincare", desc: "Red & Maroon Long Lasting", img: "https://shop.altosindia.net/storagecache/product_image/241338493-9b4b5c99-ce6a-4bed-8e56-61a756ba0ca1.jpeg" },
+      { id: 105, slug: "ultra-black-kajal", name: "Ultra Black Kajal", pack: "8 ml", mrp: 199, price: 179, cat: "Beauty & Skincare", desc: "Waterproof & Smudge-free", img: "https://shop.altosindia.net/storagecache/product_image/242051497-6749f230-3bf7-487d-9a21-b07dda633079.jpeg" },
+      { id: 106, slug: "matte-lipstick", name: "Matte Lipstick", pack: "4 gm", mrp: 225, price: 203, cat: "Beauty & Skincare", desc: "Rich Vibrant Shades", img: "https://shop.altosindia.net/storagecache/product_image/243303166-312ce6f5-3897-48fc-b9c0-cc3c71ce9716.jpeg" },
+      { id: 107, slug: "nail-polish", name: "Nail Polish", pack: "8 ml", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "High Gloss Vibrant Nails", img: "https://shop.altosindia.net/storagecache/product_image/240308777-fe7b2db3-9a32-4814-8e80-310548d1fab1.jpeg" },
+      { id: 108, slug: "sanitary-pads-with-anion-chip", name: "Sanitary Pads with Anion Chip", pack: "7 Pads", mrp: 110, price: 99, cat: "Beauty & Skincare", desc: "Anti-Bacterial Protection", img: "https://shop.altosindia.net/storagecache/product_image/233833399-e6fd0f11-36e9-4bee-88a8-0e8dc2d81754.jpeg" },
+      { id: 109, slug: "onion-black-seed-hair-oil", name: "Onion Black Seed Hair Oil", pack: "100 ml", mrp: 248, price: 223, cat: "Hair & Grooming", desc: "7 Essential Oils for Regrowth", img: "https://shop.altosindia.net/storagecache/product_image/234016957-97cfdab3-75be-4f3d-8b25-096541ae1dab.jpeg" },
+      { id: 110, slug: "bhringraj-hair-oil", name: "Bhringraj Hair Oil", pack: "100 ml", mrp: 332, price: 299, cat: "Hair & Grooming", desc: "Intensive Hair Fall Therapy", img: "https://shop.altosindia.net/storagecache/product_image/230201055-28bcd540-d8c9-47d2-84e5-60d1ceb24bc1.jpeg" },
+      { id: 111, slug: "9-in-1-hair-oil-100ml", name: "9 in 1 Hair Oil (100ml)", pack: "100 ml", mrp: 225, price: 203, cat: "Hair & Grooming", desc: "Repairs Damaged Hair", img: "https://shop.altosindia.net/storagecache/product_image/243241860-0d9a39e7-a07f-4fb7-89cb-d4d8843985db.jpeg" },
+      { id: 112, slug: "vitalizer-hair-oil", name: "Vitalizer Hair Oil", pack: "120 ml", mrp: 400, price: 360, cat: "Hair & Grooming", desc: "Controls Dandruff & Hair Fall", img: "https://shop.altosindia.net/storagecache/product_image/245839596-5206dc6b-9bad-49d1-9bcf-91420e3d53d9.jpeg" },
+      { id: 113, slug: "amla-hair-oil", name: "Amla Hair Oil", pack: "120 ml", mrp: 149, price: 134, cat: "Hair & Grooming", desc: "Promotes Strong Hair Growth", img: "https://shop.altosindia.net/storagecache/product_image/234445808-f4536bd4-5065-4e78-b63a-861f2633385a.jpeg" },
+      { id: 114, slug: "long-hair-shampoo", name: "Long Hair Shampoo", pack: "200 ml", mrp: 224, price: 202, cat: "Hair & Grooming", desc: "For Thicker, Stronger Hair", img: "https://shop.altosindia.net/storagecache/product_image/231631435-0a2d4e42-2dce-4679-a1d4-280b1a1d923b.jpeg" },
+      { id: 115, slug: "prevent-hair-fall-shampoo", name: "Prevent Hair Fall Shampoo", pack: "200 ml", mrp: 224, price: 202, cat: "Hair & Grooming", desc: "Significantly Reduces Hair Fall", img: "https://shop.altosindia.net/storagecache/product_image/244953341-886c29da-8f0c-4a7c-bff4-bc8fc0c09363.jpeg" },
+      { id: 116, slug: "amla-shikakai-shampoo", name: "Amla Shikakai Shampoo", pack: "200 ml", mrp: 330, price: 297, cat: "Hair & Grooming", desc: "Natural Shiny & Silky Hair", img: "https://shop.altosindia.net/storagecache/product_image/231120832-ad0f769e-224e-4dea-a092-6b5ae682d024.jpeg" },
+      { id: 117, slug: "anti-dandruff-shampoo", name: "Anti Dandruff Shampoo", pack: "200 ml", mrp: 224, price: 202, cat: "Hair & Grooming", desc: "Nourishes Scalp & Clears Flakes", img: "https://shop.altosindia.net/storagecache/product_image/231824333-dae13eca-0bf2-43c8-9f50-4ff601337405.jpeg" },
+      { id: 118, slug: "hair-conditioner", name: "Hair Conditioner", pack: "200 ml", mrp: 190, price: 171, cat: "Hair & Grooming", desc: "Soft & Silky Smooth Hair", img: "https://shop.altosindia.net/storagecache/product_image/242846461-aa1879c3-6241-4cbb-b3ec-d423b69ad343.jpeg" },
+      { id: 119, slug: "hair-serum", name: "Hair Serum", pack: "100 ml", mrp: 225, price: 203, cat: "Hair & Grooming", desc: "Non-Greasy Natural Shine", img: "https://shop.altosindia.net/storagecache/product_image/233517819-d81f64d1-c16c-42b4-87e2-8408dc648e24.jpeg" },
+      { id: 120, slug: "very-cool-hair-oil", name: "Very Cool Hair Oil", pack: "100 ml", mrp: 121, price: 109, cat: "Hair & Grooming", desc: "Cooling Stress & Tension Relief", img: "https://shop.altosindia.net/storagecache/product_image/230320906-87e03ae8-2a72-4403-8120-022171f1db31.jpeg" },
+      { id: 121, slug: "herbal-shaving-cream", name: "Herbal Shaving Cream", pack: "90 gm", mrp: 90, price: 81, cat: "Hair & Grooming", desc: "Cool & Smooth Shave", img: "https://shop.altosindia.net/storagecache/product_image/250015143-9a6dddd1-e621-4c4d-a99b-2d435efb4d72.jpeg" },
+      { id: 122, slug: "oremol-natural-black-hair", name: "Oremol Natural Black Hair", pack: "100 ml", mrp: 100, price: 90, cat: "Hair & Grooming", desc: "Gives Naturally Black Hair", img: "https://shop.altosindia.net/storagecache/product_image/233352321-d029a7e8-6b6d-4dba-8dfa-993aad8de952.jpeg" },
+      { id: 123, slug: "zordan-black-hill-body-deodorant", name: "Zordan Black Hill Body Deodorant", pack: "150 ml", mrp: 199, price: 179, cat: "Hair & Grooming", desc: "Bold Black Hill Fragrance", img: "https://shop.altosindia.net/storagecache/product_image/253400216-272270d1-1938-4950-b54d-7b78fdfe48a7.jpeg" },
+      { id: 124, slug: "perfume-blueflash-or-black-velvet", name: "Perfume (Blueflash or Black Velvet)", pack: "50 ml", mrp: 555, price: 500, cat: "Hair & Grooming", desc: "Long-Lasting Freshness", img: "https://shop.altosindia.net/storagecache/product_image/254937895-1830388b-6be7-4762-9c02-edcf81ea3c28.jpeg" },
+      { id: 125, slug: "oredent-toothpaste-100g", name: "Oredent Toothpaste (100g)", pack: "100 gm", mrp: 130, price: 117, cat: "Home & Kitchen", desc: "Double Protection Formula", img: "https://shop.altosindia.net/storagecache/product_image/231809893-f2469fff-abb5-45f2-a3e4-80354d24dfb8.jpeg" },
+      { id: 126, slug: "orefresh-gel", name: "Orefresh Gel", pack: "100 gm", mrp: 135, price: 122, cat: "Home & Kitchen", desc: "Instant Fresh Breath Gel", img: "https://shop.altosindia.net/storagecache/product_image/231736620-016cb5ab-c64e-44f7-9d90-030b0088fb50.jpeg" },
+      { id: 127, slug: "antiseptic-hand-wash", name: "Antiseptic Hand Wash", pack: "250 ml", mrp: 97, price: 87, cat: "Home & Kitchen", desc: "Germ Protection & Cleanliness", img: "https://shop.altosindia.net/storagecache/product_image/241521574-45566806-2c87-4b00-9375-5384ca1b8a24.jpeg" },
+      { id: 128, slug: "kesar-soap", name: "Kesar Soap", pack: "75 gm", mrp: 60, price: 54, cat: "Home & Kitchen", desc: "Soft & Nourished Skin Bar", img: "https://shop.altosindia.net/storagecache/product_image/232249129-ab31862c-ceb2-4190-96ad-463df4ffd567.jpeg" },
+      { id: 129, slug: "shine-bathing-bar", name: "Shine Bathing Bar", pack: "75 gm", mrp: 55, price: 50, cat: "Home & Kitchen", desc: "Daily Refreshing Soap", img: "https://shop.altosindia.net/storagecache/product_image/231902954-4c09ada6-77e4-4299-8675-9f3fe35bb8fa.jpeg" },
+      { id: 130, slug: "dish-top-gel", name: "Dish Top Gel", pack: "250 ml", mrp: 155, price: 140, cat: "Home & Kitchen", desc: "Heavy Grease Dishwashing Gel", img: "https://shop.altosindia.net/storagecache/product_image/231021489-88892149-62b2-4635-9aca-68c23fa6d512.jpeg" },
+      { id: 131, slug: "glass-cleaner", name: "Glass Cleaner", pack: "500 ml", mrp: 130, price: 117, cat: "Home & Kitchen", desc: "Streak-Free glass Sparkle", img: "/images/altos/glass-cleaner-optimized.webp" },
+      { id: 132, slug: "floor-cleaner", name: "Floor Cleaner", pack: "500 ml", mrp: 170, price: 153, cat: "Home & Kitchen", desc: "Disinfectant Surface Cleaner", img: "https://shop.altosindia.net/storagecache/product_image/252951666-5a878207-116e-49ad-ab7e-2ac6212e5c87.jpeg" },
+      { id: 133, slug: "enrich-gold-tea", name: "Enrich Gold Tea", pack: "250 gm", mrp: 265, price: 239, cat: "Home & Kitchen", desc: "Bright Blend Rich Aroma Tea", img: "https://shop.altosindia.net/storagecache/product_image/232717290-fcd3e52c-a447-4f3f-8e8e-de7f10c5e430.jpeg" },
+      { id: 134, slug: "kadak-tea", name: "Kadak Tea", pack: "250 gm", mrp: 175, price: 158, cat: "Home & Kitchen", desc: "Totally Refreshing Kadak Chai", img: "https://shop.altosindia.net/storagecache/product_image/233040737-7c3d8d12-a67b-4feb-8ad9-9cf3725e85f4.jpeg" },
+      { id: 135, slug: "pure-turmeric-powder-haldi", name: "Pure Turmeric Powder (Haldi)", pack: "100 gm", mrp: 66, price: 59, cat: "Home & Kitchen", desc: "100% Pure Natural Spice", img: "https://shop.altosindia.net/storagecache/product_image/241540744-ffcedfe3-037b-4383-ab65-5b62922cb282.jpeg" },
+      { id: 136, slug: "pure-red-chilli-powder-lal-mirch", name: "Pure Red Chilli Powder (Lal Mirch)", pack: "100 gm", mrp: 70, price: 63, cat: "Home & Kitchen", desc: "100% Natural Red Spice", img: "https://shop.altosindia.net/storagecache/product_image/241927847-16f35b8a-77d6-49e7-a17b-7858a18c647d.jpeg" },
+      { id: 137, slug: "pure-coriander-powder-dhania", name: "Pure Coriander Powder (Dhania)", pack: "100 gm", mrp: 46, price: 41, cat: "Home & Kitchen", desc: "100% Natural Spice", img: "https://shop.altosindia.net/storagecache/product_image/242058094-15c90df2-87c0-42a5-878b-6d0ac28f81ec.jpeg" },
+      { id: 138, slug: "pure-garam-masala", name: "Pure Garam Masala", pack: "100 gm", mrp: 105, price: 95, cat: "Home & Kitchen", desc: "100% Pure Rich Spice Blend", img: "https://shop.altosindia.net/storagecache/product_image/250644378-eba7b338-0a60-428f-b7fd-bab1dba4264f.jpeg" },
+      { id: 139, slug: "rice-bran-oil", name: "Rice Bran Oil", pack: "1 Ltr", mrp: 320, price: 288, cat: "Home & Kitchen", desc: "Heart-Healthy Cooking Oil", img: "https://shop.altosindia.net/storagecache/product_image/232440206-fa8cdae4-6a24-4827-b7f6-96c8eaff1d11.jpeg" },
+      { id: 140, slug: "royal-chandan-premium-agarbatti", name: "Royal Chandan Premium Agarbatti", pack: "15 pcs", mrp: 20, price: 18, cat: "Home & Kitchen", desc: "Sandalwood Incense Sticks", img: "https://shop.altosindia.net/storagecache/product_image/252545163-78fd4956-3158-4cd7-9bf0-4ac8db1ee9f3.jpeg" },
+      { id: 141, slug: "altos-care-pest-control", name: "Altos Care Pest Control", pack: "250 ml", mrp: 530, price: 477, cat: "Agri & Veterinary", desc: "Effective Plant Pest Control", img: "https://altosindia.net/public/product/v1-agriculture-aid/alto-care.jpg" },
+      { id: 142, slug: "alvet-cal-for-animals", name: "Alvet-Cal for Animals", pack: "500 ml", mrp: 160, price: 144, cat: "Agri & Veterinary", desc: "Essential Animal Multivitamin", img: "https://altosindia.net/public/product/v1-agriculture-aid/alvet-cal.jpg" },
+      { id: 143, slug: "oregon-80-water-retention", name: "Oregon-80 Water Retention", pack: "500 ml", mrp: 685, price: 617, cat: "Agri & Veterinary", desc: "Increases Soil Water Retention", img: "https://altosindia.net/public/product/v1-agriculture-aid/oregon-80.jpg" },
+      { id: 144, slug: "alto-gro-plant-booster", name: "Alto Gro Plant Booster", pack: "250 ml", mrp: 578, price: 520, cat: "Agri & Veterinary", desc: "Promotes Rapid Plant Growth", img: "https://altosindia.net/public/product/v1-agriculture-aid/alto-gro.jpg" },
+      { id: 145, slug: "haldi-pure-capsule", name: "Haldi Pure Capsule", pack: "60 caps", mrp: 372, price: 335, cat: "Medicines & Health", desc: "Immunity & Vitality Support", img: "https://shop.altosindia.net/storagecache/product_image/232909711-b1da22da-a8c7-43b9-911d-f685f24fdaf0.jpeg" },
+      { id: 146, slug: "liquid-sindur-red-red", name: "Liquid Sindur Red - Red", pack: "5 ml", mrp: 150, price: 135, cat: "Beauty & Skincare", desc: "Rich Long Lasting Sindur", img: "https://shop.altosindia.net/storagecache/product_image/241338493-9b4b5c99-ce6a-4bed-8e56-61a756ba0ca1.jpeg" },
+      { id: 147, slug: "zordan-blue-hill-body-deodorant", name: "Zordan Blue Hill Body Deodorant", pack: "150 ml", mrp: 199, price: 179, cat: "Hair & Grooming", desc: "All-Day Invigorating Fragrance", img: "https://shop.altosindia.net/storagecache/product_image/252855116-ce4b921c-567f-462d-9342-9fb9436fe64b.jpeg" },
+      { id: 148, slug: "altocare", name: "Altocare", pack: "250 ml", mrp: 530, price: 477, cat: "Agri & Veterinary", desc: "Effective Plant Pest Control", img: "https://altosindia.net/public/product/v1-agriculture-aid/alto-care.jpg" },
+      { id: 149, slug: "oregon-80-sa-agent", name: "Oregon 80 (SA Agent)", pack: "500 ml", mrp: 685, price: 617, cat: "Agri & Veterinary", desc: "Increases Soil Water Retention", img: "https://altosindia.net/public/product/v1-agriculture-aid/oregon-80.jpg" },
+      { id: 150, slug: "coloston-capsule", name: "Coloston Capsule", pack: "60 cap", mrp: 627, price: 564, cat: "Medicines & Health", desc: "100% Bovine Colostrum Powder", img: "https://shop.altosindia.net/storagecache/product_image/235712619-aeea641a-c0b9-4567-8866-19e8c924d367.jpeg" },
+      { id: 151, slug: "to-breen-capsule-altos", name: "To Breen Capsule (Altos)", pack: "60 cap", mrp: 448, price: 403, cat: "Medicines & Health", desc: "Improves Brain Memory", img: "https://shop.altosindia.net/storagecache/product_image/254251621-75fcc6f9-de79-47be-8b58-4534a5a91438.jpeg" },
+      { id: 152, slug: "ultra-k-10-capsule-fat-burn", name: "Ultra K-10 Capsule (Fat Burn)", pack: "60 Caps", mrp: 475, price: 428, cat: "Medicines & Health", desc: "Weight Loss & Metabolism Support", img: "https://shop.altosindia.net/storagecache/product_image/234520920-4da2aef7-beab-49a8-9dbd-b79137c93627.jpeg" },
+      { id: 153, slug: "black-kajal-pencil", name: "Black Kajal Pencil", pack: "8 ml", mrp: 199, price: 179, cat: "Beauty & Skincare", desc: "Waterproof & Smudge-free", img: "https://shop.altosindia.net/storagecache/product_image/242051497-6749f230-3bf7-487d-9a21-b07dda633079.jpeg" },
+      { id: 154, slug: "face-pack-beauty", name: "Face Pack Beauty", pack: "100 gm", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "Soft, Fair & Glowing Skin", img: "https://shop.altosindia.net/storagecache/product_image/232114505-e0d912b3-12a8-4956-8722-b890b18771c0.jpeg" },
+      { id: 155, slug: "face-wash-gold", name: "Face Wash Gold", pack: "60 ml", mrp: 115, price: 104, cat: "Beauty & Skincare", desc: "Luxurious Glow & Shine", img: "https://shop.altosindia.net/storagecache/product_image/230032228-1cc740c0-730c-493c-8e52-10815b1ec150.jpeg" },
+      { id: 156, slug: "face-wash-charcoal", name: "Face Wash Charcoal", pack: "60 ML", mrp: 109, price: 98, cat: "Beauty & Skincare", desc: "Pollution Control & Deep Cleansing", img: "https://shop.altosindia.net/storagecache/product_image/231809127-31179eb4-ffac-4a41-9b2b-23a96468948d.jpeg" },
+      { id: 157, slug: "face-wash-papaya", name: "Face Wash Papaya", pack: "60 ml", mrp: 135, price: 122, cat: "Beauty & Skincare", desc: "Clean, Fresh & Glowing Skin", img: "https://shop.altosindia.net/storagecache/product_image/230350314-66882881-e413-4ac5-ac76-a0ced8d0afda.jpeg" },
+      { id: 158, slug: "face-wash-skin-glow", name: "Face Wash Skin Glow", pack: "60 ml", mrp: 121, price: 109, cat: "Beauty & Skincare", desc: "Fresh & Glowing Complexion", img: "https://shop.altosindia.net/storagecache/product_image/235713283-653d75db-691a-4723-baf7-69fa0e302a6e.jpeg" },
+      { id: 159, slug: "face-wash-ubtan", name: "Face Wash Ubtan", pack: "50 ML", mrp: 149, price: 134, cat: "Beauty & Skincare", desc: "Tan Removal & Radiant Glow", img: "https://shop.altosindia.net/storagecache/product_image/230222375-e099c679-be9e-420c-a8c7-a2c1864f22aa.jpeg" },
+      { id: 160, slug: "aloevera-moisturising-gel", name: "Aloevera Moisturising Gel", pack: "100 gm", mrp: 145, price: 131, cat: "Beauty & Skincare", desc: "Pure Hydrating Gel", img: "https://shop.altosindia.net/storagecache/product_image/233342252-1a88bbf2-7cd2-4a07-81b8-402cf9a3b43c.jpeg" },
+      { id: 161, slug: "cold-cream-almond-and-cocoa-butter", name: "Cold Cream (Almond & Cocoa Butter)", pack: "50 gm", mrp: 50, price: 45, cat: "Beauty & Skincare", desc: "Nourishing Winter Moisturizer", img: "https://shop.altosindia.net/storagecache/product_image/235730412-8deaadb8-ebf0-4f83-9045-18ddb181d6d7.jpeg" },
+      { id: 162, slug: "fruit-cream", name: "Fruit Cream", pack: "50 gm", mrp: 50, price: 45, cat: "Beauty & Skincare", desc: "Provide Moisture to Rough Skin", img: "https://shop.altosindia.net/storagecache/product_image/245236272-1cc4825b-021d-40a4-93c6-b0bd39b57104.jpeg" },
+      { id: 163, slug: "hydra-boost-gel", name: "Hydra Boost Gel", pack: "30 gm", mrp: 115, price: 104, cat: "Beauty & Skincare", desc: "Soft & Smooth Skin", img: "https://shop.altosindia.net/storagecache/product_image/255338240-9d8b0aad-d891-4be6-931d-7d4bef393188.jpeg" },
+      { id: 164, slug: "jojoba-moisturising-lotion", name: "Jojoba Moisturising Lotion", pack: "100 ml", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "Nourishes Skin Instantly", img: "https://shop.altosindia.net/storagecache/product_image/233131017-e52c1e11-6dd6-4e42-974d-50f2019e7903.jpeg" },
+      { id: 165, slug: "lip-balm", name: "Lip Balm", pack: "10 gm", mrp: 60, price: 54, cat: "Beauty & Skincare", desc: "For Soft & Smooth Lips", img: "https://shop.altosindia.net/storagecache/product_image/231043027-bb96cb2b-9af8-49ce-964b-81cb388f9853.jpeg" },
+      { id: 166, slug: "rose-and-musk-moisturising-lotion", name: "Rose & Musk Moisturising Lotion", pack: "100 ml", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "Fragrance & Moisture", img: "https://shop.altosindia.net/storagecache/product_image/231609931-fd68faff-2019-45ec-8b45-d832e083555c.jpeg" },
+      { id: 167, slug: "sun-screen-cream-spf-20", name: "Sun Screen Cream Spf - 20", pack: "100 ml", mrp: 125, price: 113, cat: "Beauty & Skincare", desc: "UVA UVB Sun Protection", img: "https://shop.altosindia.net/storagecache/product_image/242028491-fa4578e8-714b-4f51-98c7-d07e4f403926.jpeg" },
+      { id: 168, slug: "sun-screen-cream-spf-40", name: "Sun Screen Cream Spf - 40", pack: "100 ml", mrp: 299, price: 269, cat: "Beauty & Skincare", desc: "High Protection Sun Guard", img: "https://shop.altosindia.net/storagecache/product_image/234100825-af9d1236-13d4-4f6e-b232-fb2b82f7f896.jpeg" },
+      { id: 169, slug: "zordan-footcare-cream", name: "Zordan Footcare Cream", pack: "50 gm", mrp: 84, price: 76, cat: "Beauty & Skincare", desc: "Soft & Supple Feet", img: "https://shop.altosindia.net/storagecache/product_image/242328348-78bb3d40-9ffb-45f9-829f-c7f326d04cc7.jpeg" },
+      { id: 170, slug: "anti-dandruff-shampoo-100ml", name: "Anti Dandruff Shampoo (100ml)", pack: "100 ml", mrp: 130, price: 117, cat: "Hair & Grooming", desc: "Nourishes Scalp & Clears Flakes", img: "https://shop.altosindia.net/storagecache/product_image/231824333-dae13eca-0bf2-43c8-9f50-4ff601337405.jpeg" },
+      { id: 171, slug: "hena-hair-pack", name: "Hena Hair Pack", pack: "100 gm", mrp: 99, price: 89, cat: "Hair & Grooming", desc: "Give Natural Colour to Hair", img: "https://shop.altosindia.net/storagecache/product_image/233227998-adc40d2d-1074-4aca-a3b7-52ea97a9affb.jpeg" },
+      { id: 172, slug: "onion-shampoo", name: "Onion Shampoo", pack: "200 ml", mrp: 245, price: 221, cat: "Hair & Grooming", desc: "Reduces Hair Fall & Nourishes", img: "https://shop.altosindia.net/storagecache/product_image/255546805-5e0ce0e2-49af-4ca3-aa78-f69bc8b77b99.jpeg" },
+      { id: 173, slug: "talcum-powder", name: "Talcum Powder", pack: "100 gm Each", mrp: 135, price: 122, cat: "Hair & Grooming", desc: "All-Day Freshness", img: "https://shop.altosindia.net/storagecache/product_image/242050167-dc1e91a9-ddf1-48da-b67d-2bdbdd294da1.jpeg" },
+      { id: 174, slug: "zordan-perfume-bloom", name: "Zordan Perfume Bloom", pack: "50 ml", mrp: 525, price: 473, cat: "Hair & Grooming", desc: "Luxury Fragrance", img: "https://shop.altosindia.net/storagecache/product_image/250050007-885559c6-517c-4820-9006-992a1e3a71fb.jpeg" },
+      { id: 175, slug: "dish-washing-gel", name: "Dish Washing Gel", pack: "500 ml", mrp: 199, price: 179, cat: "Home & Kitchen", desc: "Heavy Grease Dishwashing Gel", img: "https://shop.altosindia.net/storagecache/product_image/231021489-88892149-62b2-4635-9aca-68c23fa6d512.jpeg" },
+      { id: 176, slug: "hand-wash-250ml", name: "Hand Wash (250ml)", pack: "250 ml", mrp: 97, price: 87, cat: "Home & Kitchen", desc: "Germ Protection & Cleanliness", img: "https://shop.altosindia.net/storagecache/product_image/241521574-45566806-2c87-4b00-9375-5384ca1b8a24.jpeg" },
+      { id: 177, slug: "sharbat-sweet-rose", name: "Sharbat Sweet Rose", pack: "700 ml", mrp: 199, price: 179, cat: "Home & Kitchen", desc: "Fresh & Cool Sharbat", img: "https://altosindia.net/public/product/v1-home-care/sweet-rose-sharbat.jpg" },
+      { id: 178, slug: "shine-home-cream-soap", name: "Shine Home Cream Soap", pack: "75 gm", mrp: 210, price: 189, cat: "Home & Kitchen", desc: "Nourishes Skin Soft & Glowing", img: "https://shop.altosindia.net/storagecache/product_image/240244129-2544b3f9-4392-445b-8027-c32784cf0138.jpeg" },
+      { id: 179, slug: "ws7-detergent", name: "Ws7 Detergent", pack: "500 gm", mrp: 99, price: 89, cat: "Home & Kitchen", desc: "Super Cleansing Advance Formula", img: "https://shop.altosindia.net/storagecache/product_image/235957356-80996ed7-49d7-404c-8ad5-3ea644779aff.jpeg" },
+      { id: 181, slug: "complete-health-pack", name: "Health Pack(Curcum+Aroplexplus+Coloston+VIG-R Cap)", pack: "4 X 60CAPS", mrp: 4127, price: 3714, cat: "Medicines & Health", desc: "Four 60-capsule packs: Aroplex Plus, Vig-R, Curcum Plus and Coloston.", img: "https://shop.altosindia.net/storagecache/product_image/254504735-ad8e690e-ff61-4f52-95e9-10ce146f3052.jpeg" },
+      { id: 182, slug: "advance-hair-serum", name: "Advance Hair Serum", pack: "15 Ml", mrp: 299, price: 269, cat: "Hair & Grooming", desc: "A scalp serum with Redensyl, Saw Palmetto, Baicapil, Rosemary, Biotin and Anagain.", img: "https://shop.altosindia.net/storagecache/product_image/255224542-e97fedc0-abc9-4a19-8e56-163f5e19c211.jpeg" },
+      { id: 183, slug: "almond-hair-oil", name: "Hair Oil Almond", pack: "100 ml", mrp: 89, price: 80, cat: "Hair & Grooming", desc: "An almond hair oil for scalp and hair massage.", img: "https://shop.altosindia.net/storagecache/product_image/230602976-9d6b7739-da72-4cb0-8858-89a6b3c6d1db.jpeg" },
+      { id: 184, slug: "herbal-hair-oil", name: "Herbal Hair Oil", pack: "120 ML", mrp: 144, price: 130, cat: "Hair & Grooming", desc: "A herbal hair oil containing Bhringraj, Majeeth and Nagkesar.", img: "https://shop.altosindia.net/storagecache/product_image/240528692-d368ee86-69ea-43f3-9877-5605147308bd.jpeg" },
+      { id: 185, slug: "liquid-cream-soap", name: "Liquid Cream Soap", pack: "250 ml", mrp: 155, price: 140, cat: "Home & Kitchen", desc: "A liquid cream soap for everyday hand and skin cleansing.", img: "https://shop.altosindia.net/storagecache/product_image/230735462-36297fb0-45a1-4d8c-ba90-5922862dce9e.jpeg" },
+      { id: 186, slug: "nabhi-oil", name: "Nabhi Oil", pack: "30 Ml", mrp: 299, price: 269, cat: "Medicines & Health", desc: "An oil blend intended for external application around the navel area.", img: "https://shop.altosindia.net/storagecache/product_image/262113958-803d29e6-fdf2-414d-b625-632461683aeb.jpeg" },
+      { id: 187, slug: "sea-buckthorn-juice", name: "Sea Buckthorn Juice", pack: "500 Ml", mrp: 999, price: 899, cat: "Syrups & Juices", desc: "A sea buckthorn juice supplied in a 500 ml bottle.", img: "https://shop.altosindia.net/storagecache/product_image/261436414-9488d618-c2f0-4fbb-8cba-7000868d54c0.jpeg" },
+      { id: 188, slug: "body-oil-100ml", name: "Body Oil", pack: "100 ml", mrp: 110, price: 99, cat: "Beauty & Skincare", desc: "A body massage oil containing almond oil and olive oil for moisturising dry skin.", img: "https://shop.altosindia.net/storagecache/product_image/230557323-4221b806-e811-4aa2-bca3-9e24dca6f1dc.jpeg" },
+      { id: 189, slug: "winter-care-cream", name: "Cold Cream Winter", pack: "50 Gm", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "A moisturising winter-care cream with Tulsi and Aloe Vera extracts.", img: "https://shop.altosindia.net/storagecache/product_image/230928721-6d5245e1-70d8-4426-82aa-4661faecfdda.jpeg" },
+      { id: 190, slug: "sanjeevani-granules", name: "Sanjeevani Granules (Pack Of 12)", pack: "60 Gm", mrp: 300, price: 270, cat: "Powders & Nutrition", desc: "Herbal granules in a 60 g pack containing 12 sachets.", img: "https://shop.altosindia.net/storagecache/product_image/250801316-94dab141-9ead-4e1a-8321-4b214240adf6.jpeg" },
+      { id: 191, slug: "triphala-churna", name: "Triphala Churna", pack: "100 Gm", mrp: 99, price: 89, cat: "Powders & Nutrition", desc: "A 100 g pack of Triphala herbal powder.", img: "https://shop.altosindia.net/storagecache/product_image/260842967-01a6eb26-8160-4a54-bd98-503a126d2394.jpeg" },
+      { id: 192, slug: "hair-removal-cream", name: "Hair Removing Cream", pack: "50 gm", mrp: 120, price: 108, cat: "Beauty & Skincare", desc: "A hair-removal cream containing Papaya and Shea Butter.", img: "https://shop.altosindia.net/storagecache/product_image/233405743-7bef575e-0691-48e3-940a-252a9f8c596b.jpeg" },
+      { id: 193, slug: "herbal-antiseptic-cream", name: "Herbal Antiseptic Cream", pack: "20 GM", mrp: 48, price: 43, cat: "Beauty & Skincare", desc: "A topical herbal cream containing Neem, Tulsi, Haldi and other listed ingredients.", img: "https://shop.altosindia.net/storagecache/product_image/242852076-8d93ee65-263e-4747-a2cf-993e6ff8d6f1.jpeg" },
+      { id: 194, slug: "skin-glow-cream", name: "Skin Glow Cream", pack: "50 gm", mrp: 163, price: 147, cat: "Beauty & Skincare", desc: "A facial cream containing Aloe Vera and Basil extracts.", img: "https://shop.altosindia.net/storagecache/product_image/234957239-111cbfed-ca89-43f9-bf96-5a897d939403.jpeg" },
+      { id: 195, slug: "whitening-and-glow-cream", name: "Whitening & Glow Cream", pack: "50 gm", mrp: 126, price: 113, cat: "Beauty & Skincare", desc: "A facial cream containing Almond and Apricot ingredients.", img: "https://shop.altosindia.net/storagecache/product_image/233039951-7914e662-ff9b-4691-961a-3ae5575aa9bc.jpeg" },
+      { id: 196, slug: "prakruti-punch", name: "Prakruti Punch", pack: "500 Ml", mrp: 499, price: 449, cat: "Syrups & Juices", desc: "A 500 ml herbal juice blend with Aloe Vera, Tulsi, Haldi, Amla and other listed plant ingredients.", img: "https://shop.altosindia.net/storagecache/product_image/260126377-2b6f2575-8ef6-4a2b-9a72-710ebac005a0.jpeg" },
+      { id: 197, slug: "moringa-tablets", name: "Altos Moringa Tablets", pack: "60 Tab", mrp: 299, price: 269, cat: "Medicines & Health", desc: "A 60-tablet Moringa supplement.", img: "https://shop.altosindia.net/storagecache/product_image/251041772-4d2f81bd-c20e-465b-98de-62be9d8c9350.jpeg" },
+      { id: 198, slug: "hair-revitalizer-tablets", name: "Hair Revitalizer Tablet", pack: "60 Tab", mrp: 499, price: 449, cat: "Hair & Grooming", desc: "A hair-nutrition supplement supplied as 60 tablets, described by the manufacturer as a blend of 19 nutrients.", img: "https://shop.altosindia.net/storagecache/product_image/262339898-369f8437-f81a-4e44-b9b2-6bb4ba3fff94.jpeg" },
+      { id: 199, slug: "oreslim-advance-fat-burner-tablets", name: "Oreslim Advance Fat Burner Tablet", pack: "60 Tab", mrp: 749, price: 674, cat: "Medicines & Health", desc: "A 60-tablet supplement containing L-Carnitine, Garcinia Cambogia, caffeine and green coffee extracts.", img: "https://shop.altosindia.net/storagecache/product_image/261957689-5130b5bb-b5af-4150-83bf-904f3ddbf358.jpeg" },
+      { id: 200, slug: "vitamin-c-tablets", name: "Vitamin C From Amla Extract Tab", pack: "60 TAB", mrp: 270, price: 243, cat: "Medicines & Health", desc: "A 60-tablet Vitamin C supplement with Amla extract and Zinc.", img: "https://shop.altosindia.net/storagecache/product_image/231121721-df2d5aca-0e2c-46c3-b8b3-cc55c6214da0.jpeg" },
+      { id: 201, slug: "oreslim-tea", name: "Oreslim Tea", pack: "100 Gm", mrp: 499, price: 449, cat: "Powders & Nutrition", desc: "A 100 g tea blend with green tea, green coffee, black tea, Hibiscus and other listed ingredients.", img: "https://shop.altosindia.net/storagecache/product_image/262942547-0e8217bf-ba0a-49ad-a710-b836a6095fb9.jpeg" },
+      { id: 202, slug: "cleansing-milk", name: "Cleansing Milk", pack: "100 ml", mrp: 105, price: 95, cat: "Beauty & Skincare", desc: "A facial cleansing milk containing Cucumber and Aloe Vera extracts.", img: "https://shop.altosindia.net/storagecache/product_image/234154658-0b1bb702-1c22-4b61-a36b-ec7e7bf4109d.jpeg" },
+      { id: 203, slug: "facial-skin-toner", name: "Skin Toner", pack: "120 ml", mrp: 140, price: 126, cat: "Beauty & Skincare", desc: "A 120 ml facial skin toner containing Rose Petals.", img: "https://shop.altosindia.net/storagecache/product_image/234356718-44c2a4b5-6153-4156-ab4d-62d07a38fbd8.jpeg" },
+      { id: 204, slug: "orefresh-toothpaste", name: "Toothpaste Orefresh", pack: "100 gm", mrp: 125, price: 113, cat: "Home & Kitchen", desc: "A toothpaste containing Tulsi, Clove and Mint.", img: "https://shop.altosindia.net/storagecache/product_image/231707695-5ad400e5-1043-4c01-a758-ffdef9b6d570.jpeg" },
+      { id: 205, slug: "papaya-face-wash-120ml", name: "Papaya Face Wash (120 ml)", pack: "120 ml", mrp: 231, price: 208, cat: "Beauty & Skincare", desc: "A 120 ml Papaya and Aloe Vera facial cleanser.", img: "https://shop.altosindia.net/storagecache/product_image/230350314-66882881-e413-4ac5-ac76-a0ced8d0afda.jpeg" }
+    ];
+
+    const kitDefinitions = [{"id":1001,"slug":"anti-dandruff-care-kit","name":"Anti-Dandruff Care Kit","ids":[117,118,112,182],"summary":"A four-product scalp and hair-care selection.","routine":["हफ्ते में 3 wash days रखें। रात में Hair Vitalizer Aroma को scalp पर हल्के हाथों से लगाएँ।","Advance Hair Serum को उसके label के अनुसार अलग से scalp पर लगाएँ; oil में मिलाने की सलाह नहीं दी गई है।","अगली सुबह गीले बालों पर Anti-Dandruff Shampoo लगाएँ, कुछ मिनट बाद अच्छी तरह rinse करें।","Shampoo के बाद conditioner बालों पर लगाएँ और लगभग 2 मिनट बाद rinse करें।","बाल सूखने के बाद Vitalizer का इस्तेमाल उसके pack directions के अनुसार करें।"],"note":"तुरंत या तय समय में परिणाम की अपेक्षा न करें। असर हर व्यक्ति में अलग हो सकता है और परिणाम की गारंटी नहीं है। Product label के निर्देशों का पालन करें।"},{"id":1002,"slug":"hair-fall-care-kit","name":"Hair Fall Care Kit","ids":[115,118,110,182,60],"summary":"A five-product hair-care selection with Ore Amla 500 ml.","routine":["हफ्ते में 3 wash days रखें। रात में Bhringraj Oil से हल्की मालिश करें और अगली सुबह shampoo करें।","Advance Hair Serum को उसके label के अनुसार अलग से scalp पर लगाएँ; इसे oil में मिलाने का निर्देश नहीं है।","Shampoo के बाद conditioner बालों पर लगाएँ, लगभग 2 मिनट बाद rinse करें।","बाल सूखने पर जरूरत के अनुसार थोड़ी मात्रा में Bhringraj Oil लगाएँ।","Ore Amla पीने वाला product है। इसकी मात्रा और समय के लिए bottle label तथा qualified professional के निर्देश मानें; व्यक्तिगत सलाह के लिए WhatsApp करें।"],"note":"तुरंत या तय समय में परिणाम की अपेक्षा न करें। असर हर व्यक्ति में अलग हो सकता है और परिणाम की गारंटी नहीं है। Product label के निर्देशों का पालन करें।"},{"id":1003,"slug":"anti-ageing-care-kit","name":"Anti-Aging Care Kit","ids":[98,85,205,102,1],"summary":"A five-product skincare selection with Papaya Face Wash 120 ml.","routine":["सुबह Papaya Face Wash से चेहरा साफ करें।","धूप में निकलने से पहले SPF 50 को pack directions के अनुसार लगाएँ और दोबारा लगाने के निर्देश मानें।","रात में चेहरा साफ करके Anti-Wrinkle Cream लगाएँ।","Apricot Scrub हफ्ते में एक बार हल्के हाथों से इस्तेमाल करें; irritation हो तो रोक दें। बाकी रातों में face wash और cream रखें।","Tulsi Power की मात्रा और इस्तेमाल के लिए उसके label तथा qualified professional के निर्देश मानें।"],"note":"तुरंत या तय समय में परिणाम की अपेक्षा न करें। असर हर व्यक्ति में अलग हो सकता है और परिणाम की गारंटी नहीं है। Product label के निर्देशों का पालन करें।"},{"id":1004,"slug":"blemish-care-kit","name":"Blemish Care Kit","ids":[206,205,97,76],"summary":"Papaya face pack, face wash, Papaya Light cream and FT-15 in one selection.","routine":["सुबह और रात Papaya Face Wash से चेहरा साफ करें।","रात में साफ चेहरे पर Papaya Light Anti-Blemishing Cream हल्के हाथों से लगाएँ; अन्य समय इस्तेमाल के लिए pack directions मानें।","Papaya Face Pack हफ्ते में 2 बार लगाएँ। आँखों के आसपास न लगाएँ; 10–15 मिनट बाद धो लें।","FT-15 की मात्रा और समय के लिए bottle label तथा qualified professional के निर्देश मानें। व्यक्तिगत सलाह के लिए WhatsApp करें।"],"note":"तुरंत या तय समय में परिणाम की अपेक्षा न करें। असर हर व्यक्ति में अलग हो सकता है और परिणाम की गारंटी नहीं है। Product label के निर्देशों का पालन करें।"},{"id":1005,"slug":"kids-immunity-pack","name":"Kids Immunity Pack","ids":[53,57,76],"summary":"Choco Kidz, Multivitamin Gummies and FT-15. For age suitability and product-use guidance, contact us on WhatsApp.","routine":[],"note":"तुरंत या तय समय में परिणाम की अपेक्षा न करें। असर हर व्यक्ति में अलग हो सकता है और परिणाम की गारंटी नहीं है। Product label के निर्देशों का पालन करें।"},{"id":1006,"slug":"daily-essential-kit","name":"Daily Essential Kit","ids":[125,116,118,205,161,164,165,91,176,102],"summary":"Ten personal-care essentials, with one pack of each listed product. Contact us on WhatsApp for product selection guidance.","routine":[],"note":"तुरंत या तय समय में परिणाम की अपेक्षा न करें। असर हर व्यक्ति में अलग हो सकता है और परिणाम की गारंटी नहीं है। Product label के निर्देशों का पालन करें।"},{"id":1007,"slug":"kitchen-essentials-kit","name":"Kitchen Essentials Kit","ids":[136,137,138,135,139,134],"summary":"Six kitchen essentials: Lal Mirch, Dhania, Garam Masala, Haldi, Rice Bran Oil and Kadak Tea. One pack of each.","routine":[],"note":"Use each product according to its label. Extra 5% discount applies to the complete kit on our individual selling prices."},{"id":1008,"slug":"home-cleaning-essentials-kit","name":"Home Cleaning Essentials Kit","ids":[207,131,176,175,132,179],"summary":"Six cleaning essentials: Toilet Cleaner 500 ml, Glass Cleaner 500 ml, Hand Wash 250 ml, Dish Wash 500 ml, Floor Cleaner 500 ml and WS7 Detergent 500 g. One pack each.","routine":[],"note":"Follow each product label. Never mix cleaning products. Keep away from children. Extra 5% discount applies to the complete kit on our individual selling prices."}];
+    function buildCareKits(catalogue, definitions) {
+  return definitions.map(def => {
+    const components = def.ids.map(id => {
+      const item = catalogue.find(p => p.id === id);
+      if (!item) throw new Error("Missing kit component: " + id);
+      return item;
+    });
+    const regularTotal = components.reduce((sum, p) => sum + p.price, 0);
+    const price = Math.round(regularTotal * 0.95);
+    return { ...def, components, regularTotal, price, savings: regularTotal - price,
+      mrp: components.reduce((sum, p) => sum + p.mrp, 0), pack: components.length + " products · 1 each",
+      category: "Awin Care Kits", cat: "Awin Care Kits", description: def.summary, desc: def.summary,
+      image: components[0].image || components[0].img, img: components[0].image || components[0].img,
+      brand: "Awin Enterprises", inStock: components.every(p => p.inStock !== false), sku: "AWIN-KIT-" + def.id };
+  });
+}
+    const careKits = buildCareKits(products, kitDefinitions);
+    const purchasableItems = [...products, ...careKits];
+
+    products.sort((a, b) => {
+      const getPriority = (p) => {
+        const name = p.name.toLowerCase();
+        if (name.includes("shampoo") || name.includes("face wash") || name.includes("facewash")) return 1;
+        if (name.includes("cream") || name.includes("deo") || name.includes("deodorant") || name.includes("perfume")) return 2;
+        if (p.cat === "Beauty & Skincare" || p.cat === "Hair & Grooming") return 3;
+        return 4;
+      };
+      return getPriority(a) - getPriority(b);
+    });
+
+    const categories = ["All", "Medicines & Health", "Powders & Nutrition", "Syrups & Juices", "Beauty & Skincare", "Hair & Grooming", "Home & Kitchen", "Agri & Veterinary"];
+    let selectedCategory = "All";
+    const CART_KEY = "awin.shoppingCart";
+    let cart = loadCart();
+
+    function loadCart() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(CART_KEY));
+        return Object.fromEntries(purchasableItems.flatMap(({ id }) => {
+          const quantity = saved?.[id];
+          return Number.isSafeInteger(quantity) && quantity > 0 ? [[id, quantity]] : [];
+        }));
+      } catch {
+        return {};
+      }
+    }
+
+    function saveCart() {
+      try {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      } catch {
+        // The cart remains usable on this page when storage is unavailable.
+      }
+    }
+    let activeCheckoutPayload = null;
+
+    function getUrgencyBadge(id) {
+      // No unverified stock or sales claims.
+      return { text: "Product Details", class: "bg-purple-50 text-purple-700 border-purple-100" };
+    }
+
+    function initCategories() {
+      const container = document.getElementById("categoryContainer");
+      if(!container) return;
+      container.innerHTML = categories.map(cat => `
+        <button onclick="filterCategory('${cat}')" class="category-btn px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${selectedCategory === cat ? 'bg-purple-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+          ${cat}
+        </button>
+      `).join("");
+    }
+
+    function filterCategory(cat) {
+      selectedCategory = cat;
+      initCategories();
+      renderProducts();
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toastNotification");
+      const toastText = document.getElementById("toastText");
+      if(!toast) return;
+      toastText.innerText = message;
+      toast.classList.remove("opacity-0", "pointer-events-none", "-translate-y-4");
+      toast.classList.add("opacity-100", "translate-y-0");
+      setTimeout(() => {
+        toast.classList.remove("opacity-100", "translate-y-0");
+        toast.classList.add("opacity-0", "pointer-events-none", "-translate-y-4");
+      }, 2500);
+    }
+
+    function copyProductLinkDirect(event, pId, pName) {
+      event.stopPropagation();
+      const productUrl = `${window.location.origin}${window.location.pathname}#product-${pId}`;
+      navigator.clipboard.writeText(productUrl).then(() => {
+        showToast(`Direct link copied for ${pName}! 🔗`);
+      }).catch(() => {
+        showToast("Link copy nahi ho paya!");
+      });
+    }
+
+    function showConcern(type) {
+      const rules = {
+        supplements: { label: "Supplements", test: p => [1,2,3,4,8,9,10,11,12,13,14,15,17,18,21,23,24,25,27,28,29,30,31,32,33,35,36,37,38,39,40,41,43,44,46,48,49,52,53,54,55,56,57,58,59,60,61,62,64,73,74,75,76,145,150,151,152,181,187,190,191,196,197,198,199,200,201].includes(p.id) },
+        hair: { label: "Hair Care", test: p => /shampoo|hair|conditioner/i.test(p.name + " " + p.desc) },
+        face: { label: "Face & Skin", test: p => /face wash|facewash|papaya|skin cream|moisturiz|toner/i.test(p.name + " " + p.desc) },
+        daily: { label: "Daily Routine", test: p => (["Beauty & Skincare", "Hair & Grooming", "Home & Kitchen"].includes(p.cat) && ![86,87,198].includes(p.id)) || [6,63].includes(p.id) }
+      };
+      const rule = rules[type];
+      if (!rule) return;
+      const matched = products.filter(rule.test);
+      const feedback = document.getElementById("concernFeedback");
+      if (feedback) {
+        feedback.textContent = matched.length ? rule.label + ": " + matched.length + " relevant products available below. Choose based on the product label and your needs." : rule.label + ": No exact match in the current catalogue. Please ask us on WhatsApp for guidance.";
+        feedback.classList.remove("hidden");
+      }
+      selectedCategory = "All";
+      const search = document.getElementById("searchInput");
+      if (search) search.value = "";
+      renderProducts();
+      const grid = document.getElementById("productGrid");
+      if (grid && matched.length) {
+        const ids = new Set(matched.map(p => p.id));
+        Array.from(grid.children).forEach(card => {
+          const match = card.id.match(/^product-(\d+)$/);
+          if (match && !ids.has(Number(match[1]))) card.classList.add("hidden");
+        });
+        const counter = document.getElementById("productCounter");
+        if (counter) counter.textContent = matched.length + " RELEVANT PRODUCTS";
+      }
+      if (grid) grid.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    function clearConcern() {
+      const feedback = document.getElementById("concernFeedback");
+      if (feedback) feedback.classList.add("hidden");
+      selectedCategory = "All";
+      const search = document.getElementById("searchInput");
+      if (search) search.value = "";
+      renderProducts();
+    }
+
+    function kitOrderContents(kit) {
+      return kit.components.map(p => "  - " + p.name + " (" + p.pack + ") x 1 per kit").join("\n") + "\n  Extra 5% kit discount included; kit price Rs " + kit.price;
+    }
+    function buyCareKit(id) { const kit = careKits.find(p => p.id === id); if (kit) buySingleProductNow(kit); }
+    function normalizeSearch(value) {
+      return value.toLowerCase().replace(/face\s*wash/g, "face wash")
+        .replace(/(\d)\s+(ml|gm|kg|g)\b/g, "$1$2").replace(/\s+/g, " ").trim();
+    }
+
+    function renderCareKits() {
+      const query = normalizeSearch(document.getElementById("searchInput").value);
+      const visible = careKits.filter(k => !query || normalizeSearch(k.name + " " + k.components.map(p => p.name).join(" ")).includes(query));
+      document.getElementById("careKits").hidden = selectedCategory !== "All" || visible.length === 0;
+      document.getElementById("kitGrid").innerHTML = visible.map(k => `
+        <article class="rounded-2xl bg-white border border-purple-100 shadow-sm p-4 flex flex-col" id="kit-${k.id}">
+          <div class="${k.components.length > 5 ? "grid grid-cols-5 gap-2 min-h-44" : "flex gap-1 items-center h-28"} bg-slate-50 rounded-xl p-2">${k.components.map(p => `<img src="${p.img}" alt="${p.name}" loading="lazy" decoding="async" style="width:${k.components.length > 5 ? 100 : 100/k.components.length}%;height:${k.components.length > 5 ? 72 : 96}px;object-fit:contain;min-width:0">`).join("")}</div>
+          <span class="text-[11px] font-bold text-emerald-700 mt-3">${k.components.length} products · Extra 5% OFF</span><h3 class="text-lg font-extrabold mt-1">${k.name}</h3>
+          <ul class="text-xs text-slate-600 list-disc pl-4 my-3 space-y-1">${k.components.map(p => `<li>${p.id===112 ? "Hair Vitalizer Aroma" : p.id===97 ? "Papaya Light Anti-Blemishing Cream" : p.name} · ${p.pack}</li>`).join("")}</ul>
+          <div class="mt-auto"><p class="text-xs text-slate-500">Individual selling total <s>₹${k.regularTotal}</s></p><p class="text-2xl font-black text-purple-800">₹${k.price} <span class="text-xs font-semibold text-emerald-700">Save extra ₹${k.savings}</span></p>
+          <div class="flex flex-wrap gap-2 mt-3"><button type="button" onclick="buyCareKit(${k.id})" class="rounded-lg bg-purple-700 text-white px-3 py-2 font-bold text-sm">Buy Kit</button><button type="button" onclick="addToCart(${k.id});showToast('Kit added to cart')" class="rounded-lg border border-purple-200 px-3 py-2 text-purple-800 text-sm font-bold">Add Kit to Cart</button></div>
+          <a class="block text-xs text-purple-700 underline mt-3" href="/products/${k.slug}">View kit details${k.routine.length ? " & routine" : ""}</a>
+          ${k.routine.length ? `<details class="text-xs mt-3"><summary class="font-bold cursor-pointer">Care routine</summary><ol class="list-decimal pl-4 space-y-2 mt-2">${k.routine.map(r=>`<li>${r}</li>`).join("")}</ol></details>` : ""}
+          <a target="_blank" rel="noopener noreferrer" class="block text-xs font-bold text-emerald-700 mt-3 underline" href="https://wa.me/917828757646?text=${encodeURIComponent('Namaste, mujhe '+k.name+' ke products aur istemaal ki guidance chahiye.')}">Product selection aur istemaal ki jaankari ke liye WhatsApp karein</a>
+          <p class="text-[11px] leading-relaxed bg-amber-50 border border-amber-100 rounded-lg p-2 mt-3">${k.note}</p></div>
+        </article>`).join("");
+    }
+
+    function renderProducts() {
+      renderCareKits();
+      const searchInput = document.getElementById("searchInput");
+      const grid = document.getElementById("productGrid");
+      const counter = document.getElementById("productCounter");
+      if(!grid) return;
+
+      const query = normalizeSearch(searchInput ? searchInput.value : "");
+      document.getElementById("shopByConcern").hidden = Boolean(query);
+      const filtered = products.filter(p => selectedCategory === "All" || p.cat === selectedCategory);
+      let visibleProducts = filtered;
+      if (query) {
+        const words = query.split(" ");
+        const ranks = new Map();
+        for (const p of filtered) {
+          const name = normalizeSearch(p.name);
+          const details = normalizeSearch(p.name + " " + p.pack + " " + p.desc);
+          let rank = 0;
+          if (name === query) rank = 5;
+          else if (name.startsWith(query)) rank = 4;
+          else if (name.includes(query)) rank = 3;
+          else if (words.every(word => name.includes(word))) rank = 2;
+          else if (words.every(word => details.includes(word))) rank = 1;
+          ranks.set(p.id, rank);
+        }
+        visibleProducts = filtered.filter(p => ranks.get(p.id)).sort((a, b) =>
+          ranks.get(b.id) - ranks.get(a.id) ||
+          Number(b.slug === "papaya-face-wash-120ml") - Number(a.slug === "papaya-face-wash-120ml")
+        );
+      }
+
+      if(counter) counter.innerText = `${visibleProducts.length} PRODUCTS AVAILABLE`;
+
+      if (visibleProducts.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-16 text-center text-slate-400"><i class="fa-solid fa-box-open text-4xl mb-2"></i><p class="text-sm">No products found matching your search.</p></div>`;
+        return;
+      }
+
+      grid.innerHTML = visibleProducts.map(p => {
+        const badge = getUrgencyBadge(p.id);
+        return `
+          <div id="product-${p.id}" class="bg-white rounded-2xl border border-slate-200/80 p-3 flex flex-col justify-between hover:shadow-lg transition cursor-pointer relative group" onclick="openProductDetail(${p.id})">
+            <button onclick="copyProductLinkDirect(event, ${p.id}, '${p.name.replace(/'/g, "\\'")}')" class="absolute top-2 left-2 z-20 bg-white/90 hover:bg-purple-50 text-purple-700 w-7 h-7 rounded-full flex items-center justify-center shadow border border-purple-100 transition" title="Copy Product Link">
+              <i class="fa-solid fa-share-nodes text-[11px]"></i>
+            </button>
+            <div>
+              <div class="relative w-full aspect-square bg-white border border-slate-100 rounded-xl p-1 flex items-center justify-center mb-2 overflow-hidden">
+                <span class="absolute top-1.5 right-2 text-[9px] font-extrabold px-1.5 py-0.5 rounded border ${badge.class} z-10">${badge.text}</span>
+                <img src="${p.img}" alt="${p.name}" class="w-full h-full object-contain" style="transform:scale(${p.imageScale || 1})" loading="lazy" decoding="async" onerror="this.onerror=null;this.removeAttribute('src')" />
+              </div>
+              <div class="text-[9px] font-bold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded inline-block mb-1">${p.pack}</div>
+              <h3 class="font-bold text-slate-800 text-xs leading-snug line-clamp-1">${p.name}</h3>
+              <p class="text-slate-400 text-[11px] mt-0.5 line-clamp-1">${p.desc}</p>
+              <a href="/products/${p.slug}" onclick="event.stopPropagation()" class="inline-block text-[10px] font-bold text-purple-700 hover:text-purple-900 mt-1 underline underline-offset-2">View product page</a>
+            </div>
+            <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between" onclick="event.stopPropagation()">
+              <div>
+                <div class="flex items-center gap-1 leading-none mb-0.5">
+                  <span class="text-[10px] text-slate-400 line-through">₹${p.mrp}</span>
+                  <span class="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1 rounded">10% OFF</span>
+                </div>
+                <span class="font-extrabold text-slate-900 text-sm">₹${p.price}</span>
+              </div>
+              <button onclick="addToCart(${p.id})" class="px-3 py-1 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition active:scale-95 flex items-center gap-1 shadow-sm">
+                <i class="fa-solid fa-plus text-[10px]"></i> Add
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // GA4 funnel events. WhatsApp inquiries are NOT verified purchases.
+    function trackAwinEvent(name, data) { if (typeof window.gtag === 'function') window.gtag('event', name, data); }
+    function awinGaItem(p, qty = 1) { return {item_id:String(p.id),item_name:p.name,price:Number(p.price),quantity:qty}; }
+    function awinCartGaItems() { return Object.entries(cart).flatMap(([id,qty]) => { const p=purchasableItems.find(x=>x.id===Number(id));return p?[awinGaItem(p,qty)]:[]; }); }
+    function openProductDetail(productId) {
+      const p = products.find(item => item.id === productId);
+      if (!p) return;
+      const badge = getUrgencyBadge(p.id);
+      trackAwinEvent('view_item',{currency:'INR',value:p.price,items:[awinGaItem(p)]});
+
+      const modalImage = document.getElementById("modalImg");
+      modalImage.onerror = () => modalImage.removeAttribute("src");
+      modalImage.alt = p.name;
+      modalImage.src = p.img;
+      document.getElementById("modalImg").style.transform = `scale(${p.imageScale || 1})`;
+      document.getElementById("modalPack").innerText = p.pack;
+      document.getElementById("modalBadge").innerText = badge.text;
+      document.getElementById("modalCat").innerText = p.cat;
+      document.getElementById("modalName").innerText = p.name;
+      document.getElementById("modalDesc").innerText = p.desc;
+      document.getElementById("modalStrikedMrp").innerText = `₹${p.mrp}`;
+      document.getElementById("modalPrice").innerText = `₹${p.price}`;
+
+      document.getElementById("pincodeInput").value = "";
+      const pRes = document.getElementById("pincodeResult");
+      if(pRes) { pRes.classList.add("hidden"); pRes.innerText = ""; }
+
+      document.getElementById("modalShareBtn").onclick = () => {
+        const productUrl = `${window.location.origin}${window.location.pathname}#product-${p.id}`;
+        navigator.clipboard.writeText(productUrl).then(() => {
+          showToast(`Direct link copied for ${p.name}! 🔗`);
+        });
+      };
+
+      document.getElementById("modalAddBtn").onclick = () => { addToCart(p.id); closeDetailModal(); };
+      document.getElementById("modalBuyBtn").onclick = () => { closeDetailModal(); buySingleProductNow(p); };
+      document.getElementById("productDetailModal").classList.remove("hidden");
+    }
+
+    function closeDetailModal() {
+      document.getElementById("productDetailModal").classList.add("hidden");
+    }
+
+    function checkPincode() {
+      const pin = document.getElementById("pincodeInput").value.trim();
+      const res = document.getElementById("pincodeResult");
+      if(!res) return;
+      if (!pin || pin.length !== 6 || isNaN(pin)) {
+        res.innerHTML = `<span class="text-rose-600 font-bold"><i class="fa-solid fa-circle-exclamation"></i> Kripya sahi 6-digit Pincode dalein.</span>`;
+        res.classList.remove("hidden");
+        return;
+      }
+      res.innerHTML = `<span class="text-slate-700 font-medium"><i class="fa-solid fa-circle-info text-purple-600"></i> PIN ${pin} noted. Delivery availability and time need confirmation before payment. <a class="text-purple-700 underline font-bold" target="_blank" rel="noopener noreferrer" href="https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent("Namaste, please confirm delivery availability and time for PIN "+pin)}">Confirm on WhatsApp</a>.</span>`;
+      res.classList.remove("hidden");
+    }
+
+
+
+    function buySingleProductNow(item) {
+      activeCheckoutPayload = { type: "single", item, subtotal: item.price, itemsText: `${item.name} (${item.pack}) x 1${item.components ? "\n" + kitOrderContents(item) : ""}` };
+      trackAwinEvent('begin_checkout',{currency:'INR',value:item.price,items:[awinGaItem(item)]});
+      setupCheckoutView(item.price);
+      document.getElementById("checkoutModal").classList.remove("hidden");
+    }
+
+    function addToCart(productId) {
+      if (!purchasableItems.some(p => p.id === productId)) return;
+      const added = purchasableItems.find(p=>p.id===productId);
+      trackAwinEvent('add_to_cart',{currency:'INR',value:added.price,items:[awinGaItem(added)]});
+      cart[productId] = (cart[productId] || 0) + 1;
+      saveCart();
+      updateCartUI();
+    }
+
+    function changeQty(productId, delta) {
+      if (cart[productId]) {
+        cart[productId] += delta;
+        if (cart[productId] <= 0) delete cart[productId];
+        saveCart();
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const countEl = document.getElementById("cartCount");
+      const itemsContainer = document.getElementById("cartItems");
+      const subtotalEl = document.getElementById("cartSubtotal");
+      const checkoutBtn = document.getElementById("checkoutBtn");
+      const floatingBar = document.getElementById("floatingCartBar");
+      const floatItemCount = document.getElementById("floatItemCount");
+      const floatSubtotal = document.getElementById("floatSubtotal");
+
+      let totalItems = 0;
+      let subtotal = 0;
+      let html = "";
+
+      for (const [idStr, qty] of Object.entries(cart)) {
+        const item = purchasableItems.find(p => p.id === parseInt(idStr));
+        if (!item) continue;
+        totalItems += qty;
+        subtotal += item.price * qty;
+        html += `
+          <div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-100 bg-slate-50/50">
+            <div class="flex-1 pr-2">
+              <div class="font-bold text-xs text-slate-800 line-clamp-1">${item.name}</div>${item.components ? `<div class="text-[10px] text-emerald-700">Extra 5% kit discount included · ${item.components.map(p => p.name + " (" + p.pack + ")").join(" + ")}</div>` : ""}
+              <div class="text-[11px] text-slate-400">₹${item.price} each • ${item.pack}</div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 rounded-md bg-white border flex items-center justify-center text-xs font-bold text-slate-600">-</button>
+              <span class="text-xs font-bold text-slate-800 w-4 text-center">${qty}</span>
+              <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 rounded-md bg-purple-600 flex items-center justify-center text-xs font-bold text-white">+</button>
+            </div>
+          </div>
+        `;
+      }
+
+      if(countEl) countEl.innerText = totalItems;
+      if(subtotalEl) subtotalEl.innerText = `₹${subtotal}`;
+      document.getElementById("cartShipping").innerText = subtotal >= 1000 ? "Free" : subtotal > 0 ? "Calculated at checkout" : "₹0";
+      document.getElementById("cartTotal").innerText = subtotal > 0 && subtotal < 1000 ? "Calculated at checkout" : `₹${subtotal}`;
+      if(checkoutBtn) checkoutBtn.disabled = totalItems === 0;
+
+      if (floatingBar) {
+        if (totalItems > 0) {
+          floatingBar.classList.remove("hidden");
+          if(floatItemCount) floatItemCount.innerText = totalItems;
+          if(floatSubtotal) floatSubtotal.innerText = `₹${subtotal}`;
+        } else {
+          floatingBar.classList.add("hidden");
+        }
+      }
+
+      if(itemsContainer) {
+        itemsContainer.innerHTML = totalItems === 0 ? `<div class="py-16 text-center text-slate-400"><i class="fa-solid fa-cart-shopping text-3xl mb-2 text-slate-300"></i><p class="text-xs">Your shopping cart is empty.</p></div>` : html;
+      }
+    }
+
+    function toggleCart() {
+      const modal = document.getElementById("cartModal");
+      if(modal) modal.classList.toggle("hidden");
+    }
+
+    function openCheckoutModal() {
+      let subtotal = 0;
+      let orderItems = [];
+      for (const [idStr, qty] of Object.entries(cart)) {
+        const item = purchasableItems.find(p => p.id === parseInt(idStr));
+        if (item) {
+          subtotal += item.price * qty;
+          orderItems.push(`• ${item.name} (${item.pack}) x ${qty} = ₹${item.price * qty}${item.components ? "\n" + kitOrderContents(item) : ""}`);
+        }
+      }
+      if (subtotal <= 0) return;
+      activeCheckoutPayload = { type: "cart", subtotal, itemsText: orderItems.join("\n") };
+      trackAwinEvent('begin_checkout',{currency:'INR',value:subtotal,items:awinCartGaItems()});
+      setupCheckoutView(subtotal);
+      document.getElementById("cartModal").classList.add("hidden");
+      document.getElementById("checkoutModal").classList.remove("hidden");
+    }
+
+    const checkoutDeliveryForm = document.getElementById("checkoutDeliveryForm");
+    const checkoutPin = document.getElementById("checkoutPin");
+    const checkoutDeliveryStatus = document.getElementById("checkoutDeliveryStatus");
+
+    function setupCheckoutView(subtotal) {
+      activeCheckoutPayload.delivery = subtotal >= 1000 ? { fee: 0 } : null;
+      checkoutDeliveryForm.reset();
+      checkoutDeliveryForm.hidden = subtotal >= 1000;
+      checkoutDeliveryStatus.textContent = "";
+      document.getElementById("checkoutFormError").classList.add("hidden");
+      renderCheckoutPayment();
+    }
+
+    function renderCheckoutPayment() {
+      const { subtotal, delivery } = activeCheckoutPayload;
+      document.getElementById("checkoutPayment").hidden = !delivery;
+      const paidButton = document.getElementById("checkoutPaidButton");
+      paidButton.classList.toggle("hidden", !delivery);
+      paidButton.classList.toggle("flex", !!delivery);
+      const pending = document.getElementById("checkoutPendingTotal");
+      pending.hidden = !!delivery;
+      pending.textContent = "Products ₹" + subtotal + ". Enter your PIN code to see the payable total.";
+      if (!delivery) return;
+      const shipping = delivery.fee;
+      const amount = subtotal + shipping;
+      document.getElementById("checkoutBreakdown").innerText = `Products ₹${subtotal} · Delivery ${shipping ? `₹${shipping}` : "free"}`;
+      const upiUrl = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${amount}&cu=INR`;
+      const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiUrl)}`;
+      const qrImg = document.getElementById("upiQrImage");
+      const qrDisp = document.getElementById("qrAmountDisplay");
+      const dlBtn = document.getElementById("downloadQrBtn");
+      
+      if(qrImg) qrImg.src = qrApiUrl;
+      if(qrDisp) qrDisp.innerText = `₹${amount}`;
+      if(dlBtn) dlBtn.href = qrApiUrl;
+      const upiAppBtn = document.getElementById("openUpiAppBtn");
+      const upiAppHelp = document.getElementById("upiAppHelp");
+      if (upiAppBtn) {
+        upiAppBtn.href = upiUrl;
+        upiAppBtn.onclick = () => trackAwinEvent("upi_payment_app_opened", {currency:"INR",value:amount,checkout_type:activeCheckoutPayload?.type || "unknown"});
+      }
+      // Responsive visibility is controlled by CSS rather than user-agent detection.
+      if (upiAppHelp) upiAppHelp.className = "md:hidden text-[11px] text-slate-600";
+      const copyAlert = document.getElementById("copyAlert");
+      if(copyAlert) copyAlert.classList.add("hidden");
+    }
+
+    checkoutPin.addEventListener("input", () => {
+      if (!activeCheckoutPayload || activeCheckoutPayload.subtotal >= 1000) return;
+      activeCheckoutPayload.deliveryRequest = null;
+      activeCheckoutPayload.delivery = null;
+      checkoutDeliveryStatus.textContent = "";
+      renderCheckoutPayment();
+    });
+
+    checkoutDeliveryForm.addEventListener("submit", async event => {
+      event.preventDefault();
+      const checkout = activeCheckoutPayload;
+      const pin = checkoutPin.value.trim();
+      if (!checkout || checkout.subtotal >= 1000 || !/^[1-9][0-9]{5}$/.test(pin)) return;
+      const request = Symbol();
+      checkout.deliveryRequest = request;
+      checkout.delivery = null;
+      renderCheckoutPayment();
+      checkoutDeliveryStatus.textContent = "Checking delivery fee…";
+      try {
+        const response = await fetch("/api/shadowfax-rate?pincode=" + pin, { signal: AbortSignal.timeout(10000) });
+        if (!response.ok) throw new Error("Quote request failed");
+        const quote = await response.json();
+        if (checkout !== activeCheckoutPayload || checkout.deliveryRequest !== request) return;
+        if (quote.available === false) {
+          checkoutDeliveryStatus.textContent = "Delivery quote unavailable for this PIN. Contact us on WhatsApp for help.";
+          return;
+        }
+        if (quote.available !== true || quote.destinationPincode !== pin ||
+            !Number.isSafeInteger(quote.deliveryFee) || quote.deliveryFee < 0 || quote.deliveryFee % 10 !== 0) {
+          throw new Error("Invalid quote");
+        }
+        checkout.delivery = { fee: quote.deliveryFee, pin };
+        checkoutDeliveryStatus.textContent = "";
+        renderCheckoutPayment();
+      } catch {
+        if (checkout === activeCheckoutPayload && checkout.deliveryRequest === request) {
+          checkoutDeliveryStatus.textContent = "Couldn't get the delivery fee. Try again or contact us on WhatsApp.";
+        }
+      }
+    });
+
+    function copyUpiId() {
+      navigator.clipboard.writeText(UPI_ID).then(() => {
+        const alertEl = document.getElementById("copyAlert");
+        if(alertEl) {
+          alertEl.classList.remove("hidden");
+          setTimeout(() => alertEl.classList.add("hidden"), 2500);
+        }
+      });
+    }
+
+    function closeCheckoutModal() {
+      const modal = document.getElementById("checkoutModal");
+      if (modal && !modal.classList.contains("hidden") && activeCheckoutPayload) {
+        trackAwinEvent("checkout_closed", {currency:"INR",value:activeCheckoutPayload.subtotal+(activeCheckoutPayload.delivery?.fee ?? 0),checkout_type:activeCheckoutPayload.type});
+      }
+      if (modal) modal.classList.add("hidden");
+      activeCheckoutPayload = null;
+    }
+
+    function submitToWhatsApp(isPaid) {
+      if (!activeCheckoutPayload) return;
+      const name = document.getElementById("custName").value.trim();
+      const phone = document.getElementById("custPhone").value.trim();
+      const address = document.getElementById("custAddress").value.trim();
+      const errorEl = document.getElementById("checkoutFormError");
+      const problems = [];
+      if (name.length < 2) problems.push("Enter your full name.");
+      if (!/^[6-9][0-9]{9}$/.test(phone)) problems.push("Enter a valid 10-digit Indian mobile number.");
+      if (address.length < 10 || !/\b[1-9][0-9]{5}\b/.test(address)) problems.push("Enter a complete delivery address including a valid 6-digit PIN.");
+      const delivery = activeCheckoutPayload.delivery;
+      if (isPaid && !delivery) problems.push("Check the delivery fee before paying.");
+      if (delivery?.pin && !address.match(/\b[1-9][0-9]{5}\b/g)?.includes(delivery.pin)) {
+        problems.push("Use the same delivery PIN in your address and delivery quote.");
+      }
+      if (problems.length) {
+        if (errorEl) { errorEl.textContent = problems.join(" "); errorEl.classList.remove("hidden"); }
+        trackAwinEvent("checkout_validation_error", {checkout_type:activeCheckoutPayload.type, error_count:problems.length});
+        return;
+      }
+      if (errorEl) { errorEl.textContent = ""; errorEl.classList.add("hidden"); }
+      const paymentStatusText = isPaid ? "CUSTOMER CLAIMS UPI PAYMENT - VERIFICATION PENDING" : "PAYMENT PENDING / ENQUIRY";
+
+      let msg = `*NEW ORDER / INQUIRY - AWIN ENTERPRISES*\n\n`;
+      msg += `*Payment Status:* ${paymentStatusText}\n`;
+      const subtotal = activeCheckoutPayload.subtotal;
+      const shipping = delivery?.fee;
+      msg += "*Product subtotal:* ₹" + subtotal + "\n";
+      msg += shipping === undefined
+        ? "*Delivery:* To be confirmed\n\n"
+        : "*Delivery:* ₹" + shipping + "\n*Total Amount:* ₹" + (subtotal + shipping) + "\n\n";
+      msg += `*Order Items:*\n${activeCheckoutPayload.itemsText}\n`;
+
+      if (name || phone || address) {
+        msg += `\n*Customer Details (Delivery):*\n`;
+        if (name) msg += `• Name: ${name}\n`;
+        if (phone) msg += `• Phone: ${phone}\n`;
+        if (address) msg += `• Address: ${address}\n`;
+      }
+
+      msg += isPaid ? `\nMaine UPI payment kiya hai. Kripya payment verify karke hi order confirm karein. Main transaction screenshot/reference share karunga.` : `\nMaine abhi pay nahi kiya hai, mujhe order/payment ke baare me baat karni hai.`;
+      trackAwinEvent("whatsapp_order_inquiry",{currency:"INR",value:subtotal+(shipping ?? 0),payment_claimed:isPaid,items:activeCheckoutPayload.type==="single"?[awinGaItem(activeCheckoutPayload.item)]:awinCartGaItems()});
+      window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`, "_blank");
+    }
+
+    window.addEventListener("pageshow", (event) => {
+      if (event.persisted) {
+        cart = loadCart();
+        updateCartUI();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (new URLSearchParams(window.location.search).get("cart") === "open") {
+        document.getElementById("cartModal").classList.remove("hidden");
+      }
+      initCategories();
+      renderProducts();
+      updateCartUI();
+
+      if (window.location.hash) {
+        setTimeout(() => {
+          const targetCard = document.querySelector(window.location.hash);
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            targetCard.classList.add('highlight-product');
+            setTimeout(() => targetCard.classList.remove('highlight-product'), 3500);
+          }
+        }, 300);
+      }
+    });
