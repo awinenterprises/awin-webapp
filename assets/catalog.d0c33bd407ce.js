@@ -517,11 +517,18 @@
       const modalImage = document.getElementById("modalImg");
       modalImage.onerror = () => modalImage.removeAttribute("src");
       modalImage.alt = p.name;
-      modalImage.src = p.img;
+      modalImage.src = productThumbnail(p);
+      modalImage.dataset.fullImage = p.img;
+      document.getElementById("modalProductLink").href = `/products/${p.slug}`;
       const additionalImage = document.getElementById("modalAdditionalImage");
       additionalImage.parentElement.hidden = !p.additionalImage;
-      if (p.additionalImage) additionalImage.src = p.additionalImage;
-      else additionalImage.removeAttribute("src");
+      if (p.additionalImage) {
+        additionalImage.src = "/images/product-thumbnails/92-gold.webp";
+        additionalImage.dataset.fullImage = p.additionalImage;
+      } else {
+        additionalImage.removeAttribute("src");
+        delete additionalImage.dataset.fullImage;
+      }
       document.getElementById("modalImg").style.transform = `scale(${p.imageScale || 1})`;
       document.getElementById("modalPack").innerText = p.pack;
       document.getElementById("modalBadge").innerText = badge.text;
