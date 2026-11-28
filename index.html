@@ -370,10 +370,10 @@
       <a id="openUpiAppBtn" href="#" class="flex md:hidden w-full py-2.5 bg-purple-700 hover:bg-purple-800 text-white rounded-xl font-bold text-xs items-center justify-center gap-2"><i class="fa-solid fa-mobile-screen-button"></i> Pay with UPI App</a>
       <p id="upiAppHelp" class="hidden text-[11px] text-slate-600">Your phone may ask which UPI app to use. Verify the receiver and amount before paying. Return here afterward to send your payment reference for verification.</p>
       <div class="flex flex-col items-center justify-center p-2 bg-slate-50 border rounded-xl space-y-2">
-        <img id="upiQrImage" alt="UPI QR Code" class="w-36 h-36 rounded-lg shadow-sm" crossorigin="anonymous" />
+        <img id="upiQrImage" alt="UPI QR Code" class="w-36 h-36 rounded-lg shadow-sm" />
         <div class="flex gap-2 w-full">
-          <a id="downloadQrBtn" href="#" target="_blank" class="flex-1 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold text-[11px] rounded-lg border border-purple-200 transition flex items-center justify-center gap-1">
-            <i class="fa-solid fa-expand"></i> View QR
+          <a id="downloadQrBtn" href="#" download="awin-upi-qr.gif" class="flex-1 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold text-[11px] rounded-lg border border-purple-200 transition flex items-center justify-center gap-1">
+            <i class="fa-solid fa-download"></i> Save QR
           </a>
           <button onclick="copyUpiId()" class="flex-1 py-1.5 bg-slate-800 hover:bg-slate-900 text-white font-bold text-[11px] rounded-lg transition flex items-center justify-center gap-1">
             <i class="fa-solid fa-copy"></i> Copy UPI ID
@@ -407,7 +407,8 @@
     </div>
   </div>
 
-  <script defer src="/assets/catalog.d0c33bd407ce.js?v=quick-view-thumbnails"></script>
+  <script defer src="/assets/upi-qr.v1.js"></script>
+  <script defer src="/assets/catalog.4e533ba61a8e.js"></script>
   <!-- Start of Tawk.to Live Chat -->
   <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

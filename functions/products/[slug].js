@@ -2499,7 +2499,8 @@ ${inStock ? `
 </section>
 </div>
 <footer>© Awin Enterprises · <a href="https://awinenterprises.in/">awinenterprises.in</a></footer>
-${inStock ? `<script>
+${inStock ? `<script src="/assets/upi-qr.v1.js"></script>
+<script>
   const gaItem = {item_id: ${JSON.stringify(String(product.id))}, item_name: ${JSON.stringify(product.name)}, price: ${product.price}, quantity: 1};
   const trackGa = (eventName, data) => { if (typeof window.gtag === "function") window.gtag("event", eventName, data); };
   const form = document.getElementById("order-form");
@@ -2575,7 +2576,7 @@ ${inStock ? `<script>
       ? "intent://" + upi.slice("upi://".length) +
         "#Intent;scheme=upi;S.browser_fallback_url=" + encodeURIComponent(fallback) + ";end"
       : upi;
-    qr.src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(upi);
+    qr.src = createUpiQrImage(upi);
   }
 
   document.querySelector('a[href="#checkout"]')?.addEventListener("click", () => {
