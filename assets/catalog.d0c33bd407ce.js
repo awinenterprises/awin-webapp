@@ -402,13 +402,17 @@
         .replace(/(\d)\s+(ml|gm|kg|g)\b/g, "$1$2").replace(/\s+/g, " ").trim();
     }
 
+    function productThumbnail(product) {
+      return product.id === 131 ? product.img : `/images/product-thumbnails/${product.id}.webp`;
+    }
+
     function renderCareKits() {
       const query = normalizeSearch(document.getElementById("searchInput").value);
       const visible = careKits.filter(k => !query || normalizeSearch(k.name + " " + k.components.map(p => p.name).join(" ")).includes(query));
       document.getElementById("careKits").hidden = selectedCategory !== "All" || visible.length === 0;
       document.getElementById("kitGrid").innerHTML = visible.map(k => `
         <article class="rounded-2xl bg-white border border-purple-100 shadow-sm p-4 flex flex-col" id="kit-${k.id}">
-          <div class="${k.components.length > 5 ? "grid grid-cols-5 gap-2 min-h-44" : "flex gap-1 items-center h-28"} bg-slate-50 rounded-xl p-2">${k.components.map(p => `<img src="${p.img}" alt="${p.name}" loading="lazy" decoding="async" style="width:${k.components.length > 5 ? 100 : 100/k.components.length}%;height:${k.components.length > 5 ? 72 : 96}px;object-fit:contain;min-width:0">`).join("")}</div>
+          <div class="${k.components.length > 5 ? "grid grid-cols-5 gap-2 min-h-44" : "flex gap-1 items-center h-28"} bg-slate-50 rounded-xl p-2">${k.components.map(p => `<img src="${productThumbnail(p)}" alt="${p.name}" loading="lazy" decoding="async" style="width:${k.components.length > 5 ? 100 : 100/k.components.length}%;height:${k.components.length > 5 ? 72 : 96}px;object-fit:contain;min-width:0">`).join("")}</div>
           <span class="text-[11px] font-bold text-emerald-700 mt-3">${k.components.length} products · Extra 5% OFF</span><h3 class="text-lg font-extrabold mt-1">${k.name}</h3>
           <ul class="text-xs text-slate-600 list-disc pl-4 my-3 space-y-1">${k.components.map(p => `<li>${p.id===112 ? "Hair Vitalizer Aroma" : p.id===97 ? "Papaya Light Anti-Blemishing Cream" : p.name} · ${p.pack}</li>`).join("")}</ul>
           <div class="mt-auto"><p class="text-xs text-slate-500">Individual selling total <s>₹${k.regularTotal}</s></p><p class="text-2xl font-black text-purple-800">₹${k.price} <span class="text-xs font-semibold text-emerald-700">Save extra ₹${k.savings}</span></p>
@@ -476,7 +480,7 @@
             <div>
               <div class="relative w-full aspect-square bg-white border border-slate-100 rounded-xl p-1 flex items-center justify-center mb-2 overflow-hidden">
                 <span class="absolute top-1.5 right-2 text-[9px] font-extrabold px-1.5 py-0.5 rounded border ${badge.class} z-10">${badge.text}</span>
-                ${p.additionalImage ? `<div class="grid grid-cols-2 items-center h-full gap-1"><img src="${p.img}" alt="Rose Skin Toner" class="w-full max-h-full object-contain" loading="lazy"><img src="${p.additionalImage}" alt="Gold Skin Toner" class="w-full max-h-full object-contain" style="filter:brightness(1.10)" loading="lazy"></div>` : `<img src="${featuredProductIds.includes(p.id) ? `/images/product-thumbnails/${p.id}.webp` : p.img}" alt="${p.name}" class="w-full h-full object-contain" style="transform:scale(${p.imageScale || 1})" loading="${p.id === featuredProductIds[0] ? "eager" : "lazy"}" decoding="async" onerror="this.onerror=null;this.removeAttribute('src')" />`}
+                ${p.additionalImage ? `<div class="grid grid-cols-2 items-center h-full gap-1"><img src="${productThumbnail(p)}" alt="Rose Skin Toner" class="w-full max-h-full object-contain" loading="lazy"><img src="/images/product-thumbnails/92-gold.webp" alt="Gold Skin Toner" class="w-full max-h-full object-contain" style="filter:brightness(1.10)" loading="lazy"></div>` : `<img src="${productThumbnail(p)}" alt="${p.name}" class="w-full h-full object-contain" style="transform:scale(${p.imageScale || 1})" loading="${p.id === featuredProductIds[0] ? "eager" : "lazy"}" decoding="async" onerror="this.onerror=null;this.removeAttribute('src')" />`}
               </div>
               <div class="text-[9px] font-bold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded inline-block mb-1">${p.pack}</div>
               <h3 class="font-bold text-slate-800 text-xs leading-snug line-clamp-1">${p.name}</h3>
