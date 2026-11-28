@@ -46,7 +46,7 @@ const manufacturerImages = {
   "facial-kit-papaya-or-gold": "https://shop.altosindia.net/storagecache/product_image/241253639-3b943f07-f7c8-4efc-9ef6-9bb1ca1c0b05.jpeg",
   "gold-bleach-cream-339g": "https://shop.altosindia.net/storagecache/product_image/242607039-3edd9a54-d7fb-45a2-a5da-07cd50400af0.jpeg",
   "rose-water": "https://shop.altosindia.net/storagecache/product_image/235855229-001edb1f-fcc8-4c20-95ec-507bcfd81a4f.jpeg",
-  "rose-and-gold-toner": "https://shop.altosindia.net/storagecache/product_image/234946580-7fc6b102-a7ce-4d26-877d-3b96e5e927c9.jpeg",
+  "rose-and-gold-toner": "/images/toner/rose.jpg",
   "cold-cream": "https://altosindia.net/public/product/v1-face-care/cold-cream.jpg",
   "sunscreen-spf-50": "https://shop.altosindia.net/storagecache/product_image/230245448-66109dac-43f1-42a6-8362-e1b79da29fd9.jpeg",
   "bb-cream": "https://shop.altosindia.net/storagecache/product_image/240524705-62371be3-0623-4913-8495-3426bbfd3811.jpeg",
