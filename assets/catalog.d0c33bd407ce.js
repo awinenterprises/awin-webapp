@@ -138,7 +138,7 @@
       { id: 89, slug: "gold-bleach-cream-339g", name: "Gold Bleach Cream (339g)", pack: "339 gm", mrp: 349, price: 314, cat: "Beauty & Skincare", desc: "Salon Pack Golden Glow", img: "https://shop.altosindia.net/storagecache/product_image/242607039-3edd9a54-d7fb-45a2-a5da-07cd50400af0.jpeg" },
       { id: 90, slug: "beauty-face-pack", name: "Beauty Face Pack", pack: "100 gm", mrp: 99, price: 89, cat: "Beauty & Skincare", desc: "Soft, Fair & Glowing Skin", img: "https://shop.altosindia.net/storagecache/product_image/232114505-e0d912b3-12a8-4956-8722-b890b18771c0.jpeg" },
       { id: 91, slug: "rose-water", name: "Rose Water", pack: "120 ml", mrp: 75, price: 68, cat: "Beauty & Skincare", desc: "Maintains Natural Skin pH", img: "https://shop.altosindia.net/storagecache/product_image/235855229-001edb1f-fcc8-4c20-95ec-507bcfd81a4f.jpeg" },
-      { id: 92, slug: "rose-and-gold-toner", name: "Rose & Gold Toner", pack: "100 ml", mrp: 135, price: 122, cat: "Beauty & Skincare", desc: "Deep Cleansing & Tone Enhancer", img: "https://shop.altosindia.net/storagecache/product_image/234946580-7fc6b102-a7ce-4d26-877d-3b96e5e927c9.jpeg" },
+      { id: 92, slug: "rose-and-gold-toner", name: "Toner Combo (Rose 100ml + Gold 100ml)", pack: "2 × 100 ml", mrp: 135, price: 122, additionalImage: "https://altosindia.net/public/product/v1-face-care/gold-skin-toner.jpg", cat: "Beauty & Skincare", desc: "Deep Cleansing & Tone Enhancer", img: "https://shop.altosindia.net/storagecache/product_image/234946580-7fc6b102-a7ce-4d26-877d-3b96e5e927c9.jpeg" },
       { id: 93, slug: "aloe-vera-moisturising-gel-100g", name: "Aloe Vera Moisturising Gel (100g)", pack: "100 gm", mrp: 145, price: 131, cat: "Beauty & Skincare", desc: "Pure Hydrating Gel", img: "https://shop.altosindia.net/storagecache/product_image/233342252-1a88bbf2-7cd2-4a07-81b8-402cf9a3b43c.jpeg" },
       { id: 94, slug: "honey-and-saffron-body-lotion", name: "Honey & Saffron Body Lotion", pack: "100 ml", mrp: 120, price: 108, cat: "Beauty & Skincare", desc: "Moisturizes Skin Deeply", img: "https://shop.altosindia.net/storagecache/product_image/230244716-d0bfe2be-6f7f-48ea-8c77-d0a59f3cf376.jpeg" },
       { id: 95, slug: "cold-cream", name: "Cold Cream (Skin White)", pack: "75 gm", mrp: 110, price: 99, cat: "Beauty & Skincare", desc: "Aloe Vera Moisturiser for Dry Skin", img: "https://altosindia.net/public/product/v1-face-care/cold-cream.jpg" },
@@ -476,7 +476,7 @@
             <div>
               <div class="relative w-full aspect-square bg-white border border-slate-100 rounded-xl p-1 flex items-center justify-center mb-2 overflow-hidden">
                 <span class="absolute top-1.5 right-2 text-[9px] font-extrabold px-1.5 py-0.5 rounded border ${badge.class} z-10">${badge.text}</span>
-                <img src="${p.img}" alt="${p.name}" class="w-full h-full object-contain" style="transform:scale(${p.imageScale || 1})" loading="lazy" decoding="async" onerror="this.onerror=null;this.removeAttribute('src')" />
+                ${p.additionalImage ? `<div class="grid grid-cols-2 items-center h-full gap-1"><img src="${p.img}" alt="Rose Skin Toner" class="w-full max-h-full object-contain" loading="lazy"><img src="${p.additionalImage}" alt="Gold Skin Toner" class="w-full max-h-full object-contain" loading="lazy"></div>` : `<img src="${p.img}" alt="${p.name}" class="w-full h-full object-contain" style="transform:scale(${p.imageScale || 1})" loading="lazy" decoding="async" onerror="this.onerror=null;this.removeAttribute('src')" />`}
               </div>
               <div class="text-[9px] font-bold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded inline-block mb-1">${p.pack}</div>
               <h3 class="font-bold text-slate-800 text-xs leading-snug line-clamp-1">${p.name}</h3>
@@ -514,6 +514,10 @@
       modalImage.onerror = () => modalImage.removeAttribute("src");
       modalImage.alt = p.name;
       modalImage.src = p.img;
+      const additionalImage = document.getElementById("modalAdditionalImage");
+      additionalImage.parentElement.hidden = !p.additionalImage;
+      if (p.additionalImage) additionalImage.src = p.additionalImage;
+      else additionalImage.removeAttribute("src");
       document.getElementById("modalImg").style.transform = `scale(${p.imageScale || 1})`;
       document.getElementById("modalPack").innerText = p.pack;
       document.getElementById("modalBadge").innerText = badge.text;

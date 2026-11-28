@@ -267,7 +267,7 @@ const productDetails = {
     "source": "https://shop.altosindia.net/eshop/product/info/Multivitamin-Syrup"
   },
   "rose-and-gold-toner": {
-    "summary": "A Zordan facial toner listing for the Rose and Gold variants.",
+    "summary": "A two-bottle Zordan toner combo with Rose Skin Toner (100 ml) and Gold Skin Toner (100 ml).",
     "ingredients": [],
     "directions": [
       "Apply gently to the face with a cotton pad, following the directions for your selected toner."
@@ -2439,7 +2439,7 @@ gtag('event', 'view_item', {currency:'INR',value:${product.price},items:[{item_i
 <div class="wrap">
 <header><a class="brand" href="/">Awin Enterprises</a><a class="back" href="/">← Browse catalogue</a></header>
 <main class="card">
-<div class="photo" ${product.components ? `style="display:grid;grid-template-columns:repeat(${product.components.length > 5 ? 3 : 2},minmax(0,1fr));gap:10px;aspect-ratio:auto"` : ""}>${product.components ? product.components.map(p => `<button type="button" data-image-zoom aria-label="Zoom product image"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" style="width:100%;height:150px;object-fit:contain" loading="lazy" decoding="async"></button>`).join("") : `<button type="button" data-image-zoom aria-label="Zoom product image"><img src="${escapeHtml(displayImage)}" alt="${escapeHtml(product.name)}" style="transform:scale(${product.imageScale ?? 1})" fetchpriority="high" decoding="async"></button>`}</div>
+<div class="photo" ${product.components || product.additionalImage ? `style="display:grid;grid-template-columns:repeat(${(product.components?.length ?? 0) > 5 ? 3 : 2},minmax(0,1fr));gap:10px;aspect-ratio:auto"` : ""}>${product.components ? product.components.map(p => `<button type="button" data-image-zoom aria-label="Zoom product image"><img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" style="width:100%;height:150px;object-fit:contain" loading="lazy" decoding="async"></button>`).join("") : `<button type="button" data-image-zoom aria-label="Zoom product image"><img src="${escapeHtml(displayImage)}" alt="${escapeHtml(product.name)}" style="transform:scale(${product.imageScale ?? 1})" fetchpriority="high" decoding="async"></button>`}${product.additionalImage ? `<button type="button" data-image-zoom aria-label="Zoom Gold Skin Toner"><img src="${escapeHtml(product.additionalImage)}" alt="Gold Skin Toner" decoding="async"></button>` : ""}</div>
 <div>
 <div class="tag">${escapeHtml(product.category)}</div>
 <h1>${escapeHtml(product.name)}</h1>

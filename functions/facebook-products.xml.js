@@ -22,10 +22,11 @@ export function onRequestGet() {
     );
     const attributes = {
       id: `awin-${product.id}`,
-      title: `${product.name} - ${product.pack}`,
+      title: product.additionalImage ? product.name : `${product.name} - ${product.pack}`,
       description: `${product.name}, ${product.pack}. ${product.description}`,
       link: `${SITE}/products/${product.slug}`,
       image_link: product.image.startsWith("/") ? `${SITE}${product.image}` : product.image,
+      ...(product.additionalImage ? { additional_image_link: product.additionalImage } : {}),
       availability: (product.inStock ?? true) ? "in stock" : "out of stock",
       price: `${Number(product.price).toFixed(2)} INR`,
       condition: "new",
